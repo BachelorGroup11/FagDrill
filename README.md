@@ -1,6 +1,6 @@
 # Fagdrill :books:
 
-![My Skills](https://skillicons.dev/icons?i=react,firebase,figma)
+![My Skills](https://skillicons.dev/icons?i=react,firebase)
 
 ## How it works
 Type 'expo start' in the root directory terminal
