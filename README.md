@@ -7,6 +7,7 @@ Make practicing for certificates trivial
 Type 'expo start' in the root directory terminal
 
 ## Todo
+- [ ] Decide naming conventions
 - [ ] Configure Firebase
 - [ ] Add Routing
 - [ ] Implement core
