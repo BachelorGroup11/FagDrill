@@ -4,7 +4,7 @@ Make practicing for certificates trivial
 ![My Skills](https://skillicons.dev/icons?i=react,firebase)
 
 ## How it works
-In root directory:
+Terminal
 ```
 expo start
 ```
