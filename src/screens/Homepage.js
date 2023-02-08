@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
 	Text,
 	View,
@@ -10,8 +10,22 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/core';
 import { styles } from '../styles/HomeStyle';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 
 const HomePage = () => {
+	useEffect(() => {
+		const fetchData = async () => {
+			const ref = doc(db, 'TestCollection', 'TestId');
+			const docSnap = await getDoc(ref);
+			docSnap.exists()
+				? console.log(docSnap.data())
+				: console.log('No such document');
+		};
+
+		fetchData().catch(console.error);
+	}, []);
+
 	const navigation = useNavigation();
 
 	const goToFirst = () => {
