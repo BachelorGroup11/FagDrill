@@ -8,23 +8,21 @@ import Quiz1Info from './src/screens/Quiz1Info';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-
-        <Stack.Screen options={{headerShown: false}} name="homepage" component={HomePage} />
-        <Stack.Screen options={{headerShown: false}} name="quiz1info" component={Quiz1Info} />
-        
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+	return (
+		<NavigationContainer>
+			<Stack.Navigator screenOptions={{ headerShown: false }}>
+				<Stack.Screen name="homepage" component={HomePage} />
+				<Stack.Screen name="quiz1info" component={Quiz1Info} />
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+	container: {
+		flex: 1,
+		backgroundColor: '#fff',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 });
