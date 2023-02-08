@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomePage from './src/screens/Homepage';
+import HomePage from './src/screens/HomePage';
 import Quiz1Info from './src/screens/Quiz1Info';
 
 const Stack = createNativeStackNavigator();
