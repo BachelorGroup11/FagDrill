@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
 	Text,
 	View,
@@ -8,11 +8,22 @@ import {
 	ImageBackground,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/core';
 import { styles } from '../styles/HomeStyle';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 
-const HomePage = () => {
-	const navigation = useNavigation();
+const HomePage = ({ navigation }) => {
+	useEffect(() => {
+		const fetchData = async () => {
+			const ref = doc(db, 'TestCollection', 'TestId');
+			const docSnap = await getDoc(ref);
+			docSnap.exists()
+				? console.log(docSnap.data())
+				: console.log('No such document');
+		};
+
+		fetchData().catch(console.error);
+	}, []);
 
 	const goToFirst = () => {
 		navigation.navigate('quiz1info');
