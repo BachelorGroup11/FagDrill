@@ -8,12 +8,11 @@ import {
 	ImageBackground,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/core';
 import { styles } from '../styles/HomeStyle';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 
-const HomePage = () => {
+const HomePage = ({ navigation }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const ref = doc(db, 'TestCollection', 'TestId');
@@ -25,8 +24,6 @@ const HomePage = () => {
 
 		fetchData().catch(console.error);
 	}, []);
-
-	const navigation = useNavigation();
 
 	const goToFirst = () => {
 		navigation.navigate('quiz1info');
