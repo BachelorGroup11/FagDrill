@@ -13,7 +13,7 @@ Type 'expo start' in the root directory terminal
 - [ ] Implement core
 
 ## Code structure
-Example of potential structure: https://medium.com/the-andela-way/how-to-structure-a-react-native-app-for-scale-a29194cd33fc
+Code structure: https://medium.com/the-andela-way/how-to-structure-a-react-native-app-for-scale-a29194cd33fc
 
 Naming conventions: https://gilshaan.medium.com/react-native-coding-standards-and-best-practices-5b4b5c9f4076
 
