@@ -6,7 +6,7 @@ Make practicing for certificates trivial
 ## How it works
 In root directory:
 ```
-Expo start
+expo start
 ```
 
 ## Todo
