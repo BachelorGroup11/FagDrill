@@ -16,7 +16,7 @@ To open the app:
 
 ## Todo
 - [X] Decide naming conventions
-- [X] Configure Firebase
+- [ ] Configure Firebase
 - [X] Add Routing
 - [ ] Implement core
 
