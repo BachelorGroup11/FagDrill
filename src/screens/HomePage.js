@@ -26,14 +26,6 @@ const HomePage = ({ navigation }) => {
 		fetchData().catch(console.error);
 	}, []);
 
-	const goToFirst = () => {
-		navigation.navigate('quiz1info');
-	};
-
-	const Alert = () => {
-		alert('Kommer når vi har fått fikset profil siden');
-	};
-
 	const handleSignOut = () => {
 		auth
 			.signOut()
@@ -41,6 +33,14 @@ const HomePage = ({ navigation }) => {
 				navigation.replace('loginpage');
 			})
 			.catch((error) => console.log(error.message));
+	};
+
+	const goToFirst = () => {
+		navigation.navigate('quiz1info');
+	};
+
+	const Alert = () => {
+		alert('Kommer når vi har fått fikset profil siden');
 	};
 
 	return (
