@@ -25,4 +25,4 @@ To open the app:
 
 [Naming conventions](https://gilshaan.medium.com/react-native-coding-standards-and-best-practices-5b4b5c9f4076)
 
-<img src="https://miro.medium.com/max/720/0*wWlpL49JC_WqRu6Z.webp" width="500"/>
+<img src="https://miro.medium.com/max/720/0*2UvHBt3DhXGKLe9D.webp" width="500"/>
