@@ -25,6 +25,7 @@ const LoginPage = ({ navigation }) => {
 			<TextInput
 				style={styles.TextInputPassword}
 				onChangeText={(text) => setPassword(text)}
+				secureTextEntry
 			/>
 
 			<View style={styles.loginBtn}>
