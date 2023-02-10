@@ -4,8 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/SignUpStyle';
 
 const SignUpPage = ({ navigation }) => {
-	const [email, setemail] = useState('');
-	const [password, setpassword] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -16,7 +16,7 @@ const SignUpPage = ({ navigation }) => {
 			</View>
 			<TextInput
 				style={styles.TextInputEmail}
-				onChangeText={(email) => setemail(email)}
+				onChangeText={(text) => setEmail(text)}
 			/>
 
 			<View style={styles.inputViewPassword}>
@@ -24,7 +24,7 @@ const SignUpPage = ({ navigation }) => {
 			</View>
 			<TextInput
 				style={styles.TextInputPassword}
-				onChangeText={(password) => setpassword(password)}
+				onChangeText={(text) => setPassword(text)}
 			/>
 
 			<View style={styles.signupBtn}>
