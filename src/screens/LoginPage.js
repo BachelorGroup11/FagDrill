@@ -16,7 +16,7 @@ const LoginPage = ({ navigation }) => {
 			</View>
 			<TextInput
 				style={styles.TextInputEmail}
-				onChangeText={(email) => setEmail(email)}
+				onChangeText={(text) => setEmail(text)}
 			/>
 
 			<View style={styles.inputViewPassword}>
@@ -24,7 +24,7 @@ const LoginPage = ({ navigation }) => {
 			</View>
 			<TextInput
 				style={styles.TextInputPassword}
-				onChangeText={(password) => setPassword(password)}
+				onChangeText={(text) => setPassword(text)}
 			/>
 
 			<View style={styles.loginBtn}>
