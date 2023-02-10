@@ -7,12 +7,9 @@ import {
 	ImageBackground,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/core';
 import { styles } from '../styles/Quiz1Style';
 
-const Quiz1Info = () => {
-	const navigation = useNavigation();
-
+const Quiz1Info = ({ navigation }) => {
 	const goToHome = () => {
 		navigation.navigate('homepage');
 	};
