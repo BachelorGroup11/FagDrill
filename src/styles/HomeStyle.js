@@ -66,4 +66,13 @@ export const styles = StyleSheet.create({
 		top: 44,
 		borderRadius: 22,
 	},
+	loginBtn: {
+		backgroundColor: '#2e216f',
+		alignSelf: 'center',
+		position: 'relative',
+		height: 40,
+		borderRadius: 10,
+		width: 250,
+		margin: 10,
+	},
 });

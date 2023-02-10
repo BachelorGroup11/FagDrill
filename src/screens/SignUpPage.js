@@ -1,11 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/SignUpStyle';
+import {
+	createUserWithEmailAndPassword,
+	onAuthStateChanged,
+} from 'firebase/auth';
+import { auth } from '../../firebaseConfig';
 
 const SignUpPage = ({ navigation }) => {
-	const [email, setemail] = useState('');
-	const [password, setpassword] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, (user) => {
+			if (user) {
+				navigation.navigate('homepage');
+			}
+		});
+		return unsubscribe;
+	}, []);
+
+	const handleSignUp = () => {
+		createUserWithEmailAndPassword(auth, email, password)
+			.then((userCredentials) => {
+				const user = userCredentials.user;
+			})
+			.catch((error) => alert(error.message));
+	};
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -16,7 +38,7 @@ const SignUpPage = ({ navigation }) => {
 			</View>
 			<TextInput
 				style={styles.TextInputEmail}
-				onChangeText={(email) => setemail(email)}
+				onChangeText={(text) => setEmail(text)}
 			/>
 
 			<View style={styles.inputViewPassword}>
@@ -24,7 +46,8 @@ const SignUpPage = ({ navigation }) => {
 			</View>
 			<TextInput
 				style={styles.TextInputPassword}
-				onChangeText={(password) => setpassword(password)}
+				onChangeText={(text) => setPassword(text)}
+				secureTextEntry
 			/>
 
 			<View style={styles.signupBtn}>
@@ -33,7 +56,7 @@ const SignUpPage = ({ navigation }) => {
 					color="white"
 					fontWeight="bold"
 					style={styles.signupBtn}
-					onPress={() => navigation.navigate('homepage')}
+					onPress={handleSignUp}
 				/>
 			</View>
 
