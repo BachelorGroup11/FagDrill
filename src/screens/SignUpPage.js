@@ -6,7 +6,8 @@ import {
 	createUserWithEmailAndPassword,
 	onAuthStateChanged,
 } from 'firebase/auth';
-import { auth } from '../../firebaseConfig';
+import { collection, addDoc } from 'firebase/firestore';
+import { db, auth } from '../../firebaseConfig';
 
 const SignUpPage = ({ navigation }) => {
 	const [email, setEmail] = useState('');
@@ -24,7 +25,13 @@ const SignUpPage = ({ navigation }) => {
 	const handleSignUp = () => {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then((userCredentials) => {
-				const user = userCredentials.user;
+				addDoc(collection(db, 'users'), {
+					email: userCredentials.user.email,
+					is_admin: false,
+					user_id: userCredentials.user.uid,
+				}).catch((error) =>
+					console.log(`Error while adding user to firestore: ${error}`)
+				);
 			})
 			.catch((error) => alert(error.message));
 	};
