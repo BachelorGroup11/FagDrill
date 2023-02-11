@@ -10,20 +10,19 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/HomeStyle';
-import { doc, getDoc } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import { db, auth } from '../../firebaseConfig';
 
 const HomePage = ({ navigation }) => {
 	useEffect(() => {
 		const fetchData = async () => {
-			const ref = doc(db, 'TestCollection', 'TestId');
-			const docSnap = await getDoc(ref);
-			docSnap.exists()
-				? console.log(docSnap.data())
-				: console.log('No such document');
+			const querySnapshot = await getDocs(collection(db, 'quizzes'));
+			querySnapshot.forEach((doc) => {
+				console.log(doc.id, ' => ', doc.data());
+			});
 		};
 
-		fetchData().catch(console.error);
+		fetchData().catch((error) => console.log(error));
 	}, []);
 
 	const handleSignOut = () => {
@@ -32,7 +31,7 @@ const HomePage = ({ navigation }) => {
 			.then(() => {
 				navigation.replace('loginpage');
 			})
-			.catch((error) => console.log(error.message));
+			.catch((error) => console.log(error));
 	};
 
 	const goToFirst = () => {
