@@ -35,7 +35,7 @@ const HomePage = ({ navigation }) => {
 	};
 
 	const goToFirst = () => {
-		navigation.navigate('quiz1info');
+		navigation.navigate('quizinfo');
 	};
 
 	const Alert = () => {
