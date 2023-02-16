@@ -40,11 +40,13 @@ const QuizInfo = ({ route, navigation }) => {
 						<Text style={styles.knapptext}>X</Text>
 					</TouchableOpacity>
 				</View>
-
-				<Text style={styles.Infotext}>
-					Øving til sert nr {route.params.number}
-				</Text>
-				{info && <Text style={styles.descriptionText}>{info}</Text>}
+				<View style={styles.textWrapper}>
+					<Text style={styles.levelText}>Level X</Text>
+					<Text style={styles.Infotext}>
+						Øving til sert nr {route.params.number}
+					</Text>
+					{info && <Text style={styles.descriptionText}>{info}</Text>}
+				</View>
 			</SafeAreaView>
 			<StatusBar translucent backgroundColor="transparent" />
 		</ImageBackground>
