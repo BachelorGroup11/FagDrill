@@ -7,13 +7,9 @@ import {
 	ImageBackground,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '../styles/Quiz1Style';
+import { styles } from '../styles/QuizInfoStyle';
 
-const Quiz1Info = ({ navigation }) => {
-	const goToHome = () => {
-		navigation.navigate('homepage');
-	};
-
+const QuizInfo = ({ navigation }) => {
 	return (
 		<ImageBackground
 			source={require('../assets/images/Quizinfo_bg.png')}
@@ -23,7 +19,7 @@ const Quiz1Info = ({ navigation }) => {
 				<View>
 					<TouchableOpacity
 						style={styles.btnBackToHome}
-						onPress={() => goToHome()}
+						onPress={() => navigation.navigate('homepage')}
 					>
 						<Text style={styles.knapptext}>X</Text>
 					</TouchableOpacity>
@@ -36,4 +32,4 @@ const Quiz1Info = ({ navigation }) => {
 	);
 };
 
-export default Quiz1Info;
+export default QuizInfo;
