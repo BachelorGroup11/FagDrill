@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	Text,
 	View,
@@ -8,8 +8,24 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/QuizInfoStyle';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 
-const QuizInfo = ({ navigation }) => {
+const QuizInfo = ({ route, navigation }) => {
+	const [info, setInfo] = useState();
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const docRef = doc(db, 'quizzes', route.params.quiz);
+			const docSnap = await getDoc(docRef);
+			docSnap.exists()
+				? setInfo(docSnap.data().info)
+				: console.log('no such document');
+		};
+
+		fetchData().catch((error) => console.log(error));
+	}, []);
+
 	return (
 		<ImageBackground
 			source={require('../assets/images/Quizinfo_bg.png')}
@@ -25,7 +41,10 @@ const QuizInfo = ({ navigation }) => {
 					</TouchableOpacity>
 				</View>
 
-				<Text style={styles.Infotext}>Øving til sert nr 3</Text>
+				<Text style={styles.Infotext}>
+					Øving til sert nr {route.params.number}
+				</Text>
+				{info && <Text style={{ textAlign: 'center' }}>{info}</Text>}
 			</SafeAreaView>
 			<StatusBar translucent backgroundColor="transparent" />
 		</ImageBackground>

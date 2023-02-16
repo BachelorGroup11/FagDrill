@@ -66,68 +66,34 @@ const HomePage = ({ navigation }) => {
 					<View style={styles.containerthre}>
 						<TouchableOpacity
 							style={styles.knappBytteS}
-							onPress={() => goToFirst()}
+							onPress={() =>
+								navigation.navigate('quizinfo', {
+									number: 1,
+									quiz: 'dFPZQ3bseEkoPMqlrzz7',
+								})
+							}
 						>
 							<ImageBackground
 								source={require('../assets/images/QuizBtn.png')}
 								style={styles.imgButton}
 							>
-								<Text style={styles.knapptext}>Øving til sert nr3</Text>
+								<Text style={styles.knapptext}>Øving til sert nr1</Text>
 							</ImageBackground>
 						</TouchableOpacity>
 						<TouchableOpacity
 							style={styles.knappBytteS}
-							onPress={() => goToFirst()}
+							onPress={() =>
+								navigation.navigate('quizinfo', {
+									number: 2,
+									quiz: 'ad8usDZM4b5GWrpoV6nb',
+								})
+							}
 						>
 							<ImageBackground
 								source={require('../assets/images/QuizBtn.png')}
 								style={styles.imgButton}
 							>
-								<Text style={styles.knapptext}>Øving til sert nr3</Text>
-							</ImageBackground>
-						</TouchableOpacity>
-						<TouchableOpacity
-							style={styles.knappBytteS}
-							onPress={() => goToFirst()}
-						>
-							<ImageBackground
-								source={require('../assets/images/QuizBtn.png')}
-								style={styles.imgButton}
-							>
-								<Text style={styles.knapptext}>Øving til sert nr3</Text>
-							</ImageBackground>
-						</TouchableOpacity>
-						<TouchableOpacity
-							style={styles.knappBytteS}
-							onPress={() => goToFirst()}
-						>
-							<ImageBackground
-								source={require('../assets/images/QuizBtn.png')}
-								style={styles.imgButton}
-							>
-								<Text style={styles.knapptext}>Øving til sert nr3</Text>
-							</ImageBackground>
-						</TouchableOpacity>
-						<TouchableOpacity
-							style={styles.knappBytteS}
-							onPress={() => goToFirst()}
-						>
-							<ImageBackground
-								source={require('../assets/images/QuizBtn.png')}
-								style={styles.imgButton}
-							>
-								<Text style={styles.knapptext}>Øving til sert nr3</Text>
-							</ImageBackground>
-						</TouchableOpacity>
-						<TouchableOpacity
-							style={styles.knappBytteS}
-							onPress={() => goToFirst()}
-						>
-							<ImageBackground
-								source={require('../assets/images/QuizBtn.png')}
-								style={styles.imgButton}
-							>
-								<Text style={styles.knapptext}>Øving til sert nr3</Text>
+								<Text style={styles.knapptext}>Øving til sert nr2</Text>
 							</ImageBackground>
 						</TouchableOpacity>
 						<View style={styles.loginBtn}>
