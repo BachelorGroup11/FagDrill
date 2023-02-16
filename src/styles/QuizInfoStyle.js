@@ -19,6 +19,15 @@ export const styles = StyleSheet.create({
 		color: '#000',
 		padding: 5,
 		paddingLeft: 10,
+		fontSize: 32,
+		fontWeight: 'bold',
+	},
+	descriptionText: {
+		fontSize: 15,
+		fontWeight: 'bold',
+		padding: 5,
+		width: 300,
+		left: 60,
 	},
 	btnBackToHome: {
 		width: 50,

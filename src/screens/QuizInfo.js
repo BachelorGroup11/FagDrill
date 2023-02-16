@@ -44,7 +44,7 @@ const QuizInfo = ({ route, navigation }) => {
 				<Text style={styles.Infotext}>
 					Øving til sert nr {route.params.number}
 				</Text>
-				{info && <Text style={{ textAlign: 'center' }}>{info}</Text>}
+				{info && <Text style={styles.descriptionText}>{info}</Text>}
 			</SafeAreaView>
 			<StatusBar translucent backgroundColor="transparent" />
 		</ImageBackground>
