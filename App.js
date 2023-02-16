@@ -31,7 +31,11 @@ export default function App() {
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
 				<Stack.Screen name="loginpage" component={LoginPage} />
 				<Stack.Screen name="signuppage" component={SignUpPage} />
-				<Stack.Screen name="homepage" component={HomePage} />
+				<Stack.Screen
+					name="homepage"
+					component={HomePage}
+					options={{ gestureEnabled: false }}
+				/>
 				<Stack.Screen name="quizinfo" component={QuizInfo} />
 			</Stack.Navigator>
 		</NavigationContainer>
