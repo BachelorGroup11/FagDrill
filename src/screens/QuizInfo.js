@@ -48,7 +48,10 @@ const QuizInfo = ({ route, navigation }) => {
 					</Text>
 					{info && <Text style={styles.descriptionText}>{info}</Text>}
 				</View>
-				<TouchableOpacity style={styles.startBtn}>
+				<TouchableOpacity
+					style={styles.startBtn}
+					onPress={() => navigation.navigate('homepage')}
+				>
 					<Text style={styles.btnText}>START</Text>
 				</TouchableOpacity>
 			</SafeAreaView>
