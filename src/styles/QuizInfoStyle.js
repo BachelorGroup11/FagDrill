@@ -63,6 +63,6 @@ export const styles = StyleSheet.create({
 	btnText: {
 		color: '#ffffff',
 		fontSize: 27,
-		fontFamily: 'Poppins',
+		fontFamily: 'PoppinsBold',
 	},
 });
