@@ -1,13 +1,19 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useFonts } from 'expo-font';
 import LoginPage from './src/screens/LoginPage';
 import HomePage from './src/screens/HomePage';
 import QuizInfo from './src/screens/QuizInfo';
 import SignUpPage from './src/screens/SignUpPage';
 
 const Stack = createNativeStackNavigator();
+const customFonts = {
+	PoppinsBold: require('./src/assets/fonts/Poppins-Bold.ttf'),
+};
 
 export default function App() {
+	const [isLoaded] = useFonts(customFonts);
+
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
