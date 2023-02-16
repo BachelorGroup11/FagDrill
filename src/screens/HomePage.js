@@ -34,10 +34,6 @@ const HomePage = ({ navigation }) => {
 			.catch((error) => console.log(error));
 	};
 
-	const goToFirst = () => {
-		navigation.navigate('quizinfo');
-	};
-
 	const Alert = () => {
 		alert('Kommer når vi har fått fikset profil siden');
 	};
