@@ -5,6 +5,7 @@ import {
 	TouchableOpacity,
 	StatusBar,
 	ImageBackground,
+	Button,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/QuizInfoStyle';
@@ -47,6 +48,9 @@ const QuizInfo = ({ route, navigation }) => {
 					</Text>
 					{info && <Text style={styles.descriptionText}>{info}</Text>}
 				</View>
+				<TouchableOpacity style={styles.startBtn}>
+					<Text style={styles.btnText}>START</Text>
+				</TouchableOpacity>
 			</SafeAreaView>
 			<StatusBar translucent backgroundColor="transparent" />
 		</ImageBackground>
