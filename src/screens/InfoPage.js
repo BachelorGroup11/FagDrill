@@ -7,11 +7,11 @@ import {
 	ImageBackground,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '../styles/QuizInfoStyle';
+import { styles } from '../styles/InfoStyle';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 
-const QuizInfo = ({ route, navigation }) => {
+const InfoPage = ({ route, navigation }) => {
 	const [info, setInfo] = useState();
 
 	useEffect(() => {
@@ -59,4 +59,4 @@ const QuizInfo = ({ route, navigation }) => {
 	);
 };
 
-export default QuizInfo;
+export default InfoPage;
