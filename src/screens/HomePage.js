@@ -38,8 +38,8 @@ const HomePage = ({ navigation }) => {
 		navigation.navigate('quiz1info');
 	};
 
-	const Alert = () => {
-		alert('Kommer når vi har fått fikset profil siden');
+	const goToUserPage_Admin = () => {
+		navigation.navigate('Userpageadmin');
 	};
 
 	return (
@@ -55,7 +55,7 @@ const HomePage = ({ navigation }) => {
 				<ScrollView style={styles.container}>
 					<TouchableOpacity
 						style={styles.imgBtn_profile}
-						onPress={() => Alert()}
+						onPress={() => goToUserPage_Admin()}
 					>
 						<ImageBackground
 							source={require('../assets/images/Propile_btn_bg.png')}
