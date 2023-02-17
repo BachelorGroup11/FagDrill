@@ -5,7 +5,7 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import LoginPage from './src/screens/LoginPage';
 import HomePage from './src/screens/HomePage';
-import QuizInfo from './src/screens/QuizInfo';
+import InfoPage from './src/screens/InfoPage';
 import SignUpPage from './src/screens/SignUpPage';
 import PlayPage from './src/screens/PlayPage';
 
@@ -37,7 +37,7 @@ export default function App() {
 					component={HomePage}
 					options={{ gestureEnabled: false }}
 				/>
-				<Stack.Screen name="quizinfo" component={QuizInfo} />
+				<Stack.Screen name="infopage" component={InfoPage} />
 				<Stack.Screen name="playpage" component={PlayPage} />
 			</Stack.Navigator>
 		</NavigationContainer>

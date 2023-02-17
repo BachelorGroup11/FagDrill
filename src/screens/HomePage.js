@@ -63,7 +63,7 @@ const HomePage = ({ navigation }) => {
 						<TouchableOpacity
 							style={styles.knappBytteS}
 							onPress={() =>
-								navigation.navigate('quizinfo', {
+								navigation.navigate('infopage', {
 									number: 1,
 									quiz: 'dFPZQ3bseEkoPMqlrzz7',
 								})
@@ -79,7 +79,7 @@ const HomePage = ({ navigation }) => {
 						<TouchableOpacity
 							style={styles.knappBytteS}
 							onPress={() =>
-								navigation.navigate('quizinfo', {
+								navigation.navigate('infopage', {
 									number: 2,
 									quiz: 'ad8usDZM4b5GWrpoV6nb',
 								})
