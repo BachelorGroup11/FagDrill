@@ -5,6 +5,8 @@ import HomePage from "./src/screens/HomePage";
 import Quiz1Info from "./src/screens/Quiz1Info";
 import SignUpPage from "./src/screens/SignUpPage";
 import UserPage from "./src/screens/UserPage";
+import ProgressPage from "./src/screens/ProgressPage";
+import ChangePasswordPage from "./src/screens/ChangePasswordPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +19,11 @@ export default function App() {
         <Stack.Screen name="homepage" component={HomePage} />
         <Stack.Screen name="quiz1info" component={Quiz1Info} />
         <Stack.Screen name="userpage" component={UserPage} />
+        <Stack.Screen name="progresspage" component={ProgressPage} />
+        <Stack.Screen
+          name="changepasswordpage"
+          component={ChangePasswordPage}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

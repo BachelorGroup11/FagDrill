@@ -25,15 +25,6 @@ const HomePage = ({ navigation }) => {
     fetchData().catch((error) => console.log(error));
   }, []);
 
-  const handleSignOut = () => {
-    auth
-      .signOut()
-      .then(() => {
-        navigation.replace("loginpage");
-      })
-      .catch((error) => console.log(error));
-  };
-
   const goToFirst = () => {
     navigation.navigate("quiz1info");
   };
@@ -126,15 +117,6 @@ const HomePage = ({ navigation }) => {
                 <Text style={styles.knapptext}>Øving til sert nr3</Text>
               </ImageBackground>
             </TouchableOpacity>
-            <View style={styles.loginBtn}>
-              <Button
-                title={"Sign out"}
-                color="white"
-                fontWeight="bold"
-                style={styles.loginBtn}
-                onPress={handleSignOut}
-              />
-            </View>
           </View>
         </ScrollView>
       </SafeAreaView>
