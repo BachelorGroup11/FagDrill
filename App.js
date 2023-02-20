@@ -15,7 +15,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
-		PoppinsBold: require('./src/assets/fonts/Poppins-Bold.ttf'),
+		PoppinsBold: require('./src/assets/fonts/Poppins/Poppins-Bold.ttf'),
 	});
 
 	// After custom fonts have loaded, we can hide the splash screen and display the app screen.
