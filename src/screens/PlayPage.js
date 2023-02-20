@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 import {
 	Text,
 	TouchableOpacity,
@@ -30,11 +30,11 @@ const PlayPage = ({ route, navigation }) => {
 
 		const fetchData = async () => {
 			const querySnapshot = await getDocs(q);
+
 			setQuestionText(querySnapshot.docs[0].data().question_text);
 			setOptions(querySnapshot.docs[0].data().options);
 			setCorrectOption(querySnapshot.docs[0].data().correct_answer);
 			setQuizLength(querySnapshot.docs.length);
-			console.log(typeof querySnapshot.docs.length);
 
 			querySnapshot.forEach((doc) => {
 				setQuestionsArray((oldArray) => [...oldArray, doc.data()]);
@@ -44,16 +44,17 @@ const PlayPage = ({ route, navigation }) => {
 		fetchData().catch((error) => console.log(error));
 	}, []);
 
-	const handleClick = (idx) => {
-		if (index < questionsArray.length) {
-			setQuestionText(questionsArray[index].question_text);
-			setOptions(questionsArray[index].options);
-			setCorrectOption(questionsArray[index].correct_answer);
+	const handleClick = (answerIdx) => {
+		if (index >= quizLength) {
+			return console.log('Quiz Completed');
 		}
 
+		setQuestionText(questionsArray[index].question_text);
+		setOptions(questionsArray[index].options);
+		setCorrectOption(questionsArray[index].correct_answer);
 		setIndex((index) => index + 1);
 
-		if (idx === correctOption) {
+		if (answerIdx === correctOption) {
 			setScore((score) => score + 1);
 			console.log('Correct answer');
 			navigation.navigate('playpage');
@@ -77,7 +78,9 @@ const PlayPage = ({ route, navigation }) => {
 						<Text style={styles.knapptext}>X</Text>
 					</TouchableOpacity>
 				</View>
-				<Text style={styles.IndexText}>Spørsmål {index} av 20</Text>
+				<Text style={styles.IndexText}>
+					Spørsmål {index} av {quizLength}
+				</Text>
 				<Text style={styles.QuestionText}>{questionText}</Text>
 				{options.map((option, idx) => (
 					<Option value={option} key={idx} id={idx} handleClick={handleClick} />
