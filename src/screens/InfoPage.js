@@ -22,10 +22,10 @@ const InfoPage = ({ route, navigation }) => {
 			// Get data from firestore collection quizzes with specified quiz from route parameter
 			const docRef = doc(db, 'quizzes', route.params.quiz);
 			const docSnap = await getDoc(docRef);
-			// If query is successful, update info state, otherwise return an error
+			// If query is successful, update info state, otherwise log an error
 			docSnap.exists()
 				? setInfo(docSnap.data().info)
-				: console.log('no such document');
+				: console.log('No such document');
 		};
 
 		fetchData().catch((error) => console.log(error));
