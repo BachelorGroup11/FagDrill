@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
 	Text,
 	View,
@@ -10,21 +10,9 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/HomeStyle';
-import { collection, getDocs } from 'firebase/firestore';
-import { db, auth } from '../../firebaseConfig';
+import { auth } from '../../firebaseConfig';
 
 const HomePage = ({ navigation }) => {
-	useEffect(() => {
-		const fetchData = async () => {
-			const querySnapshot = await getDocs(collection(db, 'quizzes'));
-			querySnapshot.forEach((doc) => {
-				console.log(doc.id, ' => ', doc.data());
-			});
-		};
-
-		fetchData().catch((error) => console.log(error));
-	}, []);
-
 	const handleSignOut = () => {
 		auth
 			.signOut()
@@ -32,10 +20,6 @@ const HomePage = ({ navigation }) => {
 				navigation.replace('loginpage');
 			})
 			.catch((error) => console.log(error));
-	};
-
-	const Alert = () => {
-		alert('Kommer når vi har fått fikset profil siden');
 	};
 
 	return (
@@ -51,7 +35,7 @@ const HomePage = ({ navigation }) => {
 				<ScrollView style={styles.container}>
 					<TouchableOpacity
 						style={styles.imgBtn_profile}
-						onPress={() => Alert()}
+						onPress={() => alert('Kommer når vi har fått fikset profil siden')}
 					>
 						<ImageBackground
 							source={require('../assets/images/Propile_btn_bg.png')}
