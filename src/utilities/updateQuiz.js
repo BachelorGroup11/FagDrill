@@ -8,7 +8,7 @@ export const updateQuiz = (answerIdx, state, dispatch) => {
 		});
 	}
 
-	// Update state with information on next question
+	// Update state with information on next question, and increase score if answer was correct
 	dispatch({
 		type: 'setmulitple',
 		payload: {
