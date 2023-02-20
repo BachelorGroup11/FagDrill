@@ -1,4 +1,4 @@
-import { styles } from '../styles/PlayStyle';
+import { styles } from '../styles/OptionStyle';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { updateQuiz } from '../utilities/updateQuiz';
 import { useNavigation } from '@react-navigation/native';
