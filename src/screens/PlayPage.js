@@ -7,7 +7,7 @@ import { query, getDocs, collection, where } from 'firebase/firestore';
 import { QuizReducer, INITIAL_STATE } from '../utilities/QuizReducer';
 import { Option, GoBack } from '../components/Index';
 
-const PlayPage = ({ route, navigation }) => {
+const PlayPage = ({ route }) => {
 	const [state, dispatch] = useReducer(QuizReducer, INITIAL_STATE);
 
 	useEffect(() => {
@@ -19,6 +19,9 @@ const PlayPage = ({ route, navigation }) => {
 
 		const fetchData = async () => {
 			const querySnapshot = await getDocs(q);
+			querySnapshot.forEach((doc) => {
+				dispatch({ type: 'setquestionsarray', payload: doc.data() });
+			});
 
 			dispatch({
 				type: 'setmulitple',
@@ -29,39 +32,10 @@ const PlayPage = ({ route, navigation }) => {
 					correctOption: querySnapshot.docs[0].data().correct_answer,
 				},
 			});
-
-			querySnapshot.forEach((doc) => {
-				dispatch({ type: 'setquestionsarray', payload: doc.data() });
-			});
 		};
 
 		fetchData().catch((error) => console.log(error));
 	}, []);
-
-	const handleClick = (answerIdx) => {
-		if (state.index >= state.quizLength) {
-			return console.log('Quiz Completed');
-		}
-
-		dispatch({
-			type: 'setmulitple',
-			payload: {
-				index: state.index + 1,
-				questionText: state.questionsArray[state.index].question_text,
-				options: state.questionsArray[state.index].options,
-				correctOption: state.questionsArray[state.index].correct_answer,
-			},
-		});
-
-		if (answerIdx === state.correctOption) {
-			dispatch({ type: 'setscore', payload: state.score + 1 });
-			console.log('Correct answer');
-			navigation.navigate('playpage');
-		} else {
-			console.log('Incorrect answer');
-			navigation.navigate('playpage');
-		}
-	};
 
 	return (
 		<ImageBackground
@@ -75,7 +49,13 @@ const PlayPage = ({ route, navigation }) => {
 				</Text>
 				<Text style={styles.QuestionText}>{state.questionText}</Text>
 				{state.options.map((option, idx) => (
-					<Option value={option} key={idx} id={idx} handleClick={handleClick} />
+					<Option
+						value={option}
+						key={idx}
+						id={idx}
+						state={state}
+						dispatch={dispatch}
+					/>
 				))}
 			</SafeAreaView>
 			<StatusBar translucent backgroundColor="transparent" />
