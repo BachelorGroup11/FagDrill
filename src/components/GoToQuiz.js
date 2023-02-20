@@ -1,16 +1,13 @@
 import { styles } from '../styles/components/GoToQuizStyle';
 import { Text, TouchableOpacity, ImageBackground } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 // Component for buttons on homepage redirecting to a specified quiz
-export const GoToQuiz = ({ number, quiz }) => {
-	const navigation = useNavigation();
-
+export const GoToQuiz = ({ nav, number, quiz }) => {
 	return (
 		<TouchableOpacity
 			style={styles.knappBytteS}
 			onPress={() =>
-				navigation.navigate('infopage', {
+				nav.navigate('infopage', {
 					number: number,
 					quiz: quiz,
 				})

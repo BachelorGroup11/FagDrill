@@ -37,7 +37,7 @@ const InfoPage = ({ route, navigation }) => {
 			style={{ flex: 1, width: null, alignSelf: 'stretch' }}
 		>
 			<SafeAreaView style={styles.containerTo}>
-				<GoBack destination={'homepage'} />
+				<GoBack nav={navigation} destination={'homepage'} />
 				<View style={styles.textWrapper}>
 					<Text style={styles.levelText}>Level X</Text>
 					<Text style={styles.Infotext}>
