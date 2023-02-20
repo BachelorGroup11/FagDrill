@@ -8,6 +8,7 @@ export const INITIAL_STATE = {
 	score: 0,
 };
 
+// State containing all necessary information for Play screen
 export const QuizReducer = (state, action) => {
 	switch (action.type) {
 		case 'setquestionsarray':

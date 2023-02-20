@@ -1,8 +1,11 @@
+// Function responsible for handling Play screen logic on answer input
 export const updateQuiz = (navigation, answerIdx, state, dispatch) => {
+	// If number of answers exceed length of quiz return
 	if (state.index >= state.quizLength) {
 		return console.log('Quiz Completed');
 	}
 
+	// Update state with information on next question
 	dispatch({
 		type: 'setmulitple',
 		payload: {
@@ -13,6 +16,7 @@ export const updateQuiz = (navigation, answerIdx, state, dispatch) => {
 		},
 	});
 
+	// If answer is correct increment score by one, then refresh screen with updated state
 	if (answerIdx === state.correctOption) {
 		dispatch({ type: 'setscore', payload: state.score + 1 });
 		console.log('Correct answer');
