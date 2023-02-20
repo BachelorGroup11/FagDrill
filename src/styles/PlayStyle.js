@@ -18,28 +18,4 @@ export const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 		top: 330,
 	},
-	btnBack: {
-		position: 'relative',
-		width: 50,
-		height: 50,
-		borderRadius: 30,
-		left: 20,
-		top: 10,
-	},
-	btnChoice: {
-		backgroundColor: '#3F51B5',
-		alignSelf: 'center',
-		justifyContent: 'center',
-		alignItems: 'center',
-		height: 58,
-		borderRadius: 22,
-		width: 314,
-		margin: 5,
-		top: 360,
-	},
-	btnText: {
-		color: '#ffffff',
-		fontFamily: 'PoppinsBold',
-		fontSize: 27,
-	},
 });
