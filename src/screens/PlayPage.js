@@ -9,14 +9,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/PlayStyle';
 import { db } from '../../firebaseConfig';
-import {
-	query,
-	doc,
-	getDoc,
-	getDocs,
-	collection,
-	where,
-} from 'firebase/firestore';
+import { query, getDocs, collection, where } from 'firebase/firestore';
 import { Option } from '../components/Option';
 
 const PlayPage = ({ route, navigation }) => {
@@ -25,9 +18,8 @@ const PlayPage = ({ route, navigation }) => {
 	const [correctOption, setCorrectOption] = useState();
 	const [score, setScore] = useState(0);
 	const [index, setIndex] = useState(1);
-	const [allQuestions, setAllQuestions] = useState([]);
-
-	const test = ['wrong', 'wrong', 'right', 'wrong'];
+	const [questionsArray, setQuestionsArray] = useState([]);
+	const [quizLength, setQuizLength] = useState(0);
 
 	useEffect(() => {
 		const { number, quiz } = route.params;
@@ -38,32 +30,35 @@ const PlayPage = ({ route, navigation }) => {
 
 		const fetchData = async () => {
 			const querySnapshot = await getDocs(q);
-
 			setQuestionText(querySnapshot.docs[0].data().question_text);
 			setOptions(querySnapshot.docs[0].data().options);
 			setCorrectOption(querySnapshot.docs[0].data().correct_answer);
+			setQuizLength(querySnapshot.docs.length);
+			console.log(typeof querySnapshot.docs.length);
 
 			querySnapshot.forEach((doc) => {
-				setAllQuestions((oldArray) => [...oldArray, doc.data()]);
+				setQuestionsArray((oldArray) => [...oldArray, doc.data()]);
 			});
 		};
+
 		fetchData().catch((error) => console.log(error));
 	}, []);
 
 	const handleClick = (idx) => {
-		if (index < allQuestions.length) {
-			setQuestionText(allQuestions[index].question_text);
-			setOptions(allQuestions[index].options);
-			setCorrectOption(allQuestions[index].correct_answer);
+		if (index < questionsArray.length) {
+			setQuestionText(questionsArray[index].question_text);
+			setOptions(questionsArray[index].options);
+			setCorrectOption(questionsArray[index].correct_answer);
 		}
 
-		setIndex(index + 1);
+		setIndex((index) => index + 1);
+
 		if (idx === correctOption) {
-			setScore(score + 1);
-			console.log('correct', score);
+			setScore((score) => score + 1);
+			console.log('Correct answer');
 			navigation.navigate('playpage');
 		} else {
-			console.log('wrong');
+			console.log('Incorrect answer');
 			navigation.navigate('playpage');
 		}
 	};
@@ -82,12 +77,10 @@ const PlayPage = ({ route, navigation }) => {
 						<Text style={styles.knapptext}>X</Text>
 					</TouchableOpacity>
 				</View>
-
 				<Text style={styles.IndexText}>Spørsmål {index} av 20</Text>
 				<Text style={styles.QuestionText}>{questionText}</Text>
-
-				{test.map((option, idx) => (
-					<Option value={option} key={idx} />
+				{options.map((option, idx) => (
+					<Option value={option} key={idx} id={idx} handleClick={handleClick} />
 				))}
 			</SafeAreaView>
 			<StatusBar translucent backgroundColor="transparent" />

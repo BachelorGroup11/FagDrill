@@ -1,18 +1,13 @@
 import { styles } from '../styles/PlayStyle';
-import {
-	Text,
-	TouchableOpacity,
-	StatusBar,
-	ImageBackground,
-	View,
-} from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
-export const Option = ({ value }) => {
-	const test = ['wrong', 'wrong', 'wrong', 'wrong'];
-
+export const Option = ({ value, id, handleClick }) => {
 	return (
 		<View>
-			<TouchableOpacity style={styles.btnChoice}>
+			<TouchableOpacity
+				style={styles.btnChoice}
+				onPress={() => handleClick(id)}
+			>
 				<Text style={styles.btnText}>{value}</Text>
 			</TouchableOpacity>
 		</View>
