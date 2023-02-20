@@ -4,13 +4,6 @@ export const styles = StyleSheet.create({
 	containerTo: {
 		flex: 1,
 	},
-	knapptext: {
-		fontSize: 30,
-		alignSelf: 'flex-start',
-		color: '#000',
-		padding: 5,
-		paddingLeft: 10,
-	},
 	textWrapper: {
 		textAlign: 'center',
 		marginLeft: 'auto',
@@ -36,14 +29,6 @@ export const styles = StyleSheet.create({
 		fontWeight: '600',
 		width: 300,
 		marginVertical: 10,
-	},
-	btnBackToHome: {
-		width: 50,
-		height: 50,
-		borderRadius: 30,
-		position: 'relative',
-		left: 20,
-		top: 10,
 	},
 	startBtn: {
 		backgroundColor: '#3F51B5',

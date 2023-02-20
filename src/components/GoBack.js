@@ -1,7 +1,8 @@
-import { styles } from '../styles/PlayStyle';
+import { styles } from '../styles/GoBackStyle';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+// Component responsible for rendering navigate back symbol in top left corner of application
 export const GoBack = ({ destination }) => {
 	const navigation = useNavigation();
 
