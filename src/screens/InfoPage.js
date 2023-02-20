@@ -49,7 +49,12 @@ const InfoPage = ({ route, navigation }) => {
 				</View>
 				<TouchableOpacity
 					style={styles.startBtn}
-					onPress={() => navigation.navigate('playpage')}
+					onPress={() =>
+						navigation.navigate('playpage', {
+							number: route.params.number,
+							quiz: route.params.quiz,
+						})
+					}
 				>
 					<Text style={styles.btnText}>START</Text>
 				</TouchableOpacity>
