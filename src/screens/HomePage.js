@@ -10,6 +10,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/HomeStyle';
 import { auth } from '../../firebaseConfig';
+import { GoToQuiz } from '../components/GoToQuiz';
 
 const HomePage = ({ navigation }) => {
 	const handleSignOut = () => {
@@ -43,38 +44,8 @@ const HomePage = ({ navigation }) => {
 					</TouchableOpacity>
 
 					<View style={styles.containerthre}>
-						<TouchableOpacity
-							style={styles.knappBytteS}
-							onPress={() =>
-								navigation.navigate('infopage', {
-									number: 1,
-									quiz: 'dFPZQ3bseEkoPMqlrzz7',
-								})
-							}
-						>
-							<ImageBackground
-								source={require('../assets/images/QuizBtn.png')}
-								style={styles.imgButton}
-							>
-								<Text style={styles.knapptext}>Øving til sert nr1</Text>
-							</ImageBackground>
-						</TouchableOpacity>
-						<TouchableOpacity
-							style={styles.knappBytteS}
-							onPress={() =>
-								navigation.navigate('infopage', {
-									number: 2,
-									quiz: 'ad8usDZM4b5GWrpoV6nb',
-								})
-							}
-						>
-							<ImageBackground
-								source={require('../assets/images/QuizBtn.png')}
-								style={styles.imgButton}
-							>
-								<Text style={styles.knapptext}>Øving til sert nr2</Text>
-							</ImageBackground>
-						</TouchableOpacity>
+						<GoToQuiz number={1} quiz={'dFPZQ3bseEkoPMqlrzz7'} />
+						<GoToQuiz number={2} quiz={'ad8usDZM4b5GWrpoV6nb'} />
 						<View style={styles.loginBtn}>
 							<Button
 								title={'Sign out'}
