@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import {
 	Text,
 	TouchableOpacity,
@@ -10,16 +10,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/PlayStyle';
 import { db } from '../../firebaseConfig';
 import { query, getDocs, collection, where } from 'firebase/firestore';
+import { QuizReducer, INITIAL_STATE } from '../utilities/QuizReducer';
 import { Option } from '../components/Option';
 
 const PlayPage = ({ route, navigation }) => {
-	const [questionText, setQuestionText] = useState('');
-	const [options, setOptions] = useState([]);
-	const [correctOption, setCorrectOption] = useState();
-	const [score, setScore] = useState(0);
-	const [index, setIndex] = useState(1);
-	const [questionsArray, setQuestionsArray] = useState([]);
-	const [quizLength, setQuizLength] = useState(0);
+	const [state, dispatch] = useReducer(QuizReducer, INITIAL_STATE);
 
 	useEffect(() => {
 		const { number, quiz } = route.params;
@@ -31,13 +26,18 @@ const PlayPage = ({ route, navigation }) => {
 		const fetchData = async () => {
 			const querySnapshot = await getDocs(q);
 
-			setQuestionText(querySnapshot.docs[0].data().question_text);
-			setOptions(querySnapshot.docs[0].data().options);
-			setCorrectOption(querySnapshot.docs[0].data().correct_answer);
-			setQuizLength(querySnapshot.docs.length);
+			dispatch({
+				type: 'setmulitple',
+				payload: {
+					quizLength: querySnapshot.docs.length,
+					questionText: querySnapshot.docs[0].data().question_text,
+					options: querySnapshot.docs[0].data().options,
+					correctOption: querySnapshot.docs[0].data().correct_answer,
+				},
+			});
 
 			querySnapshot.forEach((doc) => {
-				setQuestionsArray((oldArray) => [...oldArray, doc.data()]);
+				dispatch({ type: 'setquestionsarray', payload: doc.data() });
 			});
 		};
 
@@ -45,17 +45,22 @@ const PlayPage = ({ route, navigation }) => {
 	}, []);
 
 	const handleClick = (answerIdx) => {
-		if (index >= quizLength) {
+		if (state.index >= state.quizLength) {
 			return console.log('Quiz Completed');
 		}
 
-		setQuestionText(questionsArray[index].question_text);
-		setOptions(questionsArray[index].options);
-		setCorrectOption(questionsArray[index].correct_answer);
-		setIndex((index) => index + 1);
+		dispatch({
+			type: 'setmulitple',
+			payload: {
+				index: state.index + 1,
+				questionText: state.questionsArray[state.index].question_text,
+				options: state.questionsArray[state.index].options,
+				correctOption: state.questionsArray[state.index].correct_answer,
+			},
+		});
 
-		if (answerIdx === correctOption) {
-			setScore((score) => score + 1);
+		if (answerIdx === state.correctOption) {
+			dispatch({ type: 'setscore', payload: state.score + 1 });
 			console.log('Correct answer');
 			navigation.navigate('playpage');
 		} else {
@@ -79,10 +84,10 @@ const PlayPage = ({ route, navigation }) => {
 					</TouchableOpacity>
 				</View>
 				<Text style={styles.IndexText}>
-					Spørsmål {index} av {quizLength}
+					Spørsmål {state.index} av {state.quizLength}
 				</Text>
-				<Text style={styles.QuestionText}>{questionText}</Text>
-				{options.map((option, idx) => (
+				<Text style={styles.QuestionText}>{state.questionText}</Text>
+				{state.options.map((option, idx) => (
 					<Option value={option} key={idx} id={idx} handleClick={handleClick} />
 				))}
 			</SafeAreaView>
