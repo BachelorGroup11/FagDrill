@@ -15,7 +15,7 @@ const PlayPage = ({ route }) => {
 	useEffect(() => {
 		// Retrieve specified quiz as parameter from route
 		const { number, quiz } = route.params;
-		// Query all question documents which contain a link to the specified quiz
+		// Query all documents in questions collection containing a link to the specified quiz
 		const q = query(
 			collection(db, 'questions'),
 			where('quizzes', 'array-contains', quiz)
@@ -28,6 +28,7 @@ const PlayPage = ({ route }) => {
 				dispatch({ type: 'setquestionsarray', payload: doc.data() });
 			});
 
+			// Update remaining state information responsible for rendering text and handling logic
 			dispatch({
 				type: 'setmulitple',
 				payload: {
