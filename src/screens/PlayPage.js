@@ -1,18 +1,11 @@
 import React, { useEffect, useReducer } from 'react';
-import {
-	Text,
-	TouchableOpacity,
-	StatusBar,
-	ImageBackground,
-	View,
-} from 'react-native';
+import { Text, StatusBar, ImageBackground } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/PlayStyle';
 import { db } from '../../firebaseConfig';
 import { query, getDocs, collection, where } from 'firebase/firestore';
 import { QuizReducer, INITIAL_STATE } from '../utilities/QuizReducer';
-import { Option } from '../components/Option';
-import { GoBack } from '../components/GoBack';
+import { Option, GoBack } from '../components/Index';
 
 const PlayPage = ({ route, navigation }) => {
 	const [state, dispatch] = useReducer(QuizReducer, INITIAL_STATE);
