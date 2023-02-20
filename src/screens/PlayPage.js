@@ -12,6 +12,7 @@ import { db } from '../../firebaseConfig';
 import { query, getDocs, collection, where } from 'firebase/firestore';
 import { QuizReducer, INITIAL_STATE } from '../utilities/QuizReducer';
 import { Option } from '../components/Option';
+import { GoBack } from '../components/GoBack';
 
 const PlayPage = ({ route, navigation }) => {
 	const [state, dispatch] = useReducer(QuizReducer, INITIAL_STATE);
@@ -75,14 +76,7 @@ const PlayPage = ({ route, navigation }) => {
 			style={{ flex: 1, width: null, alignSelf: 'stretch' }}
 		>
 			<SafeAreaView>
-				<View style={{ zIndex: 1 }}>
-					<TouchableOpacity
-						style={styles.btnBack}
-						onPress={() => navigation.navigate('homepage')}
-					>
-						<Text style={styles.knapptext}>X</Text>
-					</TouchableOpacity>
-				</View>
+				<GoBack destination={'homepage'} />
 				<Text style={styles.IndexText}>
 					Spørsmål {state.index} av {state.quizLength}
 				</Text>
