@@ -13,12 +13,16 @@ import { db } from '../../firebaseConfig';
 import { GoBack } from '../components/GoBack';
 
 const InfoPage = ({ route, navigation }) => {
+	// Contains data from the info field on a specified quiz in the database
 	const [info, setInfo] = useState();
 
+	// Update info state with information on specified quiz
 	useEffect(() => {
 		const fetchData = async () => {
+			// Get data from firestore collection quizzes with specified quiz from route parameter
 			const docRef = doc(db, 'quizzes', route.params.quiz);
 			const docSnap = await getDoc(docRef);
+			// If get request is successful, update info state, otherwise return an error
 			docSnap.exists()
 				? setInfo(docSnap.data().info)
 				: console.log('no such document');

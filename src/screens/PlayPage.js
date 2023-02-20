@@ -8,10 +8,14 @@ import { QuizReducer, INITIAL_STATE } from '../utilities/QuizReducer';
 import { Option, GoBack } from '../components/Index';
 
 const PlayPage = ({ route }) => {
+	// Contains all relevant information on the specified quiz, see: ../utilities/QuizReducer
 	const [state, dispatch] = useReducer(QuizReducer, INITIAL_STATE);
 
+	// Retrieve all questions related to the specified quiz then update state with information
 	useEffect(() => {
+		// Retrieve specified quiz as parameter from route
 		const { number, quiz } = route.params;
+		// Query all question documents which contain a link to the specified quiz
 		const q = query(
 			collection(db, 'questions'),
 			where('quizzes', 'array-contains', quiz)
@@ -19,6 +23,7 @@ const PlayPage = ({ route }) => {
 
 		const fetchData = async () => {
 			const querySnapshot = await getDocs(q);
+			// Append each question retrieved from database to state
 			querySnapshot.forEach((doc) => {
 				dispatch({ type: 'setquestionsarray', payload: doc.data() });
 			});
