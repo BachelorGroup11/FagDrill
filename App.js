@@ -18,7 +18,7 @@ export default function App() {
 		PoppinsBold: require('./src/assets/fonts/Poppins/Poppins-Bold.ttf'),
 	});
 
-	// After custom fonts have loaded, we can hide the splash screen and display the app screen.
+	// After custom fonts have loaded, we can hide the splash screen and display the app screen
 	const onLayoutRootView = useCallback(async () => {
 		if (fontsLoaded) {
 			await SplashScreen.hideAsync();

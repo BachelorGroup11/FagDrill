@@ -44,8 +44,16 @@ const HomePage = ({ navigation }) => {
 					</TouchableOpacity>
 
 					<View style={styles.containerthre}>
-						<GoToQuiz number={1} quiz={'dFPZQ3bseEkoPMqlrzz7'} />
-						<GoToQuiz number={2} quiz={'ad8usDZM4b5GWrpoV6nb'} />
+						<GoToQuiz
+							nav={navigation}
+							number={1}
+							quiz={'dFPZQ3bseEkoPMqlrzz7'}
+						/>
+						<GoToQuiz
+							nav={navigation}
+							number={2}
+							quiz={'ad8usDZM4b5GWrpoV6nb'}
+						/>
 						<View style={styles.loginBtn}>
 							<Button
 								title={'Sign out'}

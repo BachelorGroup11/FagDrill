@@ -7,7 +7,7 @@ import { query, getDocs, collection, where } from 'firebase/firestore';
 import { QuizReducer, INITIAL_STATE } from '../utilities/QuizReducer';
 import { Option, GoBack } from '../components/Index';
 
-const PlayPage = ({ route }) => {
+const PlayPage = ({ route, navigation }) => {
 	// Contains all relevant information on the specified quiz, see: ../utilities/QuizReducer
 	const [state, dispatch] = useReducer(QuizReducer, INITIAL_STATE);
 
@@ -49,7 +49,7 @@ const PlayPage = ({ route }) => {
 			style={{ flex: 1, width: null, alignSelf: 'stretch' }}
 		>
 			<SafeAreaView>
-				<GoBack destination={'homepage'} />
+				<GoBack nav={navigation} destination={'homepage'} />
 				<Text style={styles.IndexText}>
 					Spørsmål {state.index} av {state.quizLength}
 				</Text>
