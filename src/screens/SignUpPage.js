@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '../styles/SignUpStyle';
+import { styles } from '../styles/screens/SignUpStyle';
 import {
 	createUserWithEmailAndPassword,
 	onAuthStateChanged,

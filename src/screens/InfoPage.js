@@ -7,7 +7,7 @@ import {
 	ImageBackground,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '../styles/InfoStyle';
+import { styles } from '../styles/screens/InfoStyle';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { GoBack } from '../components/GoBack';
