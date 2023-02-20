@@ -16,13 +16,13 @@ const PlayPage = ({ route }) => {
 		// Retrieve specified quiz as parameter from route
 		const { number, quiz } = route.params;
 		// Query all documents in questions collection containing a link to the specified quiz
-		const q = query(
+		const questionsQuery = query(
 			collection(db, 'questions'),
 			where('quizzes', 'array-contains', quiz)
 		);
 
 		const fetchData = async () => {
-			const querySnapshot = await getDocs(q);
+			const querySnapshot = await getDocs(questionsQuery);
 			// Append each question retrieved from database to state
 			querySnapshot.forEach((doc) => {
 				dispatch({ type: 'setquestionsarray', payload: doc.data() });
