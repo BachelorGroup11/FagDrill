@@ -13,7 +13,7 @@ const SignUpPage = ({ navigation }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	// Check wheter a user has successfully signed up, then redirect the user to the Home screen
+	// Check whether a user has successfully signed up, then redirect the user to the Home screen
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
