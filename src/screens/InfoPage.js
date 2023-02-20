@@ -10,6 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/InfoStyle';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
+import { GoBack } from '../components/GoBack';
 
 const InfoPage = ({ route, navigation }) => {
 	const [info, setInfo] = useState();
@@ -32,14 +33,7 @@ const InfoPage = ({ route, navigation }) => {
 			style={{ flex: 1, width: null, alignSelf: 'stretch' }}
 		>
 			<SafeAreaView style={styles.containerTo}>
-				<View>
-					<TouchableOpacity
-						style={styles.btnBackToHome}
-						onPress={() => navigation.navigate('homepage')}
-					>
-						<Text style={styles.knapptext}>X</Text>
-					</TouchableOpacity>
-				</View>
+				<GoBack destination={'homepage'} />
 				<View style={styles.textWrapper}>
 					<Text style={styles.levelText}>Level X</Text>
 					<Text style={styles.Infotext}>
