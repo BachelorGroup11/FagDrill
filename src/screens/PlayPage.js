@@ -17,6 +17,7 @@ import {
 	collection,
 	where,
 } from 'firebase/firestore';
+import { Option } from '../components/Option';
 
 const PlayPage = ({ route, navigation }) => {
 	const [questionText, setQuestionText] = useState('');
@@ -25,6 +26,8 @@ const PlayPage = ({ route, navigation }) => {
 	const [score, setScore] = useState(0);
 	const [index, setIndex] = useState(1);
 	const [allQuestions, setAllQuestions] = useState([]);
+
+	const test = ['wrong', 'wrong', 'right', 'wrong'];
 
 	useEffect(() => {
 		const { number, quiz } = route.params;
@@ -35,8 +38,6 @@ const PlayPage = ({ route, navigation }) => {
 
 		const fetchData = async () => {
 			const querySnapshot = await getDocs(q);
-			let docs = querySnapshot.docs[0];
-			console.log(docs.data());
 
 			setQuestionText(querySnapshot.docs[0].data().question_text);
 			setOptions(querySnapshot.docs[0].data().options);
@@ -46,7 +47,6 @@ const PlayPage = ({ route, navigation }) => {
 				setAllQuestions((oldArray) => [...oldArray, doc.data()]);
 			});
 		};
-
 		fetchData().catch((error) => console.log(error));
 	}, []);
 
@@ -64,7 +64,6 @@ const PlayPage = ({ route, navigation }) => {
 			navigation.navigate('playpage');
 		} else {
 			console.log('wrong');
-
 			navigation.navigate('playpage');
 		}
 	};
@@ -83,36 +82,13 @@ const PlayPage = ({ route, navigation }) => {
 						<Text style={styles.knapptext}>X</Text>
 					</TouchableOpacity>
 				</View>
+
 				<Text style={styles.IndexText}>Spørsmål {index} av 20</Text>
 				<Text style={styles.QuestionText}>{questionText}</Text>
 
-				<TouchableOpacity
-					style={styles.btnChoice}
-					onPress={() => handleClick(0)}
-				>
-					<Text style={styles.btnText}>{options[0]}</Text>
-				</TouchableOpacity>
-
-				<TouchableOpacity
-					style={[styles.btnChoice, { margin: 70 }]}
-					onPress={() => handleClick(1)}
-				>
-					<Text style={styles.btnText}>{options[1]}</Text>
-				</TouchableOpacity>
-
-				<TouchableOpacity
-					style={[styles.btnChoice, { margin: 140 }]}
-					onPress={() => handleClick(2)}
-				>
-					<Text style={styles.btnText}>{options[2]}</Text>
-				</TouchableOpacity>
-
-				<TouchableOpacity
-					style={[styles.btnChoice, { margin: 210 }]}
-					onPress={() => handleClick(3)}
-				>
-					<Text style={styles.btnText}>{options[3]}</Text>
-				</TouchableOpacity>
+				{test.map((option, idx) => (
+					<Option value={option} key={idx} />
+				))}
 			</SafeAreaView>
 			<StatusBar translucent backgroundColor="transparent" />
 		</ImageBackground>
