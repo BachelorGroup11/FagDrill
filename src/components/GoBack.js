@@ -1,4 +1,4 @@
-import { styles } from '../styles/GoBackStyle';
+import { styles } from '../styles/components/GoBackStyle';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 

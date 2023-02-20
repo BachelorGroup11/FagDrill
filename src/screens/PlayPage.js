@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from 'react';
 import { Text, StatusBar, ImageBackground } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '../styles/PlayStyle';
+import { styles } from '../styles/screens/PlayStyle';
 import { db } from '../../firebaseConfig';
 import { query, getDocs, collection, where } from 'firebase/firestore';
 import { QuizReducer, INITIAL_STATE } from '../utilities/QuizReducer';

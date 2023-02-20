@@ -8,7 +8,7 @@ import {
 	Button,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '../styles/HomeStyle';
+import { styles } from '../styles/screens/HomeStyle';
 import { auth } from '../../firebaseConfig';
 
 const HomePage = ({ navigation }) => {

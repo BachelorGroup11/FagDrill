@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '../styles/LoginStyle';
+import { styles } from '../styles/screens/LoginStyle';
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebaseConfig';
 
