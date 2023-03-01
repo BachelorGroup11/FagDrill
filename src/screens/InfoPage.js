@@ -10,7 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/InfoStyle';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
-import { GoBack } from '../components/GoBack';
+import { GoBack, LoadingAnimation } from '../components/Index';
 
 const InfoPage = ({ route, navigation }) => {
 	// Contains data from the info field on a specified quiz in the database
@@ -32,33 +32,39 @@ const InfoPage = ({ route, navigation }) => {
 	}, []);
 
 	return (
-		<ImageBackground
-			source={require('../assets/images/Quizinfo_bg.png')}
-			style={{ flex: 1, width: null, alignSelf: 'stretch' }}
-		>
-			<SafeAreaView style={styles.containerTo}>
-				<GoBack nav={navigation} destination={'homepage'} />
-				<View style={styles.textWrapper}>
-					<Text style={styles.levelText}>Level X</Text>
-					<Text style={styles.Infotext}>
-						Øving til sert nr {route.params.number}
-					</Text>
-					{info && <Text style={styles.descriptionText}>{info}</Text>}
-				</View>
-				<TouchableOpacity
-					style={styles.startBtn}
-					onPress={() =>
-						navigation.navigate('playpage', {
-							number: route.params.number,
-							quiz: route.params.quiz,
-						})
-					}
+		<View style={styles.containerTo}>
+			{!info ? (
+				<LoadingAnimation />
+			) : (
+				<ImageBackground
+					source={require('../assets/images/Quizinfo_bg.png')}
+					style={{ flex: 1, width: null, alignSelf: 'stretch' }}
 				>
-					<Text style={styles.btnText}>START</Text>
-				</TouchableOpacity>
-			</SafeAreaView>
-			<StatusBar translucent backgroundColor="transparent" />
-		</ImageBackground>
+					<SafeAreaView style={styles.containerTo}>
+						<GoBack nav={navigation} destination={'homepage'} />
+						<View style={styles.textWrapper}>
+							<Text style={styles.levelText}>Level X</Text>
+							<Text style={styles.Infotext}>
+								Øving til sert nr {route.params.number}
+							</Text>
+							<Text style={styles.descriptionText}>{info}</Text>
+						</View>
+						<TouchableOpacity
+							style={styles.startBtn}
+							onPress={() =>
+								navigation.navigate('playpage', {
+									number: route.params.number,
+									quiz: route.params.quiz,
+								})
+							}
+						>
+							<Text style={styles.btnText}>START</Text>
+						</TouchableOpacity>
+					</SafeAreaView>
+					<StatusBar translucent backgroundColor="transparent" />
+				</ImageBackground>
+			)}
+		</View>
 	);
 };
 
