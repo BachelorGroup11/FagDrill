@@ -5,42 +5,46 @@ import {
 	TouchableOpacity,
 	StatusBar,
 	ImageBackground,
-    Button,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/UserPageAdminStyle';
-import { collection, deleteDoc, doc,firebase, Firestore, query, getDoc, getDocs, getUsers, setDoc, addDoc, where } from 'firebase/firestore';
-import { db, auth,} from '../../firebaseConfig';
-import { useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-
-
+import { collection, query, getDocs, where } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
+import { useEffect } from 'react';
+import { getAuth } from 'firebase/auth';
 
 const UserPage_Admin = ({ navigation }) => {
+	// temp variabler, sikkert ikke beste metode å plassere de her
+	const auth = getAuth();
+	const user = auth.currentUser;
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const userQuery = query(
+				collection(db, 'users'),
+				where('user_id', '==', user.uid)
+			);
+
+			const querySnapshot = await getDocs(userQuery);
+			querySnapshot.forEach((doc) => {
+				console.log(doc.data());
+			});
+		};
+		fetchData().catch((error) => console.log(error));
+	}, []);
+
 	const goToHome = () => {
 		navigation.navigate('homepage');
 	};
 
 	const handleSignOut = () => {
 		auth
-		  .signOut()
-		  .then(() => {
-			navigation.replace("loginpage");
-		  })
-		  .catch((error) => console.log(error));
-	  };
-
-	const usersCollectionRef= collection(db,"users");
-	
-
-	//<Text style={styles.knapptext}>{user.email}</Text>
-
-	const auth = getAuth();
-	const user = auth.currentUser;
-	//alert(user.uid)
-	const uid = user.uid;
-	const q = query(usersCollectionRef, where(uid, "==", user.user_id), where(user.is_admin, "==", true));
-	
+			.signOut()
+			.then(() => {
+				navigation.replace('loginpage');
+			})
+			.catch((error) => console.log(error));
+	};
 
 	return (
 		<ImageBackground
@@ -49,44 +53,33 @@ const UserPage_Admin = ({ navigation }) => {
 		>
 			<SafeAreaView style={styles.containerTo}>
 				<View>
-				
-				<Text style={styles.knapptext}>{q}</Text>
-
+					{user && <Text style={styles.knapptext}>{user.email}</Text>}
 				</View>
-					<TouchableOpacity
-						style={styles.imgBtn_profile}
-						onPress={() => goToHome()}
-					>
-						<Text style={styles.knapptext}>X</Text>
-					</TouchableOpacity>
+				<TouchableOpacity
+					style={styles.imgBtn_profile}
+					onPress={() => goToHome()}
+				>
+					<Text style={styles.knapptext}>X</Text>
+				</TouchableOpacity>
 
-                    
-				        <TouchableOpacity
-                            style={styles.Userpagebtn}
-                        >
-                            <Text style={styles.Userpagebtntext}>Administrer quizer</Text>
-                        </TouchableOpacity>
+				<TouchableOpacity style={styles.Userpagebtn}>
+					<Text style={styles.Userpagebtntext}>Administrer quizer</Text>
+				</TouchableOpacity>
 
-                        <TouchableOpacity
-                            style={styles.Userpagebtn}
-                        >
-                            <Text style={styles.Userpagebtntext}>Administrer Brukere</Text>
-                        </TouchableOpacity>
+				<TouchableOpacity style={styles.Userpagebtn}>
+					<Text style={styles.Userpagebtntext}>Administrer Brukere</Text>
+				</TouchableOpacity>
 
-                        <TouchableOpacity
-                            style={styles.Userpagebtn}
-                        >
-                            <Text style={styles.Userpagebtntext}>Quiz resulteter</Text>
-                        </TouchableOpacity>
+				<TouchableOpacity style={styles.Userpagebtn}>
+					<Text style={styles.Userpagebtntext}>Quiz resulteter</Text>
+				</TouchableOpacity>
 
-                        <TouchableOpacity
-                            style={styles.Userpagebtn}
-							onPress={() => handleSignOut()}
-                        >
-                            <Text style={styles.Userpagebtntext}>Logg ut</Text>
-                        </TouchableOpacity>
-                    
-					
+				<TouchableOpacity
+					style={styles.Userpagebtn}
+					onPress={() => handleSignOut()}
+				>
+					<Text style={styles.Userpagebtntext}>Logg ut</Text>
+				</TouchableOpacity>
 			</SafeAreaView>
 			<StatusBar translucent backgroundColor="transparent" />
 		</ImageBackground>
