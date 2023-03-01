@@ -6,7 +6,7 @@ import { styles } from "../styles/ProgressStyle";
 const ProgressPage = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Your Account</Text>
+      <Text style={styles.title}>Need Fixing</Text>
 
       <View style={styles.container}>
         <TouchableOpacity

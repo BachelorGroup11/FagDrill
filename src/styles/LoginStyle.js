@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
   },
 
   loginBtn: {
-    backgroundColor: "#2e216f",
+    backgroundColor: "#3F51B5",
     alignSelf: "center",
     position: "absolute",
     bottom: 235,

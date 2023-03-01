@@ -18,8 +18,8 @@ export const styles = StyleSheet.create({
 
   appButtonContainer1: {
     elevation: 8,
-    backgroundColor: "#2e216f",
-    borderRadius: 10,
+    backgroundColor: "#3F51B5",
+    borderRadius: 22,
     paddingVertical: 10,
     paddingHorizontal: 12,
     bottom: -200,
@@ -37,8 +37,8 @@ export const styles = StyleSheet.create({
 
   appButtonContainer2: {
     elevation: 8,
-    backgroundColor: "#2e216f",
-    borderRadius: 10,
+    backgroundColor: "#3F51B5",
+    borderRadius: 22,
     paddingVertical: 10,
     paddingHorizontal: 12,
     bottom: -400,
@@ -69,7 +69,6 @@ export const styles = StyleSheet.create({
     fontSize: 32,
     alignSelf: "center",
     color: "black",
-
     padding: 5,
     paddingLeft: 10,
   },
