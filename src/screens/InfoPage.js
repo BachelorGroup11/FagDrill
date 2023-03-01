@@ -47,7 +47,7 @@ const InfoPage = ({ route, navigation }) => {
 							<Text style={styles.Infotext}>
 								Øving til sert nr {route.params.number}
 							</Text>
-							{info && <Text style={styles.descriptionText}>{info}</Text>}
+							<Text style={styles.descriptionText}>{info}</Text>
 						</View>
 						<TouchableOpacity
 							style={styles.startBtn}
