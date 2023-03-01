@@ -8,9 +8,9 @@ export const styles = StyleSheet.create({
   title: {
     alignself: "center",
     position: "absolute",
-    right: 155,
-    bottom: 539,
-    fontSize: 20,
+    right: 140,
+    bottom: 560,
+    fontSize: 32,
     fontWeight: "bold",
   },
 
@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
     bottom: 180,
     height: 40,
     borderRadius: 10,
-    width: 250,
+    width: 100,
     fontWeight: "underline",
     fontSize: 15,
   },
