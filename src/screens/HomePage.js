@@ -78,7 +78,7 @@ const HomePage = ({ navigation }) => {
 									>
 										<Text style={styles.knapptext}>
 											{quiz.name}
-											{'/n'}
+											{"\n"}
 											{quiz.info}
 										</Text>
 									</ImageBackground>
