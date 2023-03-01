@@ -13,25 +13,9 @@ const ChangePasswordPage = ({ navigation }) => {
 	const [currentPassword, setCurrentPassword] = useState('');
 	const [newPassword, setNewPassword] = useState('');
 
-	//const validatePassword = (currentPassword) => {
-	//  const auth = getAuth();
-	//  const user = auth.currentUser;
-	//  const credential = promptForCredentials();
-	//
-	//  reauthenticateWithCredential(user, credential)
-	//    .then(() => {
-	//      // User re-authenticated.
-	//    })
-	//    .catch((error) => {
-	//      // An error ocurred
-	//      // ...
-	//    });
-	//};
-
 	const changePassword = (providedPassword, newPassword) => {
 		const auth = getAuth();
 		const user = auth.currentUser;
-
 		const credential = EmailAuthProvider.credential(
 			user.email,
 			providedPassword
