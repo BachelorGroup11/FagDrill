@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	Text,
 	View,
@@ -14,12 +14,12 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db, auth } from '../../firebaseConfig';
 
 const HomePage = ({ navigation }) => {
+	const [quizData, setQuizData] = useState([]);
+
 	useEffect(() => {
 		const fetchData = async () => {
 			const querySnapshot = await getDocs(collection(db, 'quizzes'));
-			querySnapshot.forEach((doc) => {
-				console.log(doc.id, ' => ', doc.data());
-			});
+			setQuizData(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
 		};
 
 		fetchData().catch((error) => console.log(error));
@@ -53,6 +53,7 @@ const HomePage = ({ navigation }) => {
 				</View>
 
 				<ScrollView style={styles.container}>
+
 					<TouchableOpacity
 						style={styles.imgBtn_profile}
 						onPress={() => goToUserPage_Admin()}
@@ -64,6 +65,13 @@ const HomePage = ({ navigation }) => {
 					</TouchableOpacity>
 
 					<View style={styles.containerthre}>
+
+						{quizData.map((quiz)=>{
+								return (
+								<TouchableOpacity style={styles.knappBytteS} onPress={()=>goToFirst()}><ImageBackground source={require('../assets/images/QuizBtn.png')} style={styles.imgButton} ><Text style={styles.knapptext}>{quiz.name}{'/n'}{quiz.info}</Text></ImageBackground></TouchableOpacity>
+								);
+						})}
+
 						<TouchableOpacity
 							style={styles.knappBytteS}
 							onPress={() => goToFirst()}
@@ -75,61 +83,7 @@ const HomePage = ({ navigation }) => {
 								<Text style={styles.knapptext}>Øving til sert nr3</Text>
 							</ImageBackground>
 						</TouchableOpacity>
-						<TouchableOpacity
-							style={styles.knappBytteS}
-							onPress={() => goToFirst()}
-						>
-							<ImageBackground
-								source={require('../assets/images/QuizBtn.png')}
-								style={styles.imgButton}
-							>
-								<Text style={styles.knapptext}>Øving til sert nr3</Text>
-							</ImageBackground>
-						</TouchableOpacity>
-						<TouchableOpacity
-							style={styles.knappBytteS}
-							onPress={() => goToFirst()}
-						>
-							<ImageBackground
-								source={require('../assets/images/QuizBtn.png')}
-								style={styles.imgButton}
-							>
-								<Text style={styles.knapptext}>Øving til sert nr3</Text>
-							</ImageBackground>
-						</TouchableOpacity>
-						<TouchableOpacity
-							style={styles.knappBytteS}
-							onPress={() => goToFirst()}
-						>
-							<ImageBackground
-								source={require('../assets/images/QuizBtn.png')}
-								style={styles.imgButton}
-							>
-								<Text style={styles.knapptext}>Øving til sert nr3</Text>
-							</ImageBackground>
-						</TouchableOpacity>
-						<TouchableOpacity
-							style={styles.knappBytteS}
-							onPress={() => goToFirst()}
-						>
-							<ImageBackground
-								source={require('../assets/images/QuizBtn.png')}
-								style={styles.imgButton}
-							>
-								<Text style={styles.knapptext}>Øving til sert nr3</Text>
-							</ImageBackground>
-						</TouchableOpacity>
-						<TouchableOpacity
-							style={styles.knappBytteS}
-							onPress={() => goToFirst()}
-						>
-							<ImageBackground
-								source={require('../assets/images/QuizBtn.png')}
-								style={styles.imgButton}
-							>
-								<Text style={styles.knapptext}>Øving til sert nr3</Text>
-							</ImageBackground>
-						</TouchableOpacity>
+						
 						<View style={styles.loginBtn}>
 							<Button
 								title={'Sign out'}
