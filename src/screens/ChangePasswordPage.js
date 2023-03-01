@@ -13,13 +13,10 @@ const ChangePasswordPage = ({ navigation }) => {
 	const [currentPassword, setCurrentPassword] = useState('');
 	const [newPassword, setNewPassword] = useState('');
 
-	const changePassword = (providedPassword, newPassword) => {
+	const changePassword = (oldPassword, newPassword) => {
 		const auth = getAuth();
 		const user = auth.currentUser;
-		const credential = EmailAuthProvider.credential(
-			user.email,
-			providedPassword
-		);
+		const credential = EmailAuthProvider.credential(user.email, oldPassword);
 
 		reauthenticateWithCredential(user, credential)
 			.then(() => {
