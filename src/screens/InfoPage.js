@@ -10,8 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/InfoStyle';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
-import { GoBack } from '../components/GoBack';
-import { LoadingAnimation } from '../components/LoadingAnimation';
+import { GoBack, LoadingAnimation } from '../components/Index';
 
 const InfoPage = ({ route, navigation }) => {
 	// Contains data from the info field on a specified quiz in the database
