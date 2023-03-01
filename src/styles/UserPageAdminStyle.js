@@ -15,12 +15,12 @@ export const styles = StyleSheet.create({
 	},
 	letsplay: {
 		position: 'absolute',
-		width: 157,
+		width: '100%',
 		height: 42,
 		left: 32,
 		top: 44,
 
-		fontSize: 32,
+		fontSize: 30,
 		fontWeight: 'bold',
 		color: '#000000',
 	},

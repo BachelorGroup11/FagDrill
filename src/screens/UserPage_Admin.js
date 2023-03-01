@@ -28,6 +28,11 @@ const UserPage_Admin = ({ navigation }) => {
 			const querySnapshot = await getDocs(userQuery);
 			querySnapshot.forEach((doc) => {
 				console.log(doc.data());
+				if (doc.data().is_admin == true) {
+					alert('is admin')
+				}else{
+					alert('not admin')
+				}
 			});
 		};
 		fetchData().catch((error) => console.log(error));
@@ -53,7 +58,7 @@ const UserPage_Admin = ({ navigation }) => {
 		>
 			<SafeAreaView style={styles.containerTo}>
 				<View>
-					{user && <Text style={styles.knapptext}>{user.email}</Text>}
+					{user && <Text style={styles.letsplay}>{user.email}</Text>}
 				</View>
 				<TouchableOpacity
 					style={styles.imgBtn_profile}
