@@ -17,22 +17,37 @@ export const styles = StyleSheet.create({
   },
 
   appButtonContainer1: {
-    elevation: 8,
+    flex: 1,
     backgroundColor: "#3F51B5",
     borderRadius: 22,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    bottom: -200,
+    bottom: 450,
     width: 310,
     height: 60,
-    right: -35,
+    right: 30,
+    position: "absolute",
   },
   YourAccountText1: {
     color: "white",
     fontWeight: "bold",
     alignSelf: "center",
-    bottom: -155,
+    bottom: -5,
     fontSize: 25,
+    flex: 0.8,
+  },
+
+  appButtonContainer3: {
+    elevation: 8,
+    backgroundColor: "#3F51B5",
+    borderRadius: 22,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    bottom: 330,
+    width: 310,
+    height: 60,
+    right: 30,
+    position: "absolute",
   },
 
   appButtonContainer2: {
@@ -41,17 +56,18 @@ export const styles = StyleSheet.create({
     borderRadius: 22,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    bottom: -400,
+    bottom: 40,
     width: 310,
     height: 60,
-    right: -35,
+    right: 30,
+    position: "absolute",
   },
 
   YourAccountText2: {
     color: "white",
     fontWeight: "bold",
     alignSelf: "center",
-    bottom: -355,
+    bottom: -5,
     fontSize: 25,
   },
 
@@ -71,5 +87,6 @@ export const styles = StyleSheet.create({
     color: "black",
     padding: 5,
     paddingLeft: 10,
+    fontWeight: "bold",
   },
 });
