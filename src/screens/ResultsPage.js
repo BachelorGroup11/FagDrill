@@ -16,10 +16,10 @@ import { getAuth } from 'firebase/auth';
 const ResultsPage = ({ navigation }) => {
 	const [resultsArray, setResultsArray] = useState([]);
 
-	const auth = getAuth();
-	const user = auth.currentUser;
-
 	useEffect(() => {
+		const auth = getAuth();
+		const user = auth.currentUser;
+
 		const fetchData = async () => {
 			const userQuery = query(
 				collection(db, 'results'),
@@ -29,6 +29,16 @@ const ResultsPage = ({ navigation }) => {
 			const querySnapshot = await getDocs(userQuery);
 			querySnapshot.forEach((doc) => {
 				console.log(doc.data());
+
+				let time = {
+					seconds: doc.data().date.seconds,
+					nanoseconds: doc.data().date.nanoseconds,
+				};
+
+				const fireBaseTime = new Date(
+					time.seconds * 1000 + time.nanoseconds / 1000000
+				);
+
 				setResultsArray((resultsArray) => [
 					...resultsArray,
 					{
@@ -36,6 +46,7 @@ const ResultsPage = ({ navigation }) => {
 						attempt: doc.data().attempt,
 						score: doc.data().score,
 						totalQuestions: doc.data().total_questions,
+						date: doc.data().date.toDate(),
 					},
 				]);
 			});
@@ -50,15 +61,24 @@ const ResultsPage = ({ navigation }) => {
 					<Text style={styles.resultaterText}>Resultater</Text>
 					<GoBack nav={navigation} destination={'homepage'} />
 				</View>
-				{resultsArray.map((result, idx) => (
-					<Result
-						name={result.name}
-						attempt={result.attempt}
-						score={result.score}
-						total={result.totalQuestions}
-						key={idx}
-					/>
-				))}
+				<Button
+					title={'LOG'}
+					color="white"
+					fontWeight="bold"
+					onPress={() => console.log(new Date(resultsArray[0].date))}
+				/>
+				{resultsArray
+					.sort((a, b) => a.date - b.date)
+					.map((result, idx) => (
+						<Result
+							name={result.name}
+							attempt={result.attempt}
+							score={result.score}
+							total={result.totalQuestions}
+							date={result.date}
+							key={idx}
+						/>
+					))}
 			</ScrollView>
 			<StatusBar translucent backgroundColor="transparent" />
 		</SafeAreaView>

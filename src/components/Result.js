@@ -1,8 +1,8 @@
 import { styles } from '../styles/components/ResultStyle';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-// Result
-export const Result = ({ name, attempt, score, total }) => {
+// Render a specific result with relevant information
+export const Result = ({ name, attempt, score, total, date }) => {
 	return (
 		<View>
 			<TouchableOpacity style={styles.rectangle}>
@@ -11,6 +11,7 @@ export const Result = ({ name, attempt, score, total }) => {
 				<Text style={styles.correctNum}>
 					{score}/{total}
 				</Text>
+				<Text style={styles.date}>{date.toDateString()}</Text>
 			</TouchableOpacity>
 		</View>
 	);

@@ -31,4 +31,12 @@ export const styles = StyleSheet.create({
 		top: 28,
 		left: 18,
 	},
+	date: {
+		color: '#ffffff',
+		fontFamily: 'PoppinsBold',
+		textAlign: 'right',
+		fontSize: 14,
+		top: 10,
+		right: 15,
+	},
 });
