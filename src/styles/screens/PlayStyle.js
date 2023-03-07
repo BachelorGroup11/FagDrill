@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+	containerTo: {
+		flex: 1,
+	},
 	IndexText: {
 		position: 'absolute',
 		color: '#000',
