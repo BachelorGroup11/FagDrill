@@ -32,10 +32,7 @@ export default function App() {
 
 	return (
 		<NavigationContainer onReady={onLayoutRootView}>
-			<Stack.Navigator
-				screenOptions={{ headerShown: false }}
-				initialRouteName={'resultspage'}
-			>
+			<Stack.Navigator screenOptions={{ headerShown: false }}>
 				<Stack.Screen name="loginpage" component={LoginPage} />
 				<Stack.Screen name="signuppage" component={SignUpPage} />
 				<Stack.Screen
