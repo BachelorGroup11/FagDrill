@@ -15,7 +15,6 @@ import { fetchQuiz } from '../utilities/fetchQuiz';
 const PlayPage = ({ route, navigation }) => {
 	// Contains all relevant information on the specified quiz, see: ../utilities/QuizReducer
 	const [state, dispatch] = useReducer(QuizReducer, INITIAL_STATE);
-	//const [isLoading, setIsLoading] = useState(true);
 
 	// Retrieve all questions from specified quiz then set state with information on first render
 	useEffect(() => {
