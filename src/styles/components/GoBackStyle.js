@@ -6,8 +6,8 @@ export const styles = StyleSheet.create({
 		width: 50,
 		height: 50,
 		borderRadius: 30,
-		left: 20,
-		top: 10,
+		top: 24,
+		left: 304,
 	},
 	knapptext: {
 		fontSize: 30,
@@ -15,5 +15,6 @@ export const styles = StyleSheet.create({
 		color: '#000',
 		padding: 5,
 		paddingLeft: 10,
+		fontWeight: '600',
 	},
 });

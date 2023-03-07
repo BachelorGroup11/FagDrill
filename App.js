@@ -8,6 +8,7 @@ import HomePage from './src/screens/HomePage';
 import InfoPage from './src/screens/InfoPage';
 import SignUpPage from './src/screens/SignUpPage';
 import PlayPage from './src/screens/PlayPage';
+import ResultsPage from './src/screens/ResultsPage';
 
 // This prevents SplashScreen from auto hiding
 SplashScreen.preventAutoHideAsync();
@@ -41,6 +42,7 @@ export default function App() {
 				/>
 				<Stack.Screen name="infopage" component={InfoPage} />
 				<Stack.Screen name="playpage" component={PlayPage} />
+				<Stack.Screen name="resultspage" component={ResultsPage} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
