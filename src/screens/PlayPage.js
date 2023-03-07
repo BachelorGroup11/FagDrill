@@ -17,7 +17,7 @@ const PlayPage = ({ route, navigation }) => {
 	const [state, dispatch] = useReducer(QuizReducer, INITIAL_STATE);
 	//const [isLoading, setIsLoading] = useState(true);
 
-	// Retrieve all questions in collection containing a link to the specified quiz
+	// Retrieve all questions from specified quiz then set state with information on first render
 	useEffect(() => {
 		const { quiz } = route.params;
 		fetchQuiz(quiz, dispatch).then(() =>
