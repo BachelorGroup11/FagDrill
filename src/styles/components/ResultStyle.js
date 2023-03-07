@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
 		width: 314,
 		borderRadius: 10,
 		margin: 5,
-		top: 104,
+		top: 94,
 	},
 	quizName: {
 		color: '#ffffff',

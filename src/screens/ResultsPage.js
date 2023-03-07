@@ -8,14 +8,14 @@ import { collection, query, getDocs, where } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 const ResultsPage = ({ navigation }) => {
-	// Store the user's results in an array of objects
 	const [resultsArray, setResultsArray] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
+	// Fetch user's results from firebase
 	useEffect(() => {
 		const auth = getAuth();
 		const user = auth.currentUser;
 
-		// Fetch the user's results from firebase
 		const fetchData = async () => {
 			const resultsQuery = query(
 				collection(db, 'results'),
@@ -37,12 +37,12 @@ const ResultsPage = ({ navigation }) => {
 			});
 		};
 
-		fetchData().catch((error) => console.log(error));
+		fetchData().then(() => setIsLoading(false));
 	}, []);
 
 	return (
 		<View style={styles.containerTo}>
-			{resultsArray.length === 0 ? (
+			{isLoading ? (
 				<LoadingAnimation />
 			) : (
 				<SafeAreaView style={styles.containerTo}>

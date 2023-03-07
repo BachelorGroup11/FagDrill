@@ -62,7 +62,6 @@ const PlayPage = ({ route, navigation }) => {
 		} catch (error) {
 			console.log(error);
 		}
-		console.log(state.index, state.score);
 	}, [state.index]);
 
 	return (
