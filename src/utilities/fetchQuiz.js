@@ -3,13 +3,14 @@ import { query, getDocs, collection, where } from 'firebase/firestore';
 
 // Gets all questions related to a specific quiz then updates state
 export const fetchQuiz = async (quiz, dispatch) => {
+	// Query all question documents linked to quiz id
 	const questionsQuery = query(
 		collection(db, 'questions'),
 		where('quizzes', 'array-contains', quiz)
 	);
 
-	const querySnapshot = await getDocs(questionsQuery);
 	// Append each question retrieved from database to state
+	const querySnapshot = await getDocs(questionsQuery);
 	querySnapshot.forEach((doc) => {
 		dispatch({ type: 'setquestionsarray', payload: doc.data() });
 	});
