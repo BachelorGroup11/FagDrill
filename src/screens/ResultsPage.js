@@ -3,41 +3,15 @@ import { View, ScrollView, StatusBar, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/ResultsStyle';
 import { GoBack, Result, LoadingAnimation } from '../components/Index';
-import { db } from '../../firebaseConfig';
-import { collection, query, getDocs, where } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import { fetchResults } from '../utilities/fetchResults';
 
 const ResultsPage = ({ navigation }) => {
 	const [resultsArray, setResultsArray] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
-	// Fetch user's results from firebase
+	// Fetch all result documents linked to the specific user from firebase
 	useEffect(() => {
-		const auth = getAuth();
-		const user = auth.currentUser;
-
-		const fetchData = async () => {
-			const resultsQuery = query(
-				collection(db, 'results'),
-				where('user_id', '==', user.uid)
-			);
-
-			const querySnapshot = await getDocs(resultsQuery);
-			querySnapshot.forEach((doc) => {
-				setResultsArray((resultsArray) => [
-					...resultsArray,
-					{
-						name: doc.data().name,
-						attempt: doc.data().attempt,
-						score: doc.data().score,
-						totalQuestions: doc.data().total_questions,
-						date: doc.data().date.toDate(),
-					},
-				]);
-			});
-		};
-
-		fetchData().then(() => setIsLoading(false));
+		fetchResults(setResultsArray).then(() => setIsLoading(false));
 	}, []);
 
 	return (
