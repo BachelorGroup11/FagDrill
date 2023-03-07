@@ -4,7 +4,7 @@ export const INITIAL_STATE = {
 	questionText: null,
 	options: [],
 	correctOption: -1,
-	index: 1,
+	index: 0,
 	score: 0,
 };
 

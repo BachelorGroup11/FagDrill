@@ -48,15 +48,6 @@ const HomePage = ({ navigation }) => {
 						<GoToQuiz nav={navigation} num={2} quiz={'ad8usDZM4b5GWrpoV6nb'} />
 						<View style={styles.loginBtn}>
 							<Button
-								title={'Results'}
-								color="white"
-								fontWeight="bold"
-								style={styles.loginBtn}
-								onPress={() => navigation.navigate('resultspage')}
-							/>
-						</View>
-						<View style={styles.loginBtn}>
-							<Button
 								title={'Sign out'}
 								color="white"
 								fontWeight="bold"

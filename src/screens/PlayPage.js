@@ -1,5 +1,11 @@
 import { useEffect, useReducer } from 'react';
-import { Text, StatusBar, ImageBackground } from 'react-native';
+import {
+	View,
+	Text,
+	StatusBar,
+	ImageBackground,
+	TouchableOpacity,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/PlayStyle';
 import { db } from '../../firebaseConfig';
@@ -43,6 +49,22 @@ const PlayPage = ({ route, navigation }) => {
 		fetchData().catch((error) => console.log(error));
 	}, []);
 
+	useEffect(() => {
+		try {
+			dispatch({
+				type: 'setmulitple',
+				payload: {
+					questionText: state.questionsArray[state.index].question_text,
+					options: state.questionsArray[state.index].options,
+					correctOption: state.questionsArray[state.index].correct_answer,
+				},
+			});
+		} catch (error) {
+			console.log(error);
+		}
+		console.log(state.index, state.score);
+	}, [state.index]);
+
 	return (
 		<ImageBackground
 			source={require('../assets/images/play_bg.png')}
@@ -50,19 +72,37 @@ const PlayPage = ({ route, navigation }) => {
 		>
 			<SafeAreaView>
 				<GoBack nav={navigation} destination={'homepage'} />
-				<Text style={styles.IndexText}>
-					Spørsmål {state.index} av {state.quizLength}
-				</Text>
-				<Text style={styles.QuestionText}>{state.questionText}</Text>
-				{state.options.map((option, idx) => (
-					<Option
-						value={option}
-						key={idx}
-						id={idx}
-						state={state}
-						dispatch={dispatch}
-					/>
-				))}
+				{state.index < state.quizLength && (
+					<Text style={styles.IndexText}>
+						Spørsmål {state.index + 1} av {state.quizLength}
+					</Text>
+				)}
+				{state.index < state.quizLength ? (
+					<View>
+						<Text style={styles.QuestionText}>{state.questionText}</Text>
+						{state.options.map((option, idx) => (
+							<Option
+								value={option}
+								key={idx}
+								id={idx}
+								state={state}
+								dispatch={dispatch}
+							/>
+						))}
+					</View>
+				) : (
+					<View>
+						<Text style={styles.QuestionText}>
+							Du har fullførten quizen. Gå videre for å se resultatene dine.
+						</Text>
+						<TouchableOpacity
+							style={styles.resultsBtn}
+							onPress={() => navigation.navigate('resultspage')}
+						>
+							<Text style={styles.btnText}>Resultater</Text>
+						</TouchableOpacity>
+					</View>
+				)}
 			</SafeAreaView>
 			<StatusBar translucent backgroundColor="transparent" />
 		</ImageBackground>

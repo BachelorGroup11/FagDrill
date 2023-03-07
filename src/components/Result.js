@@ -1,7 +1,7 @@
 import { styles } from '../styles/components/ResultStyle';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-// Render a specific result with relevant information
+// Render a specific result
 export const Result = ({ name, attempt, score, total, date }) => {
 	return (
 		<View>
