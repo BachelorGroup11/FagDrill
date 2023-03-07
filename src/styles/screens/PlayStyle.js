@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
 		color: '#000',
 		fontWeight: '400',
 		fontSize: 14,
-		bottom: 65,
+		bottom: 30,
 		paddingHorizontal: 20,
 	},
 	QuestionText: {

@@ -52,13 +52,11 @@ const PlayPage = ({ route, navigation }) => {
 				>
 					<SafeAreaView>
 						<GoBack nav={navigation} destination={'homepage'} />
-						{state.index < state.quizLength && (
-							<Text style={styles.IndexText}>
-								Spørsmål {state.index + 1} av {state.quizLength}
-							</Text>
-						)}
 						{state.index < state.quizLength ? (
 							<View>
+								<Text style={styles.IndexText}>
+									Spørsmål {state.index + 1} av {state.quizLength}
+								</Text>
 								<Text style={styles.QuestionText}>{state.questionText}</Text>
 								{state.options.map((option, idx) => (
 									<Option
@@ -73,7 +71,7 @@ const PlayPage = ({ route, navigation }) => {
 						) : (
 							<View>
 								<Text style={styles.QuestionText}>
-									Du har fullførten quizen. Gå videre for å se resultatene dine.
+									Du har fullført quizen. Gå videre for å se resultatene dine.
 								</Text>
 								<TouchableOpacity
 									style={styles.resultsBtn}
