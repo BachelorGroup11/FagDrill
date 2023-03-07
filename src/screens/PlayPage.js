@@ -52,13 +52,11 @@ const PlayPage = ({ route, navigation }) => {
 				>
 					<SafeAreaView>
 						<GoBack nav={navigation} destination={'homepage'} />
-						{state.index < state.quizLength && (
-							<Text style={styles.IndexText}>
-								Spørsmål {state.index + 1} av {state.quizLength}
-							</Text>
-						)}
 						{state.index < state.quizLength ? (
 							<View>
+								<Text style={styles.IndexText}>
+									Spørsmål {state.index + 1} av {state.quizLength}
+								</Text>
 								<Text style={styles.QuestionText}>{state.questionText}</Text>
 								{state.options.map((option, idx) => (
 									<Option
