@@ -2,14 +2,17 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
 	container: {
-		alignItems: 'center',
+		paddingTop: 35,
+		flex: 1,
 	},
-	headerContainer: {},
+	containerTo: {
+		flex: 1,
+	},
 	resultaterText: {
 		fontSize: 32,
 		fontFamily: 'PoppinsBold',
 		position: 'absolute',
-		top: 44,
+		top: 24,
 		left: 32,
 	},
 });

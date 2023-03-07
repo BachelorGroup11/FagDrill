@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
 		width: 50,
 		height: 50,
 		borderRadius: 30,
-		top: 44,
+		top: 24,
 		left: 304,
 	},
 	knapptext: {
