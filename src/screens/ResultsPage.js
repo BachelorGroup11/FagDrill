@@ -1,12 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-	SafeAreaView,
-	View,
-	ScrollView,
-	StatusBar,
-	Text,
-	Button,
-} from 'react-native';
+import { SafeAreaView, View, ScrollView, StatusBar, Text } from 'react-native';
 import { styles } from '../styles/screens/ResultsStyle';
 import { GoBack, Result } from '../components/Index';
 import { db } from '../../firebaseConfig';
@@ -28,17 +21,6 @@ const ResultsPage = ({ navigation }) => {
 
 			const querySnapshot = await getDocs(userQuery);
 			querySnapshot.forEach((doc) => {
-				console.log(doc.data());
-
-				let time = {
-					seconds: doc.data().date.seconds,
-					nanoseconds: doc.data().date.nanoseconds,
-				};
-
-				const fireBaseTime = new Date(
-					time.seconds * 1000 + time.nanoseconds / 1000000
-				);
-
 				setResultsArray((resultsArray) => [
 					...resultsArray,
 					{
@@ -51,6 +33,7 @@ const ResultsPage = ({ navigation }) => {
 				]);
 			});
 		};
+
 		fetchData().catch((error) => console.log(error));
 	}, []);
 
@@ -61,14 +44,8 @@ const ResultsPage = ({ navigation }) => {
 					<Text style={styles.resultaterText}>Resultater</Text>
 					<GoBack nav={navigation} destination={'homepage'} />
 				</View>
-				<Button
-					title={'LOG'}
-					color="white"
-					fontWeight="bold"
-					onPress={() => console.log(new Date(resultsArray[0].date))}
-				/>
 				{resultsArray
-					.sort((a, b) => a.date - b.date)
+					.sort((a, b) => b.date - a.date)
 					.map((result, idx) => (
 						<Result
 							name={result.name}
