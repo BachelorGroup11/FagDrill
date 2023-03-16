@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../styles/ChangePasswordStyle";
@@ -34,10 +34,6 @@ const ChangePasswordPage = ({ navigation }) => {
       .catch((error) => {
         alert(error.message);
       });
-  };
-
-  const goToUserPage = () => {
-    navigation.navigate("userpage");
   };
 
   return (
