@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '../styles/SignUpStyle';
+import { styles } from '../styles/screens/SignUpStyle';
 import {
 	createUserWithEmailAndPassword,
 	onAuthStateChanged,
@@ -13,15 +13,18 @@ const SignUpPage = ({ navigation }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
+	// Check whether a user has successfully signed up, then redirect the user to the Home screen
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
 				navigation.navigate('homepage');
 			}
 		});
+		// Unsubscribe to avoid memory leaks
 		return unsubscribe;
 	}, []);
 
+	// Register a new user then create a new document in firestore containing the relevant user information
 	const handleSignUp = () => {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then((userCredentials) => {
