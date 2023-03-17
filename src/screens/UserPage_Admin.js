@@ -18,25 +18,7 @@ const UserPage_Admin = ({ navigation }) => {
 	const auth = getAuth();
 	const user = auth.currentUser;
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const userQuery = query(
-				collection(db, 'users'),
-				where('user_id', '==', user.uid)
-			);
-
-			const querySnapshot = await getDocs(userQuery);
-			querySnapshot.forEach((doc) => {
-				console.log(doc.data());
-				if (doc.data().is_admin == true) {
-					alert('is admin')
-				}else{
-					alert('not admin')
-				}
-			});
-		};
-		fetchData().catch((error) => console.log(error));
-	}, []);
+	
 
 	const goToHome = () => {
 		navigation.navigate('homepage');
