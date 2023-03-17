@@ -1,14 +1,15 @@
 import {
-  Text,
-  View,
-  TouchableOpacity,
-  StatusBar,
-  ScrollView,
-  ImageBackground,
-  Button,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { styles } from "../styles/HomeStyle";
+	Text,
+	View,
+	TouchableOpacity,
+	StatusBar,
+	ScrollView,
+	ImageBackground,
+	Button,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { styles } from '../styles/HomeStyle';
+import { GoToQuiz } from '../components/GoToQuiz';
 
 const HomePage = ({ navigation }) => {
 	const handleSignOut = () => {
@@ -20,15 +21,15 @@ const HomePage = ({ navigation }) => {
 			.catch((error) => console.log(error));
 	};
 
-  return (
-    <ImageBackground
-      source={require("../assets/images/home_page_bg.png")}
-      style={{ flex: 1, width: null, alignSelf: "stretch" }}
-    >
-      <SafeAreaView style={styles.containerTo}>
-        <View>
-          <Text style={styles.letsplay}>Let's play</Text>
-        </View>
+	return (
+		<ImageBackground
+			source={require('../assets/images/home_page_bg.png')}
+			style={{ flex: 1, width: null, alignSelf: 'stretch' }}
+		>
+			<SafeAreaView style={styles.containerTo}>
+				<View>
+					<Text style={styles.letsplay}>Let's play</Text>
+				</View>
 
 				<ScrollView style={styles.container}>
 					<TouchableOpacity
@@ -40,7 +41,6 @@ const HomePage = ({ navigation }) => {
 							style={styles.imgButton}
 						></ImageBackground>
 					</TouchableOpacity>
-
 					<View style={styles.containerthre}>
 						<GoToQuiz nav={navigation} num={1} quiz={'dFPZQ3bseEkoPMqlrzz7'} />
 						<GoToQuiz nav={navigation} num={2} quiz={'ad8usDZM4b5GWrpoV6nb'} />
