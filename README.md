@@ -21,7 +21,7 @@ To open the app:
 
 ## Todo
 
-[JIRA](https://st0611.atlassian.net/jira/software/projects/FD/boards/1)
+[Jira](https://st0611.atlassian.net/jira/software/projects/FD/boards/1)
 
 ## Code structure
 
