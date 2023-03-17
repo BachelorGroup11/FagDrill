@@ -5,11 +5,29 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
 
+  btnBackToHome: {
+    width: 42,
+    height: 42,
+    borderRadius: 30,
+    position: "relative",
+    left: 300,
+    top: 40,
+  },
+
+  knapptext: {
+    fontSize: 32,
+    alignSelf: "center",
+    color: "black",
+    padding: 5,
+    paddingLeft: 10,
+    fontWeight: "bold",
+  },
+
   title: {
     alignself: "center",
     position: "absolute",
-    right: 140,
-    bottom: 560,
+    right: 190,
+    top: 90,
     fontSize: 32,
     fontWeight: "bold",
   },
@@ -18,7 +36,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#C0C0C0",
     alignSelf: "center",
     position: "absolute",
-    bottom: 435,
+    bottom: 425,
     height: 40,
     borderRadius: 10,
     width: 250,
@@ -28,7 +46,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#C0C0C0",
     alignSelf: "center",
     position: "absolute",
-    bottom: 350,
+    bottom: 320,
     height: 40,
     borderRadius: 10,
     width: 250,
@@ -38,16 +56,17 @@ export const styles = StyleSheet.create({
     border: "1px solid",
     alignItems: "center",
     position: "absolute",
-    bottom: 480,
-    right: 277,
+    bottom: 470,
+    right: 198,
   },
 
   inputViewPassword: {
     border: "1px solid",
     alignItems: "center",
     position: "absolute",
-    bottom: 395,
+    bottom: 365,
     width: 190,
+    right: 170,
   },
 
   loginBtn: {
@@ -59,33 +78,23 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     width: 250,
   },
-
-  signupBtn: {
-    alignSelf: "center",
-    position: "absolute",
-    bottom: 180,
-    height: 40,
-    borderRadius: 10,
-    width: 100,
-    fontWeight: "underline",
-    fontSize: 15,
+  appButtonContainer2: {
+    elevation: 8,
+    backgroundColor: "#3F51B5",
+    borderRadius: 22,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    bottom: -600,
+    width: 310,
+    height: 60,
+    right: -35,
   },
 
-  loginText: {
+  YourAccountText2: {
     color: "white",
-    alignself: "center",
-    position: "absolute",
-    right: 155,
-    bottom: 12,
-    right: 107,
     fontWeight: "bold",
-  },
-
-  orText: {
-    color: "#00bfff",
     alignSelf: "center",
-    position: "absolute",
-    bottom: 95,
-    height: 40,
+    bottom: -5,
+    fontSize: 25,
   },
 });

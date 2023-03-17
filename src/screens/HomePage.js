@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react';
 import {
-	Text,
-	View,
-	TouchableOpacity,
-	StatusBar,
-	ScrollView,
-	ImageBackground,
-	Button,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '../styles/screens/HomeStyle';
-import { auth } from '../../firebaseConfig';
-import { GoToQuiz } from '../components/GoToQuiz';
+  Text,
+  View,
+  TouchableOpacity,
+  StatusBar,
+  ScrollView,
+  ImageBackground,
+  Button,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { styles } from "../styles/HomeStyle";
 
 const HomePage = ({ navigation }) => {
 	const handleSignOut = () => {
@@ -23,20 +20,20 @@ const HomePage = ({ navigation }) => {
 			.catch((error) => console.log(error));
 	};
 
-	return (
-		<ImageBackground
-			source={require('../assets/images/home_page_bg.png')}
-			style={{ flex: 1, width: null, alignSelf: 'stretch' }}
-		>
-			<SafeAreaView style={styles.containerTo}>
-				<View>
-					<Text style={styles.letsplay}>Let's play</Text>
-				</View>
+  return (
+    <ImageBackground
+      source={require("../assets/images/home_page_bg.png")}
+      style={{ flex: 1, width: null, alignSelf: "stretch" }}
+    >
+      <SafeAreaView style={styles.containerTo}>
+        <View>
+          <Text style={styles.letsplay}>Let's play</Text>
+        </View>
 
 				<ScrollView style={styles.container}>
 					<TouchableOpacity
 						style={styles.imgBtn_profile}
-						onPress={() => alert('Kommer når vi har fått fikset profil siden')}
+						onPress={() => Alert()}
 					>
 						<ImageBackground
 							source={require('../assets/images/Propile_btn_bg.png')}
