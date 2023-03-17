@@ -7,7 +7,7 @@ import {
 	ImageBackground,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '../styles/UserPageAdminStyle';
+import { styles } from '../styles/screens/UserPageAdminStyle';
 import { collection, query, getDocs, where } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { useEffect } from 'react';

@@ -8,7 +8,7 @@ import {
 	Button,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '../styles/HomeStyle';
+import { styles } from '../styles/screens/HomeStyle';
 import { GoToQuiz } from '../components/GoToQuiz';
 
 const HomePage = ({ navigation }) => {
@@ -19,6 +19,9 @@ const HomePage = ({ navigation }) => {
 				navigation.replace('loginpage');
 			})
 			.catch((error) => console.log(error));
+	};
+	const goToUser = () => {
+		navigation.navigate('userpage');
 	};
 
 	return (
@@ -34,7 +37,7 @@ const HomePage = ({ navigation }) => {
 				<ScrollView style={styles.container}>
 					<TouchableOpacity
 						style={styles.imgBtn_profile}
-						onPress={() => Alert()}
+						onPress={() => goToUser()}
 					>
 						<ImageBackground
 							source={require('../assets/images/Propile_btn_bg.png')}
