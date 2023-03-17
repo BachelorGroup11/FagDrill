@@ -7,6 +7,7 @@ import LoginPage from './src/screens/LoginPage';
 import HomePage from './src/screens/HomePage';
 import InfoPage from './src/screens/InfoPage';
 import SignUpPage from './src/screens/SignUpPage';
+import UserPage_Admin from './src/screens/UserPage_Admin';
 import PlayPage from './src/screens/PlayPage';
 import ResultsPage from './src/screens/ResultsPage';
 
@@ -35,6 +36,8 @@ export default function App() {
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
 				<Stack.Screen name="loginpage" component={LoginPage} />
 				<Stack.Screen name="signuppage" component={SignUpPage} />
+				<Stack.Screen name="homepage" component={HomePage} />
+				<Stack.Screen name="Userpageadmin" component={UserPage_Admin} />
 				<Stack.Screen
 					name="homepage"
 					component={HomePage}
