@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/PlayStyle';
+import ProgressBar from 'react-native-progress/Bar';
 import { Option, GoBack, LoadingAnimation } from '../components/Index';
 import { QuizReducer, INITIAL_STATE } from '../utilities/QuizReducer';
 import { fetchQuiz } from '../utilities/fetchQuiz';
@@ -51,11 +52,16 @@ const PlayPage = ({ route, navigation }) => {
 				>
 					<SafeAreaView>
 						<GoBack nav={navigation} destination={'homepage'} />
+						<ProgressBar
+							progress={state.index / state.quizLength}
+							style={styles.progressbar}
+							width={300}
+							height={20}
+							borderRadius={20}
+							color={'#3F51B5'}
+						/>
 						{state.index < state.quizLength ? (
 							<View>
-								<Text style={styles.IndexText}>
-									Spørsmål {state.index + 1} av {state.quizLength}
-								</Text>
 								<Text style={styles.QuestionText}>{state.questionText}</Text>
 								{state.options.map((option, idx) => (
 									<Option
