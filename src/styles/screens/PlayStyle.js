@@ -4,6 +4,10 @@ export const styles = StyleSheet.create({
 	containerTo: {
 		flex: 1,
 	},
+	progressbar: {
+		top: 200,
+		alignSelf: 'center',
+	},
 	IndexText: {
 		position: 'absolute',
 		color: '#000',
