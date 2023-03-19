@@ -46,7 +46,7 @@ export default function App() {
 				/>
 				<Stack.Screen name="playpage" component={PlayPage} />
 				<Stack.Screen name="infopage" component={InfoPage} />
-				<Stack.Screen name="resultpage" component={ResultsPage} />
+				<Stack.Screen name="resultspage" component={ResultsPage} />
 				<Stack.Screen name="userpage" component={UserPage} />
 				<Stack.Screen name="Userpageadmin" component={UserPage_Admin} />
 				<Stack.Screen name="progresspage" component={ProgressPage} />
