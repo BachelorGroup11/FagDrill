@@ -3,6 +3,7 @@ export const updateQuiz = (answerIdx, state, dispatch) => {
 	dispatch({
 		type: 'setmulitple',
 		payload: {
+			selected: answerIdx,
 			index: state.index + 1,
 			score: answerIdx == state.correctOption ? state.score + 1 : state.score,
 		},
