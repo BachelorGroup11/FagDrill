@@ -15,6 +15,7 @@ import ProgressBar from 'react-native-progress/Bar';
 import { Option, GoBack, LoadingAnimation } from '../components/Index';
 import { QuizReducer, INITIAL_STATE } from '../utilities/QuizReducer';
 import { fetchQuiz } from '../utilities/fetchQuiz';
+import { FillInBlank } from '../components/FillInBlank';
 
 const PlayPage = ({ route, navigation }) => {
 	const { quiz } = route.params;
@@ -37,6 +38,7 @@ const PlayPage = ({ route, navigation }) => {
 					selected: -1,
 					questionText: state.questionsArray[state.index].question_text,
 					options: state.questionsArray[state.index].options,
+					category: state.questionsArray[state.index].category,
 					correctOption: state.questionsArray[state.index].correct_answer,
 				},
 			});
@@ -100,30 +102,38 @@ const PlayPage = ({ route, navigation }) => {
 							</View>
 						) : (
 							<View>
-								<Text style={styles.QuestionText}>{state.questionText}</Text>
-								{state.options.map((option, idx) => (
-									<Option
-										value={option}
-										key={idx}
-										id={idx}
-										state={state}
-										dispatch={dispatch}
-										style={
-											idx === state.selected
-												? idx === state.correctOption
-													? {
-															borderWidth: 5,
-															borderColor: '#00FFE0',
-													  }
-													: { borderWidth: 5, borderColor: 'red' }
-												: idx === state.correctOption &&
-												  state.selected != -1 && {
-														borderWidth: 5,
-														borderColor: '#00FFE0',
-												  }
-										}
-									/>
-								))}
+								{state.category === 'fill_in_blank' ? (
+									<FillInBlank state={state} dispatch={dispatch} />
+								) : (
+									<View>
+										<Text style={styles.QuestionText}>
+											{state.questionText}
+										</Text>
+										{state.options.map((option, idx) => (
+											<Option
+												value={option}
+												key={idx}
+												id={idx}
+												state={state}
+												dispatch={dispatch}
+												style={
+													idx === state.selected
+														? idx === state.correctOption
+															? {
+																	borderWidth: 5,
+																	borderColor: '#00FFE0',
+															  }
+															: { borderWidth: 5, borderColor: 'red' }
+														: idx === state.correctOption &&
+														  state.selected != -1 && {
+																borderWidth: 5,
+																borderColor: '#00FFE0',
+														  }
+												}
+											/>
+										))}
+									</View>
+								)}
 								{state.selected != -1 && (
 									<TouchableOpacity
 										style={styles.nextBtn}

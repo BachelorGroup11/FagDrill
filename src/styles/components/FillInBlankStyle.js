@@ -1,0 +1,57 @@
+import { StyleSheet } from 'react-native';
+
+export const styles = StyleSheet.create({
+	container: { alignItems: 'center' },
+	headerText: {
+		position: 'absolute',
+		color: '#000',
+		fontWeight: 'bold',
+		fontSize: 30,
+		paddingHorizontal: 20,
+		top: 120,
+	},
+	displayText: {
+		position: 'absolute',
+		fontWeight: 'medium',
+		color: '#000',
+		paddingHorizontal: 20,
+		fontSize: 24,
+		top: 200,
+	},
+	input: {
+		width: 250,
+		height: 50,
+		borderColor: '#3F51B5',
+		borderWidth: 2,
+		borderRadius: 10,
+		top: 320,
+		paddingLeft: 10,
+		fontFamily: 'PoppinsBold',
+	},
+	sumbitBtn: {
+		backgroundColor: '#3F51B5',
+		alignSelf: 'center',
+		position: 'absolute',
+		top: 400,
+		height: 50,
+		borderRadius: 22,
+		width: 200,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	btnText: {
+		color: '#ffffff',
+		fontSize: 27,
+		fontFamily: 'PoppinsBold',
+	},
+	feedback: {
+		position: 'absolute',
+		fontWeight: 'medium',
+		fontFamily: 'PoppinsBold',
+		color: '#3F51B5',
+		paddingHorizontal: 20,
+		fontSize: 24,
+		top: 450,
+		textAlign: 'center',
+	},
+});
