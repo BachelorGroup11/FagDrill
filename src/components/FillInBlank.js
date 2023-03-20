@@ -7,19 +7,19 @@ export const FillInBlank = ({ state, dispatch }) => {
 	const [wasCorrect, setWasCorrect] = useState(false);
 
 	const sumbitAnswer = () => {
-		if (state.selected != 5)
-			dispatch({
-				type: 'setmulitple',
-				payload: {
-					index: state.index + 1,
-					selected: 5,
-					score:
-						answer.toLowerCase() === state.correctOption
-							? state.score + 1
-							: state.score,
-				},
-			});
-		answer.toLowerCase() === state.correctOption && setWasCorrect(true);
+		dispatch({
+			type: 'setmulitple',
+			payload: {
+				index: state.index + 1,
+				selected: 55,
+				score:
+					answer.toLowerCase() === state.correctOption.toLowerCase()
+						? state.score + 1
+						: state.score,
+			},
+		});
+		answer.toLowerCase() === state.correctOption.toLowerCase() &&
+			setWasCorrect(true);
 	};
 
 	return (
@@ -33,7 +33,7 @@ export const FillInBlank = ({ state, dispatch }) => {
 				onChangeText={(text) => setAnswer(text)}
 				value={answer}
 			/>
-			{state.selected != 5 ? (
+			{state.selected != 55 ? (
 				<TouchableOpacity onPress={sumbitAnswer} style={styles.sumbitBtn}>
 					<Text style={styles.btnText}>Submit</Text>
 				</TouchableOpacity>

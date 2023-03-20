@@ -12,10 +12,14 @@ import { db } from '../../firebaseConfig';
 import { getAuth } from 'firebase/auth';
 import { addDoc, collection, Timestamp } from 'firebase/firestore';
 import ProgressBar from 'react-native-progress/Bar';
-import { Option, GoBack, LoadingAnimation } from '../components/Index';
+import {
+	Option,
+	GoBack,
+	LoadingAnimation,
+	FillInBlank,
+} from '../components/Index';
 import { QuizReducer, INITIAL_STATE } from '../utilities/QuizReducer';
 import { fetchQuiz } from '../utilities/fetchQuiz';
-import { FillInBlank } from '../components/FillInBlank';
 
 const PlayPage = ({ route, navigation }) => {
 	const { quiz } = route.params;

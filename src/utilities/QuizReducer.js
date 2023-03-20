@@ -9,7 +9,6 @@ export const INITIAL_STATE = {
 	score: 0,
 	selected: -1,
 	isLoading: true,
-	correctText: null,
 };
 
 // State containing all necessary information for Play screen
@@ -19,6 +18,11 @@ export const QuizReducer = (state, action) => {
 			return {
 				...state,
 				questionsArray: [...state.questionsArray, action.payload],
+			};
+		case 'setcategory':
+			return {
+				...state,
+				category: action.payload,
 			};
 		case 'setquizlength':
 			return {
@@ -59,16 +63,6 @@ export const QuizReducer = (state, action) => {
 			return {
 				...state,
 				isLoading: action.payload,
-			};
-		case 'setcategory':
-			return {
-				...state,
-				category: action.payload,
-			};
-		case 'setcorrecttext':
-			return {
-				...state,
-				correctText: action.payload,
 			};
 		case 'setmulitple':
 			return {
