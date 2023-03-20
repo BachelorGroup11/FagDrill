@@ -15,13 +15,14 @@ export const fetchQuiz = async (quiz, dispatch) => {
 		dispatch({ type: 'setquestionsarray', payload: doc.data() });
 	});
 
-	// Update remaining state information responsible for rendering text and handling logic
+	// Set quiz state
 	dispatch({
 		type: 'setmulitple',
 		payload: {
 			quizLength: querySnapshot.docs.length,
 			questionText: querySnapshot.docs[0].data().question_text,
 			options: querySnapshot.docs[0].data().options,
+			category: querySnapshot.docs[0].data().category,
 			correctOption: querySnapshot.docs[0].data().correct_answer,
 		},
 	});
