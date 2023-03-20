@@ -6,6 +6,7 @@ export const INITIAL_STATE = {
 	correctOption: -1,
 	index: 0,
 	score: 0,
+	selected: -1,
 	isLoading: true,
 };
 
@@ -46,6 +47,11 @@ export const QuizReducer = (state, action) => {
 			return {
 				...state,
 				score: action.payload,
+			};
+		case 'setseleced':
+			return {
+				...state,
+				selected: action.payload,
 			};
 		case 'setisloading':
 			return {

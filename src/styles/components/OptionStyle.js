@@ -10,7 +10,8 @@ export const styles = StyleSheet.create({
 		borderRadius: 22,
 		width: 314,
 		margin: 5,
-		top: 360,
+		top: 240,
+		zIndex: 1,
 	},
 	btnText: {
 		color: '#ffffff',
