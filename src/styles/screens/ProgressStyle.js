@@ -14,4 +14,28 @@ export const styles = StyleSheet.create({
     top: 40,
     fontSize: 32,
   },
+
+  knapptext: {
+    fontSize: 32,
+    alignSelf: "center",
+    color: "black",
+    padding: 5,
+    paddingLeft: 10,
+    fontWeight: "bold",
+  },
+
+  title: {
+    alignself: "center",
+    position: "absolute",
+    right: 190,
+    top: 90,
+    fontSize: 32,
+    fontWeight: "bold",
+  },
+
+  chart: {
+    alignself: "center",
+    position: "absolute",
+    top: 150,
+  },
 });
