@@ -20,6 +20,8 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
+		PoppinsRegular: require('./src/assets/fonts/Poppins/Poppins-Regular.ttf'),
+		PoppinsMedium: require('./src/assets/fonts/Poppins/Poppins-Medium.ttf'),
 		PoppinsBold: require('./src/assets/fonts/Poppins/Poppins-Bold.ttf'),
 	});
 
