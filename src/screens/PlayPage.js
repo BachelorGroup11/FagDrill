@@ -1,16 +1,7 @@
 import { useEffect, useReducer, useState } from 'react';
-import {
-	View,
-	Text,
-	StatusBar,
-	ImageBackground,
-	TouchableOpacity,
-} from 'react-native';
+import { View, Text, StatusBar, ImageBackground } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/PlayStyle';
-import { db } from '../../firebaseConfig';
-import { getAuth } from 'firebase/auth';
-import { addDoc, collection, Timestamp } from 'firebase/firestore';
 import ProgressBar from 'react-native-progress/Bar';
 import {
 	Option,
@@ -26,11 +17,6 @@ const PlayPage = ({ route, navigation }) => {
 	const { quiz, number } = route.params;
 	// Contains all relevant information on the specified quiz, see: ../utilities/QuizReducer
 	const [state, dispatch] = useReducer(QuizReducer, INITIAL_STATE);
-	// needed information:
-	// Whether question has been answered
-	// What was the answer
-	// What was the correct answer
-	// [{is_answered: true, answerInput: 2, correctAnswer: 3},{},{},...]
 	const [answeredArray, setAnsweredArray] = useState([]);
 
 	// Retrieve all questions from specified quiz then set state with information on first render
@@ -61,7 +47,6 @@ const PlayPage = ({ route, navigation }) => {
 								color={'#3F51B5'}
 							/>
 						</View>
-
 						<View>
 							{state.category === 'fill_in_blank' ? (
 								<FillInBlank

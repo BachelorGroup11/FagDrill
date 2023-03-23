@@ -1,10 +1,17 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { styles } from '../styles/components/PlayNavigatorStyle';
 import { db } from '../../firebaseConfig';
 import { getAuth } from 'firebase/auth';
 import { addDoc, collection, Timestamp } from 'firebase/firestore';
 
-export const PlayNavigator = ({ state, dispatch, quiz, number, nav }) => {
+export const PlayNavigator = ({
+	state,
+	dispatch,
+	answeredArray,
+	quiz,
+	number,
+	nav,
+}) => {
 	const nextQuestion = () => {
 		if (state.index < state.questionsArray.length - 1) {
 			dispatch({
@@ -43,7 +50,7 @@ export const PlayNavigator = ({ state, dispatch, quiz, number, nav }) => {
 	};
 
 	// Create new document in results collection and push result
-	const finishQuiz = async () => {
+	const addResult = async () => {
 		const auth = getAuth();
 		const user = auth.currentUser;
 
@@ -57,6 +64,19 @@ export const PlayNavigator = ({ state, dispatch, quiz, number, nav }) => {
 			date: Timestamp.now(),
 		});
 		nav.navigate('resultspage');
+	};
+
+	const finishQuiz = () => {
+		if (answeredArray.length < state.questionsArray.length) {
+			return Alert.alert(
+				'',
+				`You have ${
+					state.quizLength - answeredArray.length
+				} unanswered questions.\nAre you sure you wish to complete the quiz?`,
+				[{ text: 'Cancel' }, { text: 'Confirm', onPress: addResult }]
+			);
+		}
+		addResult();
 	};
 
 	return (
@@ -81,11 +101,11 @@ export const PlayNavigator = ({ state, dispatch, quiz, number, nav }) => {
 			)}
 			{state.index < state.questionsArray.length - 1 ? (
 				<TouchableOpacity style={styles.nextBtn} onPress={nextQuestion}>
-					<Text style={styles.btnText}>{'Next'}</Text>
+					<Text style={styles.btnText}>Next</Text>
 				</TouchableOpacity>
 			) : (
 				<TouchableOpacity style={styles.nextBtn} onPress={finishQuiz}>
-					<Text style={styles.btnText}>{'Finish'}</Text>
+					<Text style={styles.btnText}>Finish</Text>
 				</TouchableOpacity>
 			)}
 		</View>
