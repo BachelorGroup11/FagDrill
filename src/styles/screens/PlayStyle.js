@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
 	progressContainer: {
 		width: 330,
 		height: 44,
-		top: 100,
+		top: 60,
 		flexDirection: 'row',
 		alignSelf: 'center',
 		justifyContent: 'center',
@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		fontSize: 30,
 		paddingHorizontal: 20,
-		top: 120,
+		top: 80,
 	},
 	resultsBtn: {
 		backgroundColor: '#3F51B5',

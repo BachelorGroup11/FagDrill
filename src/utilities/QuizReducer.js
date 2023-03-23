@@ -9,6 +9,7 @@ export const INITIAL_STATE = {
 	score: 0,
 	selected: -1,
 	isLoading: true,
+	answeredArray: [],
 };
 
 // State containing all necessary information for Play screen
@@ -63,6 +64,11 @@ export const QuizReducer = (state, action) => {
 			return {
 				...state,
 				isLoading: action.payload,
+			};
+		case 'setansweredarray':
+			return {
+				...state,
+				answeredArray: [...state.answeredArray, action.payload],
 			};
 		case 'setmulitple':
 			return {
