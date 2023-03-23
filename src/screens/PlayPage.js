@@ -17,7 +17,6 @@ const PlayPage = ({ route, navigation }) => {
 	const { quiz, number } = route.params;
 	// Contains all relevant information on the specified quiz, see: ../utilities/QuizReducer
 	const [state, dispatch] = useReducer(QuizReducer, INITIAL_STATE);
-	const [answeredArray, setAnsweredArray] = useState([]);
 
 	// Retrieve all questions from specified quiz then set state with information on first render
 	useEffect(() => {
@@ -49,12 +48,7 @@ const PlayPage = ({ route, navigation }) => {
 						</View>
 						<View>
 							{state.category === 'fill_in_blank' ? (
-								<FillInBlank
-									state={state}
-									dispatch={dispatch}
-									answeredArray={answeredArray}
-									setAnsweredArray={setAnsweredArray}
-								/>
+								<FillInBlank state={state} dispatch={dispatch} />
 							) : (
 								<View>
 									<Text style={styles.QuestionText}>{state.questionText}</Text>
@@ -65,8 +59,6 @@ const PlayPage = ({ route, navigation }) => {
 											id={idx}
 											state={state}
 											dispatch={dispatch}
-											answeredArray={answeredArray}
-											setAnsweredArray={setAnsweredArray}
 										/>
 									))}
 								</View>
@@ -75,7 +67,6 @@ const PlayPage = ({ route, navigation }) => {
 						<PlayNavigator
 							state={state}
 							dispatch={dispatch}
-							answeredArray={answeredArray}
 							quiz={quiz}
 							number={number}
 							nav={navigation}

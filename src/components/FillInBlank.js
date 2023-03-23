@@ -2,12 +2,7 @@ import { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { styles } from '../styles/components/FillInBlankStyle';
 
-export const FillInBlank = ({
-	state,
-	dispatch,
-	answeredArray,
-	setAnsweredArray,
-}) => {
+export const FillInBlank = ({ state, dispatch }) => {
 	const [answer, setAnswer] = useState('');
 	const [wasAnswered, setWasAnswered] = useState({
 		answered: false,
@@ -15,7 +10,10 @@ export const FillInBlank = ({
 	});
 
 	useEffect(() => {
-		let has_been_answered = answeredArray.find((x) => x.index === state.index);
+		let has_been_answered = state.answeredArray.find(
+			(x) => x.index === state.index
+		);
+
 		if (typeof has_been_answered !== 'undefined') {
 			setWasAnswered({
 				answered: true,
@@ -27,18 +25,20 @@ export const FillInBlank = ({
 	}, [state.index]);
 
 	const sumbitAnswer = () => {
-		let has_been_answered = answeredArray.find((x) => x.index === state.index);
+		let has_been_answered = state.answeredArray.find(
+			(x) => x.index === state.index
+		);
 		if (typeof has_been_answered !== 'undefined') return;
 
-		setAnsweredArray((prevArray) => [
-			...prevArray,
-			{
+		dispatch({
+			type: 'setansweredarray',
+			payload: {
 				is_answered: true,
 				answerInput: answer,
 				correctAnswer: state.correctOption,
 				index: state.index,
 			},
-		]);
+		});
 
 		dispatch({
 			type: 'setmulitple',
