@@ -3,20 +3,15 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { styles } from '../styles/components/OptionStyle';
 
 // Component responsible for rendering buttons with answer options for a given question
-export const Option = ({
-	value,
-	id,
-	state,
-	dispatch,
-	answeredArray,
-	setAnsweredArray,
-}) => {
+export const Option = ({ value, id, state, dispatch }) => {
 	const [answeredStyle, setAnsweredStyle] = useState();
 
 	// Update colour and border around on press to show wheter answer was correct or incorrect
 	useEffect(() => {
 		setAnsweredStyle([]);
-		let has_been_answered = answeredArray.find((x) => x.index === state.index);
+		let has_been_answered = state.answeredArray.find(
+			(x) => x.index === state.index
+		);
 
 		if (typeof has_been_answered !== 'undefined') {
 			has_been_answered.answerInput === has_been_answered.correctAnswer &&
@@ -37,18 +32,21 @@ export const Option = ({
 
 	// Update score on button press
 	const updateQuiz = () => {
-		let has_been_answered = answeredArray.find((x) => x.index === state.index);
+		let has_been_answered = state.answeredArray.find(
+			(x) => x.index === state.index
+		);
 		if (typeof has_been_answered !== 'undefined') return;
 
-		setAnsweredArray((prevArray) => [
-			...prevArray,
-			{
+		dispatch({
+			type: 'setansweredarray',
+			payload: {
 				is_answered: true,
 				answerInput: id,
 				correctAnswer: state.correctOption,
 				index: state.index,
 			},
-		]);
+		});
+
 		dispatch({
 			type: 'setmulitple',
 			payload: {

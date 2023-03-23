@@ -4,14 +4,7 @@ import { db } from '../../firebaseConfig';
 import { getAuth } from 'firebase/auth';
 import { addDoc, collection, Timestamp } from 'firebase/firestore';
 
-export const PlayNavigator = ({
-	state,
-	dispatch,
-	answeredArray,
-	quiz,
-	number,
-	nav,
-}) => {
+export const PlayNavigator = ({ state, dispatch, quiz, number, nav }) => {
 	const nextQuestion = () => {
 		if (state.index < state.questionsArray.length - 1) {
 			dispatch({
@@ -67,11 +60,11 @@ export const PlayNavigator = ({
 	};
 
 	const finishQuiz = () => {
-		if (answeredArray.length < state.questionsArray.length) {
+		if (state.answeredArray.length < state.questionsArray.length) {
 			return Alert.alert(
 				'',
 				`You have ${
-					state.quizLength - answeredArray.length
+					state.quizLength - state.answeredArray.length
 				} unanswered questions.\nAre you sure you wish to complete the quiz?`,
 				[{ text: 'Cancel' }, { text: 'Confirm', onPress: addResult }]
 			);
