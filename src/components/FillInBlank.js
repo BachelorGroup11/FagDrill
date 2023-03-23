@@ -1,16 +1,48 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { styles } from '../styles/components/FillInBlankStyle';
 
-export const FillInBlank = ({ state, dispatch }) => {
+export const FillInBlank = ({
+	state,
+	dispatch,
+	answeredArray,
+	setAnsweredArray,
+}) => {
 	const [answer, setAnswer] = useState('');
-	const [wasCorrect, setWasCorrect] = useState(false);
+	const [wasAnswered, setWasAnswered] = useState({
+		answered: false,
+		wasCorrect: false,
+	});
+
+	useEffect(() => {
+		let has_been_answered = answeredArray.find((x) => x.index === state.index);
+		if (typeof has_been_answered !== 'undefined') {
+			setWasAnswered({
+				answered: true,
+				wasCorrect:
+					has_been_answered.answerInput.toLowerCase() ===
+					state.correctOption.toLowerCase(),
+			});
+		}
+	}, [state.index]);
 
 	const sumbitAnswer = () => {
+		let has_been_answered = answeredArray.find((x) => x.index === state.index);
+		if (typeof has_been_answered !== 'undefined') return;
+
+		setAnsweredArray((prevArray) => [
+			...prevArray,
+			{
+				is_answered: true,
+				answerInput: answer,
+				correctAnswer: state.correctOption,
+				index: state.index,
+			},
+		]);
+
 		dispatch({
 			type: 'setmulitple',
 			payload: {
-				index: state.index + 1,
 				selected: 55,
 				score:
 					answer.toLowerCase() === state.correctOption.toLowerCase()
@@ -18,8 +50,9 @@ export const FillInBlank = ({ state, dispatch }) => {
 						: state.score,
 			},
 		});
-		answer.toLowerCase() === state.correctOption.toLowerCase() &&
-			setWasCorrect(true);
+		answer.toLowerCase() === state.correctOption.toLowerCase()
+			? setWasAnswered({ answered: true, wasCorrect: true })
+			: setWasAnswered({ answered: true, wasCorrect: false });
 	};
 
 	return (
@@ -33,11 +66,11 @@ export const FillInBlank = ({ state, dispatch }) => {
 				onChangeText={(text) => setAnswer(text)}
 				value={answer}
 			/>
-			{state.selected != 55 ? (
+			{wasAnswered.answered === false ? (
 				<TouchableOpacity onPress={sumbitAnswer} style={styles.sumbitBtn}>
 					<Text style={styles.btnText}>Submit</Text>
 				</TouchableOpacity>
-			) : wasCorrect ? (
+			) : wasAnswered.wasCorrect === true ? (
 				<Text style={styles.feedback}>Correct answer</Text>
 			) : (
 				<Text style={styles.feedback}>
