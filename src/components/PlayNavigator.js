@@ -1,8 +1,6 @@
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { styles } from '../styles/components/PlayNavigatorStyle';
-import { db } from '../../firebaseConfig';
-import { getAuth } from 'firebase/auth';
-import { addDoc, collection, Timestamp } from 'firebase/firestore';
+import { addResult } from '../utilities/addResult';
 
 export const PlayNavigator = ({ state, dispatch, quiz, number, nav }) => {
 	const nextQuestion = () => {
@@ -42,23 +40,6 @@ export const PlayNavigator = ({ state, dispatch, quiz, number, nav }) => {
 		}
 	};
 
-	// Create new document in results collection and push result
-	const addResult = async () => {
-		const auth = getAuth();
-		const user = auth.currentUser;
-
-		await addDoc(collection(db, 'results'), {
-			name: `Quiz ${number}`,
-			quiz_id: quiz,
-			score: state.score,
-			total_questions: state.quizLength,
-			user_id: user.uid,
-			attempt: 1,
-			date: Timestamp.now(),
-		});
-		nav.navigate('resultspage');
-	};
-
 	const finishQuiz = () => {
 		if (state.answeredArray.length < state.questionsArray.length) {
 			return Alert.alert(
@@ -66,10 +47,16 @@ export const PlayNavigator = ({ state, dispatch, quiz, number, nav }) => {
 				`You have ${
 					state.quizLength - state.answeredArray.length
 				} unanswered questions.\nAre you sure you wish to complete the quiz?`,
-				[{ text: 'Cancel' }, { text: 'Confirm', onPress: addResult }]
+				[
+					{ text: 'Cancel' },
+					{
+						text: 'Confirm',
+						onPress: () => addResult(state, quiz, number, nav),
+					},
+				]
 			);
 		}
-		addResult();
+		addResult(state, quiz, number, nav);
 	};
 
 	return (
