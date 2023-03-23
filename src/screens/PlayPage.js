@@ -18,6 +18,10 @@ const PlayPage = ({ route, navigation }) => {
 	// Contains all relevant information on the specified quiz, see: ../utilities/QuizReducer
 	const [state, dispatch] = useReducer(QuizReducer, INITIAL_STATE);
 
+	let has_been_answered = state.answeredArray.find(
+		(x) => x.index === state.index
+	);
+
 	// Retrieve all questions from specified quiz then set state with information on first render
 	useEffect(() => {
 		fetchQuiz(quiz, dispatch).then(() =>
@@ -51,7 +55,11 @@ const PlayPage = ({ route, navigation }) => {
 								<FillInBlank state={state} dispatch={dispatch} />
 							) : (
 								<View>
-									<Text style={styles.QuestionText}>{state.questionText}</Text>
+									<View style={styles.QuestionContainer}>
+										<Text style={styles.QuestionText}>
+											{state.questionText}
+										</Text>
+									</View>
 									{state.options.map((option, idx) => (
 										<Option
 											value={option}
@@ -61,6 +69,9 @@ const PlayPage = ({ route, navigation }) => {
 											dispatch={dispatch}
 										/>
 									))}
+									{typeof has_been_answered !== 'undefined' && (
+										<Text style={styles.summarytext}>{state.summary}</Text>
+									)}
 								</View>
 							)}
 						</View>

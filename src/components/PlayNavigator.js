@@ -13,6 +13,7 @@ export const PlayNavigator = ({ state, dispatch, quiz, number, nav }) => {
 					options: state.questionsArray[state.index + 1].options,
 					category: state.questionsArray[state.index + 1].category,
 					correctOption: state.questionsArray[state.index + 1].correct_answer,
+					summary: state.questionsArray[state.index + 1].summary,
 					index: state.index + 1,
 				},
 			});
@@ -35,6 +36,7 @@ export const PlayNavigator = ({ state, dispatch, quiz, number, nav }) => {
 					options: state.questionsArray[state.index - 1].options,
 					category: state.questionsArray[state.index - 1].category,
 					correctOption: state.questionsArray[state.index - 1].correct_answer,
+					summary: state.questionsArray[state.index - 1].summary,
 				},
 			});
 		}
@@ -65,7 +67,7 @@ export const PlayNavigator = ({ state, dispatch, quiz, number, nav }) => {
 				<Text style={styles.btnText}>Previous</Text>
 			</TouchableOpacity>
 			{state.index > 0 && (
-				<TouchableOpacity style={styles.index}>
+				<TouchableOpacity style={styles.index} onPress={previousQuestion}>
 					<Text style={styles.indextext}>{state.index}</Text>
 				</TouchableOpacity>
 			)}
@@ -75,7 +77,7 @@ export const PlayNavigator = ({ state, dispatch, quiz, number, nav }) => {
 				</Text>
 			</TouchableOpacity>
 			{state.index < state.questionsArray.length - 1 && (
-				<TouchableOpacity style={styles.index}>
+				<TouchableOpacity style={styles.index} onPress={nextQuestion}>
 					<Text style={styles.indextext}>{state.index + 2}</Text>
 				</TouchableOpacity>
 			)}
