@@ -14,7 +14,7 @@ import { QuizReducer, INITIAL_STATE } from '../utilities/QuizReducer';
 import { fetchQuiz } from '../utilities/fetchQuiz';
 
 const PlayPage = ({ route, navigation }) => {
-	const { quiz, number } = route.params;
+	const { quiz, name } = route.params;
 	// Contains all relevant information on the specified quiz, see: ../utilities/QuizReducer
 	const [state, dispatch] = useReducer(QuizReducer, INITIAL_STATE);
 
@@ -79,7 +79,7 @@ const PlayPage = ({ route, navigation }) => {
 							state={state}
 							dispatch={dispatch}
 							quiz={quiz}
-							number={number}
+							name={name}
 							nav={navigation}
 						/>
 					</SafeAreaView>
