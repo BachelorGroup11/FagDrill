@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { styles } from '../styles/components/PlayNavigatorStyle';
 import { addResult } from '../utilities/addResult';
 
-export const PlayNavigator = ({ state, dispatch, quiz, number, nav }) => {
+export const PlayNavigator = ({ state, dispatch, quiz, name, nav }) => {
 	const nextQuestion = () => {
 		if (state.index < state.questionsArray.length - 1) {
 			dispatch({
@@ -53,12 +53,12 @@ export const PlayNavigator = ({ state, dispatch, quiz, number, nav }) => {
 					{ text: 'Cancel' },
 					{
 						text: 'Confirm',
-						onPress: () => addResult(state, quiz, number, nav),
+						onPress: () => addResult(state, quiz, name, nav),
 					},
 				]
 			);
 		}
-		addResult(state, quiz, number, nav);
+		addResult(state, quiz, name, nav);
 	};
 
 	return (

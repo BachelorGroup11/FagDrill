@@ -3,12 +3,12 @@ import { getAuth } from 'firebase/auth';
 import { addDoc, collection, Timestamp } from 'firebase/firestore';
 
 // Create new document in results collection and push result
-export const addResult = async (state, quiz, number, nav) => {
+export const addResult = async (state, quiz, name, nav) => {
 	const auth = getAuth();
 	const user = auth.currentUser;
 
 	await addDoc(collection(db, 'results'), {
-		name: `Quiz ${number}`,
+		name: name,
 		quiz_id: quiz,
 		score: state.score,
 		total_questions: state.quizLength,
