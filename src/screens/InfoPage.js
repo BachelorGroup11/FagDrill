@@ -44,16 +44,14 @@ const InfoPage = ({ route, navigation }) => {
 						<GoBack nav={navigation} destination={'homepage'} />
 						<View style={styles.textWrapper}>
 							<Text style={styles.levelText}>Level X</Text>
-							<Text style={styles.Infotext}>
-								Øving til sert nr {route.params.number}
-							</Text>
+							<Text style={styles.Infotext}>Øving til {route.params.name}</Text>
 							<Text style={styles.descriptionText}>{info}</Text>
 						</View>
 						<TouchableOpacity
 							style={styles.startBtn}
 							onPress={() =>
 								navigation.navigate('playpage', {
-									number: route.params.number,
+									name: route.params.name,
 									quiz: route.params.quiz,
 								})
 							}
