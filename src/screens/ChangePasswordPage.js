@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../styles/screens/ChangePasswordStyle";
@@ -8,21 +8,59 @@ import {
   reauthenticateWithCredential,
   EmailAuthProvider,
 } from "firebase/auth";
+import { collection, query, getDocs, where, orderBy } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 
 const ChangePasswordPage = ({ navigation }) => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+
+  const [isToggle, setIsToggle] = useState(false);
+	const auth = getAuth();
+	const user = auth.currentUser;
+  // Finds ut if the current user is an admin, and set isToggle to tru if the user is admin.
+  useEffect(() => {
+		const fetchData = async () => {
+			const userQuery = query(
+				collection(db, 'users'),
+				where('user_id', '==', user.uid)
+			);
+
+			const querySnapshot = await getDocs(userQuery);
+			querySnapshot.forEach((doc) => {
+				console.log(doc.data());
+				if (doc.data().is_admin == true) {
+					setIsToggle(!isToggle)
+					console.log(isToggle)
+				}else{
+					setIsToggle(isToggle)
+					console.log(isToggle)
+				}
+			});
+		};
+		fetchData().catch((error) => console.log(error));
+	}, []);
+
+	const goToUserPages = () => {
+		console.log(isToggle)
+    //checkes if user is admin. using isToggle that we set earlier. And choses userpage or useradminPage
+		if (isToggle === true){
+			navigation.replace('Userpageadmin');
+		}else if (isToggle === false) {
+			navigation.replace('userpage');
+		}
+	};
+
   // Gets Current Pasword and CHanges it into New
   const changePassword = (oldPassword, newPassword) => {
-    const auth = getAuth();
-    const user = auth.currentUser;
     const credential = EmailAuthProvider.credential(user.email, oldPassword);
 
     reauthenticateWithCredential(user, credential)
       .then(() => {
         updatePassword(user, newPassword)
           .then(() => {
-            navigation.navigate("userpage"); //Once password change it goes to userpage
+            goToUserPages()
+            //navigation.navigate("userpage"); //Once password change it goes to userpage
           })
           .then(() => {
             alert("Successfully updated password");
@@ -43,7 +81,7 @@ const ChangePasswordPage = ({ navigation }) => {
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.btnBackToHome}
-          onPress={() => navigation.navigate("userpage")}
+          onPress={() => goToUserPages()}
         >
           <Text style={styles.knapptext}>X</Text>
         </TouchableOpacity>

@@ -2,98 +2,115 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    paddingTop: 35,
     flex: 1,
   },
-  containerTo: {
-    flex: 1,
-  },
-  containerthre: {
-    flex: 1,
-    marginTop: 170,
-    marginBottom: 50,
-  },
-  letsplay: {
-    position: "absolute",
-    width: "100%",
-    height: 42,
-    left: 32,
-    top: 44,
 
-    fontSize: 30,
+  title: {
+    position: "absolute",
+    width: 300,
+    height: 40,
+    left: 32,
+    top: 90,
+    fontSize: 32,
     fontWeight: "bold",
     color: "#000000",
   },
 
-  knapptext: {
-    fontSize: 30,
-    alignSelf: "center",
-    color: "#000",
-    fontWeight: "bold",
-
-    padding: 5,
-    paddingLeft: 10,
-  },
-
-  Userpagebtn: {
-    backgroundColor: "#3F51B5",
-    alignSelf: "center",
-    height: 60,
-    borderRadius: 20,
-    width: 350,
-    marginTop: 50,
-    bottom: -75,
-  },
-
-  Userpagebtntext: {
-    fontSize: 30,
-    alignSelf: "center",
-    color: "#ffff",
-    fontWeight: "bold",
-
-    padding: 5,
-    paddingLeft: 10,
-  },
-
-  knappBytteS: {
-    borderRadius: 22,
-    overflow: "hidden",
-    borderColor: "#ffffff",
-    alignSelf: "center",
-    justifyContent: "center",
-
-    marginVertical: 10,
-    marginHorizontal: 0,
-    height: 200,
-    width: 320,
-
-    borderColor: "#2e216f",
-    borderWidth: 0,
-  },
-
-  imgButton: {
+  appButtonContainer1: {
     flex: 1,
-    width: "100%",
-    alignSelf: "stretch",
-    height: "100%",
-    justifyContent: "center",
-    overflow: "hidden",
+    backgroundColor: "#3F51B5",
+    borderRadius: 22,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    bottom: 450,
+    width: 310,
+    height: 60,
+    right: 30,
+    position: "absolute",
   },
-  imgBtn_profile: {
-    position: "relative",
+  YourAccountText1: {
+    color: "white",
+    fontWeight: "bold",
+    alignSelf: "center",
+    bottom: -5,
+    fontSize: 25,
+    flex: 0.8,
+  },
+
+  appButtonContainer3: {
+    elevation: 8,
+    backgroundColor: "#3F51B5",
+    borderRadius: 22,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    bottom: 370,
+    width: 310,
+    height: 60,
+    right: 30,
+    position: "absolute",
+  },
+
+  appButtonContainer2: {
+    elevation: 8,
+    backgroundColor: "#3F51B5",
+    borderRadius: 22,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    bottom: 40,
+    width: 310,
+    height: 60,
+    right: 30,
+    position: "absolute",
+  },
+  appButtonContainer4: {
+    elevation: 8,
+    backgroundColor: "#3F51B5",
+    borderRadius: 22,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    bottom: 290,
+    width: 310,
+    height: 60,
+    right: 30,
+    position: "absolute",
+  },
+  appButtonContainer5: {
+    elevation: 8,
+    backgroundColor: "#3F51B5",
+    borderRadius: 22,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    bottom: 210,
+    width: 310,
+    height: 60,
+    right: 30,
+    position: "absolute",
+  },
+
+  YourAccountText2: {
+    color: "white",
+    fontWeight: "bold",
+    alignSelf: "center",
+    bottom: -5,
+    fontSize: 25,
+  },
+
+  btnBackToHome: {
     width: 50,
     height: 50,
-    left: 304,
-    top: 44,
-    borderRadius: 22,
-  },
-  loginBtn: {
-    backgroundColor: "#2e216f",
-    alignSelf: "center",
+    borderRadius: 30,
     position: "relative",
-    height: 40,
-    borderRadius: 10,
-    width: 250,
-    margin: 10,
+    left: 300,
+    top: 40,
+    fontSize: 32,
+  },
+
+  knapptext: {
+    fontSize: 32,
+    alignSelf: "center",
+    color: "black",
+    padding: 5,
+    paddingLeft: 10,
+    fontWeight: "bold",
   },
 });
