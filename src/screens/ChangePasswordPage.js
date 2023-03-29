@@ -15,40 +15,8 @@ const ChangePasswordPage = ({ navigation }) => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
-  const [isToggle, setIsToggle] = useState(false);
-	const auth = getAuth();
-	const user = auth.currentUser;
-  // Finds ut if the current user is an admin, and set isToggle to tru if the user is admin.
-  useEffect(() => {
-		const fetchData = async () => {
-			const userQuery = query(
-				collection(db, 'users'),
-				where('user_id', '==', user.uid)
-			);
-
-			const querySnapshot = await getDocs(userQuery);
-			querySnapshot.forEach((doc) => {
-				console.log(doc.data());
-				if (doc.data().is_admin == true) {
-					setIsToggle(!isToggle)
-					console.log(isToggle)
-				}else{
-					setIsToggle(isToggle)
-					console.log(isToggle)
-				}
-			});
-		};
-		fetchData().catch((error) => console.log(error));
-	}, []);
-
 	const goToUserPages = () => {
-		console.log(isToggle)
-    //checkes if user is admin. using isToggle that we set earlier. And choses userpage or useradminPage
-		if (isToggle === true){
-			navigation.replace('Userpageadmin');
-		}else if (isToggle === false) {
 			navigation.replace('userpage');
-		}
 	};
 
   // Gets Current Pasword and CHanges it into New

@@ -16,11 +16,6 @@ import { GoToQuiz } from '../components/GoToQuiz';
 
 const HomePage = ({ navigation }) => {
 	const [quizzes, setQuizzes] = useState([]);
-
-	const [isToggle, setIsToggle] = useState(false);
-	const auth = getAuth();
-	const user = auth.currentUser;
-	
 	
 	useEffect(() => {
 		setQuizzes([]);
@@ -43,36 +38,10 @@ const HomePage = ({ navigation }) => {
 		};
 		fetchQuizzes().catch((error) => console.log(error));
 		
-		// Finds ut if the current user is an admin, and set isToggle to tru if the user is admin.
-		const fetchData = async () => {
-			const userQuery = query(
-				collection(db, 'users'),
-				where('user_id', '==', user.uid)
-			);
-
-			const querySnapshot = await getDocs(userQuery);
-			querySnapshot.forEach((doc) => {
-				console.log(doc.data());
-				if (doc.data().is_admin == true) {
-					setIsToggle(!isToggle)
-					console.log(isToggle)
-				}else{
-					setIsToggle(isToggle)
-					console.log(isToggle)
-				}
-			});
-		};
-		fetchData().catch((error) => console.log(error));
 	}, []);
 
 	const userPages = () => {
-		console.log(isToggle)
-		//checkes if user is admin. using isToggle that we set earlier. And choses userpage or useradminPage
-		if (isToggle === true){
-			navigation.replace('Userpageadmin');
-		}else if (isToggle === false) {
-			navigation.replace('userpage');
-		}
+		navigation.replace('userpage');
 	};
 
 	return (

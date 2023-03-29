@@ -10,7 +10,6 @@ import PlayPage from './src/screens/PlayPage';
 import InfoPage from './src/screens/InfoPage';
 import ResultsPage from './src/screens/ResultsPage';
 import UserPage from './src/screens/UserPage';
-import UserPage_Admin from './src/screens/UserPage_Admin';
 import ProgressPage from './src/screens/ProgressPage';
 import ChangePasswordPage from './src/screens/ChangePasswordPage';
 
@@ -51,7 +50,6 @@ export default function App() {
 				<Stack.Screen name="infopage" component={InfoPage} />
 				<Stack.Screen name="resultspage" component={ResultsPage} />
 				<Stack.Screen name="userpage" component={UserPage} />
-				<Stack.Screen name="Userpageadmin" component={UserPage_Admin} />
 				<Stack.Screen name="progresspage" component={ProgressPage} />
 				<Stack.Screen
 					name="changepasswordpage"
