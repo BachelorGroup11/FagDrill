@@ -53,6 +53,8 @@ export const styles = StyleSheet.create({
     elevation: 8,
     backgroundColor: "#3F51B5",
     borderRadius: 22,
+    borderColor: "#6BB5FF",
+    borderWidth: 2,
     paddingVertical: 10,
     paddingHorizontal: 12,
     bottom: 40,
