@@ -3,6 +3,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../styles/screens/ProgressStyle";
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
+import { useEffect, useState } from 'react';
+import { getAuth } from 'firebase/auth';
+import { collection, query, getDocs, where, orderBy } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -13,7 +17,7 @@ const ProgressPage = ({ navigation }) => {
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.btnBackToHome}
-          onPress={() => navigation.navigate("userpage")}
+          onPress={() => navigation.replace('userpage')}
         >
           <Text style={styles.knapptext}>X</Text>
         </TouchableOpacity>
