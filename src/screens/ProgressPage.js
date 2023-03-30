@@ -4,16 +4,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/ProgressStyle';
 import { LineChart } from 'react-native-chart-kit';
 import { Dimensions } from 'react-native';
-import 'firebase/firestore';
-import { fetchResults } from '../utilities/fetchScore';
+import { fetchScore } from '../utilities/fetchScore';
 
 const screenWidth = Dimensions.get('window').width;
 
 const ProgressPage = ({ navigation }) => {
-	const [scoresArray, setScoresArray] = useState([]);
-	// Fetch all result documents linked to the specific user from firebase
+	// Gjør det på en annen måte så vi slipper å ha hardcoded default value, se link under for forklaring
+	// https://github.com/indiespirit/react-native-chart-kit/issues/237#issuecomment-741866484
+	const [scoresArray, setScoresArray] = useState([0, 0, 0, 0, 0, 0]);
+
 	useEffect(() => {
-		fetchResults(setScoresArray);
+		fetchScore(setScoresArray);
 	}, []);
 
 	return (
@@ -52,7 +53,7 @@ const ProgressPage = ({ navigation }) => {
 					chartConfig={{
 						backgroundColor: '#3F51B5',
 						backgroundGradientFrom: '#3F51B5',
-						backgroundGradientTo: '',
+						backgroundGradientTo: '#3F51B5',
 						decimalPlaces: 2,
 						color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
 						labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
