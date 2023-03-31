@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../styles/screens/ProgressStyle";
@@ -10,19 +10,40 @@ import { fetchDate } from "../utilities/fetchDate";
 const screenWidth = Dimensions.get("window").width;
 
 const ProgressPage = ({ navigation }) => {
-  // Gjør det på en annen måte så vi slipper å ha hardcoded default value, se link under for forklaring
-  // https://github.com/indiespirit/react-native-chart-kit/issues/237#issuecomment-741866484
   const [scoresArray, setScoresArray] = useState([]);
   const [dateArray, setDateArray] = useState([]);
+  const [quizData, setQuizData] = useState([]);
 
-  const quizId = "dFPZQ3bseEkoPMqlrzz7"; // Replace with the ID of the quiz you want to get scores for
+  const quizzes = [
+    { id: "dFPZQ3bseEkoPMqlrzz7", name: "Quiz 1" },
+    { id: "ad8usDZM4b5GWrpoV6nb", name: "Quiz 2" },
+    // Add more quizzes as needed
+  ];
+
+  const [selectedQuiz, setSelectedQuiz] = useState(quizzes[0]);
+
   useEffect(() => {
-    fetchScore(setScoresArray, quizId);
+    fetchScore(setScoresArray, selectedQuiz.id);
+    fetchDate(setDateArray, selectedQuiz.id);
+  }, [selectedQuiz]);
+
+  useEffect(() => {
+    setQuizData(quizzes.map((quiz) => quiz.name));
   }, []);
 
-  useEffect(() => {
-    fetchDate(setDateArray, quizId);
-  }, []);
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity
+        style={[
+          styles.btnQuiz,
+          item.id === selectedQuiz.id && styles.selectedQuiz,
+        ]}
+        onPress={() => setSelectedQuiz(item)}
+      >
+        <Text style={styles.quizText}>{item.name}</Text>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -35,6 +56,20 @@ const ProgressPage = ({ navigation }) => {
           <Text style={styles.knapptext}>X</Text>
         </TouchableOpacity>
       </View>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        {quizzes.map((quiz) => (
+          <TouchableOpacity
+            key={quiz.id}
+            style={[
+              styles.btnQuiz,
+              quiz.id === selectedQuiz.id && styles.selectedQuiz,
+            ]}
+            onPress={() => setSelectedQuiz(quiz)}
+          >
+            <Text style={styles.quizText}>{quiz.name}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
       <View style={styles.chart}>
         {scoresArray.length > 0 ? (
           <LineChart
