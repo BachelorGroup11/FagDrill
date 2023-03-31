@@ -49,18 +49,20 @@ export const styles = StyleSheet.create({
 		margin: 10,
 	},
 
-	resultBtn: {
-		elevation: 8,
-		backgroundColor: '#3F51B5',
-		borderRadius: 22,
-		paddingVertical: 10,
-		paddingHorizontal: 12,
-		bottom: 40,
-		width: 317,
-		height: 60,
-		right: 30,
-		position: 'absolute',
-	},
+  resultBtn: {
+    elevation: 8,
+    backgroundColor: "#3F51B5",
+    borderRadius: 22,
+    borderColor: "#6BB5FF",
+    borderWidth: 2,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    bottom: 40,
+    width: 317,
+    height: 60,
+    right: 30,
+    position: "absolute",
+  },
 
 	resultTxt: {
 		color: 'white',
