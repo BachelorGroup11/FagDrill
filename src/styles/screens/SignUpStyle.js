@@ -88,4 +88,11 @@ export const styles = StyleSheet.create({
     bottom: 95,
     height: 40,
   },
+  altaLogo: {
+    alignSelf: "center",
+    paddingTop: 20,
+    width: 150,
+    height: 150,
+    resizeMode: 'stretch',
+  }
 });
