@@ -7,7 +7,6 @@ import { Dimensions } from "react-native";
 import { fetchScore } from "../utilities/fetchScore";
 import { fetchDate } from "../utilities/fetchDate";
 
-
 const screenWidth = Dimensions.get("window").width;
 
 const ProgressPage = ({ navigation }) => {
@@ -52,7 +51,7 @@ const ProgressPage = ({ navigation }) => {
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.btnBackToHome}
-          onPress={() => navigation.replace('userpage')}
+          onPress={() => navigation.replace("userpage")}
         >
           <Text style={styles.knapptext}>X</Text>
         </TouchableOpacity>
@@ -75,10 +74,10 @@ const ProgressPage = ({ navigation }) => {
         {scoresArray.length > 0 ? (
           <LineChart
             data={{
-              labels: dateArray,
+              labels: dateArray.slice(-6),
               datasets: [
                 {
-                  data: scoresArray,
+                  data: scoresArray.slice(-6),
                 },
               ],
             }}
