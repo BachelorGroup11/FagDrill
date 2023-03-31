@@ -48,7 +48,6 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
     borderRadius: 16,
     backgroundColor: "#f2f2f2",
-    color: "#f2f2f2",
   },
 
   selectedQuiz: {
