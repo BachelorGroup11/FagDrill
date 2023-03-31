@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Text, View, TextInput, Button } from 'react-native';
+import { Text, View, TextInput, Button, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/SignUpStyle';
 import {
@@ -41,6 +41,10 @@ const SignUpPage = ({ navigation }) => {
 
 	return (
 		<SafeAreaView style={styles.container}>
+			<Image
+				style={styles.altaLogo}
+				source={require("../assets/images/Alta.png")}
+			/>
 			<Text style={styles.title}>Sign Up</Text>
 
 			<View style={styles.inputViewEmail}>

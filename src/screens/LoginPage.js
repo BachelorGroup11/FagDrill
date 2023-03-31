@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Text, View, TextInput, Button } from 'react-native';
+import { Text, View, TextInput, Button, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/LoginStyle';
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
@@ -32,6 +32,10 @@ const LoginPage = ({ navigation }) => {
 
 	return (
 		<SafeAreaView style={styles.container}>
+			<Image
+				style={styles.altaLogo}
+				source={require("../assets/images/Alta.png")}
+			/>
 			<Text style={styles.title}>Log In</Text>
 
 			<View style={styles.inputViewEmail}>
