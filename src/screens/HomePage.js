@@ -15,29 +15,35 @@ import { db } from '../../firebaseConfig';
 import { GoToQuiz } from '../components/GoToQuiz';
 
 const HomePage = ({ navigation }) => {
-	const [quizzes, setQuizzes] = useState([]);
+
+
+  const [quizzes, setQuizzes] = useState([]);
+
 
 	useEffect(() => {
 		setQuizzes([]);
 		const auth = getAuth();
 		const user = auth.currentUser;
 
-		const fetchQuizzes = async () => {
-			const quizQery = query(
-				collection(db, 'quizzes'),
-				where('users', 'array-contains', user.uid)
-			);
 
-			const querySnapshot = await getDocs(quizQery);
-			querySnapshot.forEach((doc) => {
-				setQuizzes((prevArray) => [
-					...prevArray,
-					{ id: doc.id, name: doc.data().name },
-				]);
-			});
-		};
-		fetchQuizzes().catch((error) => console.log(error));
-	}, []);
+    const fetchQuizzes = async () => {
+      const quizQery = query(
+        collection(db, "quizzes"),
+        where("users", "array-contains", user.uid)
+      );
+
+
+      const querySnapshot = await getDocs(quizQery);
+      querySnapshot.forEach((doc) => {
+        setQuizzes((prevArray) => [
+          ...prevArray,
+          { id: doc.id, name: doc.data().name },
+        ]);
+      });
+    };
+    fetchQuizzes().catch((error) => console.log(error));
+  }, []);
+
 
 	return (
 		<ImageBackground
