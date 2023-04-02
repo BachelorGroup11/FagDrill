@@ -36,27 +36,52 @@ export const styles = StyleSheet.create({
   chart: {
     alignself: "center",
     position: "absolute",
+    left: 13,
     top: 150,
   },
 
-  scrollContainer: {},
+  txtProgress: {
+    height: 41,
+    width: 330,
+    fontSize: 32,
+    position: "absolute",
+    bottom: -140,
+    left: 37,
+    fontWeight: "bold",
+    marginBottom: 16,
+  },
 
   btnQuiz: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    bottom: -50,
+    height: 78,
+    width: 314,
+    top: 130,
     marginBottom: 16,
+    marginTop: 8,
+    left: 32,
     borderRadius: 16,
-    backgroundColor: "#f2f2f2",
+    backgroundColor: "#D9D9D9",
   },
 
   selectedQuiz: {
     backgroundColor: "#3F51B5",
+    borderWidth: 1,
+    borderColor: "black",
+  },
+
+  selectedTxt: {
+    color: "white",
+    fontSize: 27,
+    fontWeight: "bold",
+    alignItems: "center",
+    top: 20,
+    left: 20,
   },
 
   quizText: {
-    fontSize: 16,
+    fontSize: 27,
     fontWeight: "bold",
     alignItems: "center",
+    top: 20,
+    left: 20,
   },
 });
