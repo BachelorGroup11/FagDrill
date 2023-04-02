@@ -6,6 +6,7 @@ import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import { fetchScore } from "../utilities/fetchScore";
 import { fetchDate } from "../utilities/fetchDate";
+import { fetchQuiz } from "../utilities/fetchQuiz";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -22,7 +23,10 @@ const ProgressPage = ({ navigation }) => {
 
   const [selectedQuiz, setSelectedQuiz] = useState(quizzes[0]);
 
+  //Resets the chart and fetches the score and date for the appropriate quiz
   useEffect(() => {
+    setScoresArray([]);
+    setDateArray([]);
     fetchScore(setScoresArray, selectedQuiz.id);
     fetchDate(setDateArray, selectedQuiz.id);
   }, [selectedQuiz]);
@@ -55,6 +59,7 @@ const ProgressPage = ({ navigation }) => {
         >
           <Text style={styles.knapptext}>X</Text>
         </TouchableOpacity>
+        <Text style={styles.txtProgress}>View Progress Form:</Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {quizzes.map((quiz) => (
@@ -66,12 +71,20 @@ const ProgressPage = ({ navigation }) => {
             ]}
             onPress={() => setSelectedQuiz(quiz)}
           >
-            <Text style={styles.quizText}>{quiz.name}</Text>
+            <Text
+              style={[
+                styles.quizText,
+                quiz.id === selectedQuiz.id && styles.selectedTxt,
+              ]}
+            >
+              {quiz.name}
+            </Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
       <View style={styles.chart}>
         {scoresArray.length > 0 ? (
+          // Shows the last 6 Results
           <LineChart
             data={{
               labels: dateArray.slice(-6),
@@ -81,16 +94,14 @@ const ProgressPage = ({ navigation }) => {
                 },
               ],
             }}
-            width={screenWidth}
+            width={350}
             height={220}
-            yAxisLabel=""
-            yAxisSuffix=""
             yAxisInterval={1}
             chartConfig={{
               backgroundColor: "#3F51B5",
               backgroundGradientFrom: "#3F51B5",
               backgroundGradientTo: "#3F51B5",
-              decimalPlaces: 2,
+              decimalPlaces: 1,
               color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               style: {
@@ -109,7 +120,7 @@ const ProgressPage = ({ navigation }) => {
             }}
           />
         ) : (
-          <Text>No data available</Text>
+          <Text>No Progress available</Text>
         )}
       </View>
     </SafeAreaView>
