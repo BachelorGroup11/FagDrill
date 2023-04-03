@@ -5,13 +5,13 @@ const screenWidth = Dimensions.get('window').width;
 export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		marginTop: 150,
+		marginTop: 130,
 	},
 	header: {
 		fontSize: 32,
 		fontFamily: 'PoppinsBold',
 		position: 'absolute',
-		left: 32,
+		left: 22,
 		top: 90,
 	},
 	title: {
@@ -25,13 +25,12 @@ export const styles = StyleSheet.create({
 		padding: 5,
 		borderBottomColor: '#3F51B5',
 		borderBottomWidth: 1,
-		color: 'grey',
+		color: '#000000',
 	},
 	buttons: {
 		display: 'flex',
 		flexDirection: 'row',
-		position: 'absolute',
-		top: 500,
+		top: 40,
 		width: screenWidth,
 		justifyContent: 'space-evenly',
 	},
@@ -60,15 +59,31 @@ export const styles = StyleSheet.create({
 		fontSize: 14,
 		color: '#ffffff',
 	},
+	questionscontainer: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		marginTop: 5,
+	},
 	questions: {
 		fontSize: 14,
 		paddingHorizontal: 15,
 		fontFamily: 'PoppinsSemiBold',
+		marginBottom: 5,
 	},
 	viewall: {
 		fontSize: 14,
 		fontFamily: 'PoppinsSemiBold',
 		color: '#3F51B5',
 		paddingHorizontal: 30,
+	},
+	boxstyles: {
+		borderColor: '#3F51B5',
+		borderWidth: 0,
+		borderBottomWidth: 1,
+		marginTop: -10,
+	},
+	inputstyles: {
+		color: 'grey',
+		marginTop: 15,
 	},
 });

@@ -1,0 +1,68 @@
+import { StyleSheet } from 'react-native';
+
+export const styles = StyleSheet.create({
+	input: {
+		height: 100,
+		margin: 12,
+		borderRadius: 20,
+		borderColor: '#CCCCCC',
+		borderWidth: 1,
+		textAlign: 'center',
+		color: '#000000',
+		fontFamily: 'PoppinsSemiBold',
+		fontSize: 18,
+		backgroundColor: '#FAFAFA',
+	},
+	answertext: {
+		color: '#FFFFFF',
+		fontSize: 20,
+		fontFamily: 'PoppinsSemiBold',
+	},
+	checkbox: {
+		height: 20,
+		width: 20,
+		borderRadius: 5,
+		position: 'absolute',
+		top: 0,
+		right: 0,
+		marginVertical: 10,
+		marginHorizontal: 10,
+		borderColor: 'white',
+	},
+	inputcontainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	answerinput: {
+		height: 180,
+		width: 160,
+		marginVertical: 8,
+		borderRadius: 20,
+		justifyContent: 'center',
+		textAlign: 'center',
+		alignItems: 'center',
+		fontFamily: 'PoppinsRegular',
+		backgroundColor: '#3F51B5',
+		borderBottomWidth: 6,
+	},
+	buttons: {
+		flexDirection: 'row',
+		justifyContent: 'space-evenly',
+	},
+	save: {
+		width: 280,
+		height: 50,
+		borderRadius: 15,
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#12D18E',
+		alignSelf: 'center',
+		marginTop: 100,
+	},
+	savetext: {
+		fontFamily: 'PoppinsSemiBold',
+		fontSize: 16,
+		color: '#ffffff',
+	},
+});

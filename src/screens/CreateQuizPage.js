@@ -9,16 +9,17 @@ import {
 } from 'react-native';
 import { styles } from '../styles/screens/CreateQuizStyle';
 import { MultipleSelectList } from 'react-native-dropdown-select-list';
-import { GoBack } from '../components/GoBack';
 import { db } from '../../firebaseConfig';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, doc, addDoc } from 'firebase/firestore';
+import { GoBack, Question } from '../components/Index';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-const CreateQuizPage = ({ navigation }) => {
+const CreateQuizPage = ({ navigation, route }) => {
 	const [users, setUsers] = useState([]);
-	const [title, setTitle] = useState('Enter title');
-	const [description, setDescription] = useState('Enter description');
+	const [title, setTitle] = useState('');
+	const [description, setDescription] = useState('');
 	const [selected, setSelected] = useState('');
+	const [questions, setQuestions] = useState([]);
 
 	useEffect(() => {
 		setUsers([]);
@@ -31,18 +32,36 @@ const CreateQuizPage = ({ navigation }) => {
 		fetchUsers();
 	}, []);
 
-	const data = [
-		{ key: '1', value: 'Mobiles', disabled: true },
-		{ key: '2', value: 'Appliances' },
-		{ key: '3', value: 'Cameras' },
-		{ key: '4', value: 'Computers', disabled: true },
-		{ key: '5', value: 'Vegetables' },
-		{ key: '6', value: 'Diary Products' },
-		{ key: '7', value: 'Drinks' },
-	];
+	useEffect(() => {
+		if (route.params === undefined) return;
+		setQuestions((prevArray) => [...prevArray, route.params]);
+	}, [route.params]);
+
+	const saveQuiz = async () => {
+		const quizRef = doc(collection(db, 'quizzes'));
+		console.log(quizRef.id);
+
+		for (let i = 0; i < questions.length; i++) {
+			await addDoc(collection(db, 'questions'), {
+				question_text: questions[i].question,
+				options: questions[i].options,
+				quizzes: [quizRef.id],
+				correct_answer:
+					questions[i].type === 'Multiple choice'
+						? parseInt(questions[i].answer)
+						: questions[i].answer,
+				category:
+					questions[i].type === 'True or false'
+						? 'true_or_false'
+						: questions[i].type === 'Multiple choice'
+						? 'multiple_choice'
+						: 'fill_in_blank',
+			});
+		}
+	};
 
 	return (
-		<ScrollView>
+		<ScrollView style={{ backgroundColor: '#FFFFFF' }}>
 			<GoBack nav={navigation} destination={'userpage'} />
 			<Text style={styles.header}>Create Quiz</Text>
 			<SafeAreaView style={styles.container}>
@@ -51,14 +70,16 @@ const CreateQuizPage = ({ navigation }) => {
 					style={styles.input}
 					onChangeText={setTitle}
 					value={title}
-					keyboardType="default"
+					placeholder={'Enter title'}
+					placeholderTextColor={'#757A86'}
 				/>
 				<Text style={styles.title}>Description</Text>
 				<TextInput
 					style={styles.input}
 					onChangeText={setDescription}
 					value={description}
-					keyboardType="default"
+					placeholder={'Enter description'}
+					placeholderTextColor={'#757A86'}
 				/>
 				<Text style={styles.title}>Visible to</Text>
 				<MultipleSelectList
@@ -66,33 +87,29 @@ const CreateQuizPage = ({ navigation }) => {
 					data={users}
 					save="value"
 					search={false}
-					boxStyles={{
-						borderColor: '#3F51B5',
-						borderWidth: 0,
-						borderBottomWidth: 1,
-						marginTop: -10,
-					}}
-					inputStyles={{
-						color: 'grey',
-						marginTop: 15,
-					}}
+					boxStyles={styles.boxstyles}
+					inputStyles={styles.inputstyles}
 				/>
-				<View
-					style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						marginTop: 5,
-					}}
-				>
-					<Text style={styles.questions}>Questions (0)</Text>
+				<View style={styles.questionscontainer}>
+					<Text style={styles.questions}>Questions</Text>
 					<TouchableOpacity>
 						<Text style={styles.viewall}>
 							View all {<FontAwesome name="arrow-right" />}
 						</Text>
 					</TouchableOpacity>
 				</View>
+				<ScrollView style={{ height: 220 }}>
+					{questions.map((item, index) => (
+						<Question
+							count={index + 1}
+							type={item.type}
+							title={item.question}
+							key={index}
+						/>
+					))}
+				</ScrollView>
 				<View style={styles.buttons}>
-					<TouchableOpacity style={styles.save}>
+					<TouchableOpacity style={styles.save} onPress={() => saveQuiz()}>
 						<Text style={styles.savetext}>Save</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
