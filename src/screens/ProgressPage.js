@@ -3,12 +3,9 @@ import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../styles/screens/ProgressStyle";
 import { LineChart } from "react-native-chart-kit";
-import { Dimensions } from "react-native";
 import { fetchScore } from "../utilities/fetchScore";
 import { fetchDate } from "../utilities/fetchDate";
-import { fetchQuiz } from "../utilities/fetchQuiz";
-
-const screenWidth = Dimensions.get("window").width;
+import { LoadingAnimation } from "../components/Index";
 
 const ProgressPage = ({ navigation }) => {
   const [scoresArray, setScoresArray] = useState([]);
@@ -21,7 +18,7 @@ const ProgressPage = ({ navigation }) => {
     // Add more quizzes as needed
   ];
 
-  const [selectedQuiz, setSelectedQuiz] = useState(quizzes[0]);
+  const [selectedQuiz, setSelectedQuiz] = useState(quizzes[0] || {});
 
   //Resets the chart and fetches the score and date for the appropriate quiz
   useEffect(() => {
@@ -84,13 +81,13 @@ const ProgressPage = ({ navigation }) => {
       </ScrollView>
       <View style={styles.chart}>
         {scoresArray.length > 0 ? (
-          // Shows the last 6 Results
+          // Shows the last 5 Results
           <LineChart
             data={{
-              labels: dateArray.slice(-6),
+              labels: dateArray.slice(-5),
               datasets: [
                 {
-                  data: scoresArray.slice(-6),
+                  data: scoresArray.slice(-5),
                 },
               ],
             }}
@@ -120,7 +117,7 @@ const ProgressPage = ({ navigation }) => {
             }}
           />
         ) : (
-          <Text>No Progress available</Text>
+          <Text style={styles.txtNoProgress}>No Available Progress</Text>
         )}
       </View>
     </SafeAreaView>

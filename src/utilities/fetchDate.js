@@ -1,5 +1,12 @@
 import { db } from "../../firebaseConfig";
-import { collection, query, getDocs, where } from "firebase/firestore";
+import {
+  collection,
+  query,
+  getDocs,
+  where,
+  orderBy,
+  limit,
+} from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 export const fetchDate = async (setArray, quizId) => {
@@ -9,7 +16,9 @@ export const fetchDate = async (setArray, quizId) => {
   const dateQuery = query(
     collection(db, "results"),
     where("user_id", "==", user.uid),
-    where("quiz_id", "==", quizId)
+    where("quiz_id", "==", quizId),
+    orderBy("date", "desc"),
+    limit(5)
   );
 
   const querySnapshot = await getDocs(dateQuery);
