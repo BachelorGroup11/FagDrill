@@ -36,11 +36,9 @@ const UserPage = ({ navigation }) => {
 				if (doc.data().is_admin == true) {
 					setIsToggle(!isToggle);
 					setIsLoaded(!isLoaded);
-					console.log(isToggle);
 				} else {
 					setIsLoaded(!isLoaded);
 					setIsToggle(isToggle);
-					console.log(isToggle);
 				}
 			});
 		};

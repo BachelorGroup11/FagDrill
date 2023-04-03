@@ -1,0 +1,45 @@
+import { StyleSheet } from 'react-native';
+
+export const styles = StyleSheet.create({
+	input: {
+		height: 160,
+		margin: 12,
+		borderRadius: 20,
+		borderColor: '#CCCCCC',
+		borderWidth: 1,
+		textAlign: 'center',
+		color: '#767575',
+		fontFamily: 'PoppinsSemiBold',
+		backgroundColor: '#FAFAFA',
+		fontSize: 14,
+		color: '#000000',
+	},
+	answerinput: {
+		height: 160,
+		marginHorizontal: 12,
+		borderRadius: 20,
+		borderColor: '#CCCCCC',
+		borderWidth: 1,
+		textAlign: 'center',
+		color: '#767575',
+		fontFamily: 'PoppinsSemiBold',
+		backgroundColor: '#FAFAFA',
+		fontSize: 14,
+		color: '#000000',
+	},
+	save: {
+		width: 280,
+		height: 50,
+		borderRadius: 15,
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#12D18E',
+		alignSelf: 'center',
+		marginTop: 60,
+	},
+	savetext: {
+		fontFamily: 'PoppinsSemiBold',
+		fontSize: 16,
+		color: '#ffffff',
+	},
+});
