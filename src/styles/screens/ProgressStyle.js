@@ -84,4 +84,14 @@ export const styles = StyleSheet.create({
     top: 20,
     left: 20,
   },
+
+  txtNoProgress: {
+    height: 41,
+    width: 330,
+    fontSize: 32,
+    position: "absolute",
+    bottom: -140,
+    left: 13,
+    fontWeight: "bold",
+  },
 });
