@@ -1,5 +1,12 @@
 import { db } from "../../firebaseConfig";
-import { collection, query, getDocs, where, limit } from "firebase/firestore";
+import {
+  collection,
+  query,
+  getDocs,
+  where,
+  limit,
+  orderBy,
+} from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 // Get all quiz results linked to a specific user and quiz ID from firestore
@@ -13,6 +20,7 @@ export const fetchScore = async (setArray, quizId) => {
     collection(db, "results"),
     where("user_id", "==", user.uid),
     where("quiz_id", "==", quizId),
+    orderBy("date", "desc"),
     limit(5)
   );
 
