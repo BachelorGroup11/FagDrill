@@ -8,13 +8,14 @@ const ManageuserPage = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Manage Users</Text>
-      <View style={styles.container}>
+      <View style={{flex: 1,}}>
         <TouchableOpacity
           style={styles.btnBackToHome}
           onPress={() => navigation.navigate("userpage")}
         >
           <Text style={styles.knapptext}>X</Text>
         </TouchableOpacity>
+        <Text style={{color: "black", alignSelf: "center",position: "absolute",top: 85}}>⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯</Text>
         <UserList />
       </View>
     </SafeAreaView>
