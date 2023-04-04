@@ -56,7 +56,7 @@ const UserPage = ({ navigation }) => {
         <LoadingAnimation />
       ) : isToggle ? (
         <SafeAreaView style={styles.container}>
-          <View>{user && <Text style={styles.title}>{user.email}</Text>}</View>
+          <Text style={styles.title}>{user.email}</Text>
           <TouchableOpacity
             style={styles.btnBackToHome}
             onPress={() => navigation.navigate("homepage")}
@@ -98,7 +98,7 @@ const UserPage = ({ navigation }) => {
         </SafeAreaView>
       ) : (
         <SafeAreaView style={styles.container}>
-          <Text style={styles.title}>Your Account</Text>
+          <Text style={styles.title}>{user.email}</Text>
 
           <View style={styles.container}>
             <TouchableOpacity
