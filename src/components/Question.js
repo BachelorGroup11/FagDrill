@@ -1,8 +1,21 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { styles } from '../styles/components/QuestionStyle';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-export const Question = ({ count, type, title }) => {
+export const Question = ({ count, type, title, questions, setQuestions }) => {
+	const deleteQuestion = async () => {
+		return Alert.alert('', `Are you sure you wish to delete ${title}?`, [
+			{ text: 'Cancel' },
+			{
+				text: 'Confirm',
+				onPress: async () => {
+					setQuestions(
+						questions.filter((current) => current.question !== title)
+					);
+				},
+			},
+		]);
+	};
 	return (
 		<View style={styles.container}>
 			<View style={{ width: '80%' }}>
@@ -14,7 +27,7 @@ export const Question = ({ count, type, title }) => {
 				</Text>
 			</View>
 			<View style={styles.deletesection}>
-				<TouchableOpacity>
+				<TouchableOpacity onPress={deleteQuestion}>
 					<FontAwesome name="trash" size={20} />
 				</TouchableOpacity>
 			</View>
