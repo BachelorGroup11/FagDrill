@@ -7,6 +7,7 @@ import UserList from "../components/UserList";
 const ManageuserPage = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Manage Users</Text>
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.btnBackToHome}

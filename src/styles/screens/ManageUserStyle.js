@@ -23,4 +23,13 @@ export const styles = StyleSheet.create({
     paddingLeft: 10,
     fontWeight: "bold",
   },
+
+  title: {
+    alignself: "center",
+    position: "absolute",
+    right: 148,
+    top: 90,
+    fontSize: 32,
+    fontWeight: "bold",
+  },
 });
