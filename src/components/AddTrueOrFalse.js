@@ -22,7 +22,7 @@ export const AddTrueOrFalse = ({ navigation }) => {
 
 		navigation.navigate('createquizpage', {
 			question: question,
-			options: ['true', 'false'],
+			options: ['True', 'False'],
 			type: 'True or false',
 			answer: trueorfalse === 'setTrue' ? 0 : 1,
 		});
