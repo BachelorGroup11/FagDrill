@@ -64,7 +64,7 @@ const UserPage = ({ navigation }) => {
 
 					<TouchableOpacity
 						style={styles.appButtonContainer1}
-						onPress={() => navigation.navigate('createquizpage')}
+						onPress={() => navigation.navigate('managequizpage')}
 					>
 						<Text style={styles.YourAccountText1}>Manage Quizzes</Text>
 					</TouchableOpacity>
