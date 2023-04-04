@@ -22,7 +22,7 @@ const CreateQuizPage = ({ navigation, route }) => {
 	const [questions, setQuestions] = useState([]);
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
-	const [selected, setSelected] = useState('');
+	const [selected, setSelected] = useState([]);
 
 	useEffect(() => {
 		setUsers([]);
@@ -42,6 +42,7 @@ const CreateQuizPage = ({ navigation, route }) => {
 		);
 		const questionIds = await addQuestions(quizRef, questions);
 		addQuiz(title, description, quizRef, userIds, questionIds);
+		navigation.navigate('managequizpage');
 	};
 
 	return (

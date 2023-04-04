@@ -1,32 +1,20 @@
 import { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import { styles } from '../styles/screens/ManageQuizStyle';
-import { db } from '../../firebaseConfig';
-import { collection, getDocs } from 'firebase/firestore';
 import { GoBack } from '../components/GoBack';
 import { Quiz } from '../components/Quiz';
+import { fetchQuizzes } from '../utilities/fetchQuizzes';
 
 const ManageQuizPage = ({ navigation }) => {
 	const [quizzes, setQuizzes] = useState([]);
 
 	useEffect(() => {
-		setQuizzes([]);
-		const fetchQuizzes = async () => {
-			const querySnapshot = await getDocs(collection(db, 'quizzes'));
-			querySnapshot.forEach((doc) => {
-				setQuizzes((previousArray) => [
-					...previousArray,
-					{
-						name: doc.data().name,
-						info: doc.data().info,
-						questions: doc.data().questions.length,
-						users: doc.data().users.length,
-					},
-				]);
-			});
-		};
-		fetchQuizzes().catch((error) => console.log(error));
-	}, []);
+		const unsubscribe = navigation.addListener('focus', () => {
+			setQuizzes([]);
+			fetchQuizzes(setQuizzes);
+		});
+		return unsubscribe;
+	}, [navigation]);
 
 	return (
 		<ScrollView bounces={false}>
@@ -39,7 +27,10 @@ const ManageQuizPage = ({ navigation }) => {
 						description={value.info}
 						numofquestions={value.questions}
 						numofusers={value.users}
-						key={value.name}
+						id={value.id}
+						quizzes={quizzes}
+						setQuizzes={setQuizzes}
+						key={value.id}
 					/>
 				))}
 				<TouchableOpacity
