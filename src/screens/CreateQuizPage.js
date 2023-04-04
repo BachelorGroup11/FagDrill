@@ -36,11 +36,13 @@ const CreateQuizPage = ({ navigation, route }) => {
 
 	const saveQuiz = async () => {
 		if (title === '') return alert('Please enter title');
+
 		const quizRef = doc(collection(db, 'quizzes'));
 		const userIds = selected.map(
 			(index) => users.find((user) => user.email === index).id
 		);
 		const questionIds = await addQuestions(quizRef, questions);
+
 		addQuiz(title, description, quizRef, userIds, questionIds);
 		navigation.navigate('managequizpage');
 	};
@@ -89,6 +91,8 @@ const CreateQuizPage = ({ navigation, route }) => {
 							count={index + 1}
 							type={item.type}
 							title={item.question}
+							questions={questions}
+							setQuestions={setQuestions}
 							key={index}
 						/>
 					))}
