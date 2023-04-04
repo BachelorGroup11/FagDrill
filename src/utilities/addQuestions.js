@@ -9,6 +9,7 @@ export const addQuestions = async (quizRef, questions) => {
 			question_text: questions[i].question,
 			options: questions[i].options,
 			quizzes: [quizRef.id],
+			summary: questions[i].summary,
 			correct_answer:
 				questions[i].type === 'Multiple choice'
 					? parseInt(questions[i].answer)
