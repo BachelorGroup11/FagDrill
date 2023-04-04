@@ -10,26 +10,29 @@ import {
 import { styles } from '../styles/screens/CreateQuizStyle';
 import { MultipleSelectList } from 'react-native-dropdown-select-list';
 import { db } from '../../firebaseConfig';
-import { collection, getDocs, doc, addDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, addDoc, setDoc } from 'firebase/firestore';
 import { GoBack, Question } from '../components/Index';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const CreateQuizPage = ({ navigation, route }) => {
 	const [users, setUsers] = useState([]);
+	const [questions, setQuestions] = useState([]);
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
 	const [selected, setSelected] = useState('');
-	const [questions, setQuestions] = useState([]);
 
 	useEffect(() => {
 		setUsers([]);
 		const fetchUsers = async () => {
 			const querySnapshot = await getDocs(collection(db, 'users'));
 			querySnapshot.forEach((doc) => {
-				setUsers((previousArray) => [...previousArray, doc.data().email]);
+				setUsers((previousArray) => [
+					...previousArray,
+					{ email: doc.data().email, id: doc.data().user_id },
+				]);
 			});
 		};
-		fetchUsers();
+		fetchUsers().catch((error) => console.log(error));
 	}, []);
 
 	useEffect(() => {
@@ -39,10 +42,13 @@ const CreateQuizPage = ({ navigation, route }) => {
 
 	const saveQuiz = async () => {
 		const quizRef = doc(collection(db, 'quizzes'));
-		console.log(quizRef.id);
+		let userIds = selected.map(
+			(index) => users.find((user) => user.email === index).id
+		);
+		let questionIds = [];
 
 		for (let i = 0; i < questions.length; i++) {
-			await addDoc(collection(db, 'questions'), {
+			const questionRef = await addDoc(collection(db, 'questions'), {
 				question_text: questions[i].question,
 				options: questions[i].options,
 				quizzes: [quizRef.id],
@@ -57,7 +63,15 @@ const CreateQuizPage = ({ navigation, route }) => {
 						? 'multiple_choice'
 						: 'fill_in_blank',
 			});
+			questionIds.push(questionRef.id);
 		}
+
+		await setDoc(doc(db, 'quizzes', quizRef.id), {
+			name: title,
+			info: description,
+			users: userIds,
+			questions: questionIds,
+		});
 	};
 
 	return (
@@ -84,7 +98,8 @@ const CreateQuizPage = ({ navigation, route }) => {
 				<Text style={styles.title}>Visible to</Text>
 				<MultipleSelectList
 					setSelected={(val) => setSelected(val)}
-					data={users}
+					data={users.map((user) => user.email)}
+					//data={//users.map((user) => Object.keys(user))}
 					save="value"
 					search={false}
 					boxStyles={styles.boxstyles}
