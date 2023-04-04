@@ -79,7 +79,14 @@ const CreateQuizPage = ({ navigation, route }) => {
 				/>
 				<View style={styles.questionscontainer}>
 					<Text style={styles.questions}>Questions</Text>
-					<TouchableOpacity>
+					<TouchableOpacity
+						onPress={() =>
+							navigation.navigate('viewallquestionspage', {
+								questions: questions,
+								setQuestions: setQuestions,
+							})
+						}
+					>
 						<Text style={styles.viewall}>
 							View all {<FontAwesome name="arrow-right" />}
 						</Text>
