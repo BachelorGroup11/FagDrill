@@ -35,6 +35,7 @@ const CreateQuizPage = ({ navigation, route }) => {
 	}, [route.params]);
 
 	const saveQuiz = async () => {
+		if (title === '') return alert('Please enter title');
 		const quizRef = doc(collection(db, 'quizzes'));
 		const userIds = selected.map(
 			(index) => users.find((user) => user.email === index).id
@@ -44,8 +45,8 @@ const CreateQuizPage = ({ navigation, route }) => {
 	};
 
 	return (
-		<ScrollView style={{ backgroundColor: '#FFFFFF' }}>
-			<GoBack nav={navigation} destination={'userpage'} />
+		<ScrollView bounces={false} style={{ backgroundColor: '#FFFFFF' }}>
+			<GoBack nav={navigation} destination={'managequizpage'} />
 			<Text style={styles.header}>Create Quiz</Text>
 			<SafeAreaView style={styles.container}>
 				<Text style={styles.title}>Title</Text>
@@ -68,7 +69,6 @@ const CreateQuizPage = ({ navigation, route }) => {
 				<MultipleSelectList
 					setSelected={(val) => setSelected(val)}
 					data={users.map((user) => user.email)}
-					//data={//users.map((user) => Object.keys(user))}
 					save="value"
 					search={false}
 					boxStyles={styles.boxstyles}

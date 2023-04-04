@@ -6,13 +6,15 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		marginTop: 130,
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	header: {
 		fontSize: 32,
 		fontFamily: 'PoppinsBold',
-		position: 'absolute',
-		left: 22,
 		top: 90,
+		left: 22,
+		position: 'absolute',
 	},
 	title: {
 		fontSize: 14,
@@ -86,5 +88,23 @@ export const styles = StyleSheet.create({
 	inputstyles: {
 		color: 'grey',
 		marginTop: 15,
+	},
+	create: {
+		height: 60,
+		width: 180,
+		marginVertical: 20,
+		borderRadius: 20,
+		justifyContent: 'center',
+		textAlign: 'center',
+		alignItems: 'center',
+		fontFamily: 'PoppinsRegular',
+		borderWidth: 2,
+		borderColor: '#3F51B5',
+		backgroundColor: '#FFFFFF',
+	},
+	createtext: {
+		fontFamily: 'PoppinsBold',
+		fontSize: 14,
+		color: '#3F51B5',
 	},
 });

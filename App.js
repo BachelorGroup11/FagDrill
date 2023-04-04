@@ -14,6 +14,7 @@ import ProgressPage from './src/screens/ProgressPage';
 import ChangePasswordPage from './src/screens/ChangePasswordPage';
 import CreateQuizPage from './src/screens/CreateQuizPage';
 import AddQuestionPage from './src/screens/AddQuestionPage';
+import ManageQuizPage from './src/screens/ManageQuizPage';
 
 // This prevents SplashScreen from auto hiding
 SplashScreen.preventAutoHideAsync();
@@ -59,6 +60,7 @@ export default function App() {
 				/>
 				<Stack.Screen name="createquizpage" component={CreateQuizPage} />
 				<Stack.Screen name="addquestionpage" component={AddQuestionPage} />
+				<Stack.Screen name="managequizpage" component={ManageQuizPage} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
