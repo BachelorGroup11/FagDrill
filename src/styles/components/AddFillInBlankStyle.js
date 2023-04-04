@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
 	input: {
-		height: 160,
+		height: 120,
 		margin: 12,
 		borderRadius: 20,
 		borderColor: '#CCCCCC',
@@ -11,11 +11,12 @@ export const styles = StyleSheet.create({
 		color: '#767575',
 		fontFamily: 'PoppinsSemiBold',
 		backgroundColor: '#FAFAFA',
-		fontSize: 14,
+		fontSize: 12,
 		color: '#000000',
 	},
-	answerinput: {
-		height: 160,
+	summaryinput: {
+		height: 120,
+		marginBottom: 12,
 		marginHorizontal: 12,
 		borderRadius: 20,
 		borderColor: '#CCCCCC',
@@ -24,7 +25,20 @@ export const styles = StyleSheet.create({
 		color: '#767575',
 		fontFamily: 'PoppinsSemiBold',
 		backgroundColor: '#FAFAFA',
-		fontSize: 14,
+		fontSize: 12,
+		color: '#000000',
+	},
+	answerinput: {
+		height: 120,
+		marginHorizontal: 12,
+		borderRadius: 20,
+		borderColor: '#CCCCCC',
+		borderWidth: 1,
+		textAlign: 'center',
+		color: '#767575',
+		fontFamily: 'PoppinsSemiBold',
+		backgroundColor: '#FAFAFA',
+		fontSize: 12,
 		color: '#000000',
 	},
 	save: {

@@ -20,9 +20,9 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 const CreateQuizPage = ({ navigation, route }) => {
 	const [users, setUsers] = useState([]);
 	const [questions, setQuestions] = useState([]);
+	const [selected, setSelected] = useState([]);
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
-	const [selected, setSelected] = useState([]);
 
 	useEffect(() => {
 		setUsers([]);

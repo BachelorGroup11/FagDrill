@@ -11,6 +11,7 @@ import Checkbox from 'expo-checkbox';
 
 export const AddTrueOrFalse = ({ navigation }) => {
 	const [question, setQuestion] = useState('');
+	const [summary, setSummary] = useState('');
 	const [isChecked, setChecked] = useState({ setTrue: false, setFalse: false });
 
 	const getTrueOrFalse = (obj) => Object.keys(obj).find((i) => obj[i] === true);
@@ -25,6 +26,7 @@ export const AddTrueOrFalse = ({ navigation }) => {
 			options: ['True', 'False'],
 			type: 'True or false',
 			answer: trueorfalse === 'setTrue' ? 0 : 1,
+			summary: summary,
 		});
 	};
 
@@ -35,6 +37,13 @@ export const AddTrueOrFalse = ({ navigation }) => {
 				onChangeText={setQuestion}
 				value={question}
 				placeholder={'Tap to add question'}
+				placeholderTextColor={'grey'}
+			/>
+			<TextInput
+				style={styles.summary}
+				onChangeText={setSummary}
+				value={summary}
+				placeholder={'Tap to add summary'}
 				placeholderTextColor={'grey'}
 			/>
 			<View style={styles.buttons}>

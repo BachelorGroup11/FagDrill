@@ -9,6 +9,7 @@ import { styles } from '../styles/components/AddFillInBlankStyle';
 
 export const AddFillInBlank = ({ navigation }) => {
 	const [question, setQuestion] = useState('');
+	const [summary, setSummary] = useState('');
 	const [answer, setAnswer] = useState('');
 
 	const handleSubmit = () => {
@@ -20,6 +21,7 @@ export const AddFillInBlank = ({ navigation }) => {
 			options: null,
 			type: 'Fill in the blank',
 			answer: answer,
+			summary: summary,
 		});
 	};
 
@@ -30,6 +32,13 @@ export const AddFillInBlank = ({ navigation }) => {
 				onChangeText={setQuestion}
 				value={question}
 				placeholder={'Tap to add question'}
+				placeholderTextColor={'grey'}
+			/>
+			<TextInput
+				style={styles.summaryinput}
+				onChangeText={setSummary}
+				value={summary}
+				placeholder={'Tap to add summary'}
 				placeholderTextColor={'grey'}
 			/>
 			<TextInput

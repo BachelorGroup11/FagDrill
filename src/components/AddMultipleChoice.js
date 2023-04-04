@@ -12,6 +12,7 @@ import Checkbox from 'expo-checkbox';
 export const AddMultipleChoice = ({ navigation }) => {
 	const numbers = { 0: 'one', 1: 'two', 2: 'three', 3: 'four' };
 	const [question, setQuestion] = useState('');
+	const [summary, setSummary] = useState('');
 	const [answer, setAnswer] = useState({
 		one: '',
 		two: '',
@@ -44,6 +45,7 @@ export const AddMultipleChoice = ({ navigation }) => {
 			options: Object.values(answer),
 			type: 'Multiple choice',
 			answer: correctIndexInteger,
+			summary: summary,
 		});
 	};
 
@@ -57,6 +59,13 @@ export const AddMultipleChoice = ({ navigation }) => {
 				onChangeText={setQuestion}
 				value={question}
 				placeholder={'Tap to add question'}
+				placeholderTextColor={'grey'}
+			/>
+			<TextInput
+				style={styles.summary}
+				onChangeText={setSummary}
+				value={summary}
+				placeholder={'Tap to add sumary'}
 				placeholderTextColor={'grey'}
 			/>
 			<View style={styles.inputcontainer}>
