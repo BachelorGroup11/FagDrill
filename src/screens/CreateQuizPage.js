@@ -10,8 +10,11 @@ import {
 import { styles } from '../styles/screens/CreateQuizStyle';
 import { MultipleSelectList } from 'react-native-dropdown-select-list';
 import { db } from '../../firebaseConfig';
-import { collection, getDocs, doc, addDoc, setDoc } from 'firebase/firestore';
+import { collection, doc } from 'firebase/firestore';
 import { GoBack, Question } from '../components/Index';
+import { fetchUsers } from '../utilities/fetchUsers';
+import { addQuiz } from '../utilities/addQuiz';
+import { addQuestions } from '../utilities/addQuestions';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const CreateQuizPage = ({ navigation, route }) => {
@@ -23,16 +26,7 @@ const CreateQuizPage = ({ navigation, route }) => {
 
 	useEffect(() => {
 		setUsers([]);
-		const fetchUsers = async () => {
-			const querySnapshot = await getDocs(collection(db, 'users'));
-			querySnapshot.forEach((doc) => {
-				setUsers((previousArray) => [
-					...previousArray,
-					{ email: doc.data().email, id: doc.data().user_id },
-				]);
-			});
-		};
-		fetchUsers().catch((error) => console.log(error));
+		fetchUsers(setUsers).catch((error) => console.log(error));
 	}, []);
 
 	useEffect(() => {
@@ -42,36 +36,11 @@ const CreateQuizPage = ({ navigation, route }) => {
 
 	const saveQuiz = async () => {
 		const quizRef = doc(collection(db, 'quizzes'));
-		let userIds = selected.map(
+		const userIds = selected.map(
 			(index) => users.find((user) => user.email === index).id
 		);
-		let questionIds = [];
-
-		for (let i = 0; i < questions.length; i++) {
-			const questionRef = await addDoc(collection(db, 'questions'), {
-				question_text: questions[i].question,
-				options: questions[i].options,
-				quizzes: [quizRef.id],
-				correct_answer:
-					questions[i].type === 'Multiple choice'
-						? parseInt(questions[i].answer)
-						: questions[i].answer,
-				category:
-					questions[i].type === 'True or false'
-						? 'true_or_false'
-						: questions[i].type === 'Multiple choice'
-						? 'multiple_choice'
-						: 'fill_in_blank',
-			});
-			questionIds.push(questionRef.id);
-		}
-
-		await setDoc(doc(db, 'quizzes', quizRef.id), {
-			name: title,
-			info: description,
-			users: userIds,
-			questions: questionIds,
-		});
+		const questionIds = await addQuestions(quizRef, questions);
+		addQuiz(title, description, quizRef, userIds, questionIds);
 	};
 
 	return (

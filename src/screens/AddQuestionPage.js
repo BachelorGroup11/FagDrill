@@ -10,7 +10,7 @@ import {
 } from '../components/Index';
 
 const AddQuestionPage = ({ navigation }) => {
-	const [selected, setSelected] = useState('');
+	const [selected, setSelected] = useState('Multiple choice');
 	const data = ['Multiple choice', 'True or false', 'Fill in the blank'];
 
 	return (
@@ -22,6 +22,7 @@ const AddQuestionPage = ({ navigation }) => {
 				data={data}
 				save="value"
 				search={false}
+				placeholder="Multiple choice"
 				defaultOption={'Multiple choice'}
 				boxStyles={styles.boxstyles}
 				dropdownStyles={styles.dropdownstyles}
