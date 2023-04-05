@@ -6,31 +6,44 @@ import { LineChart } from "react-native-chart-kit";
 import { fetchScore } from "../utilities/fetchScore";
 import { fetchDate } from "../utilities/fetchDate";
 import { LoadingAnimation } from "../components/Index";
+import { db } from "../../firebaseConfig";
+import { collection, query, getDocs, where } from "firebase/firestore";
+
+const quizCollection = collection(db, "quizzes");
 
 const ProgressPage = ({ navigation }) => {
   const [scoresArray, setScoresArray] = useState([]);
   const [dateArray, setDateArray] = useState([]);
   const [quizData, setQuizData] = useState([]);
 
-  const quizzes = [
-    { id: "dFPZQ3bseEkoPMqlrzz7", name: "Quiz 1" },
-    { id: "ad8usDZM4b5GWrpoV6nb", name: "Quiz 2" },
-    // Add more quizzes as needed
-  ];
+  const [selectedQuiz, setSelectedQuiz] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [selectedQuiz, setSelectedQuiz] = useState(quizzes[0] || {});
+  // Fetch quiz data from Firestore and store it in the state
+  useEffect(() => {
+    const fetchQuizzes = async () => {
+      const quizzesSnapshot = await getDocs(quizCollection);
+      const quizzes = quizzesSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        name: doc.data().name,
+      }));
+      setQuizData(quizzes);
+      setSelectedQuiz(quizzes[0] || {});
+    };
+    fetchQuizzes();
+  }, []);
 
-  //Resets the chart and fetches the score and date for the appropriate quiz
+  // Resets the chart and fetches the score and date for the appropriate quiz
   useEffect(() => {
     setScoresArray([]);
     setDateArray([]);
-    fetchScore(setScoresArray, selectedQuiz.id);
-    fetchDate(setDateArray, selectedQuiz.id);
+    if (selectedQuiz.id) {
+      setIsLoading(true);
+      fetchScore(setScoresArray, selectedQuiz.id)
+        .then(() => fetchDate(setDateArray, selectedQuiz.id))
+        .finally(() => setIsLoading(false));
+    }
   }, [selectedQuiz]);
-
-  useEffect(() => {
-    setQuizData(quizzes.map((quiz) => quiz.name));
-  }, []);
 
   const renderItem = ({ item }) => {
     return (
@@ -59,7 +72,7 @@ const ProgressPage = ({ navigation }) => {
         <Text style={styles.txtProgress}>View Progress Form:</Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {quizzes.map((quiz) => (
+        {quizData.map((quiz) => (
           <TouchableOpacity
             key={quiz.id}
             style={[
@@ -80,7 +93,11 @@ const ProgressPage = ({ navigation }) => {
         ))}
       </ScrollView>
       <View style={styles.chart}>
-        {scoresArray.length > 0 ? (
+        {isLoading ? (
+          <View style={styles.loadingContainer}>
+            <LoadingAnimation />
+          </View>
+        ) : scoresArray.length > 0 ? (
           // Shows the last 5 Results
           <LineChart
             data={{
@@ -123,5 +140,4 @@ const ProgressPage = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-
 export default ProgressPage;
