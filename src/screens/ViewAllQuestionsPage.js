@@ -1,14 +1,8 @@
 import { View, Text, ScrollView } from 'react-native';
-import { GoBack } from '../components/GoBack';
-import { Question } from '../components/Question';
-import { useEffect } from 'react';
+import { GoBack, Question } from '../components/Index';
 
 const ViewAllQuestionsPage = ({ navigation, route }) => {
 	const { questions, setQuestions } = route.params;
-
-	useEffect(() => {
-		console.log('rerender');
-	}, [questions]);
 
 	return (
 		<View>
