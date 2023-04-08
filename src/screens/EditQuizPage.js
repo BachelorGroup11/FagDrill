@@ -10,47 +10,65 @@ import {
 import { styles } from "../styles/screens/CreateQuizStyle";
 import { MultipleSelectList } from "react-native-dropdown-select-list";
 import { db } from "../../firebaseConfig";
-import { collection, doc } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import { GoBack, Question } from "../components/Index";
-import { fetchUsers } from "../utilities/fetchUsers";
+import { fetchUsersSetPlaceholder } from "../utilities/fetchUsersSetPlaceholder";
+import { fetchQuestions } from "../utilities/fetchQuestions";
 import { addQuiz } from "../utilities/addQuiz";
 import { addQuestions } from "../utilities/addQuestions";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-const CreateQuizPage = ({ navigation, route }) => {
+const EditQuizPage = ({ navigation, route }) => {
 	const [users, setUsers] = useState([]);
 	const [questions, setQuestions] = useState([]);
+	const [deletedQuestions, setDeletedQuestions] = useState([]);
+	const [placeholder, setPlaceholder] = useState([]);
 	const [selected, setSelected] = useState([]);
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
+	const [quizRef, setQuizRef] = useState("");
 
 	useEffect(() => {
 		setUsers([]);
-		fetchUsers(setUsers).catch((error) => console.log(error));
+		setQuestions([]);
+		fetchUsersSetPlaceholder(setUsers, setPlaceholder, route);
+		fetchQuestions(setQuestions, route);
+		setTitle(route.params.title);
+		setDescription(route.params.description);
+		setQuizRef(route.params.id);
 	}, []);
 
 	useEffect(() => {
-		if (route.params === undefined) return;
+		if (route.params === undefined || route.params.title) return;
 		setQuestions((prevArray) => [...prevArray, route.params]);
 	}, [route.params]);
 
 	const saveQuiz = async () => {
 		if (title === "") return alert("Please enter title");
 
-		const quizRef = doc(collection(db, "quizzes"));
 		const userIds = selected.map(
 			(index) => users.find((user) => user.email === index).id
 		);
-		const questionIds = await addQuestions(quizRef.id, questions);
 
-		addQuiz(title, description, quizRef.id, userIds, questionIds);
-		navigation.navigate("managequizpage");
+		try {
+			for (let i = 0; i < questions.length; i++) {
+				await deleteDoc(doc(db, "questions", questions[i].id));
+			}
+		} catch {}
+
+		for (let i = 0; i < deletedQuestions.length; i++) {
+			await deleteDoc(doc(db, "questions", deletedQuestions[i]));
+		}
+
+		const questionIds = await addQuestions(quizRef, questions);
+		addQuiz(title, description, quizRef, userIds, questionIds);
+		navigation.goBack();
 	};
 
 	return (
 		<ScrollView bounces={false} style={{ backgroundColor: "#FFFFFF" }}>
 			<GoBack nav={navigation} destination={"managequizpage"} />
-			<Text style={styles.header}>Create Quiz</Text>
+			<Text style={styles.header}>Edit Quiz</Text>
 			<SafeAreaView style={styles.container}>
 				<Text style={styles.title}>Title</Text>
 				<TextInput
@@ -70,6 +88,7 @@ const CreateQuizPage = ({ navigation, route }) => {
 				/>
 				<Text style={styles.title}>Visible to</Text>
 				<MultipleSelectList
+					placeholder={`${placeholder}`}
 					setSelected={(val) => setSelected(val)}
 					data={users.map((user) => user.email)}
 					save="value"
@@ -96,10 +115,12 @@ const CreateQuizPage = ({ navigation, route }) => {
 					{questions.map((item, index) => (
 						<Question
 							count={index + 1}
+							id={item.id}
 							type={item.type}
 							title={item.question}
 							questions={questions}
 							setQuestions={setQuestions}
+							setDeletedQuestions={setDeletedQuestions}
 							key={index}
 						/>
 					))}
@@ -112,7 +133,7 @@ const CreateQuizPage = ({ navigation, route }) => {
 						style={styles.add}
 						onPress={() =>
 							navigation.navigate("addquestionpage", {
-								destination: "createquizpage",
+								destination: "editquizpage",
 							})
 						}
 					>
@@ -124,4 +145,4 @@ const CreateQuizPage = ({ navigation, route }) => {
 	);
 };
 
-export default CreateQuizPage;
+export default EditQuizPage;

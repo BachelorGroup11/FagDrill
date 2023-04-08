@@ -1,5 +1,5 @@
-import { db } from '../../firebaseConfig';
-import { doc, setDoc } from 'firebase/firestore';
+import { db } from "../../firebaseConfig";
+import { doc, setDoc } from "firebase/firestore";
 
 export const addQuiz = async (
 	title,
@@ -8,7 +8,7 @@ export const addQuiz = async (
 	userIds,
 	questionIds
 ) => {
-	await setDoc(doc(db, 'quizzes', quizRef.id), {
+	await setDoc(doc(db, "quizzes", quizRef), {
 		name: title,
 		info: description,
 		users: userIds,

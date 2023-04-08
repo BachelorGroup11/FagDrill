@@ -1,21 +1,22 @@
-import { useCallback } from 'react';
-import { useFonts } from 'expo-font';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as SplashScreen from 'expo-splash-screen';
-import LoginPage from './src/screens/LoginPage';
-import SignUpPage from './src/screens/SignUpPage';
-import HomePage from './src/screens/HomePage';
-import PlayPage from './src/screens/PlayPage';
-import InfoPage from './src/screens/InfoPage';
-import ResultsPage from './src/screens/ResultsPage';
-import UserPage from './src/screens/UserPage';
-import ProgressPage from './src/screens/ProgressPage';
-import ChangePasswordPage from './src/screens/ChangePasswordPage';
-import CreateQuizPage from './src/screens/CreateQuizPage';
-import AddQuestionPage from './src/screens/AddQuestionPage';
-import ManageQuizPage from './src/screens/ManageQuizPage';
-import ViewAllQuestionsPage from './src/screens/ViewAllQuestionsPage';
+import { useCallback } from "react";
+import { useFonts } from "expo-font";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import * as SplashScreen from "expo-splash-screen";
+import LoginPage from "./src/screens/LoginPage";
+import SignUpPage from "./src/screens/SignUpPage";
+import HomePage from "./src/screens/HomePage";
+import PlayPage from "./src/screens/PlayPage";
+import InfoPage from "./src/screens/InfoPage";
+import ResultsPage from "./src/screens/ResultsPage";
+import UserPage from "./src/screens/UserPage";
+import ProgressPage from "./src/screens/ProgressPage";
+import ChangePasswordPage from "./src/screens/ChangePasswordPage";
+import ManageQuizPage from "./src/screens/ManageQuizPage";
+import CreateQuizPage from "./src/screens/CreateQuizPage";
+import EditQuizPage from "./src/screens/EditQuizPage";
+import AddQuestionPage from "./src/screens/AddQuestionPage";
+import ViewAllQuestionsPage from "./src/screens/ViewAllQuestionsPage";
 
 // This prevents SplashScreen from auto hiding
 SplashScreen.preventAutoHideAsync();
@@ -23,10 +24,10 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
-		PoppinsRegular: require('./src/assets/fonts/Poppins/Poppins-Regular.ttf'),
-		PoppinsMedium: require('./src/assets/fonts/Poppins/Poppins-Medium.ttf'),
-		PoppinsSemiBold: require('./src/assets/fonts/Poppins/Poppins-SemiBold.ttf'),
-		PoppinsBold: require('./src/assets/fonts/Poppins/Poppins-Bold.ttf'),
+		PoppinsRegular: require("./src/assets/fonts/Poppins/Poppins-Regular.ttf"),
+		PoppinsMedium: require("./src/assets/fonts/Poppins/Poppins-Medium.ttf"),
+		PoppinsSemiBold: require("./src/assets/fonts/Poppins/Poppins-SemiBold.ttf"),
+		PoppinsBold: require("./src/assets/fonts/Poppins/Poppins-Bold.ttf"),
 	});
 
 	// After custom fonts have loaded, we can hide the splash screen and display the app screen
@@ -59,9 +60,10 @@ export default function App() {
 					name="changepasswordpage"
 					component={ChangePasswordPage}
 				/>
-				<Stack.Screen name="createquizpage" component={CreateQuizPage} />
-				<Stack.Screen name="addquestionpage" component={AddQuestionPage} />
 				<Stack.Screen name="managequizpage" component={ManageQuizPage} />
+				<Stack.Screen name="createquizpage" component={CreateQuizPage} />
+				<Stack.Screen name="editquizpage" component={EditQuizPage} />
+				<Stack.Screen name="addquestionpage" component={AddQuestionPage} />
 				<Stack.Screen
 					name="viewallquestionspage"
 					component={ViewAllQuestionsPage}
