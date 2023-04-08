@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, ScrollView } from "react-native";
+import { Text, View, TouchableOpacity, ScrollView, ImageBackground} from "react-native";
 import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../styles/screens/ProgressStyle";
@@ -60,6 +60,10 @@ const ProgressPage = ({ navigation }) => {
   };
 
   return (
+    <ImageBackground
+      source={require("../assets/images/progress_bg.png")}
+      style={{ flex: 1, width: null, alignSelf: "stretch" }}
+    >
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Progress</Text>
       <View style={styles.container}>
@@ -138,6 +142,7 @@ const ProgressPage = ({ navigation }) => {
         )}
       </View>
     </SafeAreaView>
+    </ImageBackground>
   );
 };
 export default ProgressPage;
