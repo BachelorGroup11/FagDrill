@@ -49,10 +49,6 @@ export const styles = StyleSheet.create({
     margin: 10,
   },
 
-  quizNameBold: {
-    fontWeight: "bold",
-  },
-
   resultBtn: {
     elevation: 8,
     backgroundColor: "#3F51B5",
@@ -61,7 +57,7 @@ export const styles = StyleSheet.create({
     borderWidth: 2,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    bottom: -120,
+    bottom: 40,
     width: 317,
     height: 60,
     right: 30,
