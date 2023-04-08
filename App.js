@@ -31,16 +31,16 @@ export default function App() {
 		PoppinsBold: require("./src/assets/fonts/Poppins/Poppins-Bold.ttf"),
 	});
 
-  // After custom fonts have loaded, we can hide the splash screen and display the app screen
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
+	// After custom fonts have loaded, we can hide the splash screen and display the app screen
+	const onLayoutRootView = useCallback(async () => {
+		if (fontsLoaded) {
+			await SplashScreen.hideAsync();
+		}
+	}, [fontsLoaded]);
 
-  if (!fontsLoaded) {
-    return null;
-  }
+	if (!fontsLoaded) {
+		return null;
+	}
 
 	return (
 		<NavigationContainer onReady={onLayoutRootView}>
@@ -56,7 +56,7 @@ export default function App() {
 				<Stack.Screen name="infopage" component={InfoPage} />
 				<Stack.Screen name="resultspage" component={ResultsPage} />
 				<Stack.Screen name="userpage" component={UserPage} />
-        <Stack.Screen name="manageuserpage" component={ManageuserPage} />
+				<Stack.Screen name="manageuserpage" component={ManageuserPage} />
 				<Stack.Screen name="progresspage" component={ProgressPage} />
 				<Stack.Screen
 					name="changepasswordpage"
