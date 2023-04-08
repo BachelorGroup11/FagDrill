@@ -49,7 +49,7 @@ const UserPage = ({ navigation }) => {
 
   return (
     <ImageBackground
-      source={require("../assets/images/Quizinfo_bg.png")}
+      source={require("../assets/images/user_bg.png")}
       style={{ flex: 1, width: null, alignSelf: "stretch" }}
     >
       {!isLoaded ? (
