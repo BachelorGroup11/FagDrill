@@ -6,7 +6,7 @@ import { collection, query, getDocs, where } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 import { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
-import { LoadingAnimation, AdminPage } from "../components/Index";
+import { LoadingAnimation } from "../components/Index";
 
 const UserPage = ({ navigation }) => {
 	const handleSignOut = () => {
@@ -32,15 +32,12 @@ const UserPage = ({ navigation }) => {
 
 			const querySnapshot = await getDocs(userQuery);
 			querySnapshot.forEach((doc) => {
-				console.log(doc.data());
 				if (doc.data().is_admin == true) {
 					setIsToggle(!isToggle);
 					setIsLoaded(!isLoaded);
-					console.log(isToggle);
 				} else {
 					setIsLoaded(!isLoaded);
 					setIsToggle(isToggle);
-					console.log(isToggle);
 				}
 			});
 		};
@@ -64,7 +61,10 @@ const UserPage = ({ navigation }) => {
 						<Text style={styles.knapptext}>X</Text>
 					</TouchableOpacity>
 
-					<TouchableOpacity style={styles.appButtonContainer1}>
+					<TouchableOpacity
+						style={styles.appButtonContainer1}
+						onPress={() => navigation.navigate("managequizpage")}
+					>
 						<Text style={styles.YourAccountText1}>Manage Quizzes</Text>
 					</TouchableOpacity>
 

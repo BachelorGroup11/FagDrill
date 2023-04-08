@@ -1,14 +1,14 @@
-import { View, Text, ScrollView } from 'react-native';
-import { GoBack, Question } from '../components/Index';
+import { View, Text, ScrollView } from "react-native";
+import { GoBack, Question } from "../components/Index";
 
 const ViewAllQuestionsPage = ({ navigation, route }) => {
 	const { questions, setQuestions } = route.params;
 
 	return (
 		<View>
-			<GoBack nav={navigation} destination={'createquizpage'} />
+			<GoBack nav={navigation} />
 			<Text
-				style={{ fontFamily: 'PoppinsBold', fontSize: 32, left: 22, top: 30 }}
+				style={{ fontFamily: "PoppinsBold", fontSize: 32, left: 22, top: 30 }}
 			>
 				All Questions
 			</Text>

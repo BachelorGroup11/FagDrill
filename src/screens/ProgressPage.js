@@ -51,20 +51,6 @@ const ProgressPage = ({ navigation }) => {
 		}
 	}, [selectedQuiz]);
 
-	const renderItem = ({ item }) => {
-		return (
-			<TouchableOpacity
-				style={[
-					styles.btnQuiz,
-					item.id === selectedQuiz.id && styles.selectedQuiz,
-				]}
-				onPress={() => setSelectedQuiz(item)}
-			>
-				<Text style={styles.quizText}>{item.name}</Text>
-			</TouchableOpacity>
-		);
-	};
-
 	return (
 		<ImageBackground
 			source={require("../assets/images/progress_bg.png")}

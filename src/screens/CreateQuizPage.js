@@ -49,7 +49,7 @@ const CreateQuizPage = ({ navigation, route }) => {
 
 	return (
 		<ScrollView bounces={false} style={{ backgroundColor: "#FFFFFF" }}>
-			<GoBack nav={navigation} destination={"managequizpage"} />
+			<GoBack nav={navigation} />
 			<Text style={styles.header}>Create Quiz</Text>
 			<SafeAreaView style={styles.container}>
 				<Text style={styles.title}>Title</Text>
