@@ -2,10 +2,10 @@ import { styles } from "../styles/components/GoBackStyle";
 import { Text, TouchableOpacity, View } from "react-native";
 
 // Component responsible for rendering navigate back symbol in top left corner of application, specify which screen to navigate to as prop
-export const GoBack = ({ nav }) => {
+export const GoBack = ({ nav, style }) => {
 	return (
 		// Set zIndex to 1 to ensure component is always pressable
-		<View style={{ zIndex: 1 }}>
+		<View style={[{ zIndex: 1 }, style]}>
 			<TouchableOpacity style={styles.btnBack} onPress={() => nav.goBack()}>
 				<Text style={styles.knapptext}>X</Text>
 			</TouchableOpacity>
