@@ -1,8 +1,11 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, LogBox } from "react-native";
 import { GoBack, Question } from "../components/Index";
 
 const ViewAllQuestionsPage = ({ navigation, route }) => {
 	const { questions, setQuestions } = route.params;
+	LogBox.ignoreLogs([
+		"Non-serializable values were found in the navigation state",
+	]);
 
 	return (
 		<View>
