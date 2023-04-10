@@ -18,6 +18,7 @@ import EditQuizPage from "./src/screens/EditQuizPage";
 import AddQuestionPage from "./src/screens/AddQuestionPage";
 import ViewAllQuestionsPage from "./src/screens/ViewAllQuestionsPage";
 import ManageuserPage from "./src/screens/ManageUserPage";
+import ForgotPassword from "./src/screens/ForgotPassword";
 
 // This prevents SplashScreen from auto hiding
 SplashScreen.preventAutoHideAsync();
@@ -66,6 +67,7 @@ export default function App() {
 				<Stack.Screen name="createquizpage" component={CreateQuizPage} />
 				<Stack.Screen name="editquizpage" component={EditQuizPage} />
 				<Stack.Screen name="addquestionpage" component={AddQuestionPage} />
+				<Stack.Screen name="forgotpassword" component={ForgotPassword} />
 				<Stack.Screen
 					name="viewallquestionspage"
 					component={ViewAllQuestionsPage}

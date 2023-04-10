@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, ScrollView, StatusBar, Text } from "react-native";
+import { View, ScrollView, StatusBar, Text, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../styles/screens/ResultsStyle";
 import { GoBack, Result, LoadingAnimation } from "../components/Index";
@@ -21,10 +21,13 @@ const ResultsPage = ({ navigation }) => {
 			) : (
 				<SafeAreaView style={styles.containerTo}>
 					<ScrollView style={styles.container}>
-						<View>
-							<Text style={styles.resultaterText}>Resultater</Text>
-							<GoBack nav={navigation} />
-						</View>
+					<Text style={styles.title}>Results</Text>
+					<TouchableOpacity
+						style={styles.btnBackToHome}
+						onPress={() => navigation.navigate("homepage")}
+					>
+						<Text style={styles.knapptext}>X</Text>
+					</TouchableOpacity>
 						{resultsArray
 							.sort((a, b) => b.date - a.date)
 							.map((result, idx) => (
