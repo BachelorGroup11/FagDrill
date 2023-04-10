@@ -7,9 +7,8 @@ export const styles = StyleSheet.create({
 
   title: {
     alignself: "center",
-    position: "absolute",
-    right: 140,
-    bottom: 560,
+    textAlign: "center",
+   
     fontSize: 32,
     fontWeight: "bold",
   },
@@ -73,7 +72,7 @@ export const styles = StyleSheet.create({
   forgotPass: {
     alignSelf: "center",
     position: "absolute",
-    bottom: 100,
+    bottom: 130,
     height: 40,
     borderRadius: 10,
     width: 160,
