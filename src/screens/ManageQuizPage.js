@@ -18,7 +18,7 @@ const ManageQuizPage = ({ navigation }) => {
 
 	return (
 		<ScrollView bounces={false}>
-			<GoBack nav={navigation} />
+			<GoBack />
 			<Text style={styles.header}>Manage Quizzes</Text>
 			<SafeAreaView style={styles.container}>
 				{quizzes.map((value) => (

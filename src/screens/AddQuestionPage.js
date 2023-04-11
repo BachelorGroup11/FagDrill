@@ -16,7 +16,7 @@ const AddQuestionPage = ({ navigation, route }) => {
 
 	return (
 		<ScrollView style={styles.container}>
-			<GoBack nav={navigation} style={{ bottom: 90 }} />
+			<GoBack style={{ bottom: 90 }} />
 			<Text style={styles.header}>Add Question</Text>
 			<SelectList
 				setSelected={(val) => setSelected(val)}

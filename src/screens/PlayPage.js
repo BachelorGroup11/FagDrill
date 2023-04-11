@@ -39,7 +39,7 @@ const PlayPage = ({ route, navigation }) => {
 					style={{ flex: 1, width: null, alignSelf: "stretch" }}
 				>
 					<SafeAreaView>
-						<GoBack nav={navigation} />
+						<GoBack />
 						<View style={styles.progressContainer}>
 							<ProgressBar
 								progress={state.index / (state.quizLength - 1)}

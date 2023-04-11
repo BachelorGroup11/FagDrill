@@ -36,7 +36,6 @@ const EditQuizPage = ({ navigation, route }) => {
 		setTitle(route.params.title);
 		setDescription(route.params.description);
 		quizRef.current = route.params.id;
-		//setQuizRef(route.params.id);
 	}, []);
 
 	useEffect(() => {
@@ -68,7 +67,7 @@ const EditQuizPage = ({ navigation, route }) => {
 
 	return (
 		<ScrollView bounces={false} style={{ backgroundColor: "#FFFFFF" }}>
-			<GoBack nav={navigation} />
+			<GoBack />
 			<Text style={styles.header}>Edit Quiz</Text>
 			<SafeAreaView style={styles.container}>
 				<Text style={styles.title}>Title</Text>

@@ -9,7 +9,7 @@ const ViewAllQuestionsPage = ({ navigation, route }) => {
 
 	return (
 		<View>
-			<GoBack nav={navigation} style={{ bottom: 5 }} />
+			<GoBack style={{ bottom: 5 }} />
 			<Text
 				style={{ fontFamily: "PoppinsBold", fontSize: 32, left: 22, top: 30 }}
 			>
