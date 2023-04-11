@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { View, Text, StatusBar, ImageBackground } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../styles/screens/PlayStyle";
@@ -12,22 +12,28 @@ import {
 } from "../components/Index";
 import { QuizReducer, INITIAL_STATE } from "../utilities/QuizReducer";
 import { fetchQuiz } from "../utilities/fetchQuiz";
+import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 
 const PlayPage = ({ route, navigation }) => {
 	const { quiz, name } = route.params;
-	// Contains all relevant information on the specified quiz, see: ../utilities/QuizReducer
 	const [state, dispatch] = useReducer(QuizReducer, INITIAL_STATE);
 
 	let has_been_answered = state.answeredArray.find(
 		(x) => x.index === state.index
 	);
 
-	// Retrieve all questions from specified quiz then set state with information on first render
+	// Retrieve all questions from specified quiz then update state
 	useEffect(() => {
 		fetchQuiz(quiz, dispatch).then(() =>
 			dispatch({ type: "setisloading", payload: false })
 		);
 	}, []);
+
+	const formatTime = (remainingTime) => {
+		const minutes = `0${Math.floor(remainingTime / 60)}`.slice(-2);
+		const seconds = `0${remainingTime % 60}`.slice(-2);
+		return `${minutes}:${seconds}`;
+	};
 
 	return (
 		<View style={styles.containerTo}>
@@ -43,12 +49,26 @@ const PlayPage = ({ route, navigation }) => {
 						<View style={styles.progressContainer}>
 							<ProgressBar
 								progress={state.index / (state.quizLength - 1)}
-								style={styles.progressbar}
 								width={260}
 								height={20}
 								borderRadius={30}
 								color={"#3F51B5"}
 							/>
+							<CountdownCircleTimer
+								isPlaying
+								duration={10}
+								size={38}
+								strokeWidth={1.2}
+								colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+								colorsTime={[7, 5, 2, 0]}
+								onComplete={() => console.log("test")}
+							>
+								{({ remainingTime }) => (
+									<Text style={{ fontSize: 10 }}>
+										{formatTime(remainingTime)}
+									</Text>
+								)}
+							</CountdownCircleTimer>
 						</View>
 						<View>
 							{state.category === "fill_in_blank" ? (
