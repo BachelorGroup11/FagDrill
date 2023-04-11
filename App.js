@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -42,7 +42,7 @@ export default function App() {
 	if (!fontsLoaded) {
 		return null;
 	}
-
+	
 	return (
 		<NavigationContainer onReady={onLayoutRootView}>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
