@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
 	ScrollView,
 	View,
@@ -26,7 +26,7 @@ const EditQuizPage = ({ navigation, route }) => {
 	const [selected, setSelected] = useState([]);
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
-	const [quizRef, setQuizRef] = useState("");
+	const quizRef = useRef("");
 
 	useEffect(() => {
 		setUsers([]);
@@ -35,7 +35,8 @@ const EditQuizPage = ({ navigation, route }) => {
 		fetchQuestions(setQuestions, route);
 		setTitle(route.params.title);
 		setDescription(route.params.description);
-		setQuizRef(route.params.id);
+		quizRef.current = route.params.id;
+		//setQuizRef(route.params.id);
 	}, []);
 
 	useEffect(() => {
@@ -61,7 +62,7 @@ const EditQuizPage = ({ navigation, route }) => {
 		}
 
 		const questionIds = await addQuestions(quizRef, questions);
-		addQuiz(title, description, quizRef, userIds, questionIds);
+		addQuiz(title, description, quizRef.current, userIds, questionIds);
 		navigation.goBack();
 	};
 
