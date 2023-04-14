@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	ScrollView,
 	View,
@@ -26,7 +26,7 @@ const EditQuizPage = ({ navigation, route }) => {
 	const [selected, setSelected] = useState([]);
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
-	const quizRef = useRef("");
+	const [quizRef, setQuizRef] = useState("");
 
 	useEffect(() => {
 		setUsers([]);
@@ -35,7 +35,7 @@ const EditQuizPage = ({ navigation, route }) => {
 		fetchQuestions(setQuestions, route);
 		setTitle(route.params.title);
 		setDescription(route.params.description);
-		quizRef.current = route.params.id;
+		setQuizRef(route.params.id);
 	}, []);
 
 	useEffect(() => {
@@ -61,13 +61,13 @@ const EditQuizPage = ({ navigation, route }) => {
 		}
 
 		const questionIds = await addQuestions(quizRef, questions);
-		addQuiz(title, description, quizRef.current, userIds, questionIds);
+		addQuiz(title, description, quizRef, userIds, questionIds);
 		navigation.goBack();
 	};
 
 	return (
 		<ScrollView bounces={false} style={{ backgroundColor: "#FFFFFF" }}>
-			<GoBack />
+			<GoBack nav={navigation} />
 			<Text style={styles.header}>Edit Quiz</Text>
 			<SafeAreaView style={styles.container}>
 				<Text style={styles.title}>Title</Text>
