@@ -31,6 +31,15 @@ const PlayPage = ({ route, navigation }) => {
 		console.log(duration);
 	}, []);
 
+	const durationExpired = () => {
+		return Alert.alert('', `Duration has expired. Continue to finish Quiz.`, [
+			{
+				text: 'Continue',
+				onPress: () => addResult(state, quiz, name, navigation),
+			},
+		]);
+	};
+
 	const formatTime = (remainingTime) => {
 		const minutes = `0${Math.floor(remainingTime / 60)}`.slice(-2);
 		const seconds = `0${remainingTime % 60}`.slice(-2);
@@ -41,15 +50,6 @@ const PlayPage = ({ route, navigation }) => {
 		let hoursToSeconds = hours * 3600;
 		let minutesToSeconds = minutes * 60;
 		return hoursToSeconds + minutesToSeconds;
-	};
-
-	const durationExpired = () => {
-		return Alert.alert('', `Duration has expired. Continue to finish Quiz.`, [
-			{
-				text: 'Continue',
-				onPress: () => addResult(state, quiz, name, navigation),
-			},
-		]);
 	};
 
 	return (
@@ -71,24 +71,27 @@ const PlayPage = ({ route, navigation }) => {
 								borderRadius={30}
 								color={'#3F51B5'}
 							/>
-							<CountdownCircleTimer
-								isPlaying
-								duration={hoursAndMinutesToSeconds(
-									duration.hours,
-									duration.minutes
-								)}
-								size={38}
-								strokeWidth={1.2}
-								colors={['#004777', '#F7B801', '#A30000', '#A30000']}
-								colorsTime={[7, 5, 2, 0]}
-								onComplete={durationExpired}
-							>
-								{({ remainingTime }) => (
-									<Text style={{ fontSize: 10 }}>
-										{formatTime(remainingTime)}
-									</Text>
-								)}
-							</CountdownCircleTimer>
+							{hoursAndMinutesToSeconds(duration.hours, duration.minutes) >
+								0 && (
+								<CountdownCircleTimer
+									isPlaying
+									duration={hoursAndMinutesToSeconds(
+										duration.hours,
+										duration.minutes
+									)}
+									size={38}
+									strokeWidth={1.2}
+									colors={['#004777', '#F7B801', '#A30000', '#A30000']}
+									colorsTime={[7, 5, 2, 0]}
+									onComplete={durationExpired}
+								>
+									{({ remainingTime }) => (
+										<Text style={{ fontSize: 10 }}>
+											{formatTime(remainingTime)}
+										</Text>
+									)}
+								</CountdownCircleTimer>
+							)}
 						</View>
 						<View>
 							{state.category === 'fill_in_blank' ? (
