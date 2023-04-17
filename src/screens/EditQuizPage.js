@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
 	ScrollView,
 	View,
@@ -6,17 +6,18 @@ import {
 	TextInput,
 	SafeAreaView,
 	TouchableOpacity,
-} from "react-native";
-import { styles } from "../styles/screens/CreateQuizStyle";
-import { MultipleSelectList } from "react-native-dropdown-select-list";
-import { db } from "../../firebaseConfig";
-import { deleteDoc, doc } from "firebase/firestore";
-import { GoBack, Question } from "../components/Index";
-import { fetchUsersSetPlaceholder } from "../utilities/fetchUsersSetPlaceholder";
-import { fetchQuestions } from "../utilities/fetchQuestions";
-import { addQuiz } from "../utilities/addQuiz";
-import { addQuestions } from "../utilities/addQuestions";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+} from 'react-native';
+import { styles } from '../styles/screens/CreateQuizStyle';
+import { MultipleSelectList } from 'react-native-dropdown-select-list';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { db } from '../../firebaseConfig';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { GoBack, Question } from '../components/Index';
+import { fetchUsersSetPlaceholder } from '../utilities/fetchUsersSetPlaceholder';
+import { fetchQuestions } from '../utilities/fetchQuestions';
+import { addQuiz } from '../utilities/addQuiz';
+import { addQuestions } from '../utilities/addQuestions';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const EditQuizPage = ({ navigation, route }) => {
 	const [users, setUsers] = useState([]);
@@ -24,9 +25,10 @@ const EditQuizPage = ({ navigation, route }) => {
 	const [deletedQuestions, setDeletedQuestions] = useState([]);
 	const [placeholder, setPlaceholder] = useState([]);
 	const [selected, setSelected] = useState([]);
-	const [title, setTitle] = useState("");
-	const [description, setDescription] = useState("");
-	const [quizRef, setQuizRef] = useState("");
+	const [title, setTitle] = useState('');
+	const [description, setDescription] = useState('');
+	const [duration, setDuration] = useState({ hours: 0, minutes: 0 });
+	const [quizRef, setQuizRef] = useState('');
 
 	useEffect(() => {
 		setUsers([]);
@@ -35,6 +37,7 @@ const EditQuizPage = ({ navigation, route }) => {
 		fetchQuestions(setQuestions, route);
 		setTitle(route.params.title);
 		setDescription(route.params.description);
+		setDuration(route.params.duration);
 		setQuizRef(route.params.id);
 	}, []);
 
@@ -44,7 +47,7 @@ const EditQuizPage = ({ navigation, route }) => {
 	}, [route.params]);
 
 	const saveQuiz = async () => {
-		if (title === "") return alert("Please enter title");
+		if (title === '') return alert('Please enter title');
 
 		const userIds = selected.map(
 			(index) => users.find((user) => user.email === index).id
@@ -52,21 +55,21 @@ const EditQuizPage = ({ navigation, route }) => {
 
 		try {
 			for (let i = 0; i < questions.length; i++) {
-				await deleteDoc(doc(db, "questions", questions[i].id));
+				await deleteDoc(doc(db, 'questions', questions[i].id));
 			}
 		} catch {}
 
 		for (let i = 0; i < deletedQuestions.length; i++) {
-			await deleteDoc(doc(db, "questions", deletedQuestions[i]));
+			await deleteDoc(doc(db, 'questions', deletedQuestions[i]));
 		}
 
 		const questionIds = await addQuestions(quizRef, questions);
-		addQuiz(title, description, quizRef, userIds, questionIds);
+		addQuiz(title, description, duration, quizRef, userIds, questionIds);
 		navigation.goBack();
 	};
 
 	return (
-		<ScrollView bounces={false} style={{ backgroundColor: "#FFFFFF" }}>
+		<ScrollView bounces={false} style={{ backgroundColor: '#FFFFFF' }}>
 			<GoBack nav={navigation} />
 			<Text style={styles.header}>Edit Quiz</Text>
 			<SafeAreaView style={styles.container}>
@@ -75,16 +78,26 @@ const EditQuizPage = ({ navigation, route }) => {
 					style={styles.input}
 					onChangeText={setTitle}
 					value={title}
-					placeholder={"Enter title"}
-					placeholderTextColor={"#757A86"}
+					placeholder={'Enter title'}
+					placeholderTextColor={'#757A86'}
 				/>
 				<Text style={styles.title}>Description</Text>
 				<TextInput
 					style={styles.input}
 					onChangeText={setDescription}
 					value={description}
-					placeholder={"Enter description"}
-					placeholderTextColor={"#757A86"}
+					placeholder={'Enter description'}
+					placeholderTextColor={'#757A86'}
+				/>
+				<Text style={styles.title}>Duration</Text>
+				<DateTimePicker
+					mode="time"
+					value={new Date(0, 0, 0, duration.hours, duration.minutes, 0)}
+					display="default"
+					style={{ alignSelf: 'flex-start', padding: 8 }}
+					onChange={(e, d) =>
+						setDuration({ hours: d.getHours(), minutes: d.getMinutes() })
+					}
 				/>
 				<Text style={styles.title}>Visible to</Text>
 				<MultipleSelectList
@@ -100,7 +113,7 @@ const EditQuizPage = ({ navigation, route }) => {
 					<Text style={styles.questions}>Questions</Text>
 					<TouchableOpacity
 						onPress={() =>
-							navigation.navigate("viewallquestionspage", {
+							navigation.navigate('viewallquestionspage', {
 								questions: questions,
 								setQuestions: setQuestions,
 							})
@@ -132,8 +145,8 @@ const EditQuizPage = ({ navigation, route }) => {
 					<TouchableOpacity
 						style={styles.add}
 						onPress={() =>
-							navigation.navigate("addquestionpage", {
-								destination: "editquizpage",
+							navigation.navigate('addquestionpage', {
+								destination: 'editquizpage',
 							})
 						}
 					>
