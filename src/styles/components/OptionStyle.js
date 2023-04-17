@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
 		height: 60,
 		borderRadius: 18,
 		width: 320,
-		margin: 7,
+		margin: 10,
 		top: 260,
 		zIndex: 1,
 	},

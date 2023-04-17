@@ -14,6 +14,7 @@ export const PlayNavigator = ({ state, dispatch, quiz, name, nav }) => {
 					category: state.questionsArray[state.index + 1].category,
 					correctOption: state.questionsArray[state.index + 1].correct_answer,
 					summary: state.questionsArray[state.index + 1].summary,
+					image: state.questionsArray[state.index + 1].image,
 					index: state.index + 1,
 				},
 			});
@@ -37,6 +38,7 @@ export const PlayNavigator = ({ state, dispatch, quiz, name, nav }) => {
 					category: state.questionsArray[state.index - 1].category,
 					correctOption: state.questionsArray[state.index - 1].correct_answer,
 					summary: state.questionsArray[state.index - 1].summary,
+					image: state.questionsArray[state.index - 1].image,
 				},
 			});
 		}
