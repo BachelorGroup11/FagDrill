@@ -1,18 +1,18 @@
-import { useEffect, useReducer } from "react";
-import { View, Text, StatusBar, ImageBackground } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { styles } from "../styles/screens/PlayStyle";
-import ProgressBar from "react-native-progress/Bar";
+import { useEffect, useReducer } from 'react';
+import { View, Text, StatusBar, ImageBackground } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { styles } from '../styles/screens/PlayStyle';
+import ProgressBar from 'react-native-progress/Bar';
 import {
 	Option,
 	GoBack,
 	LoadingAnimation,
 	FillInBlank,
 	PlayNavigator,
-} from "../components/Index";
-import { QuizReducer, INITIAL_STATE } from "../utilities/QuizReducer";
-import { fetchQuiz } from "../utilities/fetchQuiz";
-import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
+} from '../components/Index';
+import { QuizReducer, INITIAL_STATE } from '../utilities/QuizReducer';
+import { fetchQuiz } from '../utilities/fetchQuiz';
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 const PlayPage = ({ route, navigation }) => {
 	const { quiz, name } = route.params;
@@ -25,7 +25,7 @@ const PlayPage = ({ route, navigation }) => {
 	// Retrieve all questions from specified quiz then update state
 	useEffect(() => {
 		fetchQuiz(quiz, dispatch).then(() =>
-			dispatch({ type: "setisloading", payload: false })
+			dispatch({ type: 'setisloading', payload: false })
 		);
 	}, []);
 
@@ -35,14 +35,26 @@ const PlayPage = ({ route, navigation }) => {
 		return `${minutes}:${seconds}`;
 	};
 
+	const hoursAndMinutesToSeconds = (hours, minutes) => {
+		let hoursToSeconds = hours * 3600;
+		let minutesToSeconds = minutes * 60;
+	};
+
+	const secondsToHoursAndMinutes = (seconds) => {
+		let total = Math.floor(seconds / 60);
+		let minutes = Math.floor(total % 60);
+		let hours = Math.floor(total / 60);
+		return { hours, minutes };
+	};
+
 	return (
 		<View style={styles.containerTo}>
 			{state.isLoading ? (
 				<LoadingAnimation />
 			) : (
 				<ImageBackground
-					source={require("../assets/images/play_bg.png")}
-					style={{ flex: 1, width: null, alignSelf: "stretch" }}
+					source={require('../assets/images/play_bg.png')}
+					style={{ flex: 1, width: null, alignSelf: 'stretch' }}
 				>
 					<SafeAreaView>
 						<GoBack />
@@ -52,16 +64,16 @@ const PlayPage = ({ route, navigation }) => {
 								width={260}
 								height={20}
 								borderRadius={30}
-								color={"#3F51B5"}
+								color={'#3F51B5'}
 							/>
 							<CountdownCircleTimer
 								isPlaying
 								duration={10}
 								size={38}
 								strokeWidth={1.2}
-								colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+								colors={['#004777', '#F7B801', '#A30000', '#A30000']}
 								colorsTime={[7, 5, 2, 0]}
-								onComplete={() => console.log("test")}
+								onComplete={() => console.log('test')}
 							>
 								{({ remainingTime }) => (
 									<Text style={{ fontSize: 10 }}>
@@ -71,7 +83,7 @@ const PlayPage = ({ route, navigation }) => {
 							</CountdownCircleTimer>
 						</View>
 						<View>
-							{state.category === "fill_in_blank" ? (
+							{state.category === 'fill_in_blank' ? (
 								<FillInBlank state={state} dispatch={dispatch} />
 							) : (
 								<View>
@@ -89,7 +101,7 @@ const PlayPage = ({ route, navigation }) => {
 											dispatch={dispatch}
 										/>
 									))}
-									{typeof has_been_answered !== "undefined" && (
+									{typeof has_been_answered !== 'undefined' && (
 										<Text style={styles.summarytext}>{state.summary}</Text>
 									)}
 								</View>
