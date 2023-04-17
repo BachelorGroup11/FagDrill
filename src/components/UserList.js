@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, Text, TouchableOpacity, View, Animated, Button,StyleSheet } from "react-native";
+import { FlatList, Text, TouchableOpacity, View, StyleSheet, Alert } from "react-native";
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import { RectButton } from 'react-native-gesture-handler';
 import Constants from 'expo-constants';
 
 import {
@@ -21,6 +20,7 @@ const UserList = () => {
   let row: Array<any> = [];
   let prevOpenedRow;
 
+  //here we fatch the user list so we can display them later
   useEffect(() => {
     const fetchUsers = async () => {
       const querySnapshot = await getDocs(collection(db, "users"));
@@ -39,6 +39,17 @@ const UserList = () => {
     fetchUsers();
   }, []);
 
+  // Create a two button alert as provention to not make admins by accident. this alert have a cancel and edit admin status.
+  const createTwoButtonAlertAdmin = (userId, is_admin) =>
+  Alert.alert('Are you sure you want to edit the admin status of this user?', '', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'Edit admin status', onPress: () => makeAdmin(userId, is_admin)},
+    ]);
+  // This edits the admin status of the user. 
   const makeAdmin = async (userId, is_admin) => {
     try {
       const userRef = doc(db, "users", userId);
@@ -56,6 +67,18 @@ const UserList = () => {
     }
   };
 
+  // Create a two button alert as provention to not delete users by accident. this alert have a cancel and delete users.
+  const createTwoButtonAlertDelete = (user) =>
+  Alert.alert('Are you sure you want to delete this user?', '', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'Delete', onPress: () => deleteUser(user)},
+    ]);
+
+  // this delets users.
   const deleteUser = async (userId) => {
     try {
       const userRef = doc(db, "users", userId);
@@ -77,6 +100,7 @@ const UserList = () => {
       prevOpenedRow = row[index];
     };
 
+    //renders when swiping the user name.
     const renderRightActions = (progress, dragX, onClick) => {
       return (
         <View
@@ -97,7 +121,7 @@ const UserList = () => {
               width:125,
               alignContent: "center",
             }}
-            onPress={() => makeAdmin(item.id, item.is_admin)}
+            onPress={() => createTwoButtonAlertAdmin(item.id, item.is_admin)}
           >
             <Text style={{ color: "white", fontWeight: "bold" , textAlign:"center"}}>
               {item.is_admin ? "Remove Admin" : "Make Admin"}
@@ -142,7 +166,7 @@ const UserList = () => {
       renderItem={(v) => 
         renderUser(v, () => {
           console.log('pressed', v);
-          deleteUser(v.item.id)
+          createTwoButtonAlertDelete(v.item.id)
         })}
       keyExtractor={(item) => item.id}
       style={{ padding: 16, marginTop: 50}}
