@@ -81,18 +81,22 @@ const HomePage = ({ navigation }) => {
 				});
 			}
 		};
-		//getPermission();
+		getPermission();
 
-		//notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-		//	setNotification(notification);
-		//});
-		//
-		//responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {});
-		//
-		//return () => {
-		//	Notifications.removeNotificationSubscription(notificationListener.current);
-		//	Notifications.removeNotificationSubscription(responseListener.current);
-		//};
+		notificationListener.current =
+			Notifications.addNotificationReceivedListener((notification) => {
+				setNotification(notification);
+			});
+
+		responseListener.current =
+			Notifications.addNotificationResponseReceivedListener((response) => {});
+
+		return () => {
+			Notifications.removeNotificationSubscription(
+				notificationListener.current
+			);
+			Notifications.removeNotificationSubscription(responseListener.current);
+		};
 	}, []);
 
 	Notifications.scheduleNotificationAsync({
