@@ -1,12 +1,21 @@
 import { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	ScrollView,
+	SafeAreaView,
+	TextInput,
+} from 'react-native';
 import { styles } from '../styles/screens/ManageQuizStyle';
 import { GoBack } from '../components/GoBack';
 import { Quiz } from '../components/Quiz';
 import { fetchQuizzes } from '../utilities/fetchQuizzes';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const ManageQuizPage = ({ navigation }) => {
 	const [quizzes, setQuizzes] = useState([]);
+	const [filteredData, setFilteredData] = useState([]);
 
 	useEffect(() => {
 		const unsubscribe = navigation.addListener('focus', () => {
@@ -16,12 +25,42 @@ const ManageQuizPage = ({ navigation }) => {
 		return unsubscribe;
 	}, [navigation]);
 
+	useEffect(() => {
+		setFilteredData(quizzes);
+	}, [quizzes]);
+
+	const filterSearch = (text) => {
+		if (text) {
+			const newData = quizzes.filter((item) => {
+				const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
+				const textData = text.toUpperCase();
+				return itemData.indexOf(textData) > -1;
+			});
+			setFilteredData(newData);
+		} else {
+			setFilteredData(quizzes);
+		}
+	};
+
 	return (
 		<ScrollView bounces={false}>
 			<GoBack />
 			<Text style={styles.header}>Manage Quizzes</Text>
+			<View style={styles.searchsection}>
+				<FontAwesome
+					name="search"
+					size={14}
+					color={'#939393'}
+					style={styles.searchicon}
+				/>
+				<TextInput
+					style={styles.searchinput}
+					onChangeText={(text) => filterSearch(text)}
+					placeholder="Quiz name"
+				/>
+			</View>
 			<SafeAreaView style={styles.container}>
-				{quizzes.map((value) => (
+				{filteredData.map((value) => (
 					<Quiz
 						id={value.id}
 						name={value.name}
