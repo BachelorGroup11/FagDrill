@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from 'react';
-import { View, Text, StatusBar, ImageBackground } from 'react-native';
+import { View, Text, StatusBar, ImageBackground, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/PlayStyle';
 import ProgressBar from 'react-native-progress/Bar';
@@ -13,9 +13,10 @@ import {
 import { QuizReducer, INITIAL_STATE } from '../utilities/QuizReducer';
 import { fetchQuiz } from '../utilities/fetchQuiz';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import { addResult } from '../utilities/addResult';
 
 const PlayPage = ({ route, navigation }) => {
-	const { quiz, name } = route.params;
+	const { quiz, name, duration } = route.params;
 	const [state, dispatch] = useReducer(QuizReducer, INITIAL_STATE);
 
 	let has_been_answered = state.answeredArray.find(
@@ -27,6 +28,7 @@ const PlayPage = ({ route, navigation }) => {
 		fetchQuiz(quiz, dispatch).then(() =>
 			dispatch({ type: 'setisloading', payload: false })
 		);
+		console.log(duration);
 	}, []);
 
 	const formatTime = (remainingTime) => {
@@ -38,13 +40,16 @@ const PlayPage = ({ route, navigation }) => {
 	const hoursAndMinutesToSeconds = (hours, minutes) => {
 		let hoursToSeconds = hours * 3600;
 		let minutesToSeconds = minutes * 60;
+		return hoursToSeconds + minutesToSeconds;
 	};
 
-	const secondsToHoursAndMinutes = (seconds) => {
-		let total = Math.floor(seconds / 60);
-		let minutes = Math.floor(total % 60);
-		let hours = Math.floor(total / 60);
-		return { hours, minutes };
+	const durationExpired = () => {
+		return Alert.alert('', `Duration has expired. Continue to finish Quiz.`, [
+			{
+				text: 'Continue',
+				onPress: () => addResult(state, quiz, name, navigation),
+			},
+		]);
 	};
 
 	return (
@@ -68,12 +73,15 @@ const PlayPage = ({ route, navigation }) => {
 							/>
 							<CountdownCircleTimer
 								isPlaying
-								duration={10}
+								duration={hoursAndMinutesToSeconds(
+									duration.hours,
+									duration.minutes
+								)}
 								size={38}
 								strokeWidth={1.2}
 								colors={['#004777', '#F7B801', '#A30000', '#A30000']}
 								colorsTime={[7, 5, 2, 0]}
-								onComplete={() => console.log('test')}
+								onComplete={durationExpired}
 							>
 								{({ remainingTime }) => (
 									<Text style={{ fontSize: 10 }}>
