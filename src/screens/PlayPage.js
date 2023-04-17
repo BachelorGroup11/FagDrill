@@ -28,7 +28,6 @@ const PlayPage = ({ route, navigation }) => {
 		fetchQuiz(quiz, dispatch).then(() =>
 			dispatch({ type: 'setisloading', payload: false })
 		);
-		console.log(duration);
 	}, []);
 
 	const durationExpired = () => {
