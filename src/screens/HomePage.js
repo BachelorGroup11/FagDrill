@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import {
 	Text,
 	View,
@@ -13,9 +13,24 @@ import { getAuth } from 'firebase/auth';
 import { collection, query, getDocs, where } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { GoToQuiz } from '../components/GoToQuiz';
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
+import storage from "@react-native-async-storage/async-storage";
+
+
+Notifications.setNotificationHandler({
+	handleNotification: async () => ({
+	  shouldShowAlert: true,
+	  shouldPlaySound: true,
+	  shouldSetBadge: true
+	})
+  });
 
 const HomePage = ({ navigation }) => {
 	const [quizzes, setQuizzes] = useState([]);
+	const [notification, setNotification] = useState(false);
+	const notificationListener = useRef();
+	const responseListener = useRef();
 
 	useEffect(() => {
 		setQuizzes([]);
@@ -37,7 +52,62 @@ const HomePage = ({ navigation }) => {
 			});
 		};
 		fetchQuizzes().catch((error) => console.log(error));
+
+		const getPermission = async () => {
+			if (Constants.isDevice) {
+				const { status: existingStatus } = await Notifications.getPermissionsAsync();
+				let finalStatus = existingStatus;
+				if (existingStatus !== 'granted') {
+				  const { status } = await Notifications.requestPermissionsAsync();
+				  finalStatus = status;
+				}
+				if (finalStatus !== 'granted') {
+				  alert('Enable push notifications to use the app!');
+				  await storage.setItem('expopushtoken', "");
+				  return;
+				}
+				const token = (await Notifications.getExpoPushTokenAsync()).data;
+				await storage.setItem('expopushtoken', token);
+			} else {
+			  alert('Must use physical device for Push Notifications');
+			}
+	  
+			  if (Platform.OS === 'android') {
+				Notifications.setNotificationChannelAsync('default', {
+				  name: 'default',
+				  importance: Notifications.AndroidImportance.MAX,
+				  vibrationPattern: [0, 250, 250, 250],
+				  lightColor: '#FF231F7C',
+				});
+			  }
+		  }
+		  getPermission();
+
+		  notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+			setNotification(notification);
+		  });
+	  
+		  responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {});
+	  
+		  return () => {
+			Notifications.removeNotificationSubscription(notificationListener.current);
+			Notifications.removeNotificationSubscription(responseListener.current);
+		  };
 	}, []);
+
+	
+	Notifications.scheduleNotificationAsync({
+		content: {
+		title: "Have you played today?",
+		data: { data: "data goes here" }
+		},
+		trigger: {
+		hour: 21,
+		minute: 0,
+		repeats: true,
+		}
+	});
+	  
 
 	return (
 		<ImageBackground
