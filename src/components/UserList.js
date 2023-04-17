@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, Text, TouchableOpacity, View, StyleSheet, Alert } from "react-native";
+import { FlatList, Text, TouchableOpacity, View, StyleSheet, Alert, TextInput} from "react-native";
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Constants from 'expo-constants';
 
@@ -17,13 +17,15 @@ const UserList = () => {
   const [loading, setLoading] = useState(true);
   const db = getFirestore();
 
+  const [newSearch, setNewSearch] = useState("");
+
   let row: Array<any> = [];
   let prevOpenedRow;
 
   //here we fatch the user list so we can display them later
   useEffect(() => {
     const fetchUsers = async () => {
-      const querySnapshot = await getDocs(collection(db, "users"));
+      const querySnapshot = await getDocs(collection(db, 'users'));
       const fetchedUsers = [];
 
       querySnapshot.forEach((doc) => {
@@ -89,6 +91,24 @@ const UserList = () => {
     } catch (error) {
       console.error("Error deleting user:", error);
     }
+  };
+
+  const fetchSearchUsers = async (newSearch) => {
+    const querySnapshot = await getDocs(collection(db, 'users'));
+    const fetchedUsers = [];
+
+    querySnapshot.forEach((doc) => {
+      const user = doc.data();
+      if (user.email.includes(newSearch)) {
+        user.id = doc.id;
+        fetchedUsers.push(user);
+      } else {
+        
+      }
+    });
+
+    setUsers(fetchedUsers);
+    setLoading(false);
   };
   
   const renderUser = ({ item, index }, onClick) => {
@@ -160,7 +180,21 @@ const UserList = () => {
   };
 
   return (
-    
+    <View>
+      <View style={{height: 40,}}>
+        <TextInput
+					style={{ backgroundColor: "#C0C0C0",
+          alignSelf: "center",
+          position: "absolute",
+          top: 50,
+          height: 40,
+          marginHorizontal: 50,
+          borderRadius: 10,
+          width: 300,}}
+          placeholder=" Search..."
+					onChangeText={(text) => fetchSearchUsers(text)}
+				/>
+      </View>
     <FlatList
       data={users}
       renderItem={(v) => 
@@ -171,6 +205,7 @@ const UserList = () => {
       keyExtractor={(item) => item.id}
       style={{ padding: 16, marginTop: 50}}
     />
+    </View>
   );
 };
 

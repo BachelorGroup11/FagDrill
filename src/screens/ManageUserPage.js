@@ -1,8 +1,9 @@
-import React from "react";
-import { Text, View, TouchableOpacity, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, TouchableOpacity, ScrollView, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../styles/screens/ManageUserStyle";
 import UserList from "../components/UserList";
+
 
 const ManageuserPage = ({ navigation }) => {
   return (
