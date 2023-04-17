@@ -1,5 +1,12 @@
-import { useEffect, useReducer } from 'react';
-import { View, Text, StatusBar, ImageBackground, Alert } from 'react-native';
+import { useEffect, useReducer, useState } from 'react';
+import {
+	View,
+	Text,
+	StatusBar,
+	ImageBackground,
+	Alert,
+	Image,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/PlayStyle';
 import ProgressBar from 'react-native-progress/Bar';
@@ -8,6 +15,7 @@ import {
 	GoBack,
 	LoadingAnimation,
 	FillInBlank,
+	ImageQuestion,
 	PlayNavigator,
 } from '../components/Index';
 import { QuizReducer, INITIAL_STATE } from '../utilities/QuizReducer';
@@ -61,7 +69,7 @@ const PlayPage = ({ route, navigation }) => {
 					style={{ flex: 1, width: null, alignSelf: 'stretch' }}
 				>
 					<SafeAreaView>
-						<GoBack />
+						<GoBack style={{ top: -50 }} />
 						<View style={styles.progressContainer}>
 							<ProgressBar
 								progress={state.index / (state.quizLength - 1)}
@@ -95,6 +103,8 @@ const PlayPage = ({ route, navigation }) => {
 						<View>
 							{state.category === 'fill_in_blank' ? (
 								<FillInBlank state={state} dispatch={dispatch} />
+							) : state.category === 'Image question' ? (
+								<ImageQuestion state={state} dispatch={dispatch} />
 							) : (
 								<View>
 									<View style={styles.QuestionContainer}>

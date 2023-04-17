@@ -34,7 +34,8 @@
     "react-native-screens": "~3.18.0",
     "swipeable": "^1.0.5",
     "react-native-svg": "13.4.0",
-    "@react-native-community/datetimepicker": "6.5.2"
+    "@react-native-community/datetimepicker": "6.5.2",
+    "expo-image-picker": "~14.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
