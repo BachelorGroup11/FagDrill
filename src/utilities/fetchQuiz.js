@@ -25,6 +25,7 @@ export const fetchQuiz = async (quiz, dispatch) => {
 			category: querySnapshot.docs[0].data().category,
 			correctOption: querySnapshot.docs[0].data().correct_answer,
 			summary: querySnapshot.docs[0].data().summary,
+			image: querySnapshot.docs[0].data().image,
 		},
 	});
 };

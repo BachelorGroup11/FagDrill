@@ -1,7 +1,7 @@
-import { db } from "../../firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { db } from '../../firebaseConfig';
+import { collection, getDocs } from 'firebase/firestore';
 export const fetchQuestions = async (setQuestions, route) => {
-	const querySnapshot = await getDocs(collection(db, "questions"));
+	const querySnapshot = await getDocs(collection(db, 'questions'));
 	querySnapshot.forEach((doc) => {
 		if (route.params.questions.includes(doc.id)) {
 			setQuestions((previousArray) => [
@@ -13,6 +13,7 @@ export const fetchQuestions = async (setQuestions, route) => {
 					type: doc.data().category,
 					answer: doc.data().correct_answer,
 					summary: doc.data().summary,
+					image: doc.data().image,
 				},
 			]);
 		}
