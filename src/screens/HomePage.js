@@ -38,16 +38,16 @@ const HomePage = ({ navigation }) => {
 		const user = auth.currentUser;
 
 		const fetchQuizzes = async () => {
-			const quizQery = query(
+			const quizQuery = query(
 				collection(db, 'quizzes'),
 				where('users', 'array-contains', user.uid)
 			);
 
-			const querySnapshot = await getDocs(quizQery);
+			const querySnapshot = await getDocs(quizQuery);
 			querySnapshot.forEach((doc) => {
 				setQuizzes((prevArray) => [
 					...prevArray,
-					{ id: doc.id, name: doc.data().name },
+					{ id: doc.id, name: doc.data().name, duration: doc.data().duration },
 				]);
 			});
 		};
@@ -137,6 +137,7 @@ const HomePage = ({ navigation }) => {
 									nav={navigation}
 									name={value.name}
 									quiz={value.id}
+									duration={value.duration}
 									key={index}
 								/>
 							))}

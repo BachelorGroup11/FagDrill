@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import { Text, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
-import { styles } from "../styles/screens/ManageQuizStyle";
-import { GoBack } from "../components/GoBack";
-import { Quiz } from "../components/Quiz";
-import { fetchQuizzes } from "../utilities/fetchQuizzes";
+import { useEffect, useState } from 'react';
+import { Text, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import { styles } from '../styles/screens/ManageQuizStyle';
+import { GoBack } from '../components/GoBack';
+import { Quiz } from '../components/Quiz';
+import { fetchQuizzes } from '../utilities/fetchQuizzes';
 
 const ManageQuizPage = ({ navigation }) => {
 	const [quizzes, setQuizzes] = useState([]);
 
 	useEffect(() => {
-		const unsubscribe = navigation.addListener("focus", () => {
+		const unsubscribe = navigation.addListener('focus', () => {
 			setQuizzes([]);
 			fetchQuizzes(setQuizzes);
 		});
@@ -27,6 +27,7 @@ const ManageQuizPage = ({ navigation }) => {
 						name={value.name}
 						navigation={navigation}
 						description={value.info}
+						duration={value.duration}
 						users={value.users}
 						questions={value.questions}
 						quizzes={quizzes}
@@ -36,7 +37,7 @@ const ManageQuizPage = ({ navigation }) => {
 				))}
 				<TouchableOpacity
 					style={styles.create}
-					onPress={() => navigation.navigate("createquizpage")}
+					onPress={() => navigation.navigate('createquizpage')}
 				>
 					<Text style={styles.createtext}>Create Quiz</Text>
 				</TouchableOpacity>
