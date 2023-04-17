@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { styles } from "../styles/screens/CreateQuizStyle";
 import { MultipleSelectList } from "react-native-dropdown-select-list";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { db } from "../../firebaseConfig";
 import { collection, doc } from "firebase/firestore";
 import { GoBack, Question } from "../components/Index";
@@ -23,10 +24,14 @@ const CreateQuizPage = ({ navigation, route }) => {
 	const [selected, setSelected] = useState([]);
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
+	const [duration, setDuration] = useState(0);
+	const [initial, setInitial] = useState({ hours: 0, seconds: 0 });
 
 	useEffect(() => {
 		setUsers([]);
 		fetchUsers(setUsers).catch((error) => console.log(error));
+		let temp = secondsToHoursAndMinutes(5400);
+		console.log(temp);
 	}, []);
 
 	useEffect(() => {
@@ -45,6 +50,20 @@ const CreateQuizPage = ({ navigation, route }) => {
 
 		addQuiz(title, description, quizRef.id, userIds, questionIds);
 		navigation.navigate("managequizpage");
+	};
+
+	const setTime = (event, date) => {
+		let hoursToSeconds = date.getHours() * 3600;
+		let minutesToSeconds = date.getMinutes() * 60;
+		setDuration(hoursToSeconds + minutesToSeconds);
+		console.log(duration);
+	};
+
+	const secondsToHoursAndMinutes = (seconds) => {
+		let total = Math.floor(seconds / 60);
+		let minutes = Math.floor(total % 60);
+		let hours = Math.floor(total / 60);
+		return { hours, minutes };
 	};
 
 	return (
@@ -67,6 +86,14 @@ const CreateQuizPage = ({ navigation, route }) => {
 					value={description}
 					placeholder={"Enter description"}
 					placeholderTextColor={"#757A86"}
+				/>
+				<Text style={styles.title}>Duration</Text>
+				<DateTimePicker
+					mode="time"
+					value={new Date(0, 0, 0, initial.hours, initial.minutes)}
+					display="default"
+					style={{ alignSelf: "flex-start", padding: 8 }}
+					onChange={setTime}
 				/>
 				<Text style={styles.title}>Visible to</Text>
 				<MultipleSelectList
