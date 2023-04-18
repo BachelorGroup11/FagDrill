@@ -5,6 +5,7 @@ import { styles } from '../styles/screens/SignUpStyle';
 import {
 	createUserWithEmailAndPassword,
 	onAuthStateChanged,
+	sendEmailVerification,
 } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
 import { db, auth } from '../../firebaseConfig';
@@ -35,6 +36,10 @@ const SignUpPage = ({ navigation }) => {
 				}).catch((error) =>
 					console.log(`Error while adding user to firestore: ${error}`)
 				);
+				if (userCredentials != null){
+					sendEmailVerification(userCredentials.user);
+					alert('Verification email sendt.')
+				  }
 			})
 			.catch((error) => alert(error.message));
 	};
