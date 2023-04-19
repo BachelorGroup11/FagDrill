@@ -16,6 +16,8 @@ import {
   updateDoc,
   deleteDoc,
   getDoc,
+  query,
+  where,
 } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -24,9 +26,11 @@ const auth = getAuth();
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isSuperToggle, setIsSuperToggle] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const db = getFirestore();
   const auth = getAuth();
+  const user = auth.currentUser;
 
   let row: Array<any> = [];
   let prevOpenedRow;
@@ -39,15 +43,54 @@ const UserList = () => {
   }, []);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const userQuery = query(
+        collection(db, "users"),
+        where("user_id", "==", user.uid)
+      );
+
+      const querySnapshot = await getDocs(userQuery);
+      querySnapshot.forEach((doc) => {
+        if (doc.data().is_super_admin == true) {
+          setIsSuperToggle(!isSuperToggle);
+          console.log(isSuperToggle);
+
+          const fetchUsers = async () => {
+            const querySnapshot = await getDocs(collection(db, "users"));
+            const fetchedUsers = [];
+              querySnapshot.forEach((doc) => {
+                const user = doc.data();
+                user.id = doc.id;
+                fetchedUsers.push(user);
+                
+              });
+
+            setUsers(fetchedUsers);
+            setLoading(false);
+          };
+      
+          fetchUsers();
+          
+        } else {
+          setIsSuperToggle(isSuperToggle);
+          
+          console.log(isSuperToggle);
+        }
+      });
+    };
+    fetchData().catch((error) => console.log(error));
+
     const fetchUsers = async () => {
       const querySnapshot = await getDocs(collection(db, "users"));
       const fetchedUsers = [];
 
-      querySnapshot.forEach((doc) => {
-        const user = doc.data();
-        user.id = doc.id;
-        fetchedUsers.push(user);
-      });
+        querySnapshot.forEach((doc) => {
+          const user = doc.data();
+          user.id = doc.id;
+          if (!user.is_super_admin == true && !user.is_admin == true) {
+            fetchedUsers.push(user);
+          }
+        });
 
       setUsers(fetchedUsers);
       setLoading(false);
@@ -60,27 +103,21 @@ const UserList = () => {
     try {
       // Retrieve the user's information
       const userRef = doc(db, "users", userId);
-      const userDoc = await getDoc(userRef);
-      const userData = userDoc.data();
-
       // Check if the current user is a super admin
-      if (userData && userData.is_super_admin === true) {
-        // Update the user's is_admin property in the Firestore database
-        await updateDoc(userRef, { is_admin: !is_admin });
+      
+      // Update the user's is_admin property in the Firestore database
+      await updateDoc(userRef, { is_admin: !is_admin });
 
-        console.log("User is now an admin");
+      console.log("User is now an admin");
 
-        // Update the state or UI with the updated user data
-        const updatedUsers = users.map((user) => {
-          if (user.id === userId) {
-            return { ...user, is_admin: !is_admin };
-          }
-          return user;
-        });
-        setUsers(updatedUsers);
-      } else {
-        console.log("You are not authorized to perform this action");
-      }
+      // Update the state or UI with the updated user data
+      const updatedUsers = users.map((user) => {
+        if (user.id === userId) {
+           return { ...user, is_admin: !is_admin };
+        }
+         return user;
+      });
+      setUsers(updatedUsers);
     } catch (error) {
       console.error("Error updating user:", error);
     }
@@ -119,51 +156,77 @@ const UserList = () => {
     };
 
     const renderRightActions = (progress, dragX, onClick) => {
-      return (
-        <View
-          style={{
-            flexDirection: "row",
-            margin: 0,
-            alignContent: "center",
-            justifyContent: "center",
-            width: 200,
-          }}
-        >
-          <TouchableOpacity
+      if (isSuperToggle === true) {
+        return (
+          <View
             style={{
-              backgroundColor: item.is_admin ? "gray" : "#3F51B5",
-              padding: 10,
-              borderRadius: 8,
-              marginRight: 8,
-              height: 40,
-              width: 125,
+              flexDirection: "row",
+              margin: 0,
               alignContent: "center",
+              justifyContent: "center",
+              width: 200,
             }}
-            onPress={() => makeAdmin(item.id, item.is_admin)}
           >
-            <Text
+            <TouchableOpacity
               style={{
-                color: "white",
-                fontWeight: "bold",
-                textAlign: "center",
+                backgroundColor: item.is_admin ? "gray" : "#3F51B5",
+                padding: 10,
+                borderRadius: 8,
+                marginRight: 8,
+                height: 40,
+                width: 125,
+                alignContent: "center",
               }}
+              onPress={() => makeAdmin(item.id, item.is_admin)}
             >
-              {item.is_admin ? "Remove Admin" : "Make Admin"}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+              <Text
+                style={{
+                  color: "white",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                {item.is_admin ? "Remove Admin" : "Make Admin"}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                backgroundColor: "#f44336",
+                padding: 10,
+                borderRadius: 8,
+                height: 40,
+              }}
+              onPress={onClick}
+            >
+              <Text style={{ color: "white", fontWeight: "bold" }}>Delete</Text>
+            </TouchableOpacity>
+          </View>
+        );
+      } else {
+        return (
+          <View
             style={{
-              backgroundColor: "#f44336",
-              padding: 10,
-              borderRadius: 8,
-              height: 40,
+              flexDirection: "row",
+              margin: 0,
+              alignContent: "center",
+              justifyContent: "center",
+              width: 200,
             }}
-            onPress={onClick}
           >
-            <Text style={{ color: "white", fontWeight: "bold" }}>Delete</Text>
-          </TouchableOpacity>
-        </View>
-      );
+            <TouchableOpacity
+              style={{
+                backgroundColor: "#f44336",
+                padding: 10,
+                borderRadius: 8,
+                height: 40,
+              }}
+              onPress={onClick}
+            >
+              <Text style={{ color: "white", fontWeight: "bold" }}>Delete</Text>
+            </TouchableOpacity>
+          </View>
+        );
+      }
     };
 
     return (

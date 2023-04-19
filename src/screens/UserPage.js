@@ -33,7 +33,7 @@ const UserPage = ({ navigation }) => {
       const querySnapshot = await getDocs(userQuery);
       querySnapshot.forEach((doc) => {
         console.log(doc.data());
-        if (doc.data().is_admin == true) {
+        if (doc.data().is_admin == true || doc.data().is_super_admin == true ) {
           setIsToggle(!isToggle);
           setIsLoaded(!isLoaded);
           console.log(isToggle);
