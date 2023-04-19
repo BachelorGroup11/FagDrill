@@ -119,6 +119,7 @@ const PlayPage = ({ route, navigation }) => {
 											id={idx}
 											state={state}
 											dispatch={dispatch}
+											style={{ bottom: 20 }}
 										/>
 									))}
 									{typeof has_been_answered !== 'undefined' && (
