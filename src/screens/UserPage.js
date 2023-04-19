@@ -22,19 +22,23 @@ const UserPage = ({ navigation }) => {
 				where('user_id', '==', user.uid)
 			);
 
-			const querySnapshot = await getDocs(userQuery);
-			querySnapshot.forEach((doc) => {
-				if (doc.data().is_admin == true) {
-					setIsToggle(!isToggle);
-					setIsLoaded(!isLoaded);
-				} else {
-					setIsLoaded(!isLoaded);
-					setIsToggle(isToggle);
-				}
-			});
-		};
-		fetchData().catch((error) => console.log(error));
-	}, []);
+
+      const querySnapshot = await getDocs(userQuery);
+      querySnapshot.forEach((doc) => {
+        console.log(doc.data());
+        if (doc.data().is_admin == true || doc.data().is_super_admin == true ) {
+          setIsToggle(!isToggle);
+          setIsLoaded(!isLoaded);
+          console.log(isToggle);
+        } else {
+          setIsLoaded(!isLoaded);
+          setIsToggle(isToggle);
+          console.log(isToggle);
+        }
+      });
+    };
+    fetchData().catch((error) => console.log(error));
+  }, []);
 
 	const handleSignOut = () => {
 		auth
