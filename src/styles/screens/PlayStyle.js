@@ -7,10 +7,9 @@ export const styles = StyleSheet.create({
 	progressContainer: {
 		width: 330,
 		height: 44,
-		top: 60,
 		flexDirection: 'row',
 		alignSelf: 'center',
-		justifyContent: 'center',
+		justifyContent: 'space-evenly',
 		alignItems: 'center',
 		borderRadius: 30,
 		borderWidth: 1,

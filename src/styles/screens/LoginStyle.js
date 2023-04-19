@@ -70,6 +70,16 @@ export const styles = StyleSheet.create({
     fontWeight: "underline",
     fontSize: 15,
   },
+  forgotPass: {
+    alignSelf: "center",
+    position: "absolute",
+    bottom: 100,
+    height: 40,
+    borderRadius: 10,
+    width: 160,
+    fontWeight: "underline",
+    fontSize: 15,
+  },
 
   loginText: {
     color: "white",

@@ -41,7 +41,7 @@ const InfoPage = ({ route, navigation }) => {
 					style={{ flex: 1, width: null, alignSelf: 'stretch' }}
 				>
 					<SafeAreaView style={styles.containerTo}>
-						<GoBack nav={navigation} destination={'homepage'} />
+						<GoBack />
 						<View style={styles.textWrapper}>
 							<Text style={styles.levelText}>Level X</Text>
 							<Text style={styles.Infotext}>Øving til {route.params.name}</Text>
@@ -53,6 +53,7 @@ const InfoPage = ({ route, navigation }) => {
 								navigation.navigate('playpage', {
 									name: route.params.name,
 									quiz: route.params.quiz,
+									duration: route.params.duration,
 								})
 							}
 						>
