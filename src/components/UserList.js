@@ -83,7 +83,7 @@ const UserList = () => {
     fetchData().catch((error) => console.log(error));
 
     const fetchUsers = async () => {
-      const querySnapshot = await getDocs(collection(db, 'users'));
+      const querySnapshot = await getDocs(collection(db, "users"));
       const fetchedUsers = [];
 
       querySnapshot.forEach((doc) => {
@@ -103,15 +103,22 @@ const UserList = () => {
 
   // Create a two button alert as provention to not make admins by accident. this alert have a cancel and edit admin status.
   const createTwoButtonAlertAdmin = (userId, is_admin) =>
-  Alert.alert('Are you sure you want to edit the admin status of this user?', '', [
-      {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel',
-      },
-      {text: 'Edit admin status', onPress: () => makeAdmin(userId, is_admin)},
-    ]);
-  // This edits the admin status of the user. 
+    Alert.alert(
+      "Are you sure you want to edit the admin status of this user?",
+      "",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "Edit admin status",
+          onPress: () => makeAdmin(userId, is_admin),
+        },
+      ]
+    );
+  // This edits the admin status of the user.
   const makeAdmin = async (userId, is_admin) => {
     try {
       // Retrieve the user's information
@@ -138,13 +145,13 @@ const UserList = () => {
 
   // Create a two button alert as provention to not delete users by accident. this alert have a cancel and delete users.
   const createTwoButtonAlertDelete = (user) =>
-  Alert.alert('Are you sure you want to delete this user?', '', [
+    Alert.alert("Are you sure you want to delete this user?", "", [
       {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel',
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel",
       },
-      {text: 'Delete', onPress: () => deleteUser(user)},
+      { text: "Delete", onPress: () => deleteUser(user) },
     ]);
 
   // this delets users.
@@ -316,7 +323,6 @@ const UserList = () => {
   };
 
   return (
-
     <FlatList
       data={users}
       renderItem={(v) =>
@@ -325,11 +331,9 @@ const UserList = () => {
           deleteUser(v.item.id);
         })
       }
-
       keyExtractor={(item) => item.id}
       style={{ padding: 16, marginTop: 50 }}
     />
-    </View>
   );
 };
 
