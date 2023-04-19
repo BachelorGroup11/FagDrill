@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { styles } from '../styles/components/OptionStyle';
 
 // Component responsible for rendering buttons with answer options for a given question
-export const Option = ({ value, id, state, dispatch }) => {
+export const Option = ({ value, id, state, dispatch, style }) => {
 	const [answeredStyle, setAnsweredStyle] = useState();
 
 	// Update colour and border around on press to show wheter answer was correct or incorrect
@@ -59,7 +59,7 @@ export const Option = ({ value, id, state, dispatch }) => {
 	return (
 		<View>
 			<TouchableOpacity
-				style={[styles.btnChoice, answeredStyle]}
+				style={[styles.btnChoice, answeredStyle, style]}
 				onPress={() => state.selected === -1 && updateQuiz()}
 			>
 				<Text style={styles.btnText}>{value}</Text>

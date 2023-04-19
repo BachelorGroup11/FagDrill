@@ -4,13 +4,12 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  // style for title
+
   title: {
     alignself: "center",
-    position: "absolute",
-    right: 155,
-    bottom: 539,
-    fontSize: 20,
+    textAlign: "center",
+   
+    fontSize: 32,
     fontWeight: "bold",
   },
 
@@ -51,7 +50,7 @@ export const styles = StyleSheet.create({
   },
 
   loginBtn: {
-    backgroundColor: "#2e216f",
+    backgroundColor: "#3F51B5",
     alignSelf: "center",
     position: "absolute",
     bottom: 235,
@@ -66,7 +65,17 @@ export const styles = StyleSheet.create({
     bottom: 180,
     height: 40,
     borderRadius: 10,
-    width: 250,
+    width: 100,
+    fontWeight: "underline",
+    fontSize: 15,
+  },
+  forgotPass: {
+    alignSelf: "center",
+    position: "absolute",
+    bottom: 130,
+    height: 40,
+    borderRadius: 10,
+    width: 160,
     fontWeight: "underline",
     fontSize: 15,
   },
@@ -88,4 +97,11 @@ export const styles = StyleSheet.create({
     bottom: 95,
     height: 40,
   },
+  altaLogo: {
+    alignSelf: "center",
+    paddingTop: 20,
+    width: 150,
+    height: 150,
+    resizeMode: 'stretch',
+  }
 });

@@ -58,7 +58,7 @@ export const FillInBlank = ({ state, dispatch }) => {
 	return (
 		<View style={styles.container} behavior={'position'}>
 			<Text style={styles.headerText}>Fill in the blank: </Text>
-			<Text style={styles.displayText}>lorem _ dolor</Text>
+			<Text style={styles.displayText}>{state.questionText}</Text>
 			<TextInput
 				style={styles.input}
 				placeholderTextColor={'#00000070'}

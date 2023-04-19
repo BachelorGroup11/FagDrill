@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Text, View, TextInput, Button, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '../styles/screens/LoginStyle';
-import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { styles } from '../styles/screens/ForgotPassStyle';
+import { onAuthStateChanged, passwordReset, sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../../firebaseConfig';
 
-const LoginPage = ({ navigation }) => {
+const ForgotPassword = ({ navigation }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -19,16 +19,20 @@ const LoginPage = ({ navigation }) => {
 		// Unsubscribe to avoid memory leaks
 		return unsubscribe;
 	}, []);
+    
 
 	// Sign in user with email and password using firebase library function
-	const handleLogin = () => {
-		signInWithEmailAndPassword(auth, email, password)
-			.then((userCredentials) => {
-				// Unused variable at this time, might come in handy in the future
-				const user = userCredentials.user;
-			})
-			.catch((error) => alert(error.message));
-	};
+    const forgotPassword = (email) => {
+        console.log("reset email sent to " + email);
+        sendPasswordResetEmail(auth,email,null)
+            .then(() => {
+                alert("reset email sent to " + email);
+                navigation.navigate('loginpage');
+            })
+            .catch(function (e) {
+                console.log(e);
+            });
+    };
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -36,7 +40,7 @@ const LoginPage = ({ navigation }) => {
 				style={styles.altaLogo}
 				source={require("../assets/images/Alta.png")}
 			/>
-			<Text style={styles.title}>Log In</Text>
+			<Text style={styles.title}>Forgot Password?</Text>
 
 			<View style={styles.inputViewEmail}>
 				<Text>Email</Text>
@@ -46,22 +50,15 @@ const LoginPage = ({ navigation }) => {
 				onChangeText={(text) => setEmail(text)}
 			/>
 
-			<View style={styles.inputViewPassword}>
-				<Text>Password</Text>
-			</View>
-			<TextInput
-				style={styles.TextInputPassword}
-				onChangeText={(text) => setPassword(text)}
-				secureTextEntry
-			/>
+			
 
 			<View style={styles.loginBtn}>
 				<Button
-					title="Log In"
+					title="Send Email"
 					color="white"
 					fontWeight="bold"
 					style={styles.loginBtn}
-					onPress={handleLogin}
+					onPress={() => forgotPassword(email)}
 				/>
 			</View>
 
@@ -71,24 +68,15 @@ const LoginPage = ({ navigation }) => {
 
 			<View style={styles.signupBtn}>
 				<Button
-					title="SIGN UP"
+					title="Log In"
 					color="#2e216f"
 					fontWeight="underline"
 					style={styles.loginBtn}
-					onPress={() => navigation.navigate('signuppage')}
-				/>
-			</View>
-			<View style={styles.forgotPass}>
-				<Button
-					title="Forgot Password?"
-					color="#039BE5"
-					fontWeight="underline"
-					style={styles.loginBtn}
-					onPress={() => navigation.navigate('forgotpassword')}
+					onPress={() => navigation.navigate('loginpage')}
 				/>
 			</View>
 		</SafeAreaView>
 	);
 };
 
-export default LoginPage;
+export default ForgotPassword;

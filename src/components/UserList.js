@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import Constants from "expo-constants";
+
 import {
   getFirestore,
   collection,
@@ -32,9 +33,12 @@ const UserList = () => {
   const auth = getAuth();
   const user = auth.currentUser;
 
+  const [newSearch, setNewSearch] = useState("");
+
   let row: Array<any> = [];
   let prevOpenedRow;
 
+  //here we fatch the user list so we can display them later
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
@@ -79,7 +83,7 @@ const UserList = () => {
     fetchData().catch((error) => console.log(error));
 
     const fetchUsers = async () => {
-      const querySnapshot = await getDocs(collection(db, "users"));
+      const querySnapshot = await getDocs(collection(db, 'users'));
       const fetchedUsers = [];
 
       querySnapshot.forEach((doc) => {
@@ -97,6 +101,17 @@ const UserList = () => {
     fetchUsers();
   }, []);
 
+  // Create a two button alert as provention to not make admins by accident. this alert have a cancel and edit admin status.
+  const createTwoButtonAlertAdmin = (userId, is_admin) =>
+  Alert.alert('Are you sure you want to edit the admin status of this user?', '', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'Edit admin status', onPress: () => makeAdmin(userId, is_admin)},
+    ]);
+  // This edits the admin status of the user. 
   const makeAdmin = async (userId, is_admin) => {
     try {
       // Retrieve the user's information
@@ -121,6 +136,18 @@ const UserList = () => {
     }
   };
 
+  // Create a two button alert as provention to not delete users by accident. this alert have a cancel and delete users.
+  const createTwoButtonAlertDelete = (user) =>
+  Alert.alert('Are you sure you want to delete this user?', '', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'Delete', onPress: () => deleteUser(user)},
+    ]);
+
+  // this delets users.
   const deleteUser = async (userId) => {
     try {
       const userRef = doc(db, "users", userId);
@@ -153,6 +180,7 @@ const UserList = () => {
       prevOpenedRow = row[index];
     };
 
+    //renders when swiping the user name.
     const renderRightActions = (progress, dragX, onClick) => {
       if (isSuperToggle === true) {
         return (
@@ -288,6 +316,7 @@ const UserList = () => {
   };
 
   return (
+
     <FlatList
       data={users}
       renderItem={(v) =>
@@ -296,9 +325,11 @@ const UserList = () => {
           deleteUser(v.item.id);
         })
       }
+
       keyExtractor={(item) => item.id}
       style={{ padding: 16, marginTop: 50 }}
     />
+    </View>
   );
 };
 
