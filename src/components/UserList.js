@@ -158,21 +158,10 @@ const UserList = () => {
   const deleteUser = async (userId) => {
     try {
       const userRef = doc(db, "users", userId);
-      const userDoc = await getDoc(userRef);
-      const userData = userDoc.data();
-      if (
-        currentUser &&
-        (currentUser.uid === userData.created_by ||
-          userData.is_super_admin === true) &&
-        userData.is_super_admin !== true
-      ) {
-        await deleteDoc(userRef);
-        console.log("User deleted successfully");
-        const updatedUsers = users.filter((user) => user.id !== userId);
-        setUsers(updatedUsers);
-      } else {
-        console.log("You are not authorized to perform this action");
-      }
+      await deleteDoc(userRef); // Delete the user document from Firestore
+      console.log("User deleted successfully");
+      const updatedUsers = users.filter((user) => user.id !== userId);
+      setUsers(updatedUsers); // Update the list of users with the deleted user removed
     } catch (error) {
       console.error("Error deleting user:", error);
     }
