@@ -58,22 +58,20 @@ const UserList = () => {
           const fetchUsers = async () => {
             const querySnapshot = await getDocs(collection(db, "users"));
             const fetchedUsers = [];
-              querySnapshot.forEach((doc) => {
-                const user = doc.data();
-                user.id = doc.id;
-                fetchedUsers.push(user);
-                
-              });
+            querySnapshot.forEach((doc) => {
+              const user = doc.data();
+              user.id = doc.id;
+              fetchedUsers.push(user);
+            });
 
             setUsers(fetchedUsers);
             setLoading(false);
           };
-      
+
           fetchUsers();
-          
         } else {
           setIsSuperToggle(isSuperToggle);
-          
+
           console.log(isSuperToggle);
         }
       });
@@ -84,13 +82,13 @@ const UserList = () => {
       const querySnapshot = await getDocs(collection(db, "users"));
       const fetchedUsers = [];
 
-        querySnapshot.forEach((doc) => {
-          const user = doc.data();
-          user.id = doc.id;
-          if (!user.is_super_admin == true && !user.is_admin == true) {
-            fetchedUsers.push(user);
-          }
-        });
+      querySnapshot.forEach((doc) => {
+        const user = doc.data();
+        user.id = doc.id;
+        if (!user.is_super_admin == true && !user.is_admin == true) {
+          fetchedUsers.push(user);
+        }
+      });
 
       setUsers(fetchedUsers);
       setLoading(false);
@@ -104,7 +102,7 @@ const UserList = () => {
       // Retrieve the user's information
       const userRef = doc(db, "users", userId);
       // Check if the current user is a super admin
-      
+
       // Update the user's is_admin property in the Firestore database
       await updateDoc(userRef, { is_admin: !is_admin });
 
@@ -113,9 +111,9 @@ const UserList = () => {
       // Update the state or UI with the updated user data
       const updatedUsers = users.map((user) => {
         if (user.id === userId) {
-           return { ...user, is_admin: !is_admin };
+          return { ...user, is_admin: !is_admin };
         }
-         return user;
+        return user;
       });
       setUsers(updatedUsers);
     } catch (error) {
@@ -210,7 +208,7 @@ const UserList = () => {
               margin: 0,
               alignContent: "center",
               justifyContent: "center",
-              width: 200,
+              width: 80,
             }}
           >
             <TouchableOpacity
