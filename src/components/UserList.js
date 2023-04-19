@@ -7,7 +7,6 @@ import {
   StyleSheet,
 } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import { RectButton } from "react-native-gesture-handler";
 import Constants from "expo-constants";
 import {
   getFirestore,
@@ -27,6 +26,7 @@ const UserList = () => {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
   const db = getFirestore();
+  const auth = getAuth();
 
   let row: Array<any> = [];
   let prevOpenedRow;
@@ -58,17 +58,19 @@ const UserList = () => {
 
   const makeAdmin = async (userId, is_admin) => {
     try {
+      // Retrieve the user's information
       const userRef = doc(db, "users", userId);
       const userDoc = await getDoc(userRef);
       const userData = userDoc.data();
-      if (
-        currentUser &&
-        (currentUser.uid === userData.created_by ||
-          userData.is_super_admin === true) &&
-        userData.is_super_admin !== true
-      ) {
+
+      // Check if the current user is a super admin
+      if (userData && userData.is_super_admin === true) {
+        // Update the user's is_admin property in the Firestore database
         await updateDoc(userRef, { is_admin: !is_admin });
+
         console.log("User is now an admin");
+
+        // Update the state or UI with the updated user data
         const updatedUsers = users.map((user) => {
           if (user.id === userId) {
             return { ...user, is_admin: !is_admin };
