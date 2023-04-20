@@ -31,11 +31,12 @@ const HomePage = ({ navigation }) => {
 	const notificationListener = useRef();
 	const responseListener = useRef();
 
+	const auth = getAuth();
+	const user = auth.currentUser;
+
 	useEffect(() => {
 		setQuizzes([]);
-		const auth = getAuth();
-		const user = auth.currentUser;
-
+		
 		const fetchQuizzes = async () => {
 			const quizQuery = query(
 				collection(db, 'quizzes'),
@@ -111,6 +112,22 @@ const HomePage = ({ navigation }) => {
 		},
 	});
 
+	const fetchQuizzesOnRefresh = async () => {
+		setQuizzes([]);
+		const quizQuery = query(
+			collection(db, 'quizzes'),
+			where('users', 'array-contains', user.uid)
+		);
+
+		const querySnapshot = await getDocs(quizQuery);
+		querySnapshot.forEach((doc) => {
+			setQuizzes((prevArray) => [
+				...prevArray,
+				{ id: doc.id, name: doc.data().name, duration: doc.data().duration },
+			]);
+		});
+	};
+
 	return (
 		<ImageBackground
 			source={require('../assets/images/home_page_bg.png')}
@@ -128,6 +145,15 @@ const HomePage = ({ navigation }) => {
 					>
 						<ImageBackground
 							source={require('../assets/images/Propile_btn_bg.png')}
+							style={styles.imgButton}
+						></ImageBackground>
+					</TouchableOpacity>
+					<TouchableOpacity
+						style={styles.refreshBtn}
+						onPress={() => fetchQuizzesOnRefresh()}
+					>
+						<ImageBackground
+							source={require('../assets/images/Refresh.png')}
 							style={styles.imgButton}
 						></ImageBackground>
 					</TouchableOpacity>
