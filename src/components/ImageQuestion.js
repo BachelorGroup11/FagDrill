@@ -14,9 +14,9 @@ export const ImageQuestion = ({ state, dispatch }) => {
 
 	useEffect(() => {
 		downloadImage();
-	}, [state.index]);
+	}, []);
 
-	const downloadImage = async () => {
+	const downloadImage = () => {
 		getDownloadURL(ref(storage, state.image))
 			.then((url) => {
 				setImage(url);

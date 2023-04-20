@@ -1,57 +1,57 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
 	KeyboardAvoidingView,
 	View,
 	Text,
 	TextInput,
 	TouchableOpacity,
-} from "react-native";
-import { styles } from "../styles/components/AddTrueOrFalseStyle";
-import Checkbox from "expo-checkbox";
+} from 'react-native';
+import { styles } from '../styles/components/AddTrueOrFalseStyle';
+import Checkbox from 'expo-checkbox';
 
 export const AddTrueOrFalse = ({ navigation, destination }) => {
-	const [question, setQuestion] = useState("");
-	const [summary, setSummary] = useState("");
+	const [question, setQuestion] = useState('');
+	const [summary, setSummary] = useState('');
 	const [isChecked, setChecked] = useState({ setTrue: false, setFalse: false });
 
 	const getTrueOrFalse = (obj) => Object.keys(obj).find((i) => obj[i] === true);
 
 	const handleSubmit = () => {
-		if (question === "") return alert("Please enter question");
+		if (question === '') return alert('Please enter question');
 		let trueorfalse = getTrueOrFalse(isChecked);
-		if (trueorfalse === undefined) return alert("Please select true or false");
+		if (trueorfalse === undefined) return alert('Please select true or false');
 
 		navigation.navigate(destination, {
 			question: question,
-			options: ["True", "False"],
-			type: "True or false",
-			answer: trueorfalse === "setTrue" ? 0 : 1,
+			options: ['True', 'False'],
+			type: 'true_or_false',
+			answer: trueorfalse === 'setTrue' ? 0 : 1,
 			summary: summary,
 		});
 	};
 
 	return (
-		<KeyboardAvoidingView style={styles.container} behavior={"position"}>
+		<KeyboardAvoidingView style={styles.container} behavior={'position'}>
 			<TextInput
 				style={styles.input}
 				onChangeText={setQuestion}
 				value={question}
-				placeholder={"Tap to add question"}
-				placeholderTextColor={"grey"}
+				placeholder={'Tap to add question'}
+				placeholderTextColor={'grey'}
 			/>
 			<TextInput
 				style={styles.summary}
 				onChangeText={setSummary}
 				value={summary}
-				placeholder={"Tap to add summary"}
-				placeholderTextColor={"grey"}
+				placeholder={'Tap to add summary'}
+				placeholderTextColor={'grey'}
 			/>
 			<View style={styles.buttons}>
 				<View style={[styles.inputcontainer, { zIndex: 1 }]}>
 					<TouchableOpacity
 						style={[
 							styles.answerinput,
-							{ backgroundColor: "#12D18E", borderBottomColor: "#00B777" },
+							{ backgroundColor: '#12D18E', borderBottomColor: '#00B777' },
 						]}
 						onPress={() =>
 							setChecked({ setTrue: !isChecked.setTrue, setFalse: false })
@@ -69,7 +69,7 @@ export const AddTrueOrFalse = ({ navigation, destination }) => {
 					<TouchableOpacity
 						style={[
 							styles.answerinput,
-							{ backgroundColor: "#F75555", borderBottomColor: "#EA1E61" },
+							{ backgroundColor: '#F75555', borderBottomColor: '#EA1E61' },
 						]}
 						onPress={() =>
 							setChecked({ setTrue: false, setFalse: !isChecked.setFalse })

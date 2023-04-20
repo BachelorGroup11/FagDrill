@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
 	QuestionContainer: {
 		width: 300,
 		height: 120,
-		top: 70,
+		top: 40,
 		borderRadius: 10,
 		alignSelf: 'center',
 		justifyContent: 'center',

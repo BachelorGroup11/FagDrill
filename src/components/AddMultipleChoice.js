@@ -43,7 +43,7 @@ export const AddMultipleChoice = ({ navigation, destination }) => {
 		navigation.navigate(destination, {
 			question: question,
 			options: Object.values(answer),
-			type: 'Multiple choice',
+			type: 'multiple_choice',
 			answer: parseInt(correctIndexInteger),
 			summary: summary,
 		});

@@ -1,5 +1,6 @@
 import { db } from '../../firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
+
 export const fetchQuestions = async (setQuestions, route) => {
 	const querySnapshot = await getDocs(collection(db, 'questions'));
 	querySnapshot.forEach((doc) => {

@@ -1,12 +1,5 @@
-import { useEffect, useReducer, useState } from 'react';
-import {
-	View,
-	Text,
-	StatusBar,
-	ImageBackground,
-	Alert,
-	Image,
-} from 'react-native';
+import { useEffect, useReducer } from 'react';
+import { View, Text, StatusBar, ImageBackground, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/PlayStyle';
 import ProgressBar from 'react-native-progress/Bar';
@@ -19,9 +12,13 @@ import {
 	PlayNavigator,
 } from '../components/Index';
 import { QuizReducer, INITIAL_STATE } from '../utilities/QuizReducer';
-import { fetchQuiz } from '../utilities/fetchQuiz';
+import {
+	fetchQuiz,
+	addResult,
+	formatTime,
+	hoursAndMinutesToSeconds,
+} from '../utilities/Index';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
-import { addResult } from '../utilities/addResult';
 
 const PlayPage = ({ route, navigation }) => {
 	const { quiz, name, duration } = route.params;
@@ -45,18 +42,6 @@ const PlayPage = ({ route, navigation }) => {
 				onPress: () => addResult(state, quiz, name, navigation),
 			},
 		]);
-	};
-
-	const formatTime = (remainingTime) => {
-		const minutes = `0${Math.floor(remainingTime / 60)}`.slice(-2);
-		const seconds = `0${remainingTime % 60}`.slice(-2);
-		return `${minutes}:${seconds}`;
-	};
-
-	const hoursAndMinutesToSeconds = (hours, minutes) => {
-		let hoursToSeconds = hours * 3600;
-		let minutesToSeconds = minutes * 60;
-		return hoursToSeconds + minutesToSeconds;
 	};
 
 	return (
@@ -119,6 +104,7 @@ const PlayPage = ({ route, navigation }) => {
 											id={idx}
 											state={state}
 											dispatch={dispatch}
+											style={{ bottom: 20 }}
 										/>
 									))}
 									{typeof has_been_answered !== 'undefined' && (

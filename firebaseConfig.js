@@ -12,7 +12,7 @@ const firebaseConfig = {
 	apiKey: Constants.manifest?.extra?.firebaseApiKey,
 	authDomain: Constants.manifest?.extra?.firebaseAuthDomain,
 	projectId: Constants.manifest?.extra?.firebaseProjectId,
-	storageBucket: 'fagdrill.appspot.com',
+	storageBucket: Constants.manifest?.extra?.firebaseStorageBucket,
 	messagingSenderId: Constants.manifest?.extra?.firebaseMessagingSenderId,
 	appId: Constants.manifest?.extra?.firebaseAppId,
 };
