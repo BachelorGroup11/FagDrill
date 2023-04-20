@@ -5,7 +5,7 @@ import { styles } from '../styles/screens/ForgotPassStyle';
 import { onAuthStateChanged, passwordReset, sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../../firebaseConfig';
 
-const ForgotPassword = ({ navigation }) => {
+const ForgotPasswordPage = ({ navigation }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -79,4 +79,4 @@ const ForgotPassword = ({ navigation }) => {
 	);
 };
 
-export default ForgotPassword;
+export default ForgotPasswordPage;

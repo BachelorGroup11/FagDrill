@@ -84,7 +84,7 @@ const LoginPage = ({ navigation }) => {
 					color="#039BE5"
 					fontWeight="underline"
 					style={styles.loginBtn}
-					onPress={() => navigation.navigate('forgotpassword')}
+					onPress={() => navigation.navigate('forgotpasswordpage')}
 				/>
 			</View>
 		</SafeAreaView>
