@@ -39,6 +39,14 @@ export const styles = StyleSheet.create({
     top: 44,
     borderRadius: 22,
   },
+  refreshBtn: {
+    position: "relative",
+    width: 50,
+    height: 50,
+    left: 304,
+    top: 55,
+    borderRadius: 22,
+  },
   loginBtn: {
     backgroundColor: "#2e216f",
     alignSelf: "center",
@@ -53,8 +61,6 @@ export const styles = StyleSheet.create({
     elevation: 8,
     backgroundColor: "#3F51B5",
     borderRadius: 22,
-    borderColor: "#6BB5FF",
-    borderWidth: 2,
     paddingVertical: 10,
     paddingHorizontal: 12,
     bottom: 40,
