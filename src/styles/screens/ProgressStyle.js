@@ -4,7 +4,19 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-
+  scrollContainer:{
+    flex:1,
+    bottom: -80
+  },
+  scoreTable:{
+    flex:1,
+    width:350,
+    backgroundColor: "#3F51B5",
+    position: "absolute",
+    bottom: 365,
+    borderRadius: 16,
+    alignSelf: "center",
+  },
   btnBackToHome: {
     width: 50,
     height: 50,
@@ -39,27 +51,40 @@ export const styles = StyleSheet.create({
     left: 13,
     top: 150,
   },
-
+  txtScor: {
+    fontSize: 25,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "white",
+  },
   txtProgress: {
     height: 41,
     width: 330,
     fontSize: 32,
     position: "absolute",
-    bottom: -140,
+    bottom: 300,
     left: 37,
     fontWeight: "bold",
     marginBottom: 16,
   },
-
+  txtavg: {
+    top:0,
+    height: 30,
+    fontSize: 17,
+    marginLeft:5,
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center",
+  },
   btnQuiz: {
-    height: 78,
+    height: 50,
     width: 314,
-    top: 130,
-    marginBottom: 16,
+    top: 0,
     marginTop: 8,
     left: 32,
     borderRadius: 16,
     backgroundColor: "#D9D9D9",
+    justifyContent: 'center',
   },
 
   selectedQuiz: {
@@ -73,7 +98,6 @@ export const styles = StyleSheet.create({
     fontSize: 27,
     fontWeight: "bold",
     alignItems: "center",
-    top: 20,
     left: 20,
   },
 
@@ -81,7 +105,6 @@ export const styles = StyleSheet.create({
     fontSize: 27,
     fontWeight: "bold",
     alignItems: "center",
-    top: 20,
     left: 20,
   },
 

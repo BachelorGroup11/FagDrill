@@ -13,9 +13,11 @@ import { fetchScore } from "../utilities/fetchScore";
 import { fetchDate } from "../utilities/fetchDate";
 import { LoadingAnimation } from "../components/Index";
 import { db } from "../../firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, where, query } from "firebase/firestore";
+import { getAuth } from 'firebase/auth';
+import { SelectList } from 'react-native-dropdown-select-list';
 
-const quizCollection = collection(db, "quizzes");
+//const quizCollection = collection(db, "quizzes");
 
 const ProgressPage = ({ navigation }) => {
 	const [scoresArray, setScoresArray] = useState([]);
@@ -25,10 +27,18 @@ const ProgressPage = ({ navigation }) => {
 	const [selectedQuiz, setSelectedQuiz] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 
+	const auth = getAuth();
+	const user = auth.currentUser;
+
 	// Fetch quiz data from Firestore and store it in the state
 	useEffect(() => {
 		const fetchQuizzes = async () => {
-			const quizzesSnapshot = await getDocs(quizCollection);
+			const quizQuery = query(
+				collection(db, 'quizzes'),
+				where('users', 'array-contains', user.uid)
+			);
+
+			const quizzesSnapshot = await getDocs(quizQuery);
 			const quizzes = quizzesSnapshot.docs.map((doc) => ({
 				id: doc.id,
 				name: doc.data().name,
@@ -37,6 +47,7 @@ const ProgressPage = ({ navigation }) => {
 			setSelectedQuiz(quizzes[0] || {});
 		};
 		fetchQuizzes();
+		console.log(quizData,{})
 	}, []);
 
 	// Resets the chart and fetches the score and date for the appropriate quiz
@@ -49,7 +60,8 @@ const ProgressPage = ({ navigation }) => {
 				.then(() => fetchDate(setDateArray, selectedQuiz.id))
 				.finally(() => setIsLoading(false));
 		}
-	}, [selectedQuiz]);
+		console.log(scoresArray)
+		}, [selectedQuiz]);
 
 	return (
 		<ImageBackground
@@ -65,9 +77,14 @@ const ProgressPage = ({ navigation }) => {
 					>
 						<Text style={styles.knapptext}>X</Text>
 					</TouchableOpacity>
-					<Text style={styles.txtProgress}>View Progress Form:</Text>
+					
 				</View>
-				<ScrollView contentContainerStyle={styles.scrollContainer}>
+				<View style={styles.scoreTable}>
+					<Text style={styles.txtScor}>Scores:</Text>
+					<Text style={styles.txtavg}>Average: {(scoresArray.reduce((a, b) => a + b, 0))/scoresArray.length}			Higest: {Math.max(...scoresArray)}			Lowest: {Math.min(...scoresArray)}</Text>
+				</View>
+				<Text style={styles.txtProgress}>View Progress Form:</Text>
+				<ScrollView style={styles.scrollContainer}>
 					{quizData.map((quiz) => (
 						<TouchableOpacity
 							key={quiz.id}
