@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, ScrollView, StatusBar, Text, TouchableOpacity } from "react-native";
+import { View, ScrollView, StatusBar, Text, TouchableOpacity, Share } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../styles/screens/ResultsStyle";
 import { GoBack, Result, LoadingAnimation } from "../components/Index";
@@ -8,11 +8,34 @@ import { fetchResults } from "../utilities/fetchResults";
 const ResultsPage = ({ navigation }) => {
 	const [resultsArray, setResultsArray] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [isShare, setIsShare] = useState([]);
 
 	// Fetch all result documents linked to the specific user from firebase
 	useEffect(() => {
 		fetchResults(setResultsArray).then(() => setIsLoading(false));
+		
 	}, []);
+
+	const onShare = async () => {
+		let msg = resultsArray[0].score
+		try {
+			const result = await Share.share({
+				title: 'My result.',
+				message: `My last result on quiz: ${resultsArray[0].name}. With the score of: ${resultsArray[0].score}/${resultsArray[0].totalQuestions}`,
+			});
+			if (result.action === Share.sharedAction) {
+			  if (result.activityType) {
+				// shared with activity type of result.activityType
+			  } else {
+				// shared
+			  }
+			} else if (result.action === Share.dismissedAction) {
+			  // dismissed
+			}
+		  } catch (error) {
+			alert(error.message);
+		  }
+	  };
 
 	return (
 		<View style={styles.containerTo}>
@@ -28,6 +51,13 @@ const ResultsPage = ({ navigation }) => {
 					>
 						<Text style={styles.knapptext}>X</Text>
 					</TouchableOpacity>
+					<TouchableOpacity
+						style={styles.btnBackToHome}
+						onPress={() => onShare()}
+					>
+						<Text style={styles.knapptext}>Del</Text>
+					</TouchableOpacity>
+					<View>
 						{resultsArray
 							.sort((a, b) => b.date - a.date)
 							.map((result, idx) => (
@@ -39,7 +69,9 @@ const ResultsPage = ({ navigation }) => {
 									date={result.date}
 									key={idx}
 								/>
+								
 							))}
+						</View>
 					</ScrollView>
 					<StatusBar translucent backgroundColor="transparent" />
 				</SafeAreaView>
