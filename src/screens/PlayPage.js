@@ -122,9 +122,21 @@ const PlayPage = ({ route, navigation }) => {
 											style={{ bottom: 20 }}
 										/>
 									))}
-									{typeof has_been_answered !== 'undefined' && (
-										<Text style={styles.summarytext}>{state.summary}</Text>
-									)}
+									{typeof has_been_answered !== 'undefined' &&
+										(state.category === 'true_or_false' ? (
+											<View
+												style={[
+													styles.summarycontainer,
+													{ bottom: 0, top: 160 },
+												]}
+											>
+												<Text style={styles.summarytext}>{state.summary}</Text>
+											</View>
+										) : (
+											<View style={styles.summarycontainer}>
+												<Text style={styles.summarytext}>{state.summary}</Text>
+											</View>
+										))}
 								</View>
 							)}
 						</View>

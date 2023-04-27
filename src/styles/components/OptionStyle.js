@@ -7,15 +7,16 @@ export const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		height: 55,
-		borderRadius: 8,
+		borderRadius: 10,
 		width: 320,
 		margin: 10,
 		top: 260,
 		zIndex: 1,
+		padding: 10,
 	},
 	btnText: {
 		color: '#ffffff',
 		fontFamily: 'PoppinsMedium',
-		fontSize: 14,
+		fontSize: 12,
 	},
 });
