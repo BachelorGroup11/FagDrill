@@ -35,6 +35,21 @@ const PlayPage = ({ route, navigation }) => {
 		);
 	}, []);
 
+	// Set initial question
+	useEffect(() => {
+		dispatch({
+			type: 'setmulitple',
+			payload: {
+				questionText: state.questionsArray[0]?.question_text,
+				options: state.questionsArray[0]?.options,
+				category: state.questionsArray[0]?.category,
+				correctOption: state.questionsArray[0]?.correct_answer,
+				summary: state.questionsArray[0]?.summary,
+				image: state.questionsArray[0]?.image,
+			},
+		});
+	}, [state.questionsArray]);
+
 	const durationExpired = () => {
 		return Alert.alert('', `Duration has expired. Continue to finish Quiz.`, [
 			{

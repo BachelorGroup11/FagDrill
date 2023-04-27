@@ -9,23 +9,21 @@ export const fetchQuiz = async (quiz, dispatch) => {
 		where('quizzes', 'array-contains', quiz)
 	);
 
-	// Append each question retrieved from database to state
 	const querySnapshot = await getDocs(questionsQuery);
+	const filteredLength = parseInt(querySnapshot.docs.length * 0.8);
+	const randomIds = [];
+
+	while (randomIds.length < filteredLength) {
+		let randomNumber = Math.floor(Math.random() * querySnapshot.docs.length);
+		if (randomIds.indexOf(randomNumber) == -1) randomIds.push(randomNumber);
+	}
+
+	let index = 0;
 	querySnapshot.forEach((doc) => {
-		dispatch({ type: 'setquestionsarray', payload: doc.data() });
+		if (randomIds.includes(index))
+			dispatch({ type: 'setquestionsarray', payload: doc.data() });
+		index += 1;
 	});
 
-	// Set quiz state
-	dispatch({
-		type: 'setmulitple',
-		payload: {
-			quizLength: querySnapshot.docs.length,
-			questionText: querySnapshot.docs[0].data().question_text,
-			options: querySnapshot.docs[0].data().options,
-			category: querySnapshot.docs[0].data().category,
-			correctOption: querySnapshot.docs[0].data().correct_answer,
-			summary: querySnapshot.docs[0].data().summary,
-			image: querySnapshot.docs[0].data().image,
-		},
-	});
+	dispatch({ type: 'setquizlength', payload: filteredLength });
 };
