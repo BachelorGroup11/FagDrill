@@ -76,6 +76,7 @@ export const styles = StyleSheet.create({
 		backgroundColor: '#12D18E',
 		alignSelf: 'center',
 		marginTop: 40,
+		marginBottom: 100,
 	},
 	savetext: {
 		fontFamily: 'PoppinsSemiBold',
