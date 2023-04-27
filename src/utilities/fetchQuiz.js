@@ -11,8 +11,8 @@ export const fetchQuiz = async (quiz, dispatch) => {
 
 	const querySnapshot = await getDocs(questionsQuery);
 	const filteredLength = parseInt(querySnapshot.docs.length * 0.8);
-	const randomIds = [];
 
+	let randomIds = [];
 	while (randomIds.length < filteredLength) {
 		let randomNumber = Math.floor(Math.random() * querySnapshot.docs.length);
 		if (randomIds.indexOf(randomNumber) == -1) randomIds.push(randomNumber);
