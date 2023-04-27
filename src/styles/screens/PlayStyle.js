@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
 	QuestionContainer: {
 		width: 300,
 		height: 120,
-		top: 40,
+		top: 20,
 		borderRadius: 10,
 		alignSelf: 'center',
 		justifyContent: 'center',
@@ -38,8 +38,8 @@ export const styles = StyleSheet.create({
 	},
 	QuestionText: {
 		fontFamily: 'PoppinsMedium',
-		fontSize: 22,
-		paddingHorizontal: 20,
+		fontSize: 14,
+		paddingHorizontal: 10,
 		textAlign: 'center',
 	},
 	resultsBtn: {
@@ -73,10 +73,25 @@ export const styles = StyleSheet.create({
 		fontSize: 27,
 		fontFamily: 'PoppinsBold',
 	},
+	summarycontainer: {
+		position: 'absolute',
+		alignSelf: 'center',
+		justifyContent: 'center',
+		bottom: 60,
+		height: 80,
+		width: 300,
+		backgroundColor: '#FFFFFF',
+		color: '#000000',
+		shadowColor: '#171717',
+		shadowOffset: { width: 0, height: 4 },
+		shadowOpacity: 0.2,
+		shadowRadius: 3,
+		borderRadius: 10,
+		paddingHorizontal: 10,
+	},
 	summarytext: {
 		textAlign: 'center',
-		fontSize: 16,
-		bottom: 90,
-		fontFamily: 'PoppinsRegular',
+		fontSize: 10,
+		fontFamily: 'PoppinsMedium',
 	},
 });

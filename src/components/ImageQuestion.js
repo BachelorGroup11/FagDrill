@@ -34,7 +34,6 @@ export const ImageQuestion = ({ state, dispatch }) => {
 						height: 200,
 						alignSelf: 'center',
 						borderRadius: 5,
-						top: 20,
 					}}
 				/>
 			)}
@@ -46,16 +45,18 @@ export const ImageQuestion = ({ state, dispatch }) => {
 					<Text style={styles.summaryText}>{state.summary}</Text>
 				</View>
 			)}
-			{state.options.map((option, idx) => (
-				<Option
-					value={option}
-					key={idx}
-					id={idx}
-					state={state}
-					dispatch={dispatch}
-					style={{ height: 50, top: 40 }}
-				/>
-			))}
+			<View style={styles.btncontainer}>
+				{state.options.map((option, idx) => (
+					<Option
+						value={option}
+						key={idx}
+						id={idx}
+						state={state}
+						dispatch={dispatch}
+						style={styles.btnchoice}
+					/>
+				))}
+			</View>
 		</View>
 	);
 };
