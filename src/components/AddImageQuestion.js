@@ -12,6 +12,7 @@ import * as ImagePicker from 'expo-image-picker';
 import Checkbox from 'expo-checkbox';
 import { storage } from '../../firebaseConfig';
 import { ref, uploadBytes } from 'firebase/storage';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export const AddImageQuestion = ({ navigation, destination }) => {
 	const numbers = { 0: 'one', 1: 'two', 2: 'three', 3: 'four' };
@@ -94,7 +95,7 @@ export const AddImageQuestion = ({ navigation, destination }) => {
 	};
 
 	return (
-		<KeyboardAvoidingView style={styles.container} behavior={'position'}>
+		<View>
 			<TextInput
 				style={styles.input}
 				onChangeText={setQuestion}
@@ -191,6 +192,6 @@ export const AddImageQuestion = ({ navigation, destination }) => {
 			<TouchableOpacity style={styles.save} onPress={() => handleSubmit()}>
 				<Text style={styles.savetext}>Submit</Text>
 			</TouchableOpacity>
-		</KeyboardAvoidingView>
+		</View>
 	);
 };
