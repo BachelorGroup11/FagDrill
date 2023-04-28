@@ -108,6 +108,7 @@ const EditQuizPage = ({ navigation, route }) => {
           setSelected={(val) => setCategory(val[0])}
           data={["practice_quiz", "social_quiz"]}
           save="value"
+          value={category}
           search={false}
           boxStyles={styles.boxstyles}
         />

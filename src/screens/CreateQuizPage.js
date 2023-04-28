@@ -28,7 +28,7 @@ const CreateQuizPage = ({ navigation, route }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [duration, setDuration] = useState({ hours: 0, minutes: 0 });
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState("");
 
   useEffect(() => {
     setUsers([]);
@@ -97,6 +97,7 @@ const CreateQuizPage = ({ navigation, route }) => {
           setSelected={(val) => setCategory(val[0])}
           data={["practice_quiz", "social_quiz"]}
           save="value"
+          value={category}
           search={false}
           boxStyles={styles.boxstyles}
         />
