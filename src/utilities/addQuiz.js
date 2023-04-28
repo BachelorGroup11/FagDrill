@@ -7,7 +7,8 @@ export const addQuiz = async (
   duration,
   quizRef,
   userIds,
-  questionIds
+  questionIds,
+  category
 ) => {
   await setDoc(doc(db, "quizzes", quizRef), {
     name: title,
