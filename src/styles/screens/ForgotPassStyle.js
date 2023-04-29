@@ -7,8 +7,8 @@ export const styles = StyleSheet.create({
 
   title: {
     alignself: "center",
-    textAlign: "center",
-   
+    textAlign:"center",
+    marginTop: 20,
     fontSize: 32,
     fontWeight: "bold",
   },
@@ -16,8 +16,6 @@ export const styles = StyleSheet.create({
   TextInputEmail: {
     backgroundColor: "#C0C0C0",
     alignSelf: "center",
-    position: "absolute",
-    bottom: 435,
     height: 40,
     borderRadius: 10,
     width: 250,
@@ -26,8 +24,6 @@ export const styles = StyleSheet.create({
   TextInputPassword: {
     backgroundColor: "#C0C0C0",
     alignSelf: "center",
-    position: "absolute",
-    bottom: 350,
     height: 40,
     borderRadius: 10,
     width: 250,
@@ -35,67 +31,76 @@ export const styles = StyleSheet.create({
 
   inputViewEmail: {
     border: "1px solid",
-    alignItems: "center",
-    position: "absolute",
-    bottom: 480,
-    right: 277,
+    alignSelf: "center",
+    marginTop: "25%",
+    //backgroundColor: "#3F51B5",
+    width: 250,
   },
-
+  emailtxt: {
+    alignSelf: "flex-start",
+    marginVertical: 5
+  },
   inputViewPassword: {
     border: "1px solid",
-    alignItems: "center",
-    position: "absolute",
-    bottom: 395,
-    width: 190,
+    alignSelf: "center",
+    //backgroundColor: "#3F51B5",
+    width: 250,
+  },
+  passwordtxt: {
+    alignSelf: "flex-start",
+    marginVertical: 5
   },
 
   loginBtn: {
-    backgroundColor: "#3F51B5",
     alignSelf: "center",
-    position: "absolute",
-    bottom: 235,
-    height: 40,
-    borderRadius: 10,
-    width: 250,
-  },
-
-  signupBtn: {
-    alignSelf: "center",
-    position: "absolute",
-    bottom: 180,
+    justifyContent: 'center',
     height: 40,
     borderRadius: 10,
     width: 100,
     fontWeight: "underline",
     fontSize: 15,
   },
+
+  signupBtn: {
+    backgroundColor: "#3F51B5",
+    alignSelf: "center",
+    justifyContent: 'center',
+    marginTop: "20%",
+    height: 40,
+    borderRadius: 10,
+    width: 250,
+  },
   forgotPass: {
     alignSelf: "center",
-    position: "absolute",
-    bottom: 130,
     height: 40,
     borderRadius: 10,
     width: 160,
     fontWeight: "underline",
     fontSize: 15,
+    marginVertical: 35
   },
-
   loginText: {
-    color: "white",
-    alignself: "center",
-    position: "absolute",
-    right: 155,
-    bottom: 12,
-    right: 107,
-    fontWeight: "bold",
+    color: "#2e216f",
+    textAlign: "center",
+    fontWeight: "underline",
+    fontSize: 18,
   },
-
+  signupText: {
+    color: "white",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+  forgotText: {
+    color: "#039BE5",
+    textAlign: "center",
+    fontWeight: "underline",
+    fontSize: 18,
+  },
   orText: {
     color: "#00bfff",
     alignSelf: "center",
-    position: "absolute",
-    bottom: 95,
-    height: 40,
+    marginVertical:2,
   },
   altaLogo: {
     alignSelf: "center",

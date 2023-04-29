@@ -69,89 +69,93 @@ const ProgressPage = ({ navigation }) => {
 			style={{ flex: 1, width: null, alignSelf: "stretch" }}
 		>
 			<SafeAreaView style={styles.container}>
+				
+			<View style={styles.container}>
 				<Text style={styles.title}>Progress</Text>
-				<View style={styles.container}>
-					<TouchableOpacity
-						style={styles.btnBackToHome}
-						onPress={() => navigation.replace("userpage")}
-					>
-						<Text style={styles.knapptext}>X</Text>
-					</TouchableOpacity>
-					
-				</View>
-				<View style={styles.scoreTable}>
-					<Text style={styles.txtScor}>Scores:</Text>
-					<Text style={styles.txtavg}>Average: {(scoresArray.reduce((a, b) => a + b, 0))/scoresArray.length}			Higest: {Math.max(...scoresArray)}			Lowest: {Math.min(...scoresArray)}</Text>
-				</View>
-				<Text style={styles.txtProgress}>View Progress Form:</Text>
-				<ScrollView style={styles.scrollContainer}>
-					{quizData.map((quiz) => (
-						<TouchableOpacity
-							key={quiz.id}
-							style={[
-								styles.btnQuiz,
-								quiz.id === selectedQuiz.id && styles.selectedQuiz,
-							]}
-							onPress={() => setSelectedQuiz(quiz)}
-						>
-							<Text
-								style={[
-									styles.quizText,
-									quiz.id === selectedQuiz.id && styles.selectedTxt,
-								]}
-							>
-								{quiz.name}
-							</Text>
-						</TouchableOpacity>
-					))}
-				</ScrollView>
-				<View style={styles.chart}>
-					{isLoading ? (
-						<View style={styles.loadingContainer}>
-							<LoadingAnimation />
-						</View>
-					) : scoresArray.length > 0 ? (
-						// Shows the last 5 Results
-						<LineChart
-							data={{
-								labels: dateArray.slice(-5),
-								datasets: [
-									{
-										data: scoresArray.slice(-5),
-									},
-								],
-							}}
-							width={350}
-							height={220}
-							yAxisInterval={1}
-							chartConfig={{
-								backgroundColor: "#3F51B5",
-								backgroundGradientFrom: "#3F51B5",
-								backgroundGradientTo: "#3F51B5",
-								decimalPlaces: 1,
-								color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-								labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-								style: {
-									borderRadius: 16,
+				<TouchableOpacity
+					style={styles.btnBackToHome}
+					onPress={() => navigation.replace("userpage")}
+				>
+					<Text style={styles.knapptext}>X</Text>
+				</TouchableOpacity>
+			</View>
+
+			<View style={styles.chart}>
+				{isLoading ? (
+					<View style={styles.loadingContainer}>
+						<LoadingAnimation />
+					</View>
+				) : scoresArray.length > 0 ? (
+					// Shows the last 5 Results
+					<LineChart
+						data={{
+							labels: dateArray.slice(-5),
+							datasets: [
+								{
+									data: scoresArray.slice(-5),
 								},
-								propsForDots: {
-									r: "6",
-									strokeWidth: "2",
-									stroke: "#fcfdff",
-								},
-							}}
-							bezier
-							style={{
-								marginVertical: 8,
+							],
+						}}
+						width= {330}
+						height= {220}
+						yAxisInterval={1}
+						chartConfig={{
+							backgroundColor: "#3F51B5",
+							backgroundGradientFrom: "#3F51B5",
+							backgroundGradientTo: "#3F51B5",
+							decimalPlaces: 1,
+							color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+							labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+							style: {
 								borderRadius: 16,
-							}}
-						/>
-					) : (
-						<Text style={styles.txtNoProgress}>No Available Progress</Text>
-					)}
-				</View>
-			</SafeAreaView>
-		</ImageBackground>
+							},
+							propsForDots: {
+								r: "6",
+								strokeWidth: "2",
+								stroke: "#fcfdff",
+							},
+						}}
+						bezier
+						style={{
+							borderRadius: 16,
+							alignSelf: "center",
+						}}
+					/>
+				) : (
+					<Text style={styles.txtNoProgress}>No Available Progress</Text>
+				)}
+			</View>
+
+			<View style={styles.scoreTable}>
+				<Text style={styles.txtScor}>Scores:</Text>
+				<Text style={styles.txtavg}>Average: {(scoresArray.reduce((a, b) => a + b, 0))/scoresArray.length}			Higest: {Math.max(...scoresArray)}			Lowest: {Math.min(...scoresArray)}</Text>
+			</View>
+
+			<Text style={styles.txtProgress}>View Progress Form:</Text>
+
+			<ScrollView style={styles.scrollContainer}>
+				{quizData.map((quiz) => (
+					<TouchableOpacity
+						key={quiz.id}
+						style={[
+							styles.btnQuiz,
+							quiz.id === selectedQuiz.id && styles.selectedQuiz,
+						]}
+						onPress={() => setSelectedQuiz(quiz)}
+					>
+						<Text
+							style={[
+								styles.quizText,
+								quiz.id === selectedQuiz.id && styles.selectedTxt,
+							]}
+						>
+							{quiz.name}
+						</Text>
+					</TouchableOpacity>
+				))}
+			</ScrollView>
+		</SafeAreaView>
+	</ImageBackground>
 	);
 };
 export default ProgressPage;

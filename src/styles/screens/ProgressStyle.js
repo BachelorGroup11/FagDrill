@@ -3,53 +3,56 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  scrollContainer:{
-    flex:1,
-    bottom: -80
-  },
-  scoreTable:{
-    flex:1,
-    width:350,
-    backgroundColor: "#3F51B5",
-    position: "absolute",
-    bottom: 365,
-    borderRadius: 16,
-    alignSelf: "center",
-  },
-  btnBackToHome: {
-    width: 50,
-    height: 50,
-    borderRadius: 30,
-    position: "relative",
-    left: 300,
-    top: 40,
-    fontSize: 32,
+    justifyContent: "center",
   },
 
+  scrollContainer:{
+    flex:1,
+    width: "75%",
+    alignSelf: "center"
+  },
+  scoreTable:{
+    width: "90%",
+    backgroundColor: "#3F51B5",
+    justifyContent: "center",
+    borderRadius: 16,
+    alignSelf: "center",
+    marginVertical: 15,
+    top: "2%"
+  },
+  btnBackToHome: {
+    justifyContent: "center",
+    width: 50,
+    height: 50,
+    borderRadius: 10,
+    position: "absolute",
+    right: "5%",
+    top: "10%",
+    fontSize: 32,
+  },
   knapptext: {
     fontSize: 32,
     alignSelf: "center",
     color: "black",
-    padding: 5,
-    paddingLeft: 10,
     fontWeight: "bold",
   },
 
   title: {
-    alignself: "center",
     position: "absolute",
-    right: 230,
-    top: 90,
+    left: "5%",
+    top: "10%",
+    width: "90%",
     fontSize: 32,
     fontWeight: "bold",
   },
 
   chart: {
-    alignself: "center",
+    alignSelf: "center",
+    //backgroundColor: "#C0C0C0",
     position: "absolute",
-    left: 13,
-    top: 150,
+    width: "90%",
+    top: "20%",
+    justifyContent: "center"
   },
   txtScor: {
     fontSize: 25,
@@ -58,14 +61,13 @@ export const styles = StyleSheet.create({
     color: "white",
   },
   txtProgress: {
-    height: 41,
-    width: 330,
+    //backgroundColor: "#C0C0C0",
+    width: "90%",
     fontSize: 32,
-    position: "absolute",
-    bottom: 300,
-    left: 37,
+    alignSelf: "center",
     fontWeight: "bold",
-    marginBottom: 16,
+    textAlign: "center",
+    
   },
   txtavg: {
     top:0,
@@ -78,10 +80,8 @@ export const styles = StyleSheet.create({
   },
   btnQuiz: {
     height: 50,
-    width: 314,
-    top: 0,
+    width: "100%",
     marginTop: 8,
-    left: 32,
     borderRadius: 16,
     backgroundColor: "#D9D9D9",
     justifyContent: 'center',

@@ -7,12 +7,14 @@ export const styles = StyleSheet.create({
   },
 
   btnBackToHome: {
-    width: 50,
-    height: 50,
-    borderRadius: 30,
-    position: "relative",
-    left: 300,
-    top: 40,
+    //backgroundColor: "#C0C0C0",
+    justifyContent: "center",
+    width: 60,
+    height: 60,
+    borderRadius: 10,
+    position: "absolute",
+    right: "5%",
+    top: "10%",
     fontSize: 32,
   },
 
@@ -20,16 +22,20 @@ export const styles = StyleSheet.create({
     fontSize: 32,
     alignSelf: "center",
     color: "black",
-    padding: 5,
-    paddingLeft: 10,
     fontWeight: "bold",
   },
-
-  title: {
-    alignself: "center",
+  line:{
+    color: "black", 
+    alignSelf: "center",
     position: "absolute",
-    right: 148,
-    top: 90,
+    top: "18%",
+  },
+  title: {
+    //backgroundColor: "#C0C0C0",
+    position: "absolute",
+    left: "5%",
+    top: "10%",
+    width: "90%",
     fontSize: 32,
     fontWeight: "bold",
   },

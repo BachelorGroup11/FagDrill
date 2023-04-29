@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Text, View, TextInput, Button, Image } from 'react-native';
+import { Text, View, TextInput, Button, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/ForgotPassStyle';
 import { onAuthStateChanged, passwordReset, sendPasswordResetEmail } from 'firebase/auth';
@@ -44,37 +44,29 @@ const ForgotPasswordPage = ({ navigation }) => {
 
 			<View style={styles.inputViewEmail}>
 				<Text>Email</Text>
-			</View>
-			<TextInput
-				style={styles.TextInputEmail}
-				onChangeText={(text) => setEmail(text)}
-			/>
-
-			
-
-			<View style={styles.loginBtn}>
-				<Button
-					title="Send Email"
-					color="white"
-					fontWeight="bold"
-					style={styles.loginBtn}
-					onPress={() => forgotPassword(email)}
+				<TextInput
+					style={styles.TextInputEmail}
+					onChangeText={(text) => setEmail(text)}
 				/>
 			</View>
+			
+			<TouchableOpacity
+				style={styles.signupBtn}
+				onPress={() => forgotPassword(email)}
+			>
+				<Text style={styles.signupText}>Send Email</Text>
+			</TouchableOpacity>
 
 			<View style={styles.orText}>
 				<Text style={styles.orText}>⎯⎯⎯⎯⎯⎯⎯⎯OR⎯⎯⎯⎯⎯⎯⎯⎯</Text>
 			</View>
 
-			<View style={styles.signupBtn}>
-				<Button
-					title="Log In"
-					color="#2e216f"
-					fontWeight="underline"
-					style={styles.loginBtn}
-					onPress={() => navigation.navigate('loginpage')}
-				/>
-			</View>
+			<TouchableOpacity
+				style={styles.loginBtn}
+				onPress={() => navigation.navigate('loginpage')}
+			>
+				<Text style={styles.loginText}>Log In</Text>
+			</TouchableOpacity>
 		</SafeAreaView>
 	);
 };
