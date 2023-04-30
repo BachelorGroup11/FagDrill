@@ -42,6 +42,7 @@ const CreateQuizPage = ({ navigation, route }) => {
 
   const saveQuiz = async () => {
     if (title === "") return alert("Please enter title");
+    if (category.length === 0) return alert("Please select a category");
 
     const quizRef = doc(collection(db, "quizzes"));
     const userIds = selected.map(
@@ -94,12 +95,16 @@ const CreateQuizPage = ({ navigation, route }) => {
         />
         <Text style={styles.title}>Category</Text>
         <SelectList
-          setSelected={(val) => setCategory(val[0])}
-          data={["practice_quiz", "social_quiz"]}
+          setSelected={(val) => setCategory(val)}
+          data={[
+            { label: "Practice Quiz", value: "practice_quiz" },
+            { label: "Social Quiz", value: "social_quiz" },
+          ]}
           save="value"
           value={category}
           search={false}
           boxStyles={styles.boxstyles}
+          inputStyles={styles.inputstyles}
         />
 
         <Text style={styles.title}>Visible to</Text>

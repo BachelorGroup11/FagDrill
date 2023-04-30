@@ -42,6 +42,7 @@ const EditQuizPage = ({ navigation, route }) => {
     setTitle(route.params.title);
     setDescription(route.params.description);
     setDuration(route.params.duration);
+    setCategory(route.params.category);
     setQuizRef(route.params.id);
   }, []);
 
@@ -52,6 +53,7 @@ const EditQuizPage = ({ navigation, route }) => {
 
   const saveQuiz = async () => {
     if (title === "") return alert("Please enter title");
+    if (category.length === 0) return alert("Please select a category");
 
     const userIds = selected.map(
       (index) => users.find((user) => user.email === index).id
@@ -68,7 +70,15 @@ const EditQuizPage = ({ navigation, route }) => {
     }
 
     const questionIds = await addQuestions(quizRef, questions);
-    addQuiz(title, description, duration, quizRef, userIds, questionIds);
+    addQuiz(
+      title,
+      description,
+      duration,
+      quizRef,
+      userIds,
+      questionIds,
+      category
+    );
     navigation.goBack();
   };
 
@@ -105,12 +115,16 @@ const EditQuizPage = ({ navigation, route }) => {
         />
         <Text style={styles.title}>Category</Text>
         <SelectList
-          setSelected={(val) => setCategory(val[0])}
-          data={["practice_quiz", "social_quiz"]}
+          setSelected={(val) => setCategory(val)}
+          data={[
+            { label: "Social Quiz", value: "social_quiz" },
+            { label: "Practice Quiz", value: "practice_quiz" },
+          ]}
           save="value"
           value={category}
           search={false}
           boxStyles={styles.boxstyles}
+          inputStyles={styles.inputstyles}
         />
         <Text style={styles.title}>Visible to</Text>
         <MultipleSelectList
