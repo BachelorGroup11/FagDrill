@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
 		borderWidth: 2,
 		borderRadius: 15,
 		top: 720,
-		width: 340,
+		width: "90%",
 		height: 60,
 	},
 	index: {

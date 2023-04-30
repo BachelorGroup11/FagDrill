@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
 		shadowOffset: { width: 0, height: 4 },
 		shadowOpacity: 0.2,
 		shadowRadius: 3,
+		elevation: 5,
 	},
 	QuestionText: {
 		fontFamily: 'PoppinsMedium',
@@ -33,6 +34,7 @@ export const styles = StyleSheet.create({
 		shadowOffset: { width: 0, height: 4 },
 		shadowOpacity: 0.2,
 		shadowRadius: 3,
+		elevation: 5,
 		height: 60,
 		borderRadius: 10,
 	},

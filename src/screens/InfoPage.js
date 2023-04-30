@@ -43,7 +43,7 @@ const InfoPage = ({ route, navigation }) => {
 					<SafeAreaView style={styles.containerTo}>
 						<GoBack />
 						<View style={styles.textWrapper}>
-							<Text style={styles.levelText}>Level X</Text>
+							<Text style={styles.levelText}>Quiz</Text>
 							<Text style={styles.Infotext}>Øving til {route.params.name}</Text>
 							<Text style={styles.descriptionText}>{info}</Text>
 						</View>
