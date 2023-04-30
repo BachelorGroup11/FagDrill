@@ -6,6 +6,7 @@ import {
 	TextInput,
 	SafeAreaView,
 	TouchableOpacity,
+	Platform,
 } from 'react-native';
 import { styles } from '../styles/screens/CreateQuizStyle';
 import { MultipleSelectList } from 'react-native-dropdown-select-list';
@@ -90,7 +91,8 @@ const EditQuizPage = ({ navigation, route }) => {
 					placeholderTextColor={'#757A86'}
 				/>
 				<Text style={styles.title}>Duration</Text>
-				<DateTimePicker
+				{Platform.OS === 'ios' && (
+					<DateTimePicker
 					mode="time"
 					value={new Date(0, 0, 0, duration.hours, duration.minutes, 0)}
 					display="default"
@@ -98,7 +100,14 @@ const EditQuizPage = ({ navigation, route }) => {
 					onChange={(e, d) =>
 						setDuration({ hours: d.getHours(), minutes: d.getMinutes() })
 					}
-				/>
+					/>
+				)}
+				
+				{Platform.OS !== 'ios' && (
+					<View style={styles.android}>
+	
+					</View>
+				)}
 				<Text style={styles.title}>Visible to</Text>
 				<MultipleSelectList
 					placeholder={`${placeholder}`}

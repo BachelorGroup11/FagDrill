@@ -6,28 +6,33 @@ export const styles = StyleSheet.create({
   },
 
   btnBackToHome: {
+    //backgroundColor: "#C0C0C0",
     width: 42,
     height: 42,
-    borderRadius: 30,
-    position: "relative",
-    left: 300,
-    top: 40,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignSelf: "flex-end"
   },
-
+  backbtnView:{
+    //backgroundColor: "#3F51B5",
+    width: "80%",
+    alignSelf: "center",
+    position: "absolute",
+    top: "20%",
+  },
   knapptext: {
     fontSize: 32,
     alignSelf: "center",
     color: "black",
-    padding: 5,
-    paddingLeft: 10,
     fontWeight: "bold",
   },
 
   title: {
-    alignself: "center",
+    //backgroundColor: "#C0C0C0",
     position: "absolute",
-    right: 190,
-    top: 90,
+    left: "10%",
+    top: "15%",
+    width: "80%",
     fontSize: 32,
     fontWeight: "bold",
   },
@@ -35,38 +40,35 @@ export const styles = StyleSheet.create({
   TextInputEmail: {
     backgroundColor: "#C0C0C0",
     alignSelf: "center",
-    position: "absolute",
-    bottom: 425,
     height: 40,
     borderRadius: 10,
     width: 250,
+    marginTop: 1,
   },
 
   TextInputPassword: {
     backgroundColor: "#C0C0C0",
     alignSelf: "center",
-    position: "absolute",
-    bottom: 320,
     height: 40,
     borderRadius: 10,
     width: 250,
+    marginTop: 1,
   },
 
   inputViewEmail: {
+    //backgroundColor: "#3F51B5",
     border: "1px solid",
-    alignItems: "center",
-    position: "absolute",
-    bottom: 470,
-    right: 198,
+    alignSelf: "center",
+    marginTop: "80%",
+    width: 250,
   },
 
   inputViewPassword: {
+    //backgroundColor: "#3F51B5",
     border: "1px solid",
-    alignItems: "center",
-    position: "absolute",
-    bottom: 365,
-    width: 190,
-    right: 170,
+    alignSelf: "center",
+    width: 250,
+    marginTop: 10,
   },
 
   loginBtn: {
@@ -83,11 +85,11 @@ export const styles = StyleSheet.create({
     backgroundColor: "#3F51B5",
     borderRadius: 22,
     paddingVertical: 10,
-    paddingHorizontal: 12,
-    bottom: -600,
-    width: 310,
+    alignSelf: "center",
+    width: "80%",
     height: 60,
-    right: -35,
+    position: "absolute",
+    bottom: 50,
   },
 
   YourAccountText2: {

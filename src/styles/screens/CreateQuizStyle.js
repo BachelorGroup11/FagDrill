@@ -87,4 +87,25 @@ export const styles = StyleSheet.create({
 		color: "grey",
 		marginTop: 15,
 	},
+	androidHouers: {
+		backgroundColor: 'lightgrey',
+		borderRadius: 5,
+		width: 50,
+		flex: 1,
+		textAlign: "center",
+	},
+	androidMin: {
+		backgroundColor: 'lightgrey',
+		borderRadius: 5,
+		width: 50,
+		flex: 1,
+		textAlign: "center",
+	},
+	android:{
+		//backgroundColor: "#000000",
+		alignSelf: "flex-start",
+		paddingLeft: 15,
+		width: "30%",
+		flexDirection: "row",
+	},
 });

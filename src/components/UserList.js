@@ -6,8 +6,9 @@ import {
   View,
   StyleSheet,
   TextInput,
+  Alert,
 } from "react-native";
-import Swipeable from "react-native-gesture-handler/Swipeable";
+import { GestureHandlerRootView, Swipeable } from "react-native-gesture-handler";
 import Constants from "expo-constants";
 
 import {
@@ -22,10 +23,11 @@ import {
   where,
 } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { styles } from "../styles/screens/ManageUserStyle";
 
 const auth = getAuth();
 
-const UserList = () => {
+const UserList = ({ navigation }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isSuperToggle, setIsSuperToggle] = useState(false);
@@ -222,7 +224,7 @@ const UserList = () => {
                 width: 125,
                 alignContent: "center",
               }}
-              onPress={() => makeAdmin(item.id, item.is_admin)}
+              onPress={() => createTwoButtonAlertAdmin(item.id, item.is_admin)}
             >
               <Text
                 style={{
@@ -275,6 +277,7 @@ const UserList = () => {
     };
 
     return (
+      <GestureHandlerRootView>
       <Swipeable
         renderRightActions={(progress, dragX) =>
           renderRightActions(progress, dragX, onClick)
@@ -331,48 +334,40 @@ const UserList = () => {
           </Text>
         </View>
       </Swipeable>
+      </GestureHandlerRootView>
     );
   };
 
   return (
-    <View>
-      <View style={{height: 40,}}>
+    <View style={{top: "15%"}}>
+
         <TextInput
 					style={{ backgroundColor: "#C0C0C0",
           alignSelf: "center",
           position: "absolute",
-          top: 50,
           height: 40,
           marginHorizontal: 50,
           borderRadius: 10,
-          width: 300,}}
+          width: "90%"}}
           placeholder=" Search..."
 					onChangeText={(text) => fetchSearchUsers(text)}
 				/>
-      </View>
-    <FlatList
-      data={users}
-      renderItem={(v) =>
-        renderUser(v, () => {
-          console.log("pressed", v);
-          deleteUser(v.item.id);
-        })
-      }
-      keyExtractor={(item) => item.id}
-      style={{ padding: 16, marginTop: 50 }}
-    />
+
+      
+        <FlatList
+          data={users}
+          renderItem={(v) =>
+            renderUser(v, () => {
+              console.log("pressed", v);
+              createTwoButtonAlertDelete(v.item.id);
+            })
+          }
+          keyExtractor={(item) => item.id}
+          style={{marginTop: 50, width: "90%", alignSelf: "center"}}
+        />
+      
     </View>
   );
 };
 
 export default UserList;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#ecf0f1",
-    padding: 8,
-  },
-});

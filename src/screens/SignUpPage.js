@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Text, View, TextInput, Button, Image } from 'react-native';
+import { Text, View, TextInput, Button, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/SignUpStyle';
 import {
@@ -53,45 +53,42 @@ const SignUpPage = ({ navigation }) => {
 			<Text style={styles.title}>Sign Up</Text>
 
 			<View style={styles.inputViewEmail}>
-				<Text>email</Text>
-			</View>
-			<TextInput
-				style={styles.TextInputEmail}
-				onChangeText={(text) => setEmail(text)}
-			/>
-
-			<View style={styles.inputViewPassword}>
-				<Text>password</Text>
-			</View>
-			<TextInput
-				style={styles.TextInputPassword}
-				onChangeText={(text) => setPassword(text)}
-				secureTextEntry
-			/>
-
-			<View style={styles.signupBtn}>
-				<Button
-					title="Sign Up"
-					color="white"
-					fontWeight="bold"
-					style={styles.signupBtn}
-					onPress={handleSignUp}
+				<Text style={styles.emailtxt}>Email</Text>
+				<TextInput
+					style={styles.TextInputEmail}
+					onChangeText={(text) => setEmail(text)}
 				/>
 			</View>
+
+			<View style={styles.inputViewPassword}>
+				<Text style={styles.passwordtxt}>Password</Text>
+				<TextInput
+					style={styles.TextInputPassword}
+					onChangeText={(text) => setPassword(text)}
+					secureTextEntry
+				/>
+			</View>
+
+			
+			<TouchableOpacity
+				style={styles.signupBtn}
+				onPress={handleSignUp}
+			>
+				<Text style={styles.signupText}>SIGN UP</Text>
+			</TouchableOpacity>
+	
 
 			<View style={styles.orText}>
 				<Text style={styles.orText}>⎯⎯⎯⎯⎯⎯⎯⎯OR⎯⎯⎯⎯⎯⎯⎯⎯</Text>
 			</View>
 
-			<View style={styles.loginBtn}>
-				<Button
-					title="LOGIN"
-					color="#2e216f"
-					fontWeight="underline"
-					style={styles.loginBtn}
-					onPress={() => navigation.navigate('loginpage')}
-				/>
-			</View>
+			<TouchableOpacity
+				style={styles.loginBtn}
+				onPress={() => navigation.navigate('loginpage')}
+			>
+				<Text style={styles.loginText}>LOGIN</Text>
+			</TouchableOpacity>
+		
 		</SafeAreaView>
 	);
 };

@@ -1,5 +1,5 @@
 import { styles } from '../styles/components/GoToQuizStyle';
-import { Text, TouchableOpacity, ImageBackground } from 'react-native';
+import { Text, TouchableOpacity, ImageBackground, Image } from 'react-native';
 
 // Component for buttons on homepage redirecting to a specified quiz
 export const GoToQuiz = ({ nav, name, quiz, duration }) => {
@@ -14,12 +14,12 @@ export const GoToQuiz = ({ nav, name, quiz, duration }) => {
 				})
 			}
 		>
-			<ImageBackground
-				source={require('../assets/images/QuizBtn.png')}
-				style={styles.imgButton}
-			>
-				<Text style={styles.knapptext}>Øving til {name}</Text>
-			</ImageBackground>
+		<ImageBackground
+			source={require('../assets/images/QuizBtn.png')}
+			style={styles.imgButton}
+		>
+			<Text style={styles.knapptext}>Quiz:{"\n"}{name}</Text>
+		</ImageBackground>
 		</TouchableOpacity>
 	);
 };

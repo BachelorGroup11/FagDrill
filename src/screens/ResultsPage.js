@@ -15,28 +15,6 @@ const ResultsPage = ({ navigation }) => {
 		fetchResults(setResultsArray).then(() => setIsLoading(false));
 		
 	}, []);
-
-	const onShare = async () => {
-		let msg = resultsArray[0].score
-		try {
-			const result = await Share.share({
-				title: 'My result.',
-				message: `My last result on quiz: ${resultsArray[0].name}. With the score of: ${resultsArray[0].score}/${resultsArray[0].totalQuestions}`,
-			});
-			if (result.action === Share.sharedAction) {
-			  if (result.activityType) {
-				// shared with activity type of result.activityType
-			  } else {
-				// shared
-			  }
-			} else if (result.action === Share.dismissedAction) {
-			  // dismissed
-			}
-		  } catch (error) {
-			alert(error.message);
-		  }
-	  };
-
 	return (
 		<View style={styles.containerTo}>
 			{isLoading ? (
@@ -51,13 +29,8 @@ const ResultsPage = ({ navigation }) => {
 					>
 						<Text style={styles.knapptext}>X</Text>
 					</TouchableOpacity>
-					<TouchableOpacity
-						style={styles.btnBackToHome}
-						onPress={() => onShare()}
-					>
-						<Text style={styles.knapptext}>Del</Text>
-					</TouchableOpacity>
-					<View>
+
+					<View style={{ marginVertical: 50}}>
 						{resultsArray
 							.sort((a, b) => b.date - a.date)
 							.map((result, idx) => (

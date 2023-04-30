@@ -134,29 +134,31 @@ const HomePage = ({ navigation }) => {
 			style={{ flex: 1, width: null, alignSelf: 'stretch' }}
 		>
 			<SafeAreaView style={styles.containerTo}>
-				<View>
-					<Text style={styles.letsplay}>Let's play</Text>
-				</View>
+				
+				<Text style={styles.letsplay}>Let's play</Text>
 
 				<ScrollView style={styles.container}>
-					<TouchableOpacity
-						style={styles.imgBtn_profile}
-						onPress={() => navigation.navigate('userpage')}
-					>
-						<ImageBackground
-							source={require('../assets/images/Propile_btn_bg.png')}
-							style={styles.imgButton}
-						></ImageBackground>
-					</TouchableOpacity>
-					<TouchableOpacity
-						style={styles.refreshBtn}
-						onPress={() => fetchQuizzesOnRefresh()}
-					>
-						<ImageBackground
-							source={require('../assets/images/Refresh.png')}
-							style={styles.imgButton}
-						></ImageBackground>
-					</TouchableOpacity>
+
+					<View style={styles.btnView}>
+						<TouchableOpacity
+							style={styles.imgBtn_profile}
+							onPress={() => navigation.navigate('userpage')}
+						>
+							<ImageBackground
+								source={require('../assets/images/Propile_btn_bg.png')}
+								style={styles.imgButton}
+							></ImageBackground>
+						</TouchableOpacity>
+						<TouchableOpacity
+							style={styles.refreshBtn}
+							onPress={() => fetchQuizzesOnRefresh()}
+						>
+							<ImageBackground
+								source={require('../assets/images/Refresh.png')}
+								style={styles.imgButton}
+							></ImageBackground>
+						</TouchableOpacity>
+					</View>
 					<View style={styles.containerthre}>
 						{quizzes
 							.sort((a, b) => a.name.localeCompare(b.name))

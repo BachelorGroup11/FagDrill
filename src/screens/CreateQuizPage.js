@@ -6,6 +6,7 @@ import {
 	TextInput,
 	SafeAreaView,
 	TouchableOpacity,
+	Platform,
 } from 'react-native';
 import { styles } from '../styles/screens/CreateQuizStyle';
 import { MultipleSelectList } from 'react-native-dropdown-select-list';
@@ -17,6 +18,7 @@ import { fetchUsers } from '../utilities/fetchUsers';
 import { addQuiz } from '../utilities/addQuiz';
 import { addQuestions } from '../utilities/addQuestions';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+
 
 const CreateQuizPage = ({ navigation, route }) => {
 	const [users, setUsers] = useState([]);
@@ -34,7 +36,7 @@ const CreateQuizPage = ({ navigation, route }) => {
 	useEffect(() => {
 		if (route.params === undefined) return;
 		setQuestions((prevArray) => [...prevArray, route.params]);
-	}, [route.params]);
+	}, [route.params])
 
 	const saveQuiz = async () => {
 		if (title === '') return alert('Please enter title');
@@ -71,7 +73,8 @@ const CreateQuizPage = ({ navigation, route }) => {
 					placeholderTextColor={'#757A86'}
 				/>
 				<Text style={styles.title}>Duration</Text>
-				<DateTimePicker
+				{Platform.OS === 'ios' && (
+					<DateTimePicker
 					mode="time"
 					value={new Date(0, 0, 0, duration.hours, duration.minutes, 0)}
 					display="default"
@@ -79,7 +82,30 @@ const CreateQuizPage = ({ navigation, route }) => {
 					onChange={(e, d) =>
 						setDuration({ hours: d.getHours(), minutes: d.getMinutes() })
 					}
-				/>
+					/>
+				)}
+			
+				<View style={styles.android}>
+					<TextInput
+						style={styles.androidHouers}
+						value={new Date(0, 0, 0, duration.hours, 0)}
+						onChangeText={(value) => setDuration({ hours: value})}
+						placeholder="Hours"
+						keyboardType = 'numeric'
+						maxLength={2}
+					/>
+					<Text style={{fontWeight: "bold", fontSize: 20,}}> : </Text>
+					<TextInput
+						style={styles.androidMin}
+						value={new Date(0, 0, 0, duration.minutes, 0)}
+						onChangeText={(value) => setDuration({ minutes: value})}
+						placeholder="Min"
+						keyboardType = 'numeric'
+						maxLength={2}
+					/>
+				</View>
+				
+				
 				<Text style={styles.title}>Visible to</Text>
 				<MultipleSelectList
 					setSelected={(val) => setSelected(val)}
