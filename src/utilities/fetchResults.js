@@ -23,6 +23,7 @@ export const fetchResults = async (setResultsArray) => {
 				name: doc.data().name,
 				attempt: doc.data().attempt,
 				score: doc.data().score,
+				quiz_id: doc.data().quiz_id,
 				totalQuestions: doc.data().total_questions,
 				date: doc.data().date.toDate(),
 			},

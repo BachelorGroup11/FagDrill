@@ -1,8 +1,26 @@
+import { useEffect, useState } from 'react';
 import { styles } from "../styles/components/ResultStyle";
 import { Text, TouchableOpacity, View, Share } from "react-native";
+import { collection, getDocs, doc } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 
 // Render a specific result
-export const Result = ({ name, attempt, score, total, date }) => {
+export const Result = ({ name, attempt, score, total, date, quiz_id }) => {
+  const [info, setInfo] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, "quizzes"));
+      querySnapshot.forEach((doc) => {
+        if (quiz_id === doc.id && doc.data().category === 'social_quiz') {
+          setInfo(doc.id);
+        }
+	    });
+    };
+
+    fetchData().catch((error) => console.log(error));
+  }, []);
+
   const onShare = async (name,score,total) => {
 		try {
 			const result = await Share.share({
@@ -43,12 +61,15 @@ export const Result = ({ name, attempt, score, total, date }) => {
           {score}/{total}
         </Text>
         <Text style={styles.date}>{date.toDateString()}</Text>
-        <TouchableOpacity
-        style = {styles.shereBtn}
-        onPress={() => onShare(name,score,total)}
-        >
-          <Text style={styles.shereTxt}>Share</Text>
-        </TouchableOpacity>
+        {quiz_id === info && (
+          <TouchableOpacity
+            style = {styles.shereBtn}
+            onPress={() => onShare(name,score,total)}
+          >
+            <Text style={styles.shereTxt}>Share</Text>
+          </TouchableOpacity>
+        )}
+        
       </View>
     </View>
   );

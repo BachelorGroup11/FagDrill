@@ -78,7 +78,7 @@ const InfoPage = ({ route, navigation }) => {
                         <Text style={styles.leaderboardtext}>
                           {result.name}
                         </Text>
-                        <Text style={styles.leaderboardtext}>
+                        <Text style={styles.leaderboardScore}>
                           {result.score} / {route.params.totalQuestions}
                         </Text>
                       </View>

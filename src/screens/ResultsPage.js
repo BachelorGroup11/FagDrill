@@ -8,7 +8,6 @@ import { fetchResults } from "../utilities/fetchResults";
 const ResultsPage = ({ navigation }) => {
 	const [resultsArray, setResultsArray] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const [isShare, setIsShare] = useState([]);
 
 	// Fetch all result documents linked to the specific user from firebase
 	useEffect(() => {
@@ -40,6 +39,7 @@ const ResultsPage = ({ navigation }) => {
 									score={result.score}
 									total={result.totalQuestions}
 									date={result.date}
+									quiz_id={result.quiz_id}
 									key={idx}
 								/>
 								

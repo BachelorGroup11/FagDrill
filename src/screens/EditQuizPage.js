@@ -6,6 +6,7 @@ import {
   TextInput,
   SafeAreaView,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import { styles } from '../styles/screens/CreateQuizStyle';
 import {
@@ -107,15 +108,19 @@ const EditQuizPage = ({ navigation, route }) => {
           placeholderTextColor={'#757A86'}
         />
         <Text style={styles.title}>Duration</Text>
-        <DateTimePicker
-          mode="time"
-          value={new Date(0, 0, 0, duration.hours, duration.minutes, 0)}
-          display="default"
-          style={{ alignSelf: 'flex-start', padding: 8 }}
-          onChange={(e, d) =>
-            setDuration({ hours: d.getHours(), minutes: d.getMinutes() })
-          }
-        />
+        
+        {Platform.OS === 'ios' && (
+          <DateTimePicker
+            mode="time"
+            value={new Date(0, 0, 0, duration.hours, duration.minutes, 0)}
+            display="default"
+            style={{ alignSelf: 'flex-start', padding: 8 }}
+            onChange={(e, d) =>
+              setDuration({ hours: d.getHours(), minutes: d.getMinutes() })
+            }
+          />
+        )}
+        
         <Text style={styles.title}>Category</Text>
         <SelectList
           placeholder={`${categoryPlaceholder}`}

@@ -53,8 +53,13 @@ const ManageQuizPage = ({ navigation }) => {
 
   return (
     <ScrollView bounces={false}>
-      <GoBack />
       <Text style={styles.header}>Manage Quizzes</Text>
+      <TouchableOpacity
+				style={styles.btnBackToHome}
+				onPress={() => navigation.replace("userpage")}
+			>
+				<Text style={styles.knapptext}>X</Text>
+			</TouchableOpacity>
       <View style={styles.searchsection}>
         <FontAwesome
           name="search"
