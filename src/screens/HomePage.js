@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 import {
-	Text,
-	View,
-	TouchableOpacity,
-	StatusBar,
-	ScrollView,
-	ImageBackground,
+  Text,
+  View,
+  TouchableOpacity,
+  StatusBar,
+  ScrollView,
+  ImageBackground,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/HomeStyle';
@@ -18,171 +18,182 @@ import Constants from 'expo-constants';
 import storage from '@react-native-async-storage/async-storage';
 
 Notifications.setNotificationHandler({
-	handleNotification: async () => ({
-		shouldShowAlert: true,
-		shouldPlaySound: true,
-		shouldSetBadge: true,
-	}),
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
 });
 
 const HomePage = ({ navigation }) => {
-	const [quizzes, setQuizzes] = useState([]);
-	const [notification, setNotification] = useState(false);
-	const notificationListener = useRef();
-	const responseListener = useRef();
+  const [quizzes, setQuizzes] = useState([]);
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
 
-	const auth = getAuth();
-	const user = auth.currentUser;
+  const auth = getAuth();
+  const user = auth.currentUser;
 
-	useEffect(() => {
-		setQuizzes([]);
-		
-		const fetchQuizzes = async () => {
-			const quizQuery = query(
-				collection(db, 'quizzes'),
-				where('users', 'array-contains', user.uid)
-			);
+  useEffect(() => {
+    setQuizzes([]);
 
-			const querySnapshot = await getDocs(quizQuery);
-			querySnapshot.forEach((doc) => {
-				setQuizzes((prevArray) => [
-					...prevArray,
-					{ id: doc.id, name: doc.data().name, duration: doc.data().duration },
-				]);
-			});
-		};
-		fetchQuizzes().catch((error) => console.log(error));
+    const fetchQuizzes = async () => {
+      const quizQuery = query(
+        collection(db, 'quizzes'),
+        where('users', 'array-contains', user.uid)
+      );
 
-		const getPermission = async () => {
-			if (Constants.isDevice) {
-				const { status: existingStatus } =
-					await Notifications.getPermissionsAsync();
-				let finalStatus = existingStatus;
-				if (existingStatus !== 'granted') {
-					const { status } = await Notifications.requestPermissionsAsync();
-					finalStatus = status;
-				}
-				if (finalStatus !== 'granted') {
-					alert('Enable push notifications to use the app!');
-					await storage.setItem('expopushtoken', '');
-					return;
-				}
-				const token = (await Notifications.getExpoPushTokenAsync()).data;
-				await storage.setItem('expopushtoken', token);
-			} else {
-				alert('Must use physical device for Push Notifications');
-			}
+      const querySnapshot = await getDocs(quizQuery);
+      querySnapshot.forEach((doc) => {
+        setQuizzes((prevArray) => [
+          ...prevArray,
+          {
+            id: doc.id,
+            name: doc.data().name,
+            duration: doc.data().duration,
+            category: doc.data().category,
+          },
+        ]);
+      });
+    };
+    fetchQuizzes().catch((error) => console.log(error));
 
-			if (Platform.OS === 'android') {
-				Notifications.setNotificationChannelAsync('default', {
-					name: 'default',
-					importance: Notifications.AndroidImportance.MAX,
-					vibrationPattern: [0, 250, 250, 250],
-					lightColor: '#FF231F7C',
-				});
-			}
-		};
-		getPermission();
+    const getPermission = async () => {
+      if (Constants.isDevice) {
+        const { status: existingStatus } =
+          await Notifications.getPermissionsAsync();
+        let finalStatus = existingStatus;
+        if (existingStatus !== 'granted') {
+          const { status } = await Notifications.requestPermissionsAsync();
+          finalStatus = status;
+        }
+        if (finalStatus !== 'granted') {
+          alert('Enable push notifications to use the app!');
+          await storage.setItem('expopushtoken', '');
+          return;
+        }
+        const token = (await Notifications.getExpoPushTokenAsync()).data;
+        await storage.setItem('expopushtoken', token);
+      } else {
+        alert('Must use physical device for Push Notifications');
+      }
 
-		notificationListener.current =
-			Notifications.addNotificationReceivedListener((notification) => {
-				setNotification(notification);
-			});
+      if (Platform.OS === 'android') {
+        Notifications.setNotificationChannelAsync('default', {
+          name: 'default',
+          importance: Notifications.AndroidImportance.MAX,
+          vibrationPattern: [0, 250, 250, 250],
+          lightColor: '#FF231F7C',
+        });
+      }
+    };
+    getPermission();
 
-		responseListener.current =
-			Notifications.addNotificationResponseReceivedListener((response) => {});
+    notificationListener.current =
+      Notifications.addNotificationReceivedListener((notification) => {
+        setNotification(notification);
+      });
 
-		return () => {
-			Notifications.removeNotificationSubscription(
-				notificationListener.current
-			);
-			Notifications.removeNotificationSubscription(responseListener.current);
-		};
-	}, []);
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener((response) => {});
 
-	Notifications.scheduleNotificationAsync({
-		content: {
-			title: 'Have you played today?',
-			data: { data: 'data goes here' },
-		},
-		trigger: {
-			hour: 21,
-			minute: 0,
-			repeats: true,
-		},
-	});
+    return () => {
+      Notifications.removeNotificationSubscription(
+        notificationListener.current
+      );
+      Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
 
-	const fetchQuizzesOnRefresh = async () => {
-		setQuizzes([]);
-		const quizQuery = query(
-			collection(db, 'quizzes'),
-			where('users', 'array-contains', user.uid)
-		);
+  Notifications.scheduleNotificationAsync({
+    content: {
+      title: 'Have you played today?',
+      data: { data: 'data goes here' },
+    },
+    trigger: {
+      hour: 21,
+      minute: 0,
+      repeats: true,
+    },
+  });
 
-		const querySnapshot = await getDocs(quizQuery);
-		querySnapshot.forEach((doc) => {
-			setQuizzes((prevArray) => [
-				...prevArray,
-				{ id: doc.id, name: doc.data().name, duration: doc.data().duration },
-			]);
-		});
-	};
+  const fetchQuizzesOnRefresh = async () => {
+    setQuizzes([]);
+    const quizQuery = query(
+      collection(db, 'quizzes'),
+      where('users', 'array-contains', user.uid)
+    );
 
-	return (
-		<ImageBackground
-			source={require('../assets/images/home_page_bg.png')}
-			style={{ flex: 1, width: null, alignSelf: 'stretch' }}
-		>
-			<SafeAreaView style={styles.containerTo}>
-				
-				<Text style={styles.letsplay}>Let's play</Text>
+    const querySnapshot = await getDocs(quizQuery);
+    querySnapshot.forEach((doc) => {
+      setQuizzes((prevArray) => [
+        ...prevArray,
+        {
+          id: doc.id,
+          name: doc.data().name,
+          duration: doc.data().duration,
+          category: doc.data().category,
+          totalQuestions: doc.data().questions.length,
+        },
+      ]);
+    });
+  };
 
-				<ScrollView style={styles.container}>
+  return (
+    <ImageBackground
+      source={require('../assets/images/home_page_bg.png')}
+      style={{ flex: 1, width: null, alignSelf: 'stretch' }}
+    >
+      <SafeAreaView style={styles.containerTo}>
+        <View>
+          <Text style={styles.letsplay}>Let's play</Text>
+        </View>
 
-					<View style={styles.btnView}>
-						<TouchableOpacity
-							style={styles.imgBtn_profile}
-							onPress={() => navigation.navigate('userpage')}
-						>
-							<ImageBackground
-								source={require('../assets/images/Propile_btn_bg.png')}
-								style={styles.imgButton}
-							></ImageBackground>
-						</TouchableOpacity>
-						<TouchableOpacity
-							style={styles.refreshBtn}
-							onPress={() => fetchQuizzesOnRefresh()}
-						>
-							<ImageBackground
-								source={require('../assets/images/Refresh.png')}
-								style={styles.imgButton}
-							></ImageBackground>
-						</TouchableOpacity>
-					</View>
-					<View style={styles.containerthre}>
-						{quizzes
-							.sort((a, b) => a.name.localeCompare(b.name))
-							.map((value, index) => (
-								<GoToQuiz
-									nav={navigation}
-									name={value.name}
-									quiz={value.id}
-									duration={value.duration}
-									key={index}
-								/>
-							))}
-					</View>
-					<TouchableOpacity
-						style={styles.resultBtn}
-						onPress={() => navigation.navigate('resultspage')}
-					>
-						<Text style={styles.resultTxt}>Results</Text>
-					</TouchableOpacity>
-				</ScrollView>
-			</SafeAreaView>
-			<StatusBar translucent backgroundColor="transparent" />
-		</ImageBackground>
-	);
+        <ScrollView style={styles.container}>
+          <TouchableOpacity
+            style={styles.imgBtn_profile}
+            onPress={() => navigation.navigate('userpage')}
+          >
+            <ImageBackground
+              source={require('../assets/images/Propile_btn_bg.png')}
+              style={styles.imgButton}
+            ></ImageBackground>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.refreshBtn}
+            onPress={() => fetchQuizzesOnRefresh()}
+          >
+            <ImageBackground
+              source={require('../assets/images/Refresh.png')}
+              style={styles.imgButton}
+            ></ImageBackground>
+          </TouchableOpacity>
+          <View style={styles.containerthre}>
+            {quizzes
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map((value, index) => (
+                <GoToQuiz
+                  nav={navigation}
+                  name={value.name}
+                  quiz={value.id}
+                  duration={value.duration}
+                  category={value.category}
+                  totalQuestions={value.totalQuestions}
+                  key={index}
+                />
+              ))}
+          </View>
+          <TouchableOpacity
+            style={styles.resultBtn}
+            onPress={() => navigation.navigate('resultspage')}
+          >
+            <Text style={styles.resultTxt}>Results</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </SafeAreaView>
+      <StatusBar translucent backgroundColor="transparent" />
+    </ImageBackground>
+  );
 };
 
 export default HomePage;
