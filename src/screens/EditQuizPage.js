@@ -17,6 +17,7 @@ import { db } from '../../firebaseConfig';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { GoBack, Question } from '../components/Index';
 import { fetchUsersSetPlaceholder } from '../utilities/fetchUsersSetPlaceholder';
+import { fetcQuizCategoryPlaceholder } from '../utilities/fetchQuizCategoryPlaceholder';
 import { fetchQuestions } from '../utilities/fetchQuestions';
 import { addQuiz } from '../utilities/addQuiz';
 import { addQuestions } from '../utilities/addQuestions';
@@ -27,6 +28,7 @@ const EditQuizPage = ({ navigation, route }) => {
   const [questions, setQuestions] = useState([]);
   const [deletedQuestions, setDeletedQuestions] = useState([]);
   const [placeholder, setPlaceholder] = useState([]);
+  const [categoryPlaceholder, setcategoryPlaceholder] = useState([]);
   const [selected, setSelected] = useState([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -38,6 +40,7 @@ const EditQuizPage = ({ navigation, route }) => {
     setUsers([]);
     setQuestions([]);
     fetchUsersSetPlaceholder(setUsers, setPlaceholder, route);
+    fetcQuizCategoryPlaceholder(quizRef,setcategoryPlaceholder, route);
     fetchQuestions(setQuestions, route);
     setTitle(route.params.title);
     setDescription(route.params.description);
@@ -115,7 +118,7 @@ const EditQuizPage = ({ navigation, route }) => {
         />
         <Text style={styles.title}>Category</Text>
         <SelectList
-          placeholder={`${category}`}
+          placeholder={`${categoryPlaceholder}`}
           setSelected={(val) => setCategory(val)}
           data={[
             { label: 'Social Quiz', value: 'social_quiz' },
