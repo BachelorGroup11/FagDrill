@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
 		flex: 1,
 	},
 	progressContainer: {
+		//backgroundColor: "#C0C0C0",
 		width: 330,
 		height: 44,
 		flexDirection: 'row',
@@ -35,6 +36,7 @@ export const styles = StyleSheet.create({
 		shadowOffset: { width: 0, height: 4 },
 		shadowOpacity: 0.2,
 		shadowRadius: 3,
+		elevation: 5,
 	},
 	QuestionText: {
 		fontFamily: 'PoppinsMedium',
@@ -74,6 +76,7 @@ export const styles = StyleSheet.create({
 		fontFamily: 'PoppinsBold',
 	},
 	summarycontainer: {
+		backgroundColor: "#C0C0C0",
 		position: 'absolute',
 		alignSelf: 'center',
 		justifyContent: 'center',
@@ -86,6 +89,7 @@ export const styles = StyleSheet.create({
 		shadowOffset: { width: 0, height: 4 },
 		shadowOpacity: 0.2,
 		shadowRadius: 3,
+		elevation: 5, // Android
 		borderRadius: 10,
 		paddingHorizontal: 10,
 	},

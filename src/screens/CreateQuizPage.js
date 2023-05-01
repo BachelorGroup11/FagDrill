@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+<<<<<<< SosialQuiz
   ScrollView,
   View,
   Text,
@@ -20,6 +21,27 @@ import { fetchUsers } from "../utilities/fetchUsers";
 import { addQuiz } from "../utilities/addQuiz";
 import { addQuestions } from "../utilities/addQuestions";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+=======
+	ScrollView,
+	View,
+	Text,
+	TextInput,
+	SafeAreaView,
+	TouchableOpacity,
+	Platform,
+} from 'react-native';
+import { styles } from '../styles/screens/CreateQuizStyle';
+import { MultipleSelectList } from 'react-native-dropdown-select-list';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { db } from '../../firebaseConfig';
+import { collection, doc } from 'firebase/firestore';
+import { GoBack, Question } from '../components/Index';
+import { fetchUsers } from '../utilities/fetchUsers';
+import { addQuiz } from '../utilities/addQuiz';
+import { addQuestions } from '../utilities/addQuestions';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+>>>>>>> main
+
 
 const CreateQuizPage = ({ navigation, route }) => {
   const [users, setUsers] = useState([]);
@@ -40,9 +62,16 @@ const CreateQuizPage = ({ navigation, route }) => {
     setQuestions((prevArray) => [...prevArray, route.params]);
   }, [route.params]);
 
+<<<<<<< SosialQuiz
   const saveQuiz = async () => {
     if (title === "") return alert("Please enter title");
     if (category.length === 0) return alert("Please select a category");
+=======
+	useEffect(() => {
+		if (route.params === undefined) return;
+		setQuestions((prevArray) => [...prevArray, route.params]);
+	}, [route.params])
+>>>>>>> main
 
     const quizRef = doc(collection(db, "quizzes"));
     const userIds = selected.map(

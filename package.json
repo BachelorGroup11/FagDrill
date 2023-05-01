@@ -30,6 +30,7 @@
     "react-native": "0.70.5",
     "react-native-chart-kit": "^6.12.0",
     "react-native-countdown-circle-timer": "^3.2.1",
+    "react-native-datepicker": "^1.7.2",
     "react-native-dropdown-select-list": "^2.0.4",
     "react-native-gesture-handler": "^2.9.0",
     "react-native-progress": "^5.0.0",

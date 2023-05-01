@@ -6,6 +6,7 @@ import {
   ScrollView,
   SafeAreaView,
   TextInput,
+  Platform,
 } from 'react-native';
 import { styles } from '../styles/screens/ManageQuizStyle';
 import { GoBack } from '../components/GoBack';
@@ -41,6 +42,14 @@ const ManageQuizPage = ({ navigation }) => {
       setFilteredData(quizzes);
     }
   };
+  
+  const createQuiz = () => {
+		if (Platform.OS === 'ios') {
+			navigation.navigate('createquizpage')
+		}else{
+			alert("You can only create a quiz on an IOS device.\n\nFor now")
+		}
+	};
 
   return (
     <ScrollView bounces={false}>
@@ -76,7 +85,7 @@ const ManageQuizPage = ({ navigation }) => {
         ))}
         <TouchableOpacity
           style={styles.create}
-          onPress={() => navigation.navigate('createquizpage')}
+          onPress={() => createQuiz()}
         >
           <Text style={styles.createtext}>Create Quiz</Text>
         </TouchableOpacity>

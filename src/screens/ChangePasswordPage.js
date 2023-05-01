@@ -43,38 +43,40 @@ const ChangePasswordPage = ({ navigation }) => {
 		<SafeAreaView style={styles.container}>
 			<Text style={styles.title}>Change{"\n"}Password</Text>
 
-			<View style={styles.container}>
+			<View style={styles.backbtnView}>
 				<TouchableOpacity
 					style={styles.btnBackToHome}
 					onPress={() => goToUserPages()}
 				>
 					<Text style={styles.knapptext}>X</Text>
 				</TouchableOpacity>
-				<View style={styles.inputViewEmail}>
-					<Text>Current Password</Text>
-				</View>
+			</View>
+
+			<View style={styles.inputViewEmail}>
+				<Text>Current Password</Text>
 				<TextInput
 					style={styles.TextInputEmail}
 					onChangeText={(text) => setCurrentPassword(text)}
 					secureTextEntry
 				/>
+			</View>
 
-				<View style={styles.inputViewPassword}>
-					<Text>New Password</Text>
-				</View>
+			<View style={styles.inputViewPassword}>
+				<Text>New Password</Text>
 				<TextInput
 					style={styles.TextInputPassword}
 					onChangeText={(text) => setNewPassword(text)}
 					secureTextEntry
 				/>
-
-				<TouchableOpacity
-					style={styles.appButtonContainer2}
-					onPress={() => changePassword(currentPassword, newPassword)}
-				>
-					<Text style={styles.YourAccountText2}>Update</Text>
-				</TouchableOpacity>
 			</View>
+
+			<TouchableOpacity
+				style={styles.appButtonContainer2}
+				onPress={() => changePassword(currentPassword, newPassword)}
+			>
+				<Text style={styles.YourAccountText2}>Update</Text>
+			</TouchableOpacity>
+
 		</SafeAreaView>
 	);
 };

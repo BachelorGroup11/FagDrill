@@ -1,5 +1,5 @@
 import { styles } from '../styles/components/GoToQuizStyle';
-import { Text, TouchableOpacity, ImageBackground } from 'react-native';
+import { Text, TouchableOpacity, ImageBackground, Image } from 'react-native';
 
 // Component for buttons on homepage redirecting to a specified quiz
 export const GoToQuiz = ({

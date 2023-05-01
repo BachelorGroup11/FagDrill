@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Text, View, TextInput, Button, Image } from 'react-native';
+import { Text, View, TextInput, Button, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/LoginStyle';
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
@@ -39,54 +39,47 @@ const LoginPage = ({ navigation }) => {
 			<Text style={styles.title}>Log In</Text>
 
 			<View style={styles.inputViewEmail}>
-				<Text>Email</Text>
-			</View>
-			<TextInput
-				style={styles.TextInputEmail}
-				onChangeText={(text) => setEmail(text)}
-			/>
-
-			<View style={styles.inputViewPassword}>
-				<Text>Password</Text>
-			</View>
-			<TextInput
-				style={styles.TextInputPassword}
-				onChangeText={(text) => setPassword(text)}
-				secureTextEntry
-			/>
-
-			<View style={styles.loginBtn}>
-				<Button
-					title="Log In"
-					color="white"
-					fontWeight="bold"
-					style={styles.loginBtn}
-					onPress={handleLogin}
+				<Text style={styles.emailtxt}>Email</Text>
+				<TextInput
+					style={styles.TextInputEmail}
+					onChangeText={(text) => setEmail(text)}
 				/>
 			</View>
+			
+			<View style={styles.inputViewPassword}>
+				<Text style={styles.passwordtxt}>Password</Text>
+				<TextInput
+					style={styles.TextInputPassword}
+					onChangeText={(text) => setPassword(text)}
+					secureTextEntry
+				/>
+			</View>
+
+			<TouchableOpacity 
+				style={styles.loginBtn} 
+				onPress={handleLogin}
+			>
+			<Text style={styles.loginText}>Log In</Text>
+			</TouchableOpacity>
 
 			<View style={styles.orText}>
 				<Text style={styles.orText}>⎯⎯⎯⎯⎯⎯⎯⎯OR⎯⎯⎯⎯⎯⎯⎯⎯</Text>
 			</View>
 
-			<View style={styles.signupBtn}>
-				<Button
-					title="SIGN UP"
-					color="#2e216f"
-					fontWeight="underline"
-					style={styles.loginBtn}
-					onPress={() => navigation.navigate('signuppage')}
-				/>
-			</View>
-			<View style={styles.forgotPass}>
-				<Button
-					title="Forgot Password?"
-					color="#039BE5"
-					fontWeight="underline"
-					style={styles.loginBtn}
-					onPress={() => navigation.navigate('forgotpasswordpage')}
-				/>
-			</View>
+			<TouchableOpacity
+				style={styles.signupBtn}
+				onPress={() => navigation.navigate('signuppage')}
+			>
+				<Text style={styles.signupText}>SIGN UP</Text>
+			</TouchableOpacity>
+			
+			<TouchableOpacity
+				style={styles.forgotPass}
+				onPress={() => navigation.navigate('forgotpasswordpage')}
+			>
+				<Text style={styles.forgotText}>Forgot Password?</Text>
+			</TouchableOpacity>
+
 		</SafeAreaView>
 	);
 };
