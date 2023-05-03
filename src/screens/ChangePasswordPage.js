@@ -6,23 +6,29 @@ import {
 	updatePassword,
 	reauthenticateWithCredential,
 	EmailAuthProvider,
+	getAuth,
 } from "firebase/auth";
 
 const ChangePasswordPage = ({ navigation }) => {
 	const [currentPassword, setCurrentPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
+	const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
 	const goToUserPages = () => {
 		navigation.replace("userpage");
 	};
 
+	const auth = getAuth();
+	const user = auth.currentUser;
+
 	// Gets Current Pasword and CHanges it into New
-	const changePassword = (oldPassword, newPassword) => {
+	const changePassword = (oldPassword, newPassword, confirmNewPassword) => {
 		const credential = EmailAuthProvider.credential(user.email, oldPassword);
 
 		reauthenticateWithCredential(user, credential)
 			.then(() => {
-				updatePassword(user, newPassword)
+				if (newPassword === confirmNewPassword) {
+					updatePassword(user, newPassword)
 					.then(() => {
 						goToUserPages();
 						//navigation.navigate("userpage"); //Once password change it goes to userpage
@@ -33,6 +39,10 @@ const ChangePasswordPage = ({ navigation }) => {
 					.catch((error) => {
 						console.log(error);
 					});
+				}else{
+					alert("The new passwords did not match");
+				}
+				
 			})
 			.catch((error) => {
 				alert(error.message);
@@ -70,9 +80,18 @@ const ChangePasswordPage = ({ navigation }) => {
 				/>
 			</View>
 
+			<View style={styles.inputViewPassword}>
+				<Text>Confirm New Password</Text>
+				<TextInput
+					style={styles.TextInputPassword}
+					onChangeText={(text) => setConfirmNewPassword(text)}
+					secureTextEntry
+				/>
+			</View>
+
 			<TouchableOpacity
 				style={styles.appButtonContainer2}
-				onPress={() => changePassword(currentPassword, newPassword)}
+				onPress={() => changePassword(currentPassword, newPassword, confirmNewPassword)}
 			>
 				<Text style={styles.YourAccountText2}>Update</Text>
 			</TouchableOpacity>

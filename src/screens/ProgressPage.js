@@ -122,15 +122,10 @@ const ProgressPage = ({ navigation }) => {
           )}
         </View>
 
-        <View style={styles.scoreTable}>
-          <Text style={styles.txtScor}>Scores:</Text>
-          <Text style={styles.txtavg}>
-            Average:{' '}
-            {scoresArray.reduce((a, b) => a + b, 0) / scoresArray.length}{' '}
-            Higest: {Math.max(...scoresArray)} Lowest:{' '}
-            {Math.min(...scoresArray)}
-          </Text>
-        </View>
+			<View style={styles.scoreTable}>
+				<Text style={styles.txtScor}>Scores:</Text>
+				<Text style={styles.txtavg}>Average: {parseFloat((scoresArray.reduce((a, b) => a + b, 0))/scoresArray.length).toFixed(2)}			Higest: {Math.max(...scoresArray)}			Lowest: {Math.min(...scoresArray)}</Text>
+			</View>
 
         <Text style={styles.txtProgress}>View Progress Form:</Text>
 

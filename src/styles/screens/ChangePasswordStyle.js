@@ -61,6 +61,7 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: "80%",
     width: 250,
+    marginBottom: 20,
   },
 
   inputViewPassword: {
