@@ -10,3 +10,5 @@ export * from './AddFillInBlank';
 export * from './AddImageQuestion';
 export * from './ImageQuestion';
 export * from './Question';
+export * from './GoToRecommended';
+export * from './GoToQuiz';
