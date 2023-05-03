@@ -38,7 +38,7 @@ const UserList = ({ navigation }) => {
 
   const [newSearch, setNewSearch] = useState("");
 
-  let row: Array<any> = [];
+  let row = [];
   let prevOpenedRow;
 
   //here we fatch the user list so we can display them later

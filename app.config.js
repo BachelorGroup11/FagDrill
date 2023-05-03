@@ -2,9 +2,9 @@ import 'dotenv/config';
 
 export default {
 	expo: {
-		name: 'FagDrill',
+		name: 'Fag Drill',
 		slug: 'FagDrill',
-		version: '1.0.0',
+		version: '1.1.0',
 		orientation: 'portrait',
 		icon: './src/assets/images/icon.png',
 		userInterfaceStyle: 'light',
@@ -19,8 +19,12 @@ export default {
 		assetBundlePatterns: ['**/*'],
 		ios: {
 			supportsTablet: true,
+			bundleIdentifier: "FD.fag.drill",
+			buildNumber: "2"
 		},
+		
 		android: {
+			package: "FD.fag.drill",
 			adaptiveIcon: {
 				foregroundImage: './src/assets/images/adaptive-icon.png',
 				backgroundColor: '#FFFFFF',
@@ -36,6 +40,9 @@ export default {
 			firebaseStorageBucket: process.env.FIREBASE_STORAGE_BUCKET,
 			firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
 			firebaseAppId: process.env.FIREBASE_APP_ID,
+			eas: {
+				projectId: "2683e6a3-06cc-40ee-addc-d5099698bb8c",
+			  },
 		},
 	},
 };

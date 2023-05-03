@@ -17,7 +17,7 @@ import {
 	addResult,
 	formatTime,
 	hoursAndMinutesToSeconds,
-} from '../utilities/Index';
+} from '../utilities/IndexTwo';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 const PlayPage = ({ route, navigation }) => {

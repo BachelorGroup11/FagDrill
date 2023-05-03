@@ -1,0 +1,25 @@
+{
+  "cli": {
+    "version": ">= 3.3.2"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "markusliland@live.no",
+        "ascAppId": "6448708429",
+        "appleTeamId": "3BS6B4A697"
+      }
+    }
+  }
+}
