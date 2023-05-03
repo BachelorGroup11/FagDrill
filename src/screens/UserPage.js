@@ -6,6 +6,9 @@ import { db } from '../../firebaseConfig';
 import { useEffect, useState } from 'react';
 import { getAuth } from 'firebase/auth';
 import { LoadingAnimation } from '../components/Index';
+import { Foundation } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 const UserPage = ({ navigation }) => {
   const [isToggle, setIsToggle] = useState(false);
@@ -23,15 +26,12 @@ const UserPage = ({ navigation }) => {
 
       const querySnapshot = await getDocs(userQuery);
       querySnapshot.forEach((doc) => {
-        console.log(doc.data());
         if (doc.data().is_admin == true || doc.data().is_super_admin == true) {
           setIsToggle(!isToggle);
           setIsLoaded(!isLoaded);
-          console.log(isToggle);
         } else {
           setIsLoaded(!isLoaded);
           setIsToggle(isToggle);
-          console.log(isToggle);
         }
       });
     };
@@ -68,6 +68,12 @@ const UserPage = ({ navigation }) => {
             style={styles.appButtonContainer1}
             onPress={() => navigation.navigate('managequizpage')}
           >
+            <FontAwesome5
+              name="edit"
+              size={20}
+              color="#FFFFFF"
+              style={{ right: 38 }}
+            />
             <Text style={styles.YourAccountText1}>Manage Quizzes</Text>
           </TouchableOpacity>
 
@@ -75,6 +81,12 @@ const UserPage = ({ navigation }) => {
             style={styles.appButtonContainer3}
             onPress={() => navigation.navigate('manageuserpage')}
           >
+            <FontAwesome5
+              name="user-edit"
+              size={20}
+              color="#FFFFFF"
+              style={{ right: 47 }}
+            />
             <Text style={styles.YourAccountText1}>Manage Users</Text>
           </TouchableOpacity>
 
@@ -82,6 +94,12 @@ const UserPage = ({ navigation }) => {
             style={styles.appButtonContainer4}
             onPress={() => navigation.navigate('progresspage')}
           >
+            <Entypo
+              name="progress-two"
+              size={25}
+              color="#FFFFFF"
+              style={{ right: 78 }}
+            />
             <Text style={styles.YourAccountText1}>Progress</Text>
           </TouchableOpacity>
 
@@ -89,6 +107,12 @@ const UserPage = ({ navigation }) => {
             style={styles.appButtonContainer5}
             onPress={() => navigation.navigate('resultspage')}
           >
+            <Foundation
+              name="results"
+              size={25}
+              color="#FFFFFF"
+              style={styles.icons}
+            />
             <Text style={styles.YourAccountText1}>Results</Text>
           </TouchableOpacity>
 
@@ -96,6 +120,12 @@ const UserPage = ({ navigation }) => {
             style={styles.appButtonContainer5}
             onPress={() => navigation.navigate('changepasswordpage')}
           >
+            <FontAwesome5
+              name="lock"
+              size={20}
+              color="#FFFFFF"
+              style={{ right: 30 }}
+            />
             <Text style={styles.YourAccountText1}>Change Password</Text>
           </TouchableOpacity>
 

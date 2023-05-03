@@ -10,15 +10,15 @@ export const styles = StyleSheet.create({
     margin: 5,
   },
   shereBtn: {
-    backgroundColor: '#5E73E8',
+    backgroundColor: '#4D5FC2',
     justifyContent: 'center',
     borderRadius: 10,
     width: 50,
     height: 50,
     position: 'absolute',
     alignItems: 'center',
-    bottom: 5,
-    right: 5,
+    bottom: 10,
+    right: 10,
   },
   shereTxt: {
     color: '#ffffff',
@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   quizName: {
     color: '#ffffff',
     fontFamily: 'PoppinsBold',
-    fontSize: 27,
+    fontSize: 25,
     position: 'absolute',
     left: 10,
     top: 5,

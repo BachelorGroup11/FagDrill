@@ -57,7 +57,7 @@ export const Result = ({ name, attempt, score, total, date, quiz_id }) => {
         ]}
       >
         <Text style={styles.quizName}>{name}</Text>
-        <Text style={styles.attemptNum}>Forsøk: {attempt}</Text>
+        <Text style={styles.attemptNum}>Score:</Text>
         <Text style={styles.correctNum}>
           {score}/{total}
         </Text>
