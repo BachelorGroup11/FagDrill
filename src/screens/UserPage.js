@@ -1,7 +1,6 @@
 import { Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../styles/screens/UserStyle';
-import { auth } from '../../firebaseConfig';
 import { collection, query, getDocs, where } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { useEffect, useState } from 'react';

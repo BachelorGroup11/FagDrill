@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   FlatList,
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
   TextInput,
   Alert,
-} from "react-native";
-import { GestureHandlerRootView, Swipeable } from "react-native-gesture-handler";
-import Constants from "expo-constants";
-
+} from 'react-native';
+import {
+  GestureHandlerRootView,
+  Swipeable,
+} from 'react-native-gesture-handler';
 import {
   getFirestore,
   collection,
@@ -18,12 +18,10 @@ import {
   doc,
   updateDoc,
   deleteDoc,
-  getDoc,
   query,
   where,
-} from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { styles } from "../styles/screens/ManageUserStyle";
+} from 'firebase/firestore';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const auth = getAuth();
 
@@ -36,7 +34,7 @@ const UserList = ({ navigation }) => {
   const auth = getAuth();
   const user = auth.currentUser;
 
-  const [newSearch, setNewSearch] = useState("");
+  const [newSearch, setNewSearch] = useState('');
 
   let row = [];
   let prevOpenedRow;
@@ -52,8 +50,8 @@ const UserList = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       const userQuery = query(
-        collection(db, "users"),
-        where("user_id", "==", user.uid)
+        collection(db, 'users'),
+        where('user_id', '==', user.uid)
       );
 
       const querySnapshot = await getDocs(userQuery);
@@ -63,7 +61,7 @@ const UserList = ({ navigation }) => {
           console.log(isSuperToggle);
 
           const fetchUsers = async () => {
-            const querySnapshot = await getDocs(collection(db, "users"));
+            const querySnapshot = await getDocs(collection(db, 'users'));
             const fetchedUsers = [];
             querySnapshot.forEach((doc) => {
               const user = doc.data();
@@ -86,7 +84,7 @@ const UserList = ({ navigation }) => {
     fetchData().catch((error) => console.log(error));
 
     const fetchUsers = async () => {
-      const querySnapshot = await getDocs(collection(db, "users"));
+      const querySnapshot = await getDocs(collection(db, 'users'));
       const fetchedUsers = [];
 
       querySnapshot.forEach((doc) => {
@@ -107,16 +105,16 @@ const UserList = ({ navigation }) => {
   // Create a two button alert as provention to not make admins by accident. this alert have a cancel and edit admin status.
   const createTwoButtonAlertAdmin = (userId, is_admin) =>
     Alert.alert(
-      "Are you sure you want to edit the admin status of this user?",
-      "",
+      'Are you sure you want to edit the admin status of this user?',
+      '',
       [
         {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
         },
         {
-          text: "Edit admin status",
+          text: 'Edit admin status',
           onPress: () => makeAdmin(userId, is_admin),
         },
       ]
@@ -125,13 +123,13 @@ const UserList = ({ navigation }) => {
   const makeAdmin = async (userId, is_admin) => {
     try {
       // Retrieve the user's information
-      const userRef = doc(db, "users", userId);
+      const userRef = doc(db, 'users', userId);
       // Check if the current user is a super admin
 
       // Update the user's is_admin property in the Firestore database
       await updateDoc(userRef, { is_admin: !is_admin });
 
-      console.log("User is now an admin");
+      console.log('User is now an admin');
 
       // Update the state or UI with the updated user data
       const updatedUsers = users.map((user) => {
@@ -142,31 +140,31 @@ const UserList = ({ navigation }) => {
       });
       setUsers(updatedUsers);
     } catch (error) {
-      console.error("Error updating user:", error);
+      console.error('Error updating user:', error);
     }
   };
 
   // Create a two button alert as provention to not delete users by accident. this alert have a cancel and delete users.
   const createTwoButtonAlertDelete = (user) =>
-    Alert.alert("Are you sure you want to delete this user?", "", [
+    Alert.alert('Are you sure you want to delete this user?', '', [
       {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel",
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
       },
-      { text: "Delete", onPress: () => deleteUser(user) },
+      { text: 'Delete', onPress: () => deleteUser(user) },
     ]);
 
   // this delets users.
   const deleteUser = async (userId) => {
     try {
-      const userRef = doc(db, "users", userId);
+      const userRef = doc(db, 'users', userId);
       await deleteDoc(userRef); // Delete the user document from Firestore
-      console.log("User deleted successfully");
+      console.log('User deleted successfully');
       const updatedUsers = users.filter((user) => user.id !== userId);
       setUsers(updatedUsers); // Update the list of users with the deleted user removed
     } catch (error) {
-      console.error("Error deleting user:", error);
+      console.error('Error deleting user:', error);
     }
   };
 
@@ -179,9 +177,12 @@ const UserList = ({ navigation }) => {
       if (isSuperToggle == true && user.email.includes(newSearch)) {
         user.id = doc.id;
         fetchedUsers.push(user);
-        
       } else {
-        if (!user.is_super_admin == true && !user.is_admin == true && user.email.includes(newSearch)) {
+        if (
+          !user.is_super_admin == true &&
+          !user.is_admin == true &&
+          user.email.includes(newSearch)
+        ) {
           user.id = doc.id;
           fetchedUsers.push(user);
         }
@@ -194,7 +195,7 @@ const UserList = ({ navigation }) => {
 
   const renderUser = ({ item, index }, onClick) => {
     const closeRow = (index) => {
-      console.log("closerow");
+      console.log('closerow');
       if (prevOpenedRow && prevOpenedRow !== row[index]) {
         prevOpenedRow.close();
       }
@@ -207,45 +208,45 @@ const UserList = ({ navigation }) => {
         return (
           <View
             style={{
-              flexDirection: "row",
+              flexDirection: 'row',
               margin: 0,
-              alignContent: "center",
-              justifyContent: "center",
+              alignContent: 'center',
+              justifyContent: 'center',
               width: 200,
             }}
           >
             <TouchableOpacity
               style={{
-                backgroundColor: item.is_admin ? "gray" : "#3F51B5",
+                backgroundColor: item.is_admin ? 'gray' : '#3F51B5',
                 padding: 10,
                 borderRadius: 8,
                 marginRight: 8,
                 height: 40,
                 width: 125,
-                alignContent: "center",
+                alignContent: 'center',
               }}
               onPress={() => createTwoButtonAlertAdmin(item.id, item.is_admin)}
             >
               <Text
                 style={{
-                  color: "white",
-                  fontWeight: "bold",
-                  textAlign: "center",
+                  color: 'white',
+                  fontWeight: 'bold',
+                  textAlign: 'center',
                 }}
               >
-                {item.is_admin ? "Remove Admin" : "Make Admin"}
+                {item.is_admin ? 'Remove Admin' : 'Make Admin'}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
-                backgroundColor: "#f44336",
+                backgroundColor: '#f44336',
                 padding: 10,
                 borderRadius: 8,
                 height: 40,
               }}
               onPress={onClick}
             >
-              <Text style={{ color: "white", fontWeight: "bold" }}>Delete</Text>
+              <Text style={{ color: 'white', fontWeight: 'bold' }}>Delete</Text>
             </TouchableOpacity>
           </View>
         );
@@ -253,23 +254,23 @@ const UserList = ({ navigation }) => {
         return (
           <View
             style={{
-              flexDirection: "row",
+              flexDirection: 'row',
               margin: 0,
-              alignContent: "center",
-              justifyContent: "center",
+              alignContent: 'center',
+              justifyContent: 'center',
               width: 80,
             }}
           >
             <TouchableOpacity
               style={{
-                backgroundColor: "#f44336",
+                backgroundColor: '#f44336',
                 padding: 10,
                 borderRadius: 8,
                 height: 40,
               }}
               onPress={onClick}
             >
-              <Text style={{ color: "white", fontWeight: "bold" }}>Delete</Text>
+              <Text style={{ color: 'white', fontWeight: 'bold' }}>Delete</Text>
             </TouchableOpacity>
           </View>
         );
@@ -278,94 +279,93 @@ const UserList = ({ navigation }) => {
 
     return (
       <GestureHandlerRootView>
-      <Swipeable
-        renderRightActions={(progress, dragX) =>
-          renderRightActions(progress, dragX, onClick)
-        }
-        onSwipeableOpen={() => closeRow(index)}
-        ref={(ref) => (row[index] = ref)}
-        rightOpenValue={-100}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            alignSelf: "center",
-            alignContent: "center",
-            justifyContent: "center",
-            //marginVertical: 20,
-            backgroundColor: "#FEFEFE",
-            height: 70,
-          }}
+        <Swipeable
+          renderRightActions={(progress, dragX) =>
+            renderRightActions(progress, dragX, onClick)
+          }
+          onSwipeableOpen={() => closeRow(index)}
+          ref={(ref) => (row[index] = ref)}
+          rightOpenValue={-100}
         >
-          <Text
+          <View
             style={{
-              flex: 1,
-              fontWeight: "bold",
-              fontSize: 20,
-              left: 30,
-              color: "black",
+              flexDirection: 'row',
+              alignItems: 'center',
+              alignSelf: 'center',
+              alignContent: 'center',
+              justifyContent: 'center',
+              //marginVertical: 20,
+              backgroundColor: '#FEFEFE',
+              height: 70,
             }}
           >
-            {item.email}
-          </Text>
-          <Text
-            style={{
-              color: "black",
-              alignSelf: "center",
-              position: "absolute",
-              bottom: -15,
-              height: 40,
-            }}
-          >
-            ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
-          </Text>
-          <Text
-            style={{
-              color: "black",
-              fontWeight: "bold",
-              fontSize: 20,
-              alignSelf: "center",
-              position: "absolute",
-              right: 30,
-            }}
-          >
-            {"<"}
-          </Text>
-        </View>
-      </Swipeable>
+            <Text
+              style={{
+                flex: 1,
+                fontWeight: 'bold',
+                fontSize: 20,
+                left: 30,
+                color: 'black',
+              }}
+            >
+              {item.email}
+            </Text>
+            <Text
+              style={{
+                color: 'black',
+                alignSelf: 'center',
+                position: 'absolute',
+                bottom: -15,
+                height: 40,
+              }}
+            >
+              ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+            </Text>
+            <Text
+              style={{
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: 20,
+                alignSelf: 'center',
+                position: 'absolute',
+                right: 30,
+              }}
+            >
+              {'<'}
+            </Text>
+          </View>
+        </Swipeable>
       </GestureHandlerRootView>
     );
   };
 
   return (
-    <View style={{top: "15%"}}>
-
-        <TextInput
-					style={{ backgroundColor: "#C0C0C0",
-          alignSelf: "center",
-          position: "absolute",
+    <View style={{ top: '15%' }}>
+      <TextInput
+        style={{
+          backgroundColor: '#C0C0C0',
+          alignSelf: 'center',
+          position: 'absolute',
           height: 40,
           marginHorizontal: 50,
           borderRadius: 10,
-          width: "90%"}}
-          placeholder=" Search..."
-					onChangeText={(text) => fetchSearchUsers(text)}
-				/>
+          width: '90%',
+        }}
+        placeholder=" Search..."
+        onChangeText={(text) => fetchSearchUsers(text)}
+      />
 
-      
-        <FlatList
-          data={users}
-          renderItem={(v) =>
-            renderUser(v, () => {
-              console.log("pressed", v);
-              createTwoButtonAlertDelete(v.item.id);
-            })
-          }
-          keyExtractor={(item) => item.id}
-          style={{marginTop: 50, width: "90%", alignSelf: "center"}}
-        />
-      
+      <FlatList
+        data={users}
+        renderItem={(v) =>
+          renderUser(v, () => {
+            console.log('pressed', v);
+            createTwoButtonAlertDelete(v.item.id);
+          })
+        }
+        keyExtractor={(item) => item.id}
+        style={{ marginTop: 50, width: '90%', alignSelf: 'center' }}
+      />
     </View>
   );
 };
