@@ -13,6 +13,7 @@ import { db, auth } from '../../firebaseConfig';
 const SignUpPage = ({ navigation }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState("");
 
 	// Check whether a user has successfully signed up, then redirect the user to the Home screen
 	useEffect(() => {
@@ -27,21 +28,29 @@ const SignUpPage = ({ navigation }) => {
 
 	// Register a new user then create a new document in firestore containing the relevant user information
 	const handleSignUp = () => {
-		createUserWithEmailAndPassword(auth, email, password)
-			.then((userCredentials) => {
-				addDoc(collection(db, 'users'), {
-					email: userCredentials.user.email,
-					is_admin: false,
-					user_id: userCredentials.user.uid,
-				}).catch((error) =>
-					console.log(`Error while adding user to firestore: ${error}`)
-				);
-				if (userCredentials != null){
-					sendEmailVerification(userCredentials.user);
-					alert('Verification email sendt.')
-				  }
-			})
-			.catch((error) => alert(error.message));
+		if (email.includes("alta.kommune.no")) {
+			if (password===confirmPassword) {
+				createUserWithEmailAndPassword(auth, email, password)
+				.then((userCredentials) => {
+					addDoc(collection(db, 'users'), {
+						email: userCredentials.user.email,
+						is_admin: false,
+						user_id: userCredentials.user.uid,
+					}).catch((error) =>
+						console.log(`Error while adding user to firestore: ${error}`)
+					);
+					if (userCredentials != null){
+						sendEmailVerification(userCredentials.user);
+						alert('Verification email sendt.')
+					  }
+				})
+				.catch((error) => alert(error.message));
+			}else{
+				alert("passwords did not match")
+			}
+		}else{
+			alert("Email did not match company standard")
+		}
 	};
 
 	return (
@@ -65,6 +74,15 @@ const SignUpPage = ({ navigation }) => {
 				<TextInput
 					style={styles.TextInputPassword}
 					onChangeText={(text) => setPassword(text)}
+					secureTextEntry
+				/>
+			</View>
+
+			<View style={styles.inputViewPassword}>
+				<Text>Confirm New Password</Text>
+				<TextInput
+					style={styles.TextInputPassword}
+					onChangeText={(text) => setConfirmPassword(text)}
 					secureTextEntry
 				/>
 			</View>

@@ -32,9 +32,10 @@ export const styles = StyleSheet.create({
   inputViewEmail: {
     border: "1px solid",
     alignSelf: "center",
-    marginTop: "25%",
+    marginTop: "15%",
     //backgroundColor: "#3F51B5",
     width: 250,
+    marginBottom:10,
   },
   emailtxt: {
     alignSelf: "flex-start",
@@ -45,6 +46,7 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     //backgroundColor: "#3F51B5",
     width: 250,
+    marginBottom:8,
   },
   passwordtxt: {
     alignSelf: "flex-start",
