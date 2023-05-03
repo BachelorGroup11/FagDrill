@@ -228,12 +228,6 @@ const HomePage = ({ navigation }) => {
                   key={index}
                 />
               ))}
-              <TouchableOpacity
-                style={styles.resultBtn}
-                onPress={() => navigation.navigate('resultspage')}
-              >
-                <Text style={styles.resultTxt}>Results</Text>
-              </TouchableOpacity>
             </ScrollView>
           </SafeAreaView>
           <StatusBar translucent backgroundColor="transparent" />

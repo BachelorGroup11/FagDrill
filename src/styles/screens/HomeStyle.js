@@ -38,6 +38,7 @@ export const styles = StyleSheet.create({
     left: '8%',
     position: 'absolute',
     height: 95,
+    marginRight: 40,
   },
   allquizzes: {
     position: 'absolute',

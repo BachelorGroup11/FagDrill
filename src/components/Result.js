@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { styles } from "../styles/components/ResultStyle";
-import { Text, TouchableOpacity, View, Share } from "react-native";
-import { collection, getDocs, doc } from 'firebase/firestore';
+import { styles } from '../styles/components/ResultStyle';
+import { Text, TouchableOpacity, View, Share } from 'react-native';
+import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 // Render a specific result
 export const Result = ({ name, attempt, score, total, date, quiz_id }) => {
@@ -10,36 +11,36 @@ export const Result = ({ name, attempt, score, total, date, quiz_id }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, "quizzes"));
+      const querySnapshot = await getDocs(collection(db, 'quizzes'));
       querySnapshot.forEach((doc) => {
         if (quiz_id === doc.id && doc.data().category === 'social_quiz') {
           setInfo(doc.id);
         }
-	    });
+      });
     };
 
     fetchData().catch((error) => console.log(error));
   }, []);
 
-  const onShare = async (name,score,total) => {
-		try {
-			const result = await Share.share({
-				title: 'My result.',
-				message: `My last result on quiz: ${name}. With the score of: ${score}/${total}`,
-			});
-			if (result.action === Share.sharedAction) {
-			  if (result.activityType) {
-				// shared with activity type of result.activityType
-			  } else {
-				// shared
-			  }
-			} else if (result.action === Share.dismissedAction) {
-			  // dismissed
-			}
-		  } catch (error) {
-			alert(error.message);
-		  }
-	  };
+  const onShare = async (name, score, total) => {
+    try {
+      const result = await Share.share({
+        title: 'My result.',
+        message: `My last result on quiz: ${name}. With the score of: ${score}/${total}`,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <View>
@@ -63,13 +64,12 @@ export const Result = ({ name, attempt, score, total, date, quiz_id }) => {
         <Text style={styles.date}>{date.toDateString()}</Text>
         {quiz_id === info && (
           <TouchableOpacity
-            style = {styles.shereBtn}
-            onPress={() => onShare(name,score,total)}
+            style={styles.shereBtn}
+            onPress={() => onShare(name, score, total)}
           >
-            <Text style={styles.shereTxt}>Share</Text>
+            <Ionicons name="share-social" size={30} color={'#FFFFFF'} />
           </TouchableOpacity>
         )}
-        
       </View>
     </View>
   );
