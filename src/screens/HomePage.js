@@ -21,7 +21,7 @@ import {
   GoToRecommended,
   GoToQuiz,
 } from '../components/Index';
-import { fetchLowestResults } from '../utilities/fetchLowestResults';
+import { fetchLowestResults, fetchQuizzesOnRefresh } from '../utilities/Index';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -38,7 +38,6 @@ const HomePage = ({ navigation }) => {
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
-
   const auth = getAuth();
   const user = auth.currentUser;
 
@@ -126,28 +125,6 @@ const HomePage = ({ navigation }) => {
     },
   });
 
-  const fetchQuizzesOnRefresh = async () => {
-    setQuizzes([]);
-    const quizQuery = query(
-      collection(db, 'quizzes'),
-      where('users', 'array-contains', user.uid)
-    );
-
-    const querySnapshot = await getDocs(quizQuery);
-    querySnapshot.forEach((doc) => {
-      setQuizzes((prevArray) => [
-        ...prevArray,
-        {
-          id: doc.id,
-          name: doc.data().name,
-          duration: doc.data().duration,
-          category: doc.data().category,
-          totalQuestions: doc.data().questions.length,
-        },
-      ]);
-    });
-  };
-
   useEffect(() => {
     setRecommendedQuizzes([]);
     fetchLowestResults(quizzes, setRecommendedQuizzes);
@@ -187,7 +164,6 @@ const HomePage = ({ navigation }) => {
             >
               <FontAwesome name="info" size={20} color={'#000000'} />
             </TouchableOpacity>
-
             <ScrollView horizontal style={styles.recommendedview}>
               {recommendedQuizzes.map(
                 (value, index) =>
@@ -208,7 +184,7 @@ const HomePage = ({ navigation }) => {
             <Text style={styles.allquizzes}>All quizzes</Text>
             <TouchableOpacity
               style={styles.refreshBtn}
-              onPress={() => fetchQuizzesOnRefresh()}
+              onPress={() => fetchQuizzesOnRefresh(setQuizzes, user)}
             >
               <ImageBackground
                 source={require('../assets/images/Refresh.png')}
