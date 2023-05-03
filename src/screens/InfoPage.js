@@ -33,7 +33,6 @@ const InfoPage = ({ route, navigation }) => {
 
   // Retrieve top three quiz results
   useEffect(() => {
-    console.log(route.params);
     setQuizResults([]);
     fetchQuizResults(setQuizResults, route)
       .catch((error) => console.log(error))
