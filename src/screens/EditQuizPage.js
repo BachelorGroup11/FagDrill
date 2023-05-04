@@ -41,7 +41,7 @@ const EditQuizPage = ({ navigation, route }) => {
     setUsers([]);
     setQuestions([]);
     fetchUsersSetPlaceholder(setUsers, setPlaceholder, route);
-    fetcQuizCategoryPlaceholder(quizRef,setcategoryPlaceholder, route);
+    fetcQuizCategoryPlaceholder(quizRef, setcategoryPlaceholder, route);
     fetchQuestions(setQuestions, route);
     setTitle(route.params.title);
     setDescription(route.params.description);
@@ -88,7 +88,7 @@ const EditQuizPage = ({ navigation, route }) => {
 
   return (
     <ScrollView bounces={false} style={{ backgroundColor: '#FFFFFF' }}>
-      <GoBack nav={navigation} />
+      <GoBack style={{ top: 30 }} />
       <Text style={styles.header}>Edit Quiz</Text>
       <SafeAreaView style={styles.container}>
         <Text style={styles.title}>Title</Text>
@@ -108,7 +108,7 @@ const EditQuizPage = ({ navigation, route }) => {
           placeholderTextColor={'#757A86'}
         />
         <Text style={styles.title}>Duration</Text>
-        
+
         {Platform.OS === 'ios' && (
           <DateTimePicker
             mode="time"
@@ -120,7 +120,7 @@ const EditQuizPage = ({ navigation, route }) => {
             }
           />
         )}
-        
+
         <Text style={styles.title}>Category</Text>
         <SelectList
           placeholder={`${categoryPlaceholder}`}
