@@ -9,6 +9,7 @@ import { LoadingAnimation } from '../components/Index';
 import { Foundation } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const UserPage = ({ navigation }) => {
   const [isToggle, setIsToggle] = useState(false);
@@ -62,6 +63,19 @@ const UserPage = ({ navigation }) => {
             onPress={() => navigation.navigate('homepage')}
           >
             <Text style={styles.knapptext}>X</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.appButtonContainer6}
+            onPress={() => navigation.navigate('dashboardpage')}
+          >
+            <MaterialCommunityIcons
+              name="chart-donut"
+              size={26}
+              color="#FFFFFF"
+              style={{ right: 42 }}
+            />
+            <Text style={styles.YourAccountText1}>Quiz Dashboard</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -142,7 +156,7 @@ const UserPage = ({ navigation }) => {
 
           <View style={styles.container}>
             <TouchableOpacity
-              style={styles.btnBackToHome}
+              style={[styles.btnBackToHome, { top: 55 }]}
               onPress={() => navigation.navigate('homepage')}
             >
               <Text style={styles.knapptext}>X</Text>
@@ -152,6 +166,12 @@ const UserPage = ({ navigation }) => {
               style={styles.appButtonContainer1}
               onPress={() => navigation.navigate('progresspage')}
             >
+              <Entypo
+                name="progress-two"
+                size={25}
+                color="#FFFFFF"
+                style={{ right: 78 }}
+              />
               <Text style={styles.YourAccountText1}>Progress</Text>
             </TouchableOpacity>
 
@@ -159,6 +179,12 @@ const UserPage = ({ navigation }) => {
               style={styles.appButtonContainer3}
               onPress={() => navigation.navigate('changepasswordpage')}
             >
+              <FontAwesome5
+                name="lock"
+                size={20}
+                color="#FFFFFF"
+                style={{ right: 30 }}
+              />
               <Text style={styles.YourAccountText1}>Change Password</Text>
             </TouchableOpacity>
 
