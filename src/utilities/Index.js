@@ -8,3 +8,5 @@ export * from './fetchNumOfCompletedQuizzes';
 export * from './fetchHighestScore';
 export * from './fetchAverageScore';
 export * from './fetchProgress';
+export * from './fetchQuizzes';
+export * from './filterSearch';

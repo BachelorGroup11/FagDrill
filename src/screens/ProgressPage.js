@@ -20,7 +20,6 @@ const ProgressPage = ({ navigation }) => {
   const [scoresArray, setScoresArray] = useState([]);
   const [dateArray, setDateArray] = useState([]);
   const [quizData, setQuizData] = useState([]);
-
   const [selectedQuiz, setSelectedQuiz] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -44,7 +43,6 @@ const ProgressPage = ({ navigation }) => {
       setSelectedQuiz(quizzes[0] || {});
     };
     fetchQuizzes();
-    console.log(quizData, {});
   }, []);
 
   // Resets the chart and fetches the score and date for the appropriate quiz
@@ -57,7 +55,6 @@ const ProgressPage = ({ navigation }) => {
         .then(() => fetchDate(setDateArray, selectedQuiz.id))
         .finally(() => setIsLoading(false));
     }
-    console.log(scoresArray);
   }, [selectedQuiz]);
 
   return (
@@ -70,7 +67,7 @@ const ProgressPage = ({ navigation }) => {
           <Text style={styles.title}>Progress</Text>
           <TouchableOpacity
             style={styles.btnBackToHome}
-            onPress={() => navigation.replace('userpage')}
+            onPress={() => navigation.goBack()}
           >
             <Text style={styles.knapptext}>X</Text>
           </TouchableOpacity>
@@ -122,10 +119,17 @@ const ProgressPage = ({ navigation }) => {
           )}
         </View>
 
-			<View style={styles.scoreTable}>
-				<Text style={styles.txtScor}>Scores:</Text>
-				<Text style={styles.txtavg}>Average: {parseFloat((scoresArray.reduce((a, b) => a + b, 0))/scoresArray.length).toFixed(2)}			Higest: {Math.max(...scoresArray)}			Lowest: {Math.min(...scoresArray)}</Text>
-			</View>
+        <View style={styles.scoreTable}>
+          <Text style={styles.txtScor}>Scores:</Text>
+          <Text style={styles.txtavg}>
+            Average:{' '}
+            {parseFloat(
+              scoresArray.reduce((a, b) => a + b, 0) / scoresArray.length
+            ).toFixed(2)}{' '}
+            Higest: {Math.max(...scoresArray)} Lowest:{' '}
+            {Math.min(...scoresArray)}
+          </Text>
+        </View>
 
         <Text style={styles.txtProgress}>View Progress Form:</Text>
 
