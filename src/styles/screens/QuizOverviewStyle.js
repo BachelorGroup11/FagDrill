@@ -1,6 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native';
-
-const screenWidth = Dimensions.get('window').width;
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,12 +8,12 @@ export const styles = StyleSheet.create({
     fontSize: 26,
     fontFamily: 'PoppinsBold',
     position: 'absolute',
-    left: 40,
+    left: 30,
     top: 90,
   },
   piechartcontainer: {
     width: '90%',
-    height: '22%',
+    height: '23%',
     backgroundColor: '#3F51B5',
     borderRadius: 20,
     alignSelf: 'center',
@@ -25,7 +23,7 @@ export const styles = StyleSheet.create({
   },
   linechartcontainer: {
     width: '90%',
-    height: '22%',
+    height: '23%',
     backgroundColor: '#3F51B5',
     borderRadius: 20,
     alignSelf: 'center',
@@ -35,7 +33,7 @@ export const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontFamily: 'PoppinsSemiBold',
     fontSize: 18,
-    top: 20,
+    top: '2%',
     left: 60,
   },
   averageandhighestcontainer: {
@@ -47,7 +45,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   averagecontainer: {
-    width: '47%',
+    width: '47.5%',
     backgroundColor: '#3F51B5',
     height: '100%',
     borderRadius: 20,
@@ -72,7 +70,7 @@ export const styles = StyleSheet.create({
     marginTop: '6%',
   },
   highestcontainer: {
-    width: '47%',
+    width: '47.5%',
     backgroundColor: '#3F51B5',
     height: '100%',
     borderRadius: 20,

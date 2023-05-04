@@ -12,3 +12,4 @@ export * from './ImageQuestion';
 export * from './Question';
 export * from './GoToRecommended';
 export * from './GoToQuiz';
+export * from './GoToOverview';

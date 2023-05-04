@@ -4,3 +4,7 @@ export * from './formatTime';
 export * from './hoursAndMinutesToseconds';
 export * from './fetchLowestResults';
 export * from './fetchQuizzesOnRefresh';
+export * from './fetchNumOfCompletedQuizzes';
+export * from './fetchHighestScore';
+export * from './fetchAverageScore';
+export * from './fetchProgress';
