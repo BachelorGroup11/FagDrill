@@ -9,9 +9,8 @@ import {
   Platform,
 } from 'react-native';
 import { styles } from '../styles/screens/ManageQuizStyle';
-import { GoBack } from '../components/GoBack';
 import { Quiz } from '../components/Quiz';
-import { fetchQuizzes } from '../utilities/fetchQuizzes';
+import { fetchQuizzes, filterSearch } from '../utilities/Index';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const ManageQuizPage = ({ navigation }) => {
@@ -30,36 +29,23 @@ const ManageQuizPage = ({ navigation }) => {
     setFilteredData(quizzes);
   }, [quizzes]);
 
-  const filterSearch = (text) => {
-    if (text) {
-      const newData = quizzes.filter((item) => {
-        const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
-      setFilteredData(newData);
+  const createQuiz = () => {
+    if (Platform.OS === 'ios') {
+      navigation.navigate('createquizpage');
     } else {
-      setFilteredData(quizzes);
+      alert('You can only create a quiz on an IOS device.\n\nFor now');
     }
   };
-  
-  const createQuiz = () => {
-		if (Platform.OS === 'ios') {
-			navigation.navigate('createquizpage')
-		}else{
-			alert("You can only create a quiz on an IOS device.\n\nFor now")
-		}
-	};
 
   return (
     <ScrollView bounces={false}>
       <Text style={styles.header}>Manage Quizzes</Text>
       <TouchableOpacity
-				style={styles.btnBackToHome}
-				onPress={() => navigation.replace("userpage")}
-			>
-				<Text style={styles.knapptext}>X</Text>
-			</TouchableOpacity>
+        style={styles.btnBackToHome}
+        onPress={() => navigation.goBack()}
+      >
+        <Text style={styles.knapptext}>X</Text>
+      </TouchableOpacity>
       <View style={styles.searchsection}>
         <FontAwesome
           name="search"
@@ -69,7 +55,7 @@ const ManageQuizPage = ({ navigation }) => {
         />
         <TextInput
           style={styles.searchinput}
-          onChangeText={(text) => filterSearch(text)}
+          onChangeText={(text) => filterSearch(text, quizzes, setFilteredData)}
           placeholder="Quiz name"
         />
       </View>
@@ -88,10 +74,7 @@ const ManageQuizPage = ({ navigation }) => {
             key={value.id}
           />
         ))}
-        <TouchableOpacity
-          style={styles.create}
-          onPress={() => createQuiz()}
-        >
+        <TouchableOpacity style={styles.create} onPress={() => createQuiz()}>
           <Text style={styles.createtext}>Create Quiz</Text>
         </TouchableOpacity>
       </SafeAreaView>

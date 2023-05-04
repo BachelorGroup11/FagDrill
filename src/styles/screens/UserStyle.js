@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#3F51B5',
     borderRadius: 12,
     paddingVertical: 10,
-    marginTop: 250,
+    marginTop: 200,
     width: '80%',
     height: 60,
     alignSelf: 'center',
@@ -81,6 +81,18 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
+  appButtonContainer6: {
+    flexDirection: 'row',
+    elevation: 8,
+    backgroundColor: '#3F51B5',
+    borderRadius: 12,
+    height: 60,
+    width: '80%',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: 180,
+  },
 
   YourAccountText2: {
     color: 'white',
@@ -96,7 +108,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     left: '80%',
     top: '13.5%',
-    fontSize: 32,
+    fontSize: 20,
   },
 
   knapptext: {
