@@ -4,17 +4,40 @@ import { styles } from '../styles/screens/QuizOverviewStyle';
 import { GoBack } from '../components/GoBack';
 import * as Progress from 'react-native-progress';
 import { LineChart } from 'react-native-chart-kit';
+import { fetchNumOfCompletedQuizzes } from '../utilities/fetchNumOfCompletedQuizzes';
+import { fetchHighestScore } from '../utilities/fetchHighestScore';
+
+import {
+  collection,
+  query,
+  getDocs,
+  where,
+  orderBy,
+  limit,
+  getDoc,
+} from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 
 const QuizOverviewPage = ({ route }) => {
+  const [percentageCompleted, setPercentageCompleted] = useState(0);
+  const [highestScore, setHighestScore] = useState({
+    score: 0,
+    totalQuestions: 0,
+    username: '',
+  });
   const screenWidth = Dimensions.get('window').width;
   const screenHeight = Dimensions.get('window').height;
 
   useEffect(() => {
-    console.log(route.params.users);
-  });
+    fetchNumOfCompletedQuizzes(route, setPercentageCompleted);
+    fetchHighestScore(route, setHighestScore);
+  }, []);
 
-  // Todo: How many has answered the quiz?
+  // Todo: Calculate progress
   // Check whether user id exists in any result document
+
+  // Calculate highest score
+  // Calculate average score
 
   return (
     <View style={styles.container}>
@@ -24,12 +47,14 @@ const QuizOverviewPage = ({ route }) => {
         <Progress.Circle
           size={160}
           animated={true}
-          progress={0.7}
+          progress={percentageCompleted}
           color="#65D870"
           unfilledColor="#FFFFFF"
           thickness={24}
           showsText={true}
-          formatText={() => `70%\nCompleted`}
+          formatText={() =>
+            `${Math.trunc(percentageCompleted * 100)}%\nCompleted`
+          }
           textStyle={{
             fontFamily: 'PoppinsRegular',
             fontSize: 16,
@@ -62,10 +87,10 @@ const QuizOverviewPage = ({ route }) => {
         <View style={styles.highestcontainer}>
           <Text style={styles.averagetext}>Highest</Text>
           <Text style={[styles.percentagetext, { color: '#65D870' }]}>
-            9/10
+            {highestScore.score}/{highestScore.totalQuestions}
           </Text>
           <Text style={[styles.basedontext, { marginTop: '20%' }]}>
-            Username
+            {highestScore.username}
           </Text>
         </View>
       </View>

@@ -132,7 +132,7 @@ const HomePage = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1 }}>
-      {recommendedQuizzes.length === 0 ? (
+      {isLoading ? (
         <LoadingAnimation />
       ) : (
         <ImageBackground
