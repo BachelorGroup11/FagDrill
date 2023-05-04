@@ -44,7 +44,14 @@ const QuizOverviewPage = ({ route }) => {
               size={160}
               animated={true}
               progress={percentageCompleted}
-              color="#65D870"
+              borderWidth={0}
+              color={
+                percentageCompleted >= 0.8
+                  ? '#65D870'
+                  : percentageCompleted >= 0.5
+                  ? '#F0BA2D'
+                  : '#FF0000'
+              }
               unfilledColor="#FFFFFF"
               thickness={24}
               showsText={true}
