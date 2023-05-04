@@ -84,7 +84,16 @@ const QuizOverviewPage = ({ route }) => {
           <View style={styles.averageandhighestcontainer}>
             <View style={styles.averagecontainer}>
               <Text style={styles.averagetext}>Average</Text>
-              <Text style={styles.percentagetext}>
+              <Text
+                style={[
+                  styles.percentagetext,
+                  averageScore.average >= 0.75
+                    ? { color: '#65D870' }
+                    : averageScore.average >= 0.5
+                    ? { color: '#F0BA2D' }
+                    : { color: '#FF0000' },
+                ]}
+              >
                 {Math.trunc(averageScore.average * 100)}%
               </Text>
               <Text style={styles.basedontext}>
@@ -94,7 +103,16 @@ const QuizOverviewPage = ({ route }) => {
             </View>
             <View style={styles.highestcontainer}>
               <Text style={styles.averagetext}>Highest</Text>
-              <Text style={[styles.percentagetext, { color: '#65D870' }]}>
+              <Text
+                style={[
+                  styles.percentagetext,
+                  highestScore.score / highestScore.totalQuestions >= 0.8
+                    ? { color: '#65D870' }
+                    : highestScore.score / highestScore.totalQuestions >= 0.5
+                    ? { color: '#F0BA2D' }
+                    : { color: '#FF0000' },
+                ]}
+              >
                 {highestScore.score}/{highestScore.totalQuestions}
               </Text>
               <Text style={[styles.basedontext, { marginTop: '20%' }]}>
