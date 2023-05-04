@@ -22,12 +22,7 @@ const ResultsPage = ({ navigation }) => {
 				<SafeAreaView style={styles.containerTo}>
 					<ScrollView style={styles.container}>
 					<Text style={styles.title}>Results</Text>
-					<TouchableOpacity
-						style={styles.btnBackToHome}
-						onPress={() => navigation.navigate("homepage")}
-					>
-						<Text style={styles.knapptext}>X</Text>
-					</TouchableOpacity>
+					<GoBack />
 
 					<View style={{ marginVertical: 50}}>
 						{resultsArray
