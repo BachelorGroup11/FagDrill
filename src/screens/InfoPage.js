@@ -86,11 +86,11 @@ const InfoPage = ({ route, navigation }) => {
                 </View>
               )}
               <Text style={styles.levelText}>
-                {route.params.totalQuestions} Spørsmål
+                {route.params.totalQuestions} Questions
               </Text>
               <View style={{ position: 'absolute', width: 320, top: 460 }}>
                 <Text style={styles.Infotext}>
-                  Øving til {route.params.name}
+                  Practice for {route.params.name}
                 </Text>
                 <Text style={[styles.descriptionText]}>{info}</Text>
               </View>

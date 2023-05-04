@@ -126,12 +126,12 @@ const ProgressPage = ({ navigation }) => {
             {parseFloat(
               scoresArray.reduce((a, b) => a + b, 0) / scoresArray.length
             ).toFixed(2)}{' '}
-            Higest: {Math.max(...scoresArray)} Lowest:{' '}
+            Highest: {Math.max(...scoresArray)} Lowest:{' '}
             {Math.min(...scoresArray)}
           </Text>
         </View>
 
-        <Text style={styles.txtProgress}>View Progress Form:</Text>
+        <Text style={styles.txtProgress}>View Progress From:</Text>
 
         <ScrollView style={styles.scrollContainer}>
           {quizData.map((quiz) => (

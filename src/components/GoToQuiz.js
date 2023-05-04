@@ -27,7 +27,10 @@ export const GoToQuiz = ({
         source={require('../assets/images/QuizBtn.png')}
         style={styles.imgButton}
       >
-        <Text style={styles.knapptext}>Øving til {name}</Text>
+        <Text style={styles.knapptext}>
+          Practice for{'\n'}
+          {name}
+        </Text>
       </ImageBackground>
     </TouchableOpacity>
   );

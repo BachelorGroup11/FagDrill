@@ -1,7 +1,6 @@
 import { styles } from '../styles/components/GoToRecommendedStyle';
 import { Text, TouchableOpacity } from 'react-native';
 
-// Component for buttons on homepage redirecting to a specified quiz
 export const GoToRecommended = ({
   nav,
   name,
@@ -24,7 +23,7 @@ export const GoToRecommended = ({
       }
     >
       <Text style={styles.knapptext}>
-        Øving til{`\n`}
+        Practice for{`\n`}
         {name}
       </Text>
     </TouchableOpacity>
