@@ -152,13 +152,39 @@ const UserPage = ({ navigation }) => {
               style={styles.appButtonContainer1}
               onPress={() => navigation.navigate('progresspage')}
             >
+              <Entypo
+                name="progress-two"
+                size={25}
+                color="#FFFFFF"
+                style={{ right: 78 }}
+              />
               <Text style={styles.YourAccountText1}>Progress</Text>
             </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.appButtonContainer5}
+              onPress={() => navigation.navigate('resultspage')}
+            >
+              <Foundation
+                name="results"
+                size={25}
+                color="#FFFFFF"
+                style={styles.icons}
+              />
+              <Text style={styles.YourAccountText1}>Results</Text>
+            </TouchableOpacity>
+
 
             <TouchableOpacity
               style={styles.appButtonContainer3}
               onPress={() => navigation.navigate('changepasswordpage')}
             >
+              <FontAwesome5
+                name="lock"
+                size={20}
+                color="#FFFFFF"
+                style={{ right: 30 }}
+              />
               <Text style={styles.YourAccountText1}>Change Password</Text>
             </TouchableOpacity>
 
