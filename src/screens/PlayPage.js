@@ -127,12 +127,7 @@ const PlayPage = ({ route, navigation }) => {
                   ))}
                   {typeof has_been_answered !== 'undefined' &&
                     (state.category === 'true_or_false' ? (
-                      <View
-                        style={[
-                          styles.summarycontainer,
-                          { bottom: 0, top: 160 },
-                        ]}
-                      >
+                      <View style={styles.summarycontainer}>
                         <Text style={styles.summarytext}>{state.summary}</Text>
                       </View>
                     ) : (
