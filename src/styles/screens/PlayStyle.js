@@ -10,11 +10,16 @@ export const styles = StyleSheet.create({
     height: 44,
     flexDirection: 'row',
     alignSelf: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
+    paddingHorizontal: 8,
     alignItems: 'center',
     borderRadius: 30,
     borderWidth: 1,
     borderColor: '#9A999917',
+  },
+  streak: {
+    fontFamily: 'PoppinsSemiBold',
+    fontSize: 16,
   },
   IndexText: {
     color: '#000000',
