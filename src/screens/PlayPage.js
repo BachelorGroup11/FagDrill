@@ -72,7 +72,10 @@ const PlayPage = ({ route, navigation }) => {
             <GoBack style={{ top: -50 }} />
             <View style={styles.progressContainer}>
               <ProgressBar
-                progress={state.index / (state.quizLength - 1)}
+                progress={
+                  state.index / (state.quizLength - 1) ||
+                  state.index / state.quizLength
+                }
                 width={260}
                 height={20}
                 borderRadius={30}
