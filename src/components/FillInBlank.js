@@ -61,8 +61,12 @@ export const FillInBlank = ({ state, dispatch }) => {
 
   return (
     <View style={styles.container} behavior={'position'}>
-      <Text style={styles.headerText}>Fill in the blank: </Text>
-      <Text style={styles.displayText}>{state.questionText}</Text>
+      <View style={styles.QuestionContainer}>
+        <Text style={styles.QuestionText}>Fill in the blank: </Text>
+      </View>
+      <View style={styles.displayContainer}>
+        <Text style={styles.displayText}>{state.questionText}</Text>
+      </View>
       <TextInput
         style={styles.input}
         placeholderTextColor={'#00000070'}
@@ -84,7 +88,9 @@ export const FillInBlank = ({ state, dispatch }) => {
           <Text style={styles.feedback}>
             Incorrect answer{'\n'}Correct answer was {state.correctOption}
           </Text>
-          <Text style={styles.summarytext}>{state.summary}</Text>
+          <View style={styles.summarycontainer}>
+            <Text style={styles.summarytext}>{state.summary}</Text>
+          </View>
         </View>
       )}
     </View>

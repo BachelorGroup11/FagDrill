@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     elevation: 5,
   },
   QuestionText: {
-    fontFamily: 'PoppinsMedium',
+    fontFamily: 'PoppinsSemiBold',
     fontSize: 12,
     paddingHorizontal: 20,
     textAlign: 'center',
@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
   },
   summaryText: {
     fontFamily: 'PoppinsMedium',
-    fontSize: 10,
+    fontSize: 12,
   },
   input: {
     width: 250,
@@ -93,7 +93,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     width: 340,
-    top: 70,
+    top: 80,
     position: 'absolute',
   },
   btnchoice: {

@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
     elevation: 5,
   },
   QuestionText: {
-    fontFamily: 'PoppinsMedium',
+    fontFamily: 'PoppinsSemiBold',
     fontSize: 14,
     paddingHorizontal: 10,
     textAlign: 'center',
@@ -85,7 +85,6 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     justifyContent: 'center',
-    //bottom: 80,
     top: 160,
     height: 100,
     width: 300,
@@ -101,7 +100,7 @@ export const styles = StyleSheet.create({
   },
   summarytext: {
     textAlign: 'center',
-    fontSize: 10,
+    fontSize: 12,
     fontFamily: 'PoppinsMedium',
   },
 });
