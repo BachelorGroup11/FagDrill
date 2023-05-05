@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     borderRadius: 15,
     top: 720,
-    width: '80%',
+    width: '85%',
     height: 60,
     backgroundColor: 'white',
     shadowColor: '#171717',
@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
   index: {
     width: 40,
     height: 40,
-    borderColor: '#3F51B5',
+    borderColor: '#2f2f2d',
     borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center',
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
   indextext: {
     fontSize: 14,
     fontFamily: 'PoppinsBold',
-    color: '#3F51B5',
+    color: '#2f2f2d',
   },
   nextBtn: {
     height: 40,
@@ -46,10 +46,5 @@ export const styles = StyleSheet.create({
     width: 80,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  btnText: {
-    color: '#ffffff',
-    fontSize: 12,
-    fontFamily: 'PoppinsMedium',
   },
 });

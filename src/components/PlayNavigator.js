@@ -67,7 +67,7 @@ export const PlayNavigator = ({ state, dispatch, quiz, name, nav }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.previousBtn} onPress={previousQuestion}>
-        <Ionicons name="ios-arrow-back-circle" size={42} color="#3F51B5" />
+        <Ionicons name="ios-arrow-back-circle" size={42} color="#2f2f2d" />
       </TouchableOpacity>
       {state.index > 0 && (
         <TouchableOpacity style={styles.index} onPress={previousQuestion}>
@@ -75,7 +75,7 @@ export const PlayNavigator = ({ state, dispatch, quiz, name, nav }) => {
         </TouchableOpacity>
       )}
       <TouchableOpacity style={styles.index}>
-        <Text style={[styles.indextext, { color: '#00FFE0' }]}>
+        <Text style={[styles.indextext, { color: '#12D18E' }]}>
           {state.index + 1}
         </Text>
       </TouchableOpacity>
@@ -86,11 +86,11 @@ export const PlayNavigator = ({ state, dispatch, quiz, name, nav }) => {
       )}
       {state.index < state.questionsArray.length - 1 ? (
         <TouchableOpacity style={styles.nextBtn} onPress={nextQuestion}>
-          <Ionicons name="ios-arrow-forward-circle" size={42} color="#3F51B5" />
+          <Ionicons name="ios-arrow-forward-circle" size={42} color="#2f2f2d" />
         </TouchableOpacity>
       ) : (
         <TouchableOpacity style={styles.nextBtn} onPress={finishQuiz}>
-          <Ionicons name="ios-checkmark-circle" size={42} color="#3F51B5" />
+          <Ionicons name="ios-checkmark-circle" size={42} color="#2f2f2d" />
         </TouchableOpacity>
       )}
     </View>
