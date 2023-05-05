@@ -28,7 +28,7 @@ const UserPage = ({ navigation }) => {
 
       const querySnapshot = await getDocs(userQuery);
       querySnapshot.forEach((doc) => {
-        setUserName(doc.data().email.split('@')[0]) 
+        setUserName(doc.data().email.split('@')[0]);
         if (doc.data().is_admin == true || doc.data().is_super_admin == true) {
           setIsToggle(!isToggle);
           setIsLoaded(!isLoaded);
@@ -76,9 +76,9 @@ const UserPage = ({ navigation }) => {
                 name="chart-donut"
                 size={26}
                 color="#FFFFFF"
-                style={{ left: 10}}
+                style={{ left: 10, top: 10, position: 'absolute' }}
               />
-              <Text style={styles.YourAccountText1}>Quiz Dashboard</Text>
+              <Text style={styles.YourAccountText1}>Quiz{`\n`}Dashboard</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -89,66 +89,66 @@ const UserPage = ({ navigation }) => {
                 name="edit"
                 size={23}
                 color="#FFFFFF"
-                style={{ left: 10 }}
+                style={{ left: 10, top: 10, position: 'absolute' }}
               />
-              <Text style={styles.YourAccountText1}>Manage Quizzes</Text>
+              <Text style={styles.YourAccountText1}>Manage{`\n`}Quizzes</Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.sidebyside}>
-          <TouchableOpacity
-            style={styles.buttonManageUserPage}
-            onPress={() => navigation.navigate('manageuserpage')}
-          >
-            <FontAwesome5
-              name="user-edit"
-              size={20}
-              color="#FFFFFF"
-              style={{ left: 10  }}
-            />
-            <Text style={styles.YourAccountText1}>Manage Users</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.buttonManageUserPage}
+              onPress={() => navigation.navigate('manageuserpage')}
+            >
+              <FontAwesome5
+                name="user-edit"
+                size={20}
+                color="#FFFFFF"
+                style={{ left: 10, top: 10, position: 'absolute' }}
+              />
+              <Text style={styles.YourAccountText1}>Manage{`\n`}Users</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.buttonProgressPage}
-            onPress={() => navigation.navigate('progresspage')}
-          >
-            <Entypo
-              name="progress-two"
-              size={25}
-              color="#FFFFFF"
-              style={{ left: 10  }}
-            />
-            <Text style={styles.YourAccountText1}>Progress</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.buttonProgressPage}
+              onPress={() => navigation.navigate('progresspage')}
+            >
+              <Entypo
+                name="progress-two"
+                size={25}
+                color="#FFFFFF"
+                style={{ left: 10, top: 10, position: 'absolute' }}
+              />
+              <Text style={styles.YourAccountText1}>Progress</Text>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.sidebyside}>
-          <TouchableOpacity
-            style={styles.buttonResultsPage}
-            onPress={() => navigation.navigate('resultspage')}
-          >
-            <Foundation
-              name="results"
-              size={25}
-              color="#FFFFFF"
-              style={{left: 10}}
-            />
-            <Text style={styles.YourAccountText1}>Results</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.buttonResultsPage}
+              onPress={() => navigation.navigate('resultspage')}
+            >
+              <Foundation
+                name="results"
+                size={25}
+                color="#FFFFFF"
+                style={{ left: 10, top: 10, position: 'absolute' }}
+              />
+              <Text style={styles.YourAccountText1}>Results</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.buttonChangePasswordPage}
-            onPress={() => navigation.navigate('changepasswordpage')}
-          >
-            <FontAwesome5
-              name="lock"
-              size={20}
-              color="#FFFFFF"
-              style={{ left: 10  }}
-            />
-            <Text style={styles.YourAccountText1}>Change Password</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.buttonChangePasswordPage}
+              onPress={() => navigation.navigate('changepasswordpage')}
+            >
+              <FontAwesome5
+                name="lock"
+                size={20}
+                color="#FFFFFF"
+                style={{ left: 10, top: 10, position: 'absolute' }}
+              />
+              <Text style={styles.YourAccountText1}>Change Password</Text>
+            </TouchableOpacity>
           </View>
 
           <TouchableOpacity
@@ -178,7 +178,7 @@ const UserPage = ({ navigation }) => {
                 name="progress-two"
                 size={25}
                 color="#FFFFFF"
-                style={{ left: 10 }}
+                style={{ left: 10, position: 'absolute' }}
               />
               <Text style={styles.YourAccountText1}>Progress</Text>
             </TouchableOpacity>
@@ -191,11 +191,10 @@ const UserPage = ({ navigation }) => {
                 name="results"
                 size={25}
                 color="#FFFFFF"
-                style={{left: 10}}
+                style={{ left: 10, position: 'absolute' }}
               />
               <Text style={styles.YourAccountText1}>Results</Text>
             </TouchableOpacity>
-
 
             <TouchableOpacity
               style={styles.normalButtonChangePasswordPage}
@@ -205,7 +204,7 @@ const UserPage = ({ navigation }) => {
                 name="lock"
                 size={20}
                 color="#FFFFFF"
-                style={{ left: 10 }}
+                style={{ left: 10, position: 'absolute' }}
               />
               <Text style={styles.YourAccountText1}>Change Password</Text>
             </TouchableOpacity>

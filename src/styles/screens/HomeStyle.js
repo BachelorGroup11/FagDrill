@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    marginTop: "90%",
+    marginTop: '87%',
     height: 500,
   },
   btnView: {
