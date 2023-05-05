@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
 import { styles } from '../styles/screens/QuizOverviewStyle';
 import { GoBack, LoadingAnimation } from '../components/Index';
 import * as Progress from 'react-native-progress';
@@ -10,9 +10,12 @@ import {
   fetchAverageScore,
   fetchProgress,
 } from '../utilities/Index';
+import CompletedModal from '../components/CompletedModal';
 
 const QuizOverviewPage = ({ route }) => {
   const [percentageCompleted, setPercentageCompleted] = useState(0);
+  const [completedUsers, setCompletedUsers] = useState([]);
+
   const [recentProgress, setRecentProgress] = useState([]);
   const [highestScore, setHighestScore] = useState({
     score: 0,
@@ -24,11 +27,17 @@ const QuizOverviewPage = ({ route }) => {
   const screenWidth = Dimensions.get('window').width;
   const screenHeight = Dimensions.get('window').height;
 
+  const [modalVisible, setModalVisible] = useState(false);
+
   useEffect(() => {
-    fetchAverageScore(route, setAverageScore).then(() => setIsLoading(false));
+    fetchNumOfCompletedQuizzes(
+      route,
+      setPercentageCompleted,
+      setCompletedUsers
+    );
     fetchHighestScore(route, setHighestScore);
     fetchProgress(route, setRecentProgress);
-    fetchNumOfCompletedQuizzes(route, setPercentageCompleted);
+    fetchAverageScore(route, setAverageScore).then(() => setIsLoading(false));
   }, []);
 
   return (
@@ -39,7 +48,15 @@ const QuizOverviewPage = ({ route }) => {
         <View style={styles.container}>
           <Text style={styles.header}>{route.params.name}</Text>
           <GoBack style={{ top: 30 }} />
-          <View style={styles.piechartcontainer}>
+          <CompletedModal
+            isVisible={modalVisible}
+            setIsVisible={setModalVisible}
+            users={completedUsers}
+          />
+          <TouchableOpacity
+            style={styles.piechartcontainer}
+            onPress={() => setModalVisible(true)}
+          >
             <Progress.Circle
               size={160}
               animated={true}
@@ -65,7 +82,7 @@ const QuizOverviewPage = ({ route }) => {
                 color: '#D5D6D9',
               }}
             />
-          </View>
+          </TouchableOpacity>
           <View style={styles.linechartcontainer}>
             {recentProgress.length > 0 && (
               <LineChart
