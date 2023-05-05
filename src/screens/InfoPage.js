@@ -78,7 +78,8 @@ const InfoPage = ({ route, navigation }) => {
                           {result.name}
                         </Text>
                         <Text style={styles.leaderboardScore}>
-                          {result.score} / {route.params.totalQuestions}
+                          {result.score} /{' '}
+                          {parseInt(route.params.totalQuestions * 0.8)}
                         </Text>
                       </View>
                     </View>
@@ -86,7 +87,10 @@ const InfoPage = ({ route, navigation }) => {
                 </View>
               )}
               <Text style={styles.levelText}>
-                {route.params.totalQuestions} Questions
+                {parseInt(route.params.totalQuestions * 0.8)}{' '}
+                {parseInt(route.params.totalQuestions * 0.8) == 1
+                  ? 'Question'
+                  : 'Questions'}
               </Text>
               <View style={{ position: 'absolute', width: 320, top: 460 }}>
                 <Text style={styles.Infotext}>
