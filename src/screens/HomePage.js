@@ -125,6 +125,12 @@ const HomePage = ({ navigation }) => {
     },
   });
 
+  const refreshQuizAndRecomended= () => {
+    fetchQuizzesOnRefresh(setQuizzes, user)
+    setRecommendedQuizzes([]);
+    fetchLowestResults(quizzes, setRecommendedQuizzes);
+  };
+
   useEffect(() => {
     setRecommendedQuizzes([]);
     fetchLowestResults(quizzes, setRecommendedQuizzes);
@@ -184,7 +190,7 @@ const HomePage = ({ navigation }) => {
             <Text style={styles.allquizzes}>All quizzes</Text>
             <TouchableOpacity
               style={styles.refreshBtn}
-              onPress={() => fetchQuizzesOnRefresh(setQuizzes, user)}
+              onPress={() => refreshQuizAndRecomended(setQuizzes, user)}
             >
               <ImageBackground
                 source={require('../assets/images/Refresh.png')}
