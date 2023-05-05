@@ -11,6 +11,8 @@ import {
   fetchProgress,
 } from '../utilities/Index';
 import CompletedModal from '../components/CompletedModal';
+import AverageModal from '../components/AverageModal';
+import { fetchUsersAverage } from '../utilities/fetchUsersAverage';
 
 const QuizOverviewPage = ({ route }) => {
   const [percentageCompleted, setPercentageCompleted] = useState(0);
@@ -23,11 +25,14 @@ const QuizOverviewPage = ({ route }) => {
     username: '',
   });
   const [averageScore, setAverageScore] = useState({ average: 0, total: 0 });
+  const [averageScoresArray, setAverageScoresArray] = useState([]);
+
   const [isLoading, setIsLoading] = useState(true);
   const screenWidth = Dimensions.get('window').width;
   const screenHeight = Dimensions.get('window').height;
 
-  const [modalVisible, setModalVisible] = useState(false);
+  const [completedModalVisible, setCompletedModalVisible] = useState(false);
+  const [averageModalVisible, setAverageModalVisible] = useState(false);
 
   useEffect(() => {
     fetchNumOfCompletedQuizzes(
@@ -38,6 +43,8 @@ const QuizOverviewPage = ({ route }) => {
     fetchHighestScore(route, setHighestScore);
     fetchProgress(route, setRecentProgress);
     fetchAverageScore(route, setAverageScore).then(() => setIsLoading(false));
+
+    fetchUsersAverage(route, setAverageScoresArray);
   }, []);
 
   return (
@@ -49,13 +56,18 @@ const QuizOverviewPage = ({ route }) => {
           <Text style={styles.header}>{route.params.name}</Text>
           <GoBack style={{ top: 30 }} />
           <CompletedModal
-            isVisible={modalVisible}
-            setIsVisible={setModalVisible}
+            isVisible={completedModalVisible}
+            setIsVisible={setCompletedModalVisible}
             users={completedUsers}
+          />
+          <AverageModal
+            isVisible={averageModalVisible}
+            setIsVisible={setAverageModalVisible}
+            users={averageScoresArray}
           />
           <TouchableOpacity
             style={styles.piechartcontainer}
-            onPress={() => setModalVisible(true)}
+            onPress={() => setCompletedModalVisible(true)}
           >
             <Progress.Circle
               size={160}
@@ -106,7 +118,10 @@ const QuizOverviewPage = ({ route }) => {
             )}
           </View>
           <View style={styles.averageandhighestcontainer}>
-            <View style={styles.averagecontainer}>
+            <TouchableOpacity
+              style={styles.averagecontainer}
+              onPress={() => setAverageModalVisible(true)}
+            >
               <Text style={styles.averagetext}>Average</Text>
               <Text
                 style={[
@@ -124,7 +139,7 @@ const QuizOverviewPage = ({ route }) => {
                 Based on{`\n`}
                 {averageScore.total} results
               </Text>
-            </View>
+            </TouchableOpacity>
             <View style={styles.highestcontainer}>
               <Text style={styles.averagetext}>Highest</Text>
               <Text

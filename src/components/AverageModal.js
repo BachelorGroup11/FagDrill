@@ -3,16 +3,14 @@ import { Modal, StyleSheet, Text, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
-export default function CompletedModal({ isVisible, setIsVisible, users }) {
+export default function AverageModal({ isVisible, setIsVisible, users }) {
   return (
     <ScrollView style={styles.centeredView}>
       <Modal animationType="slide" transparent={true} visible={isVisible}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View style={styles.headerview}>
-              <Text style={styles.modalHeader}>
-                Users who have completed{`\n`}the quiz atleast once
-              </Text>
+              <Text style={styles.modalHeader}>Average scores</Text>
             </View>
             <ScrollView style={{ marginBottom: 20 }}>
               {users.map((user, index) => {
@@ -26,21 +24,18 @@ export default function CompletedModal({ isVisible, setIsVisible, users }) {
                     }}
                   >
                     <Text style={styles.modalText}>{user.username}</Text>
-                    {user.completed ? (
-                      <FontAwesome
-                        name="check-circle"
-                        size={24}
-                        color="#00FFE0"
-                        style={{}}
-                      />
-                    ) : (
-                      <Entypo
-                        name="circle-with-cross"
-                        size={24}
-                        color="red"
-                        style={{ left: 2 }}
-                      />
-                    )}
+                    <Text
+                      style={[
+                        styles.modalText,
+                        user.average >= 80
+                          ? { color: '#65D870' }
+                          : user.average >= 50
+                          ? { color: '#F0BA2D' }
+                          : { color: '#FF0000' },
+                      ]}
+                    >
+                      {user.average}%
+                    </Text>
                   </View>
                 );
               })}
