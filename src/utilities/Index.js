@@ -10,3 +10,5 @@ export * from './fetchAverageScore';
 export * from './fetchProgress';
 export * from './fetchQuizzes';
 export * from './filterSearch';
+export * from './fetchUsersAverage';
+export * from './fetchUsersHighest';

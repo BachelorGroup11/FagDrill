@@ -10,9 +10,11 @@ import { db } from '../../firebaseConfig';
 
 export const fetchNumOfCompletedQuizzes = async (
   route,
-  setPercentageCompleted
+  setPercentageCompleted,
+  setCompletedUsers
 ) => {
   let completed = 0;
+  let completedUsers = [];
 
   for (let i = 0; i < route.params.users.length; i++) {
     const q = query(
@@ -24,9 +26,35 @@ export const fetchNumOfCompletedQuizzes = async (
     );
 
     const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      if (!querySnapshot.empty) completed += 1;
-    });
+
+    if (!querySnapshot.empty) {
+      completed += 1;
+      completedUsers.push({ userid: route.params.users[i], completed: true });
+    } else
+      completedUsers.push({ userid: route.params.users[i], completed: false });
   }
+
   setPercentageCompleted(completed / route.params.users.length);
+
+  completedUsers.forEach((user) => {
+    fetchUsername(user, setCompletedUsers);
+  });
+};
+
+const fetchUsername = async (user, setCompletedUsers) => {
+  const nameQuery = query(
+    collection(db, 'users'),
+    where('user_id', '==', user.userid)
+  );
+
+  const nameQuerySnapshot = await getDocs(nameQuery);
+  nameQuerySnapshot.forEach((doc) =>
+    setCompletedUsers((prevArr) => [
+      ...prevArr,
+      {
+        username: doc.data().email,
+        completed: user.completed,
+      },
+    ])
+  );
 };

@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#3F51B5',
     borderRadius: 20,
     alignSelf: 'center',
-    top: 140,
+    top: 130,
   },
   progresstext: {
     color: '#FFFFFF',
@@ -40,12 +40,12 @@ export const styles = StyleSheet.create({
     width: '90%',
     height: '22%',
     alignSelf: 'center',
-    top: 160,
+    top: 140,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   averagecontainer: {
-    width: '47.5%',
+    width: '48%',
     backgroundColor: '#3F51B5',
     height: '100%',
     borderRadius: 20,
@@ -70,7 +70,7 @@ export const styles = StyleSheet.create({
     marginTop: '6%',
   },
   highestcontainer: {
-    width: '47.5%',
+    width: '48%',
     backgroundColor: '#3F51B5',
     height: '100%',
     borderRadius: 20,
