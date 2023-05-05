@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
   },
   headerview: {
     borderBottomWidth: 1,
+    borderBottomColor: '#afb7bb',
   },
   modalHeader: {
     fontFamily: 'PoppinsMedium',

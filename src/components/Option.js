@@ -75,10 +75,14 @@ export const Option = ({ value, id, state, dispatch, style }) => {
             color="#00FFE0"
             style={[
               { position: 'absolute', left: 6 },
-              state.category === 'true_or_false' && {
-                top: 10,
-                color: 'white',
-              },
+              state.category === 'true_or_false'
+                ? {
+                    top: 10,
+                    color: 'white',
+                  }
+                : state.category === 'Image question'
+                ? { top: 5 }
+                : {},
             ]}
           />
         )}
@@ -89,7 +93,11 @@ export const Option = ({ value, id, state, dispatch, style }) => {
             color="red"
             style={[
               { position: 'absolute', left: 4 },
-              state.category === 'true_or_false' && { top: 10, color: 'white' },
+              state.category === 'true_or_false'
+                ? { top: 10, color: 'white' }
+                : state.category === 'Image question'
+                ? { top: 5 }
+                : {},
             ]}
           />
         )}

@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   averagecontainer: {
-    width: '47.5%',
+    width: '48%',
     backgroundColor: '#3F51B5',
     height: '100%',
     borderRadius: 20,
@@ -70,7 +70,7 @@ export const styles = StyleSheet.create({
     marginTop: '6%',
   },
   highestcontainer: {
-    width: '47.5%',
+    width: '48%',
     backgroundColor: '#3F51B5',
     height: '100%',
     borderRadius: 20,
