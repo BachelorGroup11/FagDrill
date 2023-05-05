@@ -57,7 +57,11 @@ export default function App() {
         />
         <Stack.Screen name="playpage" component={PlayPage} />
         <Stack.Screen name="infopage" component={InfoPage} />
-        <Stack.Screen name="resultspage" component={ResultsPage} />
+        <Stack.Screen
+          name="resultspage"
+          component={ResultsPage}
+          options={{ gestureEnabled: false }}
+        />
         <Stack.Screen name="userpage" component={UserPage} />
         <Stack.Screen name="manageuserpage" component={ManageuserPage} />
         <Stack.Screen name="progresspage" component={ProgressPage} />
