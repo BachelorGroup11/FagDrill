@@ -13,3 +13,6 @@ export * from './Question';
 export * from './GoToRecommended';
 export * from './GoToQuiz';
 export * from './GoToOverview';
+export * from './AverageModal';
+export * from './HighestModal';
+export * from './CompletedModal';

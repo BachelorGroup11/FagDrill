@@ -1,9 +1,15 @@
-import { ScrollView, TouchableOpacity } from 'react-native';
-import { Modal, StyleSheet, Text, View } from 'react-native';
+import {
+  Modal,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
-export default function CompletedModal({ isVisible, setIsVisible, users }) {
+export const CompletedModal = ({ isVisible, setIsVisible, users }) => {
   return (
     <ScrollView style={styles.centeredView}>
       <Modal animationType="slide" transparent={true} visible={isVisible}>
@@ -56,7 +62,7 @@ export default function CompletedModal({ isVisible, setIsVisible, users }) {
       </Modal>
     </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   centeredView: {

@@ -11,7 +11,7 @@ import { db } from '../../firebaseConfig';
 export const fetchHighestScore = async (route, setHighestScore) => {
   let currentHighest = {
     score: 0,
-    totalQuestions: 0,
+    totalQuestions: 1,
     user: '',
   };
 
@@ -26,12 +26,26 @@ export const fetchHighestScore = async (route, setHighestScore) => {
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      if (doc.data().score > currentHighest.score)
+      if (
+        doc.data().score / doc.data().total_questions >
+        currentHighest.score / currentHighest.totalQuestions
+      )
         currentHighest = {
           score: doc.data().score,
           user: doc.data().user_id,
           totalQuestions: doc.data().total_questions,
         };
+      else if (
+        doc.data().score / doc.data().total_questions ===
+          currentHighest.score / currentHighest.totalQuestions &&
+        doc.data().total_questions > currentHighest.totalQuestions
+      ) {
+        currentHighest = {
+          score: doc.data().score,
+          user: doc.data().user_id,
+          totalQuestions: doc.data().total_questions,
+        };
+      }
     });
   }
 

@@ -7,14 +7,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export const AverageModal = ({ isVisible, setIsVisible, users }) => {
+export const HighestModal = ({ isVisible, setIsVisible, users }) => {
   return (
     <ScrollView style={styles.centeredView}>
       <Modal animationType="slide" transparent={true} visible={isVisible}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View style={styles.headerview}>
-              <Text style={styles.modalHeader}>Average scores</Text>
+              <Text style={styles.modalHeader}>Highest scores</Text>
             </View>
             <ScrollView style={{ marginBottom: 20 }}>
               {users.map((user, index) => {
@@ -31,14 +31,16 @@ export const AverageModal = ({ isVisible, setIsVisible, users }) => {
                     <Text
                       style={[
                         styles.modalText,
-                        user.average >= 80
+                        user.score / user.totalQuestions >= 0.8
                           ? { color: '#65D870' }
-                          : user.average >= 50
+                          : user.score / user.totalQuestions >= 0.5
                           ? { color: '#F0BA2D' }
                           : { color: '#FF0000' },
                       ]}
                     >
-                      {user.average}%
+                      {user.score === 0 && user.totalQuestions === 0
+                        ? 'NaN'
+                        : `${user.score}/${user.totalQuestions}`}
                     </Text>
                   </View>
                 );

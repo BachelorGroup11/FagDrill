@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react';
 import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
 import { styles } from '../styles/screens/QuizOverviewStyle';
-import { GoBack, LoadingAnimation } from '../components/Index';
+import {
+  GoBack,
+  LoadingAnimation,
+  CompletedModal,
+  AverageModal,
+  HighestModal,
+} from '../components/Index';
 import * as Progress from 'react-native-progress';
 import { LineChart } from 'react-native-chart-kit';
 import {
@@ -9,21 +15,23 @@ import {
   fetchHighestScore,
   fetchAverageScore,
   fetchProgress,
+  fetchUsersAverage,
+  fetchUsersHighest,
 } from '../utilities/Index';
-import CompletedModal from '../components/CompletedModal';
-import AverageModal from '../components/AverageModal';
-import { fetchUsersAverage } from '../utilities/fetchUsersAverage';
 
 const QuizOverviewPage = ({ route }) => {
   const [percentageCompleted, setPercentageCompleted] = useState(0);
   const [completedUsers, setCompletedUsers] = useState([]);
 
   const [recentProgress, setRecentProgress] = useState([]);
+
   const [highestScore, setHighestScore] = useState({
     score: 0,
     totalQuestions: 0,
     username: '',
   });
+  const [highestScoresArray, setHighestScoresArray] = useState([]);
+
   const [averageScore, setAverageScore] = useState({ average: 0, total: 0 });
   const [averageScoresArray, setAverageScoresArray] = useState([]);
 
@@ -33,6 +41,7 @@ const QuizOverviewPage = ({ route }) => {
 
   const [completedModalVisible, setCompletedModalVisible] = useState(false);
   const [averageModalVisible, setAverageModalVisible] = useState(false);
+  const [highestModalVisible, setHighestModalVisible] = useState(false);
 
   useEffect(() => {
     fetchNumOfCompletedQuizzes(
@@ -45,6 +54,7 @@ const QuizOverviewPage = ({ route }) => {
     fetchAverageScore(route, setAverageScore).then(() => setIsLoading(false));
 
     fetchUsersAverage(route, setAverageScoresArray);
+    fetchUsersHighest(route, setHighestScoresArray);
   }, []);
 
   return (
@@ -64,6 +74,11 @@ const QuizOverviewPage = ({ route }) => {
             isVisible={averageModalVisible}
             setIsVisible={setAverageModalVisible}
             users={averageScoresArray}
+          />
+          <HighestModal
+            isVisible={highestModalVisible}
+            setIsVisible={setHighestModalVisible}
+            users={highestScoresArray}
           />
           <TouchableOpacity
             style={styles.piechartcontainer}
@@ -140,7 +155,10 @@ const QuizOverviewPage = ({ route }) => {
                 {averageScore.total} results
               </Text>
             </TouchableOpacity>
-            <View style={styles.highestcontainer}>
+            <TouchableOpacity
+              style={styles.highestcontainer}
+              onPress={() => setHighestModalVisible(true)}
+            >
               <Text style={styles.averagetext}>Highest</Text>
               <Text
                 style={[
@@ -157,7 +175,7 @@ const QuizOverviewPage = ({ route }) => {
               <Text style={[styles.basedontext, { marginTop: '20%' }]}>
                 {highestScore.username}
               </Text>
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
       )}
