@@ -14,6 +14,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 const UserPage = ({ navigation }) => {
   const [isToggle, setIsToggle] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [userName, setUserName] = useState([]);
   const auth = getAuth();
   const user = auth.currentUser;
 
@@ -27,6 +28,7 @@ const UserPage = ({ navigation }) => {
 
       const querySnapshot = await getDocs(userQuery);
       querySnapshot.forEach((doc) => {
+        setUserName(doc.data().email.split('@')[0]) 
         if (doc.data().is_admin == true || doc.data().is_super_admin == true) {
           setIsToggle(!isToggle);
           setIsLoaded(!isLoaded);
@@ -57,7 +59,7 @@ const UserPage = ({ navigation }) => {
         <LoadingAnimation />
       ) : isToggle ? (
         <SafeAreaView style={styles.container}>
-          <Text style={styles.title}>{user.email}</Text>
+          <Text style={styles.title}>{userName}</Text>
           <TouchableOpacity
             style={styles.btnBackToHome}
             onPress={() => navigation.navigate('homepage')}
@@ -65,83 +67,89 @@ const UserPage = ({ navigation }) => {
             <Text style={styles.knapptext}>X</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.appButtonContainer6}
-            onPress={() => navigation.navigate('dashboardpage')}
-          >
-            <MaterialCommunityIcons
-              name="chart-donut"
-              size={26}
-              color="#FFFFFF"
-              style={{ right: 42 }}
-            />
-            <Text style={styles.YourAccountText1}>Quiz Dashboard</Text>
-          </TouchableOpacity>
+          <View style={styles.sidebyside}>
+            <TouchableOpacity
+              style={styles.buttonDashboardPage}
+              onPress={() => navigation.navigate('dashboardpage')}
+            >
+              <MaterialCommunityIcons
+                name="chart-donut"
+                size={26}
+                color="#FFFFFF"
+                style={{ left: 10}}
+              />
+              <Text style={styles.YourAccountText1}>Quiz Dashboard</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.appButtonContainer1}
-            onPress={() => navigation.navigate('managequizpage')}
-          >
-            <FontAwesome5
-              name="edit"
-              size={20}
-              color="#FFFFFF"
-              style={{ right: 38 }}
-            />
-            <Text style={styles.YourAccountText1}>Manage Quizzes</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.buttonManageQuizPage}
+              onPress={() => navigation.navigate('managequizpage')}
+            >
+              <FontAwesome5
+                name="edit"
+                size={23}
+                color="#FFFFFF"
+                style={{ left: 10 }}
+              />
+              <Text style={styles.YourAccountText1}>Manage Quizzes</Text>
+            </TouchableOpacity>
+          </View>
 
+          <View style={styles.sidebyside}>
           <TouchableOpacity
-            style={styles.appButtonContainer3}
+            style={styles.buttonManageUserPage}
             onPress={() => navigation.navigate('manageuserpage')}
           >
             <FontAwesome5
               name="user-edit"
               size={20}
               color="#FFFFFF"
-              style={{ right: 47 }}
+              style={{ left: 10  }}
             />
             <Text style={styles.YourAccountText1}>Manage Users</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.appButtonContainer4}
+            style={styles.buttonProgressPage}
             onPress={() => navigation.navigate('progresspage')}
           >
             <Entypo
               name="progress-two"
               size={25}
               color="#FFFFFF"
-              style={{ right: 78 }}
+              style={{ left: 10  }}
             />
             <Text style={styles.YourAccountText1}>Progress</Text>
           </TouchableOpacity>
+          </View>
 
+          <View style={styles.sidebyside}>
           <TouchableOpacity
-            style={styles.appButtonContainer5}
+            style={styles.buttonResultsPage}
             onPress={() => navigation.navigate('resultspage')}
           >
             <Foundation
               name="results"
               size={25}
               color="#FFFFFF"
-              style={styles.icons}
+              style={{left: 10}}
             />
             <Text style={styles.YourAccountText1}>Results</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.appButtonContainer5}
+            style={styles.buttonChangePasswordPage}
             onPress={() => navigation.navigate('changepasswordpage')}
           >
             <FontAwesome5
               name="lock"
               size={20}
               color="#FFFFFF"
-              style={{ right: 30 }}
+              style={{ left: 10  }}
             />
             <Text style={styles.YourAccountText1}>Change Password</Text>
           </TouchableOpacity>
+          </View>
 
           <TouchableOpacity
             style={styles.appButtonContainer2}
@@ -152,7 +160,7 @@ const UserPage = ({ navigation }) => {
         </SafeAreaView>
       ) : (
         <SafeAreaView style={styles.container}>
-          <Text style={styles.title}>{user.email}</Text>
+          <Text style={styles.title}>{userName}</Text>
 
           <View style={styles.container}>
             <TouchableOpacity
@@ -163,41 +171,41 @@ const UserPage = ({ navigation }) => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={styles.appButtonContainer1}
+              style={styles.normalButtonProgressPage}
               onPress={() => navigation.navigate('progresspage')}
             >
               <Entypo
                 name="progress-two"
                 size={25}
                 color="#FFFFFF"
-                style={{ right: 78 }}
+                style={{ left: 10 }}
               />
               <Text style={styles.YourAccountText1}>Progress</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={styles.appButtonContainer5}
+              style={styles.normalButtonResultsPage}
               onPress={() => navigation.navigate('resultspage')}
             >
               <Foundation
                 name="results"
                 size={25}
                 color="#FFFFFF"
-                style={styles.icons}
+                style={{left: 10}}
               />
               <Text style={styles.YourAccountText1}>Results</Text>
             </TouchableOpacity>
 
 
             <TouchableOpacity
-              style={styles.appButtonContainer3}
+              style={styles.normalButtonChangePasswordPage}
               onPress={() => navigation.navigate('changepasswordpage')}
             >
               <FontAwesome5
                 name="lock"
                 size={20}
                 color="#FFFFFF"
-                style={{ right: 30 }}
+                style={{ left: 10 }}
               />
               <Text style={styles.YourAccountText1}>Change Password</Text>
             </TouchableOpacity>
