@@ -14,6 +14,8 @@ export const styles = StyleSheet.create({
     top: 290,
     zIndex: 1,
     paddingHorizontal: 30,
+    borderBottomWidth: 5,
+    borderBottomColor: '#2C3A87',
   },
   btnText: {
     color: '#ffffff',

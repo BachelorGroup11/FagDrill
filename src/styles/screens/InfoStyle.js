@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     top: 440,
     fontWeight: '500',
     position: 'absolute',
-    marginBottom:5,
+    marginBottom: 5,
   },
   descriptionText: {
     fontSize: 15,
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
   },
   leaderboard: {
     top: 120,
-    width: "100%",
+    width: '105%',
     height: 260,
     borderRadius: 10,
     alignSelf: 'center',
@@ -66,16 +66,16 @@ export const styles = StyleSheet.create({
   leaderboardtitle: {
     fontFamily: 'PoppinsBold',
     fontSize: 22,
-    left: "5%",
+    left: '5%',
   },
   leaderboardentry: {
-    width: "95%",
+    width: '90%',
     height: 50,
     marginTop: 10,
     padding: 10,
     borderRadius: 10,
     backgroundColor: '#3F51B5',
-    alignSelf: "center",
+    alignSelf: 'center',
     shadowColor: '#171717',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
@@ -88,13 +88,13 @@ export const styles = StyleSheet.create({
     fontFamily: 'PoppinsSemiBold',
     color: '#FFFFFF',
     fontSize: 13,
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   leaderboardScore: {
     fontFamily: 'PoppinsSemiBold',
     color: '#FFFFFF',
     fontSize: 13,
-    position: "absolute",
-    left: "100%",
+    position: 'absolute',
+    left: '100%',
   },
 });

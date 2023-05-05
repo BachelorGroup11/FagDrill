@@ -80,12 +80,16 @@ export const FillInBlank = ({ state, dispatch }) => {
         </TouchableOpacity>
       ) : wasAnswered.wasCorrect === true ? (
         <View style={styles.correctcontainer}>
-          <Text style={styles.feedback}>Correct answer</Text>
-          <Text style={styles.summarytext}>{state.summary}</Text>
+          <Text style={[styles.feedback, { color: '#12D18E' }]}>
+            Correct answer
+          </Text>
+          <View style={styles.summarycontainer}>
+            <Text style={styles.summarytext}>{state.summary}</Text>
+          </View>
         </View>
       ) : (
         <View style={styles.correctcontainer}>
-          <Text style={styles.feedback}>
+          <Text style={[styles.feedback, { color: 'red' }]}>
             Incorrect answer{'\n'}Correct answer was {state.correctOption}
           </Text>
           <View style={styles.summarycontainer}>

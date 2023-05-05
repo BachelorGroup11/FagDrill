@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     top: 320,
     paddingLeft: 10,
-    fontFamily: 'PoppinsSemiBold',
+    fontFamily: 'PoppinsMedium',
   },
   sumbitBtn: {
     backgroundColor: '#3F51B5',
@@ -66,6 +66,8 @@ export const styles = StyleSheet.create({
     width: 160,
     justifyContent: 'center',
     alignItems: 'center',
+    borderBottomWidth: 5,
+    borderBottomColor: '#2C3A87',
   },
   btnText: {
     color: '#ffffff',
@@ -79,7 +81,7 @@ export const styles = StyleSheet.create({
   feedback: {
     position: 'absolute',
     fontWeight: 'medium',
-    fontFamily: 'PoppinsMedium',
+    fontFamily: 'PoppinsSemiBold',
     color: '#3F51B5',
     paddingHorizontal: 20,
     fontSize: 22,
