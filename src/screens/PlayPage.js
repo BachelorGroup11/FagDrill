@@ -117,13 +117,20 @@ const PlayPage = ({ route, navigation }) => {
                     </Text>
                   </View>
                   {state.options.map((option, idx) => (
-                    <Option
-                      value={option}
-                      key={idx}
-                      id={idx}
-                      state={state}
-                      dispatch={dispatch}
-                    />
+                    <View
+                      key={`view${idx}`}
+                      style={
+                        state.category === 'true_or_false' && styles.trueorfalse
+                      }
+                    >
+                      <Option
+                        value={option}
+                        key={idx}
+                        id={idx}
+                        state={state}
+                        dispatch={dispatch}
+                      />
+                    </View>
                   ))}
                   {typeof has_been_answered !== 'undefined' &&
                     (state.category === 'true_or_false' ? (

@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   progressContainer: {
-    //backgroundColor: "#C0C0C0",
     width: 330,
     height: 44,
     flexDirection: 'row',
@@ -102,5 +101,12 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 12,
     fontFamily: 'PoppinsMedium',
+  },
+  trueorfalse: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    top: 50,
   },
 });
