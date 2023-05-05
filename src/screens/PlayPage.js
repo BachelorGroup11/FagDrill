@@ -71,12 +71,13 @@ const PlayPage = ({ route, navigation }) => {
           <SafeAreaView>
             <GoBack style={{ top: -50 }} />
             <View style={styles.progressContainer}>
+              <Text style={styles.streak}>🔥{state.streak}</Text>
               <ProgressBar
                 progress={
                   state.index / (state.quizLength - 1) ||
                   state.index / state.quizLength
                 }
-                width={260}
+                width={230}
                 height={20}
                 borderRadius={30}
                 color={'#3F51B5'}
@@ -122,7 +123,6 @@ const PlayPage = ({ route, navigation }) => {
                       id={idx}
                       state={state}
                       dispatch={dispatch}
-                      style={{ bottom: 20 }}
                     />
                   ))}
                   {typeof has_been_answered !== 'undefined' &&

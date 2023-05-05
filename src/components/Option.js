@@ -4,66 +4,67 @@ import { styles } from '../styles/components/OptionStyle';
 
 // Component responsible for rendering buttons with answer options for a given question
 export const Option = ({ value, id, state, dispatch, style }) => {
-	const [answeredStyle, setAnsweredStyle] = useState();
+  const [answeredStyle, setAnsweredStyle] = useState();
 
-	// Update colour and border around on press to show wheter answer was correct or incorrect
-	useEffect(() => {
-		setAnsweredStyle([]);
-		let has_been_answered = state.answeredArray.find(
-			(x) => x.index === state.index
-		);
+  // Update colour and border around on press to show wheter answer was correct or incorrect
+  useEffect(() => {
+    setAnsweredStyle([]);
+    let has_been_answered = state.answeredArray.find(
+      (x) => x.index === state.index
+    );
 
-		if (typeof has_been_answered !== 'undefined') {
-			has_been_answered.answerInput === has_been_answered.correctAnswer &&
-			has_been_answered.answerInput === id
-				? setAnsweredStyle({
-						borderWidth: 5,
-						borderColor: '#00FFE0',
-				  })
-				: has_been_answered.correctAnswer === id
-				? setAnsweredStyle({ borderWidth: 5, borderColor: '#00FFE0' })
-				: has_been_answered.answerInput === id &&
-				  setAnsweredStyle({
-						borderWidth: 5,
-						borderColor: 'red',
-				  });
-		}
-	}, [state.index, state.selected]);
+    if (typeof has_been_answered !== 'undefined') {
+      has_been_answered.answerInput === has_been_answered.correctAnswer &&
+      has_been_answered.answerInput === id
+        ? setAnsweredStyle({
+            borderWidth: 5,
+            borderColor: '#00FFE0',
+          })
+        : has_been_answered.correctAnswer === id
+        ? setAnsweredStyle({ borderWidth: 5, borderColor: '#00FFE0' })
+        : has_been_answered.answerInput === id &&
+          setAnsweredStyle({
+            borderWidth: 5,
+            borderColor: 'red',
+          });
+    }
+  }, [state.index, state.selected]);
 
-	// Update score on button press
-	const updateQuiz = () => {
-		let has_been_answered = state.answeredArray.find(
-			(x) => x.index === state.index
-		);
-		if (typeof has_been_answered !== 'undefined') return;
+  // Update score on button press
+  const updateQuiz = () => {
+    let has_been_answered = state.answeredArray.find(
+      (x) => x.index === state.index
+    );
+    if (typeof has_been_answered !== 'undefined') return;
 
-		dispatch({
-			type: 'setansweredarray',
-			payload: {
-				is_answered: true,
-				answerInput: id,
-				correctAnswer: state.correctOption,
-				index: state.index,
-			},
-		});
+    dispatch({
+      type: 'setansweredarray',
+      payload: {
+        is_answered: true,
+        answerInput: id,
+        correctAnswer: state.correctOption,
+        index: state.index,
+      },
+    });
 
-		dispatch({
-			type: 'setmulitple',
-			payload: {
-				selected: id,
-				score: id == state.correctOption ? state.score + 1 : state.score,
-			},
-		});
-	};
+    dispatch({
+      type: 'setmulitple',
+      payload: {
+        selected: id,
+        score: id == state.correctOption ? state.score + 1 : state.score,
+        streak: id == state.correctOption ? state.streak + 1 : 0,
+      },
+    });
+  };
 
-	return (
-		<View>
-			<TouchableOpacity
-				style={[styles.btnChoice, answeredStyle, style]}
-				onPress={() => state.selected === -1 && updateQuiz()}
-			>
-				<Text style={styles.btnText}>{value}</Text>
-			</TouchableOpacity>
-		</View>
-	);
+  return (
+    <View>
+      <TouchableOpacity
+        style={[styles.btnChoice, answeredStyle, style]}
+        onPress={() => state.selected === -1 && updateQuiz()}
+      >
+        <Text style={styles.btnText}>{value}</Text>
+      </TouchableOpacity>
+    </View>
+  );
 };

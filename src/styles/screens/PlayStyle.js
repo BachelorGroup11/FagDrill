@@ -10,11 +10,16 @@ export const styles = StyleSheet.create({
     height: 44,
     flexDirection: 'row',
     alignSelf: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
+    paddingHorizontal: 8,
     alignItems: 'center',
     borderRadius: 30,
     borderWidth: 1,
     borderColor: '#9A999917',
+  },
+  streak: {
+    fontFamily: 'PoppinsSemiBold',
+    fontSize: 16,
   },
   IndexText: {
     color: '#000000',
@@ -39,7 +44,7 @@ export const styles = StyleSheet.create({
     elevation: 5,
   },
   QuestionText: {
-    fontFamily: 'PoppinsMedium',
+    fontFamily: 'PoppinsSemiBold',
     fontSize: 14,
     paddingHorizontal: 10,
     textAlign: 'center',
@@ -80,7 +85,6 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     justifyContent: 'center',
-    //bottom: 80,
     top: 160,
     height: 100,
     width: 300,
@@ -96,7 +100,7 @@ export const styles = StyleSheet.create({
   },
   summarytext: {
     textAlign: 'center',
-    fontSize: 10,
+    fontSize: 12,
     fontFamily: 'PoppinsMedium',
   },
 });
