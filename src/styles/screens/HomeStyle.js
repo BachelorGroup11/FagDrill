@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    marginTop: 320,
+    marginTop: "90%",
     height: 500,
   },
   btnView: {
@@ -65,8 +65,8 @@ export const styles = StyleSheet.create({
     borderRadius: 22,
   },
   refreshBtn: {
-    width: 20,
-    height: 20,
+    width: 25,
+    height: 25,
     position: 'absolute',
     right: '10%',
     top: '45%',
