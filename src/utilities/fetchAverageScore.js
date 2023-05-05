@@ -5,18 +5,16 @@ export const fetchAverageScore = async (route, setAverageScore) => {
   let numOfResults = 0;
   let allScores = [];
 
-  for (let i = 0; i < route.params.users.length; i++) {
-    const q = query(
-      collection(db, 'results'),
-      where('quiz_id', '==', route.params.id)
-    );
+  const q = query(
+    collection(db, 'results'),
+    where('quiz_id', '==', route.params.id)
+  );
 
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      numOfResults += 1;
-      allScores.push(doc.data().score / doc.data().total_questions);
-    });
-  }
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    numOfResults += 1;
+    allScores.push(doc.data().score / doc.data().total_questions);
+  });
 
   setAverageScore({
     average: calculateAverage(allScores),
