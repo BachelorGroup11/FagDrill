@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
 import { styles } from '../styles/screens/QuizOverviewStyle';
 import {
@@ -20,42 +20,54 @@ import {
 } from '../utilities/Index';
 
 const QuizOverviewPage = ({ route }) => {
+  const [completedModalVisible, setCompletedModalVisible] = useState(false);
+  const [averageModalVisible, setAverageModalVisible] = useState(false);
+  const [highestModalVisible, setHighestModalVisible] = useState(false);
   const [percentageCompleted, setPercentageCompleted] = useState(0);
   const [completedUsers, setCompletedUsers] = useState([]);
-
   const [recentProgress, setRecentProgress] = useState([]);
-
+  const progressCount = useRef(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [averageScoresArray, setAverageScoresArray] = useState([]);
+  const [averageScore, setAverageScore] = useState({ average: 0, total: 0 });
+  const [highestScoresArray, setHighestScoresArray] = useState([]);
   const [highestScore, setHighestScore] = useState({
     score: 0,
     totalQuestions: 0,
     username: '',
   });
-  const [highestScoresArray, setHighestScoresArray] = useState([]);
-
-  const [averageScore, setAverageScore] = useState({ average: 0, total: 0 });
-  const [averageScoresArray, setAverageScoresArray] = useState([]);
-
-  const [isLoading, setIsLoading] = useState(true);
-  const screenWidth = Dimensions.get('window').width;
-  const screenHeight = Dimensions.get('window').height;
-
-  const [completedModalVisible, setCompletedModalVisible] = useState(false);
-  const [averageModalVisible, setAverageModalVisible] = useState(false);
-  const [highestModalVisible, setHighestModalVisible] = useState(false);
 
   useEffect(() => {
+    fetchHighestScore(route, setHighestScore);
     fetchNumOfCompletedQuizzes(
       route,
       setPercentageCompleted,
       setCompletedUsers
     );
-    fetchHighestScore(route, setHighestScore);
-    fetchProgress(route, setRecentProgress);
-    fetchAverageScore(route, setAverageScore).then(() => setIsLoading(false));
-
+    fetchProgress(route, setRecentProgress, 10);
+    fetchAverageScore(route, setAverageScore);
     fetchUsersAverage(route, setAverageScoresArray);
-    fetchUsersHighest(route, setHighestScoresArray);
+    fetchUsersHighest(route, setHighestScoresArray).then(() =>
+      setIsLoading(false)
+    );
   }, []);
+
+  const onPressGraph = () => {
+    let length;
+    if (progressCount.current === 2) {
+      length = 10;
+      progressCount.current = 0;
+    } else if (recentProgress.length > 10 && recentProgress.length < 20) {
+      console.log('test', recentProgress.length);
+      length = 10;
+      progressCount.current = 0;
+    } else {
+      length = recentProgress.length + 10;
+      progressCount.current += 1;
+    }
+
+    fetchProgress(route, setRecentProgress, length);
+  };
 
   return (
     <View style={styles.container}>
@@ -100,7 +112,7 @@ const QuizOverviewPage = ({ route }) => {
               thickness={24}
               showsText={true}
               formatText={() =>
-                `${Math.trunc(percentageCompleted * 100)}% of users completed`
+                `${Math.trunc(percentageCompleted * 100)}%\nCompleted`
               }
               textStyle={{
                 fontFamily: 'PoppinsRegular',
@@ -110,7 +122,10 @@ const QuizOverviewPage = ({ route }) => {
               }}
             />
           </TouchableOpacity>
-          <View style={styles.linechartcontainer}>
+          <TouchableOpacity
+            style={styles.linechartcontainer}
+            onPress={onPressGraph}
+          >
             {recentProgress.length > 0 && (
               <LineChart
                 data={{
@@ -121,17 +136,17 @@ const QuizOverviewPage = ({ route }) => {
                       strokeWidth: 4,
                     },
                   ],
-                  legend: ['Recent Scores'],
+                  legend: [`${recentProgress.length} Last Scores`],
                 }}
-                width={screenWidth * 1}
-                height={screenHeight * 0.21}
+                width={Dimensions.get('window').width * 0.95}
+                height={Dimensions.get('window').height * 0.21}
                 chartConfig={chartConfig}
                 withInnerLines={false}
                 style={{ right: 20, top: 5 }}
                 bezier
               />
             )}
-          </View>
+          </TouchableOpacity>
           <View style={styles.averageandhighestcontainer}>
             <TouchableOpacity
               style={styles.averagecontainer}
@@ -159,7 +174,7 @@ const QuizOverviewPage = ({ route }) => {
               style={styles.highestcontainer}
               onPress={() => setHighestModalVisible(true)}
             >
-              <Text style={styles.averagetext}>Highest</Text>
+              <Text style={styles.averagetext}>Best</Text>
               <Text
                 style={[
                   styles.percentagetext,
