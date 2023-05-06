@@ -83,10 +83,12 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginTop: -10,
   },
+  categorystyles: { marginTop: 15 },
   inputstyles: {
     color: 'grey',
     marginTop: 15,
   },
+  categorystyles: { marginTop: 15 },
   androidHouers: {
     backgroundColor: 'lightgrey',
     borderRadius: 5,

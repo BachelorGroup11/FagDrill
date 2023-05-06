@@ -29,7 +29,6 @@ const EditQuizPage = ({ navigation, route }) => {
   const [questions, setQuestions] = useState([]);
   const [deletedQuestions, setDeletedQuestions] = useState([]);
   const [placeholder, setPlaceholder] = useState([]);
-  const [categoryPlaceholder, setcategoryPlaceholder] = useState([]);
   const [selected, setSelected] = useState([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -41,7 +40,7 @@ const EditQuizPage = ({ navigation, route }) => {
     setUsers([]);
     setQuestions([]);
     fetchUsersSetPlaceholder(setUsers, setPlaceholder, route);
-    fetcQuizCategoryPlaceholder(quizRef, setcategoryPlaceholder, route);
+    fetcQuizCategoryPlaceholder(setCategory, route);
     fetchQuestions(setQuestions, route);
     setTitle(route.params.title);
     setDescription(route.params.description);
@@ -57,7 +56,6 @@ const EditQuizPage = ({ navigation, route }) => {
 
   const saveQuiz = async () => {
     if (title === '') return alert('Please enter title');
-    if (category.length === 0) return alert('Please select a category');
 
     const userIds = selected.map(
       (index) => users.find((user) => user.email === index).id
@@ -123,17 +121,14 @@ const EditQuizPage = ({ navigation, route }) => {
 
         <Text style={styles.title}>Category</Text>
         <SelectList
-          placeholder={`${categoryPlaceholder}`}
+          placeholder={`${category}`}
           setSelected={(val) => setCategory(val)}
-          data={[
-            { label: 'Social Quiz', value: 'social_quiz' },
-            { label: 'Practice Quiz', value: 'practice_quiz' },
-          ]}
+          data={['social_quiz', 'practice_quiz']}
           save="value"
           value={category}
           search={false}
           boxStyles={styles.boxstyles}
-          inputStyles={styles.inputstyles}
+          inputStyles={styles.categorystyles}
         />
         <Text style={styles.title}>Visible to</Text>
         <MultipleSelectList
