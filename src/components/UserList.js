@@ -23,6 +23,7 @@ import {
 } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
+
 const auth = getAuth();
 
 const UserList = ({ navigation }) => {
@@ -30,6 +31,7 @@ const UserList = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [isSuperToggle, setIsSuperToggle] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [userInQuizzes, setUserInQuizzes] = useState([]);
   const db = getFirestore();
   const auth = getAuth();
   const user = auth.currentUser;
@@ -103,7 +105,7 @@ const UserList = ({ navigation }) => {
   }, []);
 
   // Create a two button alert as provention to not make admins by accident. this alert have a cancel and edit admin status.
-  const createTwoButtonAlertAdmin = (userId, is_admin) =>
+  const createTwoButtonAlertAdmin = (userId, is_admin) => {
     Alert.alert(
       'Are you sure you want to edit the admin status of this user?',
       '',
@@ -119,6 +121,7 @@ const UserList = ({ navigation }) => {
         },
       ]
     );
+  }
   // This edits the admin status of the user.
   const makeAdmin = async (userId, is_admin) => {
     try {
@@ -144,25 +147,61 @@ const UserList = ({ navigation }) => {
     }
   };
 
+  const fetchQuizzes = async (userId) => {
+    setUserInQuizzes([])
+    const updatedQuizzes = [];
+    const quizQuery = query(
+      collection(db, 'quizzes'),
+      where('users', 'array-contains', userId)
+    );
+    console.log("New run...\n\n")
+    console.log(userId)
+    
+    const querySnapshot = await getDocs(quizQuery);
+    querySnapshot.forEach((doc) => {
+      const updatedUsers = doc.data().users.filter((user) => user !== userId);
+      updatedQuizzes.push({
+        qid: doc.id,
+        users: updatedUsers,
+      });
+    });
+  
+    // Update the state with the modified array
+    setUserInQuizzes(updatedQuizzes);
+  
+    // Push the modified quizzes to the database
+    try {
+      for (let i = 0; i < updatedQuizzes.length; i++) {
+        const quiz = updatedQuizzes[i];
+        const docRef = doc(db, 'quizzes', quiz.qid);
+        await updateDoc(docRef, { users: quiz.users });
+      }
+      console.log("Quizzes pushed to the database successfully.");
+    } catch (error) {
+      console.error("Error pushing quizzes to the database:", error);
+    }
+  };
+  
   // Create a two button alert as provention to not delete users by accident. this alert have a cancel and delete users.
-  const createTwoButtonAlertDelete = (user) =>
+  const createTwoButtonAlertDelete = (user, userId) => {
     Alert.alert('Are you sure you want to delete this user?', '', [
       {
         text: 'Cancel',
         onPress: () => console.log('Cancel Pressed'),
         style: 'cancel',
       },
-      { text: 'Delete', onPress: () => deleteUser(user) },
+      { text: 'Delete', onPress: () => deleteUser(user, userId)},
     ]);
-
+  }
   // this delets users.
-  const deleteUser = async (userId) => {
+  const deleteUser = async (userId, id) => {
     try {
       const userRef = doc(db, 'users', userId);
       await deleteDoc(userRef); // Delete the user document from Firestore
       console.log('User deleted successfully');
       const updatedUsers = users.filter((user) => user.id !== userId);
       setUsers(updatedUsers); // Update the list of users with the deleted user removed
+      fetchQuizzes(id)
     } catch (error) {
       console.error('Error deleting user:', error);
     }
@@ -360,7 +399,7 @@ const UserList = ({ navigation }) => {
         renderItem={(v) =>
           renderUser(v, () => {
             console.log('pressed', v);
-            createTwoButtonAlertDelete(v.item.id);
+            createTwoButtonAlertDelete(v.item.id, v.item.user_id);
           })
         }
         keyExtractor={(item) => item.id}
