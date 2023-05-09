@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: { alignItems: 'center' },
   QuestionContainer: {
-    width: 300,
+    width: "80%",
     height: 60,
     top: 20,
     borderRadius: 10,
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   displayContainer: {
-    width: 300,
+    width: "80%",
     height: 100,
     top: 90,
     borderRadius: 10,
@@ -94,7 +94,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     bottom: 100,
     height: 100,
-    width: 300,
+    width: "80%",
     backgroundColor: '#FFFFFF',
     color: '#000000',
     shadowColor: '#171717',

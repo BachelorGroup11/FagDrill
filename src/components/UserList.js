@@ -345,21 +345,12 @@ const UserList = ({ navigation }) => {
                 fontSize: 20,
                 left: 30,
                 color: 'black',
+                textDecorationLine: 'underline'
               }}
             >
               {item.email}
             </Text>
-            <Text
-              style={{
-                color: 'black',
-                alignSelf: 'center',
-                position: 'absolute',
-                bottom: -15,
-                height: 40,
-              }}
-            >
-              ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
-            </Text>
+            
             <Text
               style={{
                 color: 'black',

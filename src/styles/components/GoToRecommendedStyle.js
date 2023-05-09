@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'PoppinsSemiBold',
   },
   knappBytteS: {
-    marginHorizontal: 10,
+    marginLeft: 10,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#3F51B5',

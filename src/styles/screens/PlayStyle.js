@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   progressContainer: {
-    width: 330,
+    width: "90%",
     height: 44,
     flexDirection: 'row',
     alignSelf: 'center',
@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   QuestionContainer: {
-    width: 300,
+    width: "80%",
     height: 120,
     top: 20,
     borderRadius: 10,
@@ -86,7 +86,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     top: 160,
     height: 100,
-    width: 300,
+    width: "80%",
     backgroundColor: '#FFFFFF',
     color: '#000000',
     shadowColor: '#171717',

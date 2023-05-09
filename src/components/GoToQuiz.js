@@ -23,15 +23,10 @@ export const GoToQuiz = ({
         })
       }
     >
-      <ImageBackground
-        source={require('../assets/images/QuizBtn.png')}
-        style={styles.imgButton}
-      >
         <Text style={styles.knapptext}>
           Practice for{'\n'}
           {name}
         </Text>
-      </ImageBackground>
     </TouchableOpacity>
   );
 };

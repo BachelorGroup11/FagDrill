@@ -6,9 +6,10 @@ export const styles = StyleSheet.create({
   },
   textWrapper: {
     textAlign: 'center',
-    marginLeft: 40,
-    marginRight: 40,
-    bottom: 60,
+    flex: 1,
+    top: 100,
+    width: "85%",
+    alignSelf: "center",
   },
   Infotext: {
     color: '#000',
@@ -19,9 +20,7 @@ export const styles = StyleSheet.create({
   levelText: {
     fontSize: 16,
     color: '#000',
-    top: 440,
     fontWeight: '500',
-    position: 'absolute',
     marginBottom: 5,
   },
   descriptionText: {
@@ -33,16 +32,18 @@ export const styles = StyleSheet.create({
     backgroundColor: '#3F51B5',
     alignSelf: 'center',
     position: 'absolute',
-    top: 620,
-    height: 78,
+    bottom: 50,
+    height: 75,
     borderRadius: 22,
-    width: 314,
+    width: "85%",
     justifyContent: 'center',
     alignItems: 'center',
+
     shadowColor: 'grey',
     shadowOffset: { width: 1, height: 5 },
     shadowOpacity: 30,
     shadowRadius: 3,
+    elevation: 8,
   },
   btnText: {
     color: '#ffffff',
@@ -50,13 +51,14 @@ export const styles = StyleSheet.create({
     fontFamily: 'PoppinsBold',
   },
   leaderboard: {
-    top: 120,
-    width: '105%',
+    
+    width: '100%',
     height: 260,
     borderRadius: 10,
     alignSelf: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFFFFF',
+
     shadowColor: '#171717',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
@@ -94,7 +96,6 @@ export const styles = StyleSheet.create({
     fontFamily: 'PoppinsSemiBold',
     color: '#FFFFFF',
     fontSize: 13,
-    position: 'absolute',
-    left: '100%',
+    alignSelf: "flex-end",
   },
 });

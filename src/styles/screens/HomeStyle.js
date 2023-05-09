@@ -5,8 +5,12 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    marginTop: '87%',
-    height: 500,
+    
+    position: "absolute",
+    top: '50%',
+    height: "55%",
+    width: "90%",
+    alignSelf: "center",
   },
   btnView: {
     position: 'absolute',
@@ -19,33 +23,32 @@ export const styles = StyleSheet.create({
     left: '10%',
     top: '12%',
     width: '80%',
-    height: 42,
     fontSize: 32,
     fontFamily: 'PoppinsBold',
     color: '#000000',
   },
   recommendedtext: {
+    
     position: 'absolute',
     fontFamily: 'PoppinsSemiBold',
     left: '10%',
     top: '25%',
-    height: 42,
     fontSize: 16,
     color: '#000000',
   },
   recommendedview: {
+    
     top: '30%',
-    left: '8%',
     position: 'absolute',
-    height: 95,
-    marginRight: 40,
+    alignSelf: "center",
+    width: "80%",
   },
   allquizzes: {
+    
     position: 'absolute',
     fontFamily: 'PoppinsSemiBold',
     left: '10%',
     top: '45%',
-    height: 42,
     fontSize: 16,
     color: '#000000',
   },
@@ -72,9 +75,12 @@ export const styles = StyleSheet.create({
     top: '45%',
   },
   infoicon: {
+    
     position: 'absolute',
-    right: '11%',
+    justifyContent: 'center',
+    left: '85%',
     top: '25%',
+    width: 40,
   },
   loginBtn: {
     backgroundColor: '#2e216f',
@@ -109,7 +115,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     top: '30%',
     left: '12%',
-    width: 124,
+    width: "30%",
     height: 77,
   },
 });

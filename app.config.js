@@ -4,7 +4,7 @@ export default {
 	expo: {
 		name: 'Fag Drill',
 		slug: 'FagDrill',
-		version: '1.1.0',
+		version: '1.2.1',
 		orientation: 'portrait',
 		icon: './src/assets/images/icon.png',
 		userInterfaceStyle: 'light',
@@ -25,8 +25,10 @@ export default {
 		
 		android: {
 			package: "FD.fag.drill",
+			versionCode: 2,
+			permissions: [],
 			adaptiveIcon: {
-				foregroundImage: './src/assets/images/adaptive-icon.png',
+				foregroundImage: './src/assets/images/icon.png',
 				backgroundColor: '#FFFFFF',
 			},
 		},

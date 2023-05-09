@@ -68,7 +68,7 @@ const PlayPage = ({ route, navigation }) => {
           source={require('../assets/images/play_bg.png')}
           style={{ flex: 1, width: null, alignSelf: 'stretch' }}
         >
-          <SafeAreaView>
+          <SafeAreaView >
             <GoBack style={{ top: -50 }} />
             <View style={styles.progressContainer}>
               <Text style={styles.streak}>🔥{state.streak}</Text>
@@ -104,7 +104,7 @@ const PlayPage = ({ route, navigation }) => {
                 </CountdownCircleTimer>
               )}
             </View>
-            <View>
+            <View >
               {state.category === 'fill_in_blank' ? (
                 <FillInBlank state={state} dispatch={dispatch} />
               ) : state.category === 'Image question' ? (

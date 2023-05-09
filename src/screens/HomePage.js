@@ -168,7 +168,7 @@ const HomePage = ({ navigation }) => {
                 )
               }
             >
-              <FontAwesome name="info" size={20} color={'#000000'} />
+              <FontAwesome name="info" size={20} color={'#000000'}/>
             </TouchableOpacity>
             <ScrollView horizontal style={styles.recommendedview}>
               {recommendedQuizzes.map(

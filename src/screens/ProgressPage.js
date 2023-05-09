@@ -2,6 +2,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Dimensions,
   ScrollView,
   ImageBackground,
 } from 'react-native';
@@ -88,10 +89,12 @@ const ProgressPage = ({ navigation }) => {
                     data: scoresArray.slice(-5),
                   },
                 ],
+                legend: [`${scoresArray.length} Last Scores`],
               }}
-              width={330}
-              height={220}
+              width={Dimensions.get('window').width * 0.90}
+              height={Dimensions.get('window').height * 0.23}
               yAxisInterval={1}
+              withInnerLines={false}
               chartConfig={{
                 backgroundColor: '#3F51B5',
                 backgroundGradientFrom: '#3F51B5',

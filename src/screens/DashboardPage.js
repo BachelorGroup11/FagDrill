@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { ScrollView, Text, View, TextInput } from 'react-native';
+import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { styles } from '../styles/screens/DashboardStyle';
-import { GoBack, GoToOverview } from '../components/Index';
+import { GoToOverview } from '../components/Index';
 import { fetchQuizzes, filterSearch } from '../utilities/Index';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-const DashboardPage = ({}) => {
+const DashboardPage = ({navigation}) => {
   const [quizzes, setQuizzes] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
@@ -21,7 +21,12 @@ const DashboardPage = ({}) => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.header}>Dashboard</Text>
-      <GoBack style={{ top: '3%' }} />
+      <TouchableOpacity
+        style={styles.btnBackToHome}
+        onPress={() => navigation.goBack()}
+      >
+        <Text style={styles.knapptext}>X</Text>
+      </TouchableOpacity>
       <View style={styles.searchsection}>
         <FontAwesome
           name="search"
@@ -35,7 +40,7 @@ const DashboardPage = ({}) => {
           placeholder="Quiz name"
         />
       </View>
-      <View style={{ marginTop: '35%' }}>
+      <View style={{ marginTop: 120 }}>
         {filteredData.map((value, index) => (
           <GoToOverview
             id={value.id}

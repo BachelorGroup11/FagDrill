@@ -2,13 +2,12 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   btnBack: {
-    //backgroundColor: "#3F51B5",
     justifyContent: 'center',
     width: 50,
     height: 50,
     borderRadius: 10,
     top: '100%',
-    left: '80%',
+    left: '85%',
   },
   knapptext: {
     fontSize: 32,

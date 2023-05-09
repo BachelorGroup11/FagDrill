@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    display: 'flex',
+    
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
+    elevation: 8,
   },
   index: {
     width: 40,

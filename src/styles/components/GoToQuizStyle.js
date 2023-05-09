@@ -9,18 +9,16 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   knappBytteS: {
+    backgroundColor: '#3F51B5',
     alignSelf: 'center',
     marginVertical: 10,
-    height: 200,
-    width: '80%',
-    left: '2%',
+    height: 150,
+    width: '90%',
     alignItems: 'center',
-  },
-  imgButton: {
-    flex: 1,
-    height: 177,
-    width: 314,
-    alignSelf: 'center',
     justifyContent: 'center',
+    borderRadius:25,
+    borderTopRightRadius: 150,
+    marginBottom:10,
   },
+  
 });

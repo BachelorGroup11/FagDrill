@@ -70,7 +70,7 @@ const InfoPage = ({ route, navigation }) => {
                       <View
                         style={{
                           flexDirection: 'row',
-                          width: 200,
+                          width: "90%",
                           justifyContent: 'space-between',
                         }}
                       >
@@ -86,13 +86,13 @@ const InfoPage = ({ route, navigation }) => {
                   ))}
                 </View>
               )}
-              <Text style={styles.levelText}>
-                {parseInt(route.params.totalQuestions * 0.8)}{' '}
-                {parseInt(route.params.totalQuestions * 0.8) == 1
-                  ? 'Question'
-                  : 'Questions'}
-              </Text>
-              <View style={{ position: 'absolute', width: 320, top: 460 }}>
+              <View style={{width: "100%", position: 'absolute', bottom: 260,}}>
+                <Text style={styles.levelText}>
+                  {parseInt(route.params.totalQuestions * 0.8)}{' '}
+                  {parseInt(route.params.totalQuestions * 0.8) == 1
+                    ? 'Question'
+                    : 'Questions'}
+                </Text>
                 <Text style={styles.Infotext}>
                   Practice for {route.params.name}
                 </Text>
