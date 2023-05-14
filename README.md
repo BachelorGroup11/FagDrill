@@ -7,7 +7,9 @@ Make practicing for certificates trivial
 ## How it works
 
 Terminal
-
+```
+npm i
+```
 ```
 expo start
 ```
