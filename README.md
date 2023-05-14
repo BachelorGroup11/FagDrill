@@ -22,11 +22,3 @@ To open the app:
 ## Todo
 
 [Jira](https://st0611.atlassian.net/jira/software/projects/FD/boards/1)
-
-## Code structure
-
-[Code structure](https://medium.com/the-andela-way/how-to-structure-a-react-native-app-for-scale-a29194cd33fc)
-
-[Naming conventions](https://gilshaan.medium.com/react-native-coding-standards-and-best-practices-5b4b5c9f4076)
-
-<img src="https://miro.medium.com/max/720/0*2UvHBt3DhXGKLe9D.webp" width="500"/>
